@@ -118,7 +118,9 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -133,30 +135,34 @@
                            <children>
                               <Label text="Site Name" />
                               <Label text="Asset Serial Number" GridPane.rowIndex="1" />
-                              <Label text="Ext. Work Order ID" GridPane.rowIndex="2" />
-                              <Label text="System Status" GridPane.rowIndex="3" />
-                              <Label text="User Status" GridPane.rowIndex="4" />
-                              <Label text="Created On" GridPane.rowIndex="5" />
-                              <Label text="Created By" GridPane.rowIndex="6" />
-                              <Label text="Priority" GridPane.rowIndex="7" />
-                              <Label text="Status" GridPane.rowIndex="8" />
-                              <Label text="Earliest Start Date" GridPane.rowIndex="9" />
-                              <Label text="Latest Start Date" GridPane.rowIndex="10" />
-                              <Label text="Latest Finish Date" GridPane.rowIndex="11" />
-                              <Label text="Estimated Time" GridPane.rowIndex="12" />
+                              <Label text="Ext. Work Order ID" GridPane.rowIndex="3" />
+                              <Label text="System Status" GridPane.rowIndex="4" />
+                              <Label text="User Status" GridPane.rowIndex="5" />
+                              <Label text="Created On" GridPane.rowIndex="6" />
+                              <Label text="Created By" GridPane.rowIndex="7" />
+                              <Label text="Priority" GridPane.rowIndex="9" />
+                              <Label text="Status" GridPane.rowIndex="10" />
+                              <Label text="Earliest Start Date" GridPane.rowIndex="11" />
+                              <Label text="Latest Start Date" GridPane.rowIndex="12" />
+                              <Label text="Latest Finish Date" GridPane.rowIndex="13" />
+                              <Label text="Estimated Time" GridPane.rowIndex="14" />
                               <Label fx:id="lblSiteName" text="Label" GridPane.columnIndex="1" />
                               <Label fx:id="lblAssetSerialNo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="lblExtWorkOrderID" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label fx:id="lblSystemStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label fx:id="lblUserStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label fx:id="lblCreatedOn" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Label fx:id="lblCreatedBy" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <Label fx:id="lblPriority" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <Label fx:id="lblStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                              <Label fx:id="lblEarliestStart" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                              <Label fx:id="lblLatestStart" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                              <Label fx:id="lblLatestFinish" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                              <Label fx:id="lblEstimatedTime" prefWidth="35.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                              <Label fx:id="lblExtWorkOrderID" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="lblSystemStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label fx:id="lblUserStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label fx:id="lblCreatedOn" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label fx:id="lblCreatedBy" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label fx:id="lblPriority" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                              <Label fx:id="lblStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                              <Label fx:id="lblEarliestStart" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                              <Label fx:id="lblLatestStart" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                              <Label fx:id="lblLatestFinish" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                              <Label fx:id="lblEstimatedTime" prefWidth="35.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                              <Label text="Name (Description)" GridPane.rowIndex="8" />
+                              <Label fx:id="lblNameDescription" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label text="Order Type" GridPane.rowIndex="2" />
+                              <Label fx:id="lblOrderType" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
