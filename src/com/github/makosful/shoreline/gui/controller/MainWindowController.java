@@ -7,6 +7,9 @@ package com.github.makosful.shoreline.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -86,12 +89,20 @@ public class MainWindowController implements Initializable {
     private Label lblOrderType;
     //</editor-fold>
 
+    final ObservableList<String> strings = FXCollections.observableArrayList();
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        for (int i = 0; i <= 40; i++) {
+            strings.add("Column #" + i + " | Example text " + i);
+        }
+
+        chklistSelectData = new CheckListView<>(strings);
+
     }
 
     @FXML
@@ -104,6 +115,8 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void handleConversion(ActionEvent event) {
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
+            System.out.println(chklistSelectData.getCheckModel().getCheckedItems());
+        });
     }
-
 }
