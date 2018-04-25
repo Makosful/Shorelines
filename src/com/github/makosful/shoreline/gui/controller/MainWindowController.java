@@ -96,23 +96,23 @@ public class MainWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         for (int i = 0; i <= 40; i++) {
             strings.add("Column #" + i + " | Example text " + i);
         }
-
-        chklistSelectData = new CheckListView<>(strings);
-
+        
+        chklistSelectData.setItems(strings);
+        
     }
-
+    
     @FXML
     private void handleMoveItemUp(ActionEvent event) {
     }
-
+    
     @FXML
     private void handleMoveItemDown(ActionEvent event) {
     }
-
+    
     @FXML
     private void handleConversion(ActionEvent event) {
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {

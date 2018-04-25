@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -63,23 +63,19 @@
     </MenuBar>
     <SplitPane dividerPositions="0.25, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-            <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-               <content>
-                  <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="222.0">
-                     <children>
-                        <Label alignment="CENTER" layoutX="14.0" layoutY="4.0" style="&#10;" text="Select rows" textAlignment="CENTER" wrapText="false">
-                           <font>
-                              <Font size="18.0" fx:id="x111" />
-                           </font>
-                           <textFill>
-                              <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
-                           </textFill>
-                        </Label>
-                        <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="500.0" prefWidth="221.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="222.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="4.0" style="&#10;" text="Select rows" textAlignment="CENTER" wrapText="false">
+                     <font>
+                        <Font size="18.0" fx:id="x111" />
+                     </font>
+                     <textFill>
+                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
+                     </textFill>
+                  </Label>
+                  <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="491.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+               </children>
+            </AnchorPane>
         <AnchorPane>
           <children>
             <Label alignment="CENTER" layoutX="4.0" layoutY="4.0" style="&#10;" text="Sorting" textAlignment="CENTER" wrapText="false">
