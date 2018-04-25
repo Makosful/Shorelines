@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -89,34 +90,41 @@ public class MainWindowController implements Initializable {
     private Label lblOrderType;
     //</editor-fold>
 
-    final ObservableList<String> strings = FXCollections.observableArrayList();
+    final ObservableList<String> strings = FXCollections.observableArrayList("One 1", "Two 2", "Three 3", "Four 4", "Five 5", "Six 6", "Seven 7", "Eight 8", "Nine 9", "Ten10");
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        for (int i = 0; i <= 40; i++) {
-            strings.add("Column #" + i + " | Example text " + i);
-        }
-        
+
         chklistSelectData.setItems(strings);
-        
+
+        chklistSelectData.getItems().addListener((ListChangeListener.Change<? extends String> c) -> {
+        });
     }
-    
+
     @FXML
     private void handleMoveItemUp(ActionEvent event) {
+
     }
-    
+
     @FXML
     private void handleMoveItemDown(ActionEvent event) {
+
     }
-    
+
     @FXML
     private void handleConversion(ActionEvent event) {
+
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
-            System.out.println(chklistSelectData.getCheckModel().getCheckedItems());
+            checkIfExisting();
         });
+    }
+
+    private void checkIfExisting() {
+        if (!listSorted.getItems().contains(chklistSelectData.getSelectionModel().getSelectedItem())) {
+            listSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
+        }
     }
 }
