@@ -85,7 +85,7 @@
                      <textFill>
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
                      </textFill></Label>
-                  <ListView fx:id="listSorted" layoutX="8.0" layoutY="36.0" prefHeight="500.0" prefWidth="216.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                  <ListView fx:id="listViewSorted" layoutX="8.0" layoutY="36.0" prefHeight="500.0" prefWidth="216.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
                   <VBox layoutX="180.0" layoutY="237.0">
                      <children>
                         <Button fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲" />
