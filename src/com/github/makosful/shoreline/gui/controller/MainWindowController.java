@@ -100,8 +100,7 @@ public class MainWindowController implements Initializable {
 
         chklistSelectData.setItems(strings);
 
-        chklistSelectData.getItems().addListener((ListChangeListener.Change<? extends String> c) -> {
-        });
+        AddListeners();
     }
 
     @FXML
@@ -126,5 +125,11 @@ public class MainWindowController implements Initializable {
         if (!listSorted.getItems().contains(chklistSelectData.getSelectionModel().getSelectedItem())) {
             listSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
         }
+    }
+
+    private void AddListeners() {
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
+            checkIfExisting();
+        });
     }
 }
