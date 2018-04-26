@@ -130,8 +130,10 @@ public class MainWindowController implements Initializable {
     @FXML
     private void handleMoveItemDown(ActionEvent event) {
         currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
+        int prev = currentIndex + 1;
         if (movable) {
-            //TODO - add "set new selected item/index"
+            listViewSorted.getSelectionModel().select(prev);
+            listViewSorted.requestFocus();
         } else {
             return;
         }
