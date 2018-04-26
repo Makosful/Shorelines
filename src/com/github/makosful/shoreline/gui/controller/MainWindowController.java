@@ -116,9 +116,6 @@ public class MainWindowController implements Initializable {
     @FXML
     private void handleConversion(ActionEvent event) {
 
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
-            checkIfExisting();
-        });
     }
 
     private void checkIfExisting() {
