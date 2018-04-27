@@ -8,7 +8,8 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 
 /**
- * This class will be responsible for reading and writing JSON to files
+ * This class will be responsible for writing JSON files. To read JSON files,
+ * create a new class
  *
  * @author Axl
  * @param <T>
