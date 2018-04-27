@@ -1,5 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
+import com.github.makosful.shoreline.dal.DALException;
+import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;
 
 /**
@@ -19,7 +21,23 @@ import com.github.makosful.shoreline.dal.IDAL;
 public class BLLManager implements IBLL
 {
 
+    private final IDAL dal;
+
     public BLLManager()
     {
+        dal = new DALManager();
+    }
+
+    @Override
+    public void readFromExcelFile(String file) throws BLLException
+    {
+        try
+        {
+            dal.readFromXlsxFile(file);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 }

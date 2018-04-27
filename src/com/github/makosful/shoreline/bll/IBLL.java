@@ -12,4 +12,5 @@ package com.github.makosful.shoreline.bll;
 public interface IBLL
 {
 
+    public void readFromExcelFile(String file) throws BLLException;
 }

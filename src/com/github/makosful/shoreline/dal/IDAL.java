@@ -11,4 +11,7 @@ package com.github.makosful.shoreline.dal;
 public interface IDAL
 {
 
+    public void readFromXlsFile(String file) throws DALException;
+
+    public void readFromXlsxFile(String file) throws DALException;
 }

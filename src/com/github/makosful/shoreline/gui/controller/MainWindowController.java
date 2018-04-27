@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +24,8 @@ import org.controlsfx.control.CheckListView;
 public class MainWindowController implements Initializable
 {
 
+    private MainWindowModel model;
+
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
     private Color x211;
@@ -43,7 +39,7 @@ public class MainWindowController implements Initializable
     private Color x21;
     @FXML
     private Font x11;
-//</editor-fold>
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Labels">
     @FXML
@@ -94,9 +90,6 @@ public class MainWindowController implements Initializable
     private Boolean movable;
     private Integer currentIndex;
 
-    ObservableList<String> strings = FXCollections.observableArrayList("One 1", "Two 2", "Three 3", "Four 4", "Five 5", "Six 6", "Seven 7", "Eight 8", "Nine 9", "Ten10");
-    ObservableList<String> selectedStrings = FXCollections.observableArrayList();
-
     /**
      * Initializes the controller class.
      *
@@ -107,9 +100,11 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
 
-        chklistSelectData.setItems(strings);
+        model = new MainWindowModel();
 
-        listViewSorted.setItems(selectedStrings);
+        chklistSelectData.setItems(model.getMockStrings());
+
+        listViewSorted.setItems(model.getSelectedStrings());
 
         AddListeners();
     }
@@ -130,7 +125,7 @@ public class MainWindowController implements Initializable
             int prevIndex = currentIndex - 1;
 
             // Swaps the two indecies
-            Collections.swap(selectedStrings, currentIndex, prevIndex);
+            Collections.swap(model.getSelectedStrings(), currentIndex, prevIndex);
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prevIndex);
@@ -154,7 +149,7 @@ public class MainWindowController implements Initializable
             int prev = currentIndex + 1;
 
             // Swaps the two items
-            Collections.swap(selectedStrings, currentIndex, prev);
+            Collections.swap(model.getSelectedStrings(), currentIndex, prev);
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prev);
@@ -170,16 +165,16 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event)
     {
-        // TODO
+        model.readFromExcel("Import_data.xlsx");
     }
 
     /**
-     * Checks if the currently selected item can be marked as moveable
+     * Checks if the selected item is moveable
      */
     private void checkIfValidToRelocate()
     {
         movable = listViewSorted.getSelectionModel().getSelectedIndex() > 0
-                  && listViewSorted.getSelectionModel().getSelectedIndex() < selectedStrings.size();
+                  && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size();
     }
 
     /**
@@ -215,8 +210,8 @@ public class MainWindowController implements Initializable
         {
             if (c.next())
             {
-                selectedStrings.addAll(c.getAddedSubList());
-                selectedStrings.removeAll(c.getRemoved());
+                model.getSelectedStrings().addAll(c.getAddedSubList());
+                model.getSelectedStrings().removeAll(c.getRemoved());
             }
         });
 

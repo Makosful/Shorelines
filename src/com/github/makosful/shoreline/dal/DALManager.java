@@ -1,5 +1,7 @@
 package com.github.makosful.shoreline.dal;
 
+import java.io.IOException;
+
 /**
  * A facade for the Data Access Layer as a whole.
  * The sole responsibility for this class is to redirect data requests to
@@ -13,7 +15,36 @@ package com.github.makosful.shoreline.dal;
 public class DALManager implements IDAL
 {
 
+    private final ExcelReader excel;
+
     public DALManager()
     {
+        excel = new ExcelReader();
+    }
+
+    @Override
+    public void readFromXlsFile(String file) throws DALException
+    {
+        try
+        {
+            excel.readFromXlsFile(file);
+        }
+        catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public void readFromXlsxFile(String file) throws DALException
+    {
+        try
+        {
+            excel.readFromXlsxFiles(file);
+        }
+        catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
     }
 }
