@@ -22,9 +22,10 @@ public class ExcelReader
 {
 
     /**
-     * TODO
+     * Simply reads an XLS file and prints out the cell adress of every item
+     * TODO: Make it return useable data
      *
-     * @param file The file to read from
+     * @param file The XLS file to read from
      *
      * @throws java.io.IOException
      */
@@ -35,9 +36,17 @@ public class ExcelReader
         HSSFWorkbook wb = new HSSFWorkbook(fs);
         HSSFSheet sheet = wb.getSheetAt(0);
 
-        m(sheet);
+        readExcelSheet(sheet);
     }
 
+    /**
+     * Simply reads XLSX files and prints out the cell adress
+     * TODO: Make it return usable data
+     *
+     * @param file The XLSX file to read
+     *
+     * @throws IOException
+     */
     public void readFromXlsxFiles(String file) throws IOException
     {
         // Set up
@@ -46,10 +55,15 @@ public class ExcelReader
                         new FileInputStream(file)));
         XSSFSheet sheet = wb.getSheetAt(0);
 
-        m(sheet);
+        readExcelSheet(sheet);
     }
 
-    private void m(Sheet sheet)
+    /**
+     * Modualized reading of Excel files
+     *
+     * @param sheet An object implimenting the Sheet interface from ss.usermodel
+     */
+    private void readExcelSheet(Sheet sheet)
     {
         Row row;
         int rows; // Number of rows
