@@ -1,7 +1,6 @@
 package com.github.makosful.shoreline.dal;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,21 +18,19 @@ public class DALManager implements IDAL
 {
 
     private final ExcelReader excel;
-    private final JsonWriter json;
+    private final JsonWriter jWriter;
 
     public DALManager()
     {
         excel = new ExcelReader();
-        json = new JsonWriter();
+        jWriter = new JsonWriter();
 
         try
         {
-            HashMap m = new HashMap();
-            m.put("FirstName", "Malthe");
-            m.put("LastName", "Schwartz");
-            json.put("ID", 002);
-            json.put("Name", m);
-            json.write();
+            jWriter.put("MyInt", 6.9f);
+            jWriter.put("MyFloat", 6.9f);
+            jWriter.remove("Myfloat");
+            jWriter.write();
         }
         catch (IOException ex)
         {

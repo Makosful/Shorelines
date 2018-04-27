@@ -1,9 +1,6 @@
 package com.github.makosful.shoreline.dal;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Collection;
+import java.io.*;
 import java.util.Map;
 import org.json.simple.JSONObject;
 
@@ -18,6 +15,7 @@ public class JsonWriter<T>
 {
 
     private final JSONObject json;
+    private final StringWriter string;
     private String path;
 
     //<editor-fold defaultstate="collapsed" desc="Constructors">
@@ -28,6 +26,7 @@ public class JsonWriter<T>
     {
         json = new JSONObject();
         path = "output.json";
+        string = new StringWriter();
     }
 
     /**
@@ -39,9 +38,11 @@ public class JsonWriter<T>
     {
         json = new JSONObject(map);
         path = "output.json";
+        string = new StringWriter();
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Implimented methods">
     /**
      * Returns the current JSON object
      *
@@ -81,45 +82,11 @@ public class JsonWriter<T>
     }
 
     /**
-     * Removes an item if it contains the specified value
-     *
-     * @param key   The key of the item
-     * @param value The value to check
-     */
-    public void remove(String key, T value)
-    {
-        json.remove(key, value);
-    }
-
-    /**
      * Clears the pending JSON.
      */
     public void clear()
     {
         json.clear();
-    }
-
-    /**
-     * retrives the value stored at the key. Caseinsensitive.
-     *
-     * @param key The key of the value to get
-     *
-     * @return Returns the value, if the key exists. Returns null of the key
-     *         doesn't exist. Returns null if the value is null.
-     */
-    public Object get(String key)
-    {
-        return json.get(key);
-    }
-
-    /**
-     * Returns the values stored as a Collection
-     *
-     * @return Returns a Collection with all the values
-     */
-    public Collection getValues()
-    {
-        return json.values();
     }
 
     /**
@@ -157,6 +124,42 @@ public class JsonWriter<T>
         return json.isEmpty();
     }
 
+    /**
+     * Creates a JSON String based on the current data stored, and returns it.
+     * This method will only generate and return a JSON String.
+     *
+     * @see #write() Use this method to write
+     *
+     * @return Returns a String of JSON
+     *
+     * @throws IOException
+     */
+    public String generateJsonString() throws IOException
+    {
+        json.writeJSONString(string);
+        return string.toString();
+    }
+
+    /**
+     * Returns a String of JSON identical to the one written for the output.
+     * This method will only return an exsisting String.
+     *
+     * @see #generateJsonString() To generate a new String
+     *
+     * @return Returns the generated JSON string
+     */
+    public String getSerializedJson()
+    {
+        return string.toString();
+    }
+
+    @Override
+    public String toString()
+    {
+        return super.toString();
+    }
+    //</editor-fold>
+
     //<editor-fold defaultstate="collapsed" desc="Output">
     /**
      * Sets the output path. Defaults to app folder as output.json
@@ -181,6 +184,9 @@ public class JsonWriter<T>
     /**
      * Writes the stored JSON to the given output.
      *
+     * @see #setOutput(java.lang.String) Use this to set the output path and
+     * file name. It defaults to [App Path]/output.json
+     *
      * @throws IOException
      */
     public void write() throws IOException
@@ -188,7 +194,25 @@ public class JsonWriter<T>
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
         {
             json.writeJSONString(bw);
+            json.writeJSONString(string);
         }
+    }
+
+    /**
+     * Writes the JSON using the Writer given. Said Writer will have the output
+     * path.
+     *
+     * @see #generateJsonString() Use this instead if you with to only get a
+     * String object with the JSON instead of writing to afile
+     *
+     * @param out
+     *
+     * @throws IOException
+     */
+    public void write(Writer out) throws IOException
+    {
+        json.writeJSONString(out);
+        json.writeJSONString(string);
     }
     //</editor-fold>
 }
