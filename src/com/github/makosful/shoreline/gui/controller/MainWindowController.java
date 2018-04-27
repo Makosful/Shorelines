@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,7 +27,8 @@ import org.controlsfx.control.CheckListView;
  *
  * @author Storm
  */
-public class MainWindowController implements Initializable {
+public class MainWindowController implements Initializable
+{
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -100,10 +100,12 @@ public class MainWindowController implements Initializable {
     /**
      * Initializes the controller class.
      *
-     * @param url
+     * @param url FXML parameter.
+     * @param rb  FXML parameter.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
         chklistSelectData.setItems(strings);
 
@@ -112,69 +114,114 @@ public class MainWindowController implements Initializable {
         AddListeners();
     }
 
+    /**
+     * Moves the selected item up the list once
+     *
+     * @param event FXML parameter
+     */
     @FXML
-    private void handleMoveItemUp(ActionEvent event) {
-        System.out.println("Moving up?");
-        if (movable) {
+    private void handleMoveItemUp(ActionEvent event)
+    {
+        // Checks if the selected index has been marked as moveable
+        if (movable)
+        {
             // Gets the two indexes
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
             int prevIndex = currentIndex - 1;
 
+            // Swaps the two indecies
             Collections.swap(selectedStrings, currentIndex, prevIndex);
-        } else {
-            // If the item can't be moved, return without doign anything
-            return;
+
+            // Reselects the item that was just moved
+            listViewSorted.getSelectionModel().select(prevIndex);
+            listViewSorted.requestFocus();
         }
     }
 
+    /**
+     * Moves the currently selected item down the list once
+     *
+     * @param event FXML Parameter
+     */
     @FXML
-    private void handleMoveItemDown(ActionEvent event) {
-        currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-        int prev = currentIndex + 1;
-        if (movable) {
+    private void handleMoveItemDown(ActionEvent event)
+    {
+        // Checks of the current item is marked as moveable
+        if (movable)
+        {
+            // Retrives the indicies for the two items to swap
+            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
+            int prev = currentIndex + 1;
+
+            // Swaps the two items
+            Collections.swap(selectedStrings, currentIndex, prev);
+
+            // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prev);
             listViewSorted.requestFocus();
-        } else {
-            return;
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param event FXML Parameter
+     */
     @FXML
-    private void handleConversion(ActionEvent event) {
-
+    private void handleConversion(ActionEvent event)
+    {
+        // TODO
     }
 
-    private void checkIfValidToRelocate() {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() > 0
-                && listViewSorted.getSelectionModel().getSelectedIndex() < selectedStrings.size()) {
-            movable = true;
-        } else {
-            movable = false;
-        }
+    /**
+     * Checks if the currently selected item can be marked as moveable
+     */
+    private void checkIfValidToRelocate()
+    {
+        movable = listViewSorted.getSelectionModel().getSelectedIndex() > 0
+                  && listViewSorted.getSelectionModel().getSelectedIndex() < selectedStrings.size();
     }
 
-    private void disableBtnOnIndex() {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() == 0) {
+    /**
+     * Handles the disabling and reenabling of the Up/Down butons
+     */
+    private void disableBtnOnIndex()
+    {
+        if (listViewSorted.getSelectionModel().getSelectedIndex() == 0)
+        {
             btnMoveUp.setDisable(true);
-        } else {
+        }
+        else
+        {
             btnMoveUp.setDisable(false);
         }
-        if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1) {
+
+        if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1)
+        {
             btnMoveDown.setDisable(true);
-        } else {
+        }
+        else
+        {
             btnMoveDown.setDisable(false);
         }
     }
 
-    private void AddListeners() {
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
-            if (c.next()) {
+    /**
+     * Adds listeners to the the View
+     */
+    private void AddListeners()
+    {
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
+        {
+            if (c.next())
+            {
                 selectedStrings.addAll(c.getAddedSubList());
                 selectedStrings.removeAll(c.getRemoved());
             }
         });
 
-        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) -> {
+        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
+        {
             checkIfValidToRelocate();
 
             disableBtnOnIndex();
