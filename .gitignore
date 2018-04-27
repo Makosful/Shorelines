@@ -35,3 +35,7 @@ nbdist/
 !lib/*.jar
 
 # End of https://www.gitignore.io/api/java,netbeans
+
+### Filetypes with mockdata ###
+.xlsx
+.json
