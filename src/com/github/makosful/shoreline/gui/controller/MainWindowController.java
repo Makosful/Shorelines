@@ -101,6 +101,7 @@ public class MainWindowController implements Initializable {
      * Initializes the controller class.
      *
      * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -114,28 +115,34 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void handleMoveItemUp(ActionEvent event) {
-        System.out.println("Moving up?");
         if (movable) {
             // Gets the two indexes
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
             int prevIndex = currentIndex - 1;
 
+            //swaps 2 parameters, being the new and old indexes.
             Collections.swap(selectedStrings, currentIndex, prevIndex);
+
+            //requests the ListView to select the current
+            listViewSorted.getSelectionModel().select(prevIndex);
+            listViewSorted.requestFocus();
         } else {
-            // If the item can't be moved, return without doign anything
-            return;
+            // If the item can't be moved, return without doing anything
+
         }
     }
 
     @FXML
     private void handleMoveItemDown(ActionEvent event) {
-        currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-        int prev = currentIndex + 1;
         if (movable) {
-            listViewSorted.getSelectionModel().select(prev);
+            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
+            int nextIndex = currentIndex + 1;
+
+            Collections.swap(selectedStrings, currentIndex, nextIndex);
+
+            listViewSorted.getSelectionModel().select(nextIndex);
             listViewSorted.requestFocus();
         } else {
-            return;
         }
     }
 
@@ -145,12 +152,8 @@ public class MainWindowController implements Initializable {
     }
 
     private void checkIfValidToRelocate() {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() > 0
-                && listViewSorted.getSelectionModel().getSelectedIndex() < selectedStrings.size()) {
-            movable = true;
-        } else {
-            movable = false;
-        }
+        movable = listViewSorted.getSelectionModel().getSelectedIndex() >= 0
+                && listViewSorted.getSelectionModel().getSelectedIndex() < selectedStrings.size();
     }
 
     private void disableBtnOnIndex() {
