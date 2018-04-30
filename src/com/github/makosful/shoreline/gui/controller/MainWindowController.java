@@ -90,7 +90,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private ColumnConstraints gridOutputColumn;
 
-    private Boolean movable;
+    private Boolean movable = false;
     private Boolean isChecked = false;
     private Integer currentIndex;
 
@@ -207,6 +207,14 @@ public class MainWindowController implements Initializable {
 
             disableBtnOnIndex();
         });
+
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
+            if (c.next()) {
+                model.getSelectedStrings().addAll(c.getAddedSubList());
+                model.getSelectedStrings().removeAll(c.getRemoved());
+            }
+        });
+
     }
 
     @FXML
