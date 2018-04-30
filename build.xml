@@ -51,4 +51,7 @@
 
     -->
 
+    <copy todir="${basedir}/dist/res" >
+        <fileset dir="${basedir}/res" />
+    </copy>
 </project>
