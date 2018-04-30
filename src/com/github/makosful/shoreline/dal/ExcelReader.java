@@ -25,7 +25,7 @@ public class ExcelReader
      * Simply reads an XLS file and prints out the cell adress of every item
      * TODO: Make it return useable data
      *
-     * @param file The XLS file to read from
+     * @param file The XLS file path to read as String
      *
      * @throws java.io.IOException
      */
@@ -43,7 +43,7 @@ public class ExcelReader
      * Simply reads XLSX files and prints out the cell adress
      * TODO: Make it return usable data
      *
-     * @param file The XLSX file to read
+     * @param file The XLSX file path to read as String 
      *
      * @throws IOException
      */
