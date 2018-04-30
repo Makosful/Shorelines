@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline.gui.controller;
 
-import com.github.makosful.shoreline.be.SortedListICell;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,7 +29,8 @@ import org.controlsfx.control.CheckListView;
  *
  * @author Storm
  */
-public class MainWindowController implements Initializable {
+public class MainWindowController implements Initializable
+{
 
     private MainWindowModel model;
 
@@ -106,10 +106,11 @@ public class MainWindowController implements Initializable {
      * Initializes the controller class.
      *
      * @param url FXML parameter.
-     * @param rb FXML parameter.
+     * @param rb  FXML parameter.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
         model = new MainWindowModel();
 
@@ -126,9 +127,11 @@ public class MainWindowController implements Initializable {
      * @param event FXML parameter
      */
     @FXML
-    private void handleMoveItemUp(ActionEvent event) {
+    private void handleMoveItemUp(ActionEvent event)
+    {
         // Checks if the selected index has been marked as moveable
-        if (movable) {
+        if (movable)
+        {
             // Gets the two indexes
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
             int prevIndex = currentIndex - 1;
@@ -148,9 +151,11 @@ public class MainWindowController implements Initializable {
      * @param event FXML Parameter
      */
     @FXML
-    private void handleMoveItemDown(ActionEvent event) {
+    private void handleMoveItemDown(ActionEvent event)
+    {
         // Checks of the current item is marked as moveable
-        if (movable) {
+        if (movable)
+        {
             // Retrives the indicies for the two items to swap
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
             int prev = currentIndex + 1;
@@ -170,18 +175,23 @@ public class MainWindowController implements Initializable {
      * @param event FXML Parameter
      */
     @FXML
-    private void handleConversion(ActionEvent event) {
+    private void handleConversion(ActionEvent event)
+    {
         model.readFromExcel("Import_data.xlsx");
     }
 
     /**
      * Checks if the selected item is moveable
      */
-    private void checkIfValidToRelocate() {
+    private void checkIfValidToRelocate()
+    {
         if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
-                && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size()) {
+            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size())
+        {
             movable = true;
-        } else {
+        }
+        else
+        {
 
         }
     }
@@ -189,16 +199,23 @@ public class MainWindowController implements Initializable {
     /**
      * Handles the disabling and reenabling of the Up/Down butons
      */
-    private void disableBtnOnIndex() {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() == 0) {
+    private void disableBtnOnIndex()
+    {
+        if (listViewSorted.getSelectionModel().getSelectedIndex() == 0)
+        {
             btnMoveUp.setDisable(true);
-        } else {
+        }
+        else
+        {
             btnMoveUp.setDisable(false);
         }
 
-        if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1) {
+        if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1)
+        {
             btnMoveDown.setDisable(true);
-        } else {
+        }
+        else
+        {
             btnMoveDown.setDisable(false);
         }
     }
@@ -206,18 +223,22 @@ public class MainWindowController implements Initializable {
     /**
      * Adds listeners to the the View
      */
-    private void AddListeners() {
+    private void AddListeners()
+    {
         listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
 
 //        enableListViewDragAndSort();
-        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) -> {
+        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
+        {
             checkIfValidToRelocate();
 
             disableBtnOnIndex();
         });
 
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
-            if (c.next()) {
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
+        {
+            if (c.next())
+            {
                 model.getSelectedStrings().addAll(c.getAddedSubList());
                 model.getSelectedStrings().removeAll(c.getRemoved());
             }
@@ -225,11 +246,15 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    private void handleChecklistItemsStatus(ActionEvent event) {
-        if (!isChecked) {
+    private void handleChecklistItemsStatus(ActionEvent event)
+    {
+        if (!isChecked)
+        {
             chklistSelectData.getCheckModel().checkAll();
             isChecked = !isChecked;
-        } else if (isChecked) {
+        }
+        else if (isChecked)
+        {
             chklistSelectData.getCheckModel().clearChecks();
             isChecked = !isChecked;
         }
