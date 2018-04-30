@@ -95,6 +95,8 @@ public class MainWindowController implements Initializable
     private Button btnMoveDown;
     @FXML
     private Button btnConvert;
+    @FXML
+    private Button btnCheckListCheck;
 
     private Boolean movable = false;
     private Boolean isChecked = false;
@@ -225,7 +227,6 @@ public class MainWindowController implements Initializable
     {
         listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
 
-//        enableListViewDragAndSort();
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
             checkIfValidToRelocate();
@@ -249,11 +250,14 @@ public class MainWindowController implements Initializable
         if (!isChecked)
         {
             chklistSelectData.getCheckModel().checkAll();
+            btnCheckListCheck.setText("Uncheck all");
             isChecked = !isChecked;
         }
         else if (isChecked)
         {
             chklistSelectData.getCheckModel().clearChecks();
+            btnCheckListCheck.setText("Check all");
+
             isChecked = !isChecked;
         }
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
