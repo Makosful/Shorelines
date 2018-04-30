@@ -2,7 +2,6 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -55,32 +54,40 @@ public class MainWindowController implements Initializable
     @FXML
     private Label lbl02AssetSerialNo;
     @FXML
-    private Label lbl03ExtWorkOrderID;
+    private Label lbl03OrderType;
     @FXML
-    private Label lbl04SystemStatus;
+    private Label lbl04ExtWorkOrderID;
     @FXML
-    private Label lbl05UserStatus;
+    private Label lbl05SystemStatus;
     @FXML
-    private Label lbl06CreatedOn;
+    private Label lbl06UserStatus;
     @FXML
-    private Label lbl07CreatedBy;
+    private Label lbl07CreatedOn;
     @FXML
-    private Label lbl08Priority;
+    private Label lbl08CreatedBy;
     @FXML
-    private Label lbl09Status;
+    private Label lbl09NameDescription;
     @FXML
-    private Label lbl10EarliestStart;
+    private Label lbl10Priority;
     @FXML
-    private Label lb111LatestStart;
+    private Label lbl11Status;
     @FXML
-    private Label lbl12LatestFinish;
+    private Label lbl12EarliestStart;
     @FXML
-    private Label lbl13EstimatedTime;
+    private Label lbl13LatestStart;
     @FXML
-    private Label lb14lNameDescription;
+    private Label lbl14LatestFinish;
     @FXML
-    private Label lbl15OrderType;
+    private Label lbl15EstimatedTime;
     //</editor-fold>
+
+    @FXML
+    private ColumnConstraints gridOutputColumn;
+
+    @FXML
+    private CheckListView<String> chklistSelectData;
+    @FXML
+    private ListView<String> listViewSorted;
 
     @FXML
     private Button btnMoveUp;
@@ -88,15 +95,6 @@ public class MainWindowController implements Initializable
     private Button btnMoveDown;
     @FXML
     private Button btnConvert;
-    @FXML
-    private Button btnChecklistCheck;
-
-    @FXML
-    private CheckListView<String> chklistSelectData;
-    @FXML
-    private ListView<String> listViewSorted;
-    @FXML
-    private ColumnConstraints gridOutputColumn;
 
     private Boolean movable = false;
     private Boolean isChecked = false;
@@ -258,5 +256,11 @@ public class MainWindowController implements Initializable
             chklistSelectData.getCheckModel().clearChecks();
             isChecked = !isChecked;
         }
+        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
+        {
+            checkIfValidToRelocate();
+
+            disableBtnOnIndex();
+        });
     }
 }

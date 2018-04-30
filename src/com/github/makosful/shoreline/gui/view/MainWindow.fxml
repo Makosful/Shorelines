@@ -61,7 +61,7 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2506, 0.52" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.25, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="222.0">
                <children>
@@ -85,7 +85,7 @@
                      <textFill>
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
                      </textFill></Label>
-                  <ListView fx:id="listViewSorted" layoutX="8.0" layoutY="36.0" prefHeight="500.0" prefWidth="234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                  <ListView fx:id="listViewSorted" layoutX="8.0" layoutY="36.0" prefHeight="500.0" prefWidth="216.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
                   <VBox layoutX="180.0" layoutY="237.0">
                      <children>
                         <Button fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲" />
@@ -94,9 +94,9 @@
                   </VBox>
           </children>
         </AnchorPane>
-        <ScrollPane prefWidth="427.0">
+        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="522.0" prefWidth="427.0">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="520.0" prefWidth="444.0">
                      <children>
                         <Label alignment="CENTER" layoutX="4.0" layoutY="4.0" style="&#10;" text="Output Example (JSON)" textAlignment="CENTER" wrapText="false">
                            <font>
@@ -174,7 +174,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Button>
-            <Button fx:id="btnChecklistCheck" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Button" />
+            <Button fx:id="btnCheckListCheck" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all rows" />
          </children>
       </Pane>
   </children>

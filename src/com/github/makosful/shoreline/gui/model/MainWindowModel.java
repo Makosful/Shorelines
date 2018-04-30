@@ -21,7 +21,7 @@ public class MainWindowModel
     private final IBLL bll;
 
     // Mock Data
-    ObservableList<String> strings = FXCollections.observableArrayList("Site_Name", "Asset_ID", "", "Order_Type", "Work_Order_ID", "System_Status", "User_Status", "Created_On", "Created_By", "Description", "Priority", "Status", "Earliest_Start_Date", "Latest_Start_Date", "Latest_Finish_Date", "Estimated_Time_Hours");
+    ObservableList<String> strings = FXCollections.observableArrayList("Site_Name", "Asset_ID", "Order_Type", "Work_Order_ID", "System_Status", "User_Status", "Created_On", "Created_By", "Description", "Priority", "Status", "Earliest_Start_Date", "Latest_Start_Date", "Latest_Finish_Date", "Estimated_Time_Hours");
     ObservableList<String> selectedStrings = FXCollections.observableArrayList();
 
     public MainWindowModel()
