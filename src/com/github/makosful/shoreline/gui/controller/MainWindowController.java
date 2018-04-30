@@ -1,17 +1,25 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.be.SortedListICell;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -43,35 +51,35 @@ public class MainWindowController implements Initializable {
 
     //<editor-fold defaultstate="collapsed" desc="Labels">
     @FXML
-    private Label lblSiteName;
+    private Label lbl01SiteName;
     @FXML
-    private Label lblAssetSerialNo;
+    private Label lbl02AssetSerialNo;
     @FXML
-    private Label lblExtWorkOrderID;
+    private Label lbl03ExtWorkOrderID;
     @FXML
-    private Label lblSystemStatus;
+    private Label lbl04SystemStatus;
     @FXML
-    private Label lblUserStatus;
+    private Label lbl05UserStatus;
     @FXML
-    private Label lblCreatedOn;
+    private Label lbl06CreatedOn;
     @FXML
-    private Label lblCreatedBy;
+    private Label lbl07CreatedBy;
     @FXML
-    private Label lblPriority;
+    private Label lbl08Priority;
     @FXML
-    private Label lblStatus;
+    private Label lbl09Status;
     @FXML
-    private Label lblEarliestStart;
+    private Label lbl10EarliestStart;
     @FXML
-    private Label lblLatestStart;
+    private Label lb111LatestStart;
     @FXML
-    private Label lblLatestFinish;
+    private Label lbl12LatestFinish;
     @FXML
-    private Label lblEstimatedTime;
+    private Label lbl13EstimatedTime;
     @FXML
-    private Label lblNameDescription;
+    private Label lb14lNameDescription;
     @FXML
-    private Label lblOrderType;
+    private Label lbl15OrderType;
     //</editor-fold>
 
     @FXML
@@ -201,8 +209,8 @@ public class MainWindowController implements Initializable {
     private void AddListeners() {
         listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
 
-        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable)
-                -> {
+//        enableListViewDragAndSort();
+        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) -> {
             checkIfValidToRelocate();
 
             disableBtnOnIndex();
@@ -214,7 +222,6 @@ public class MainWindowController implements Initializable {
                 model.getSelectedStrings().removeAll(c.getRemoved());
             }
         });
-
     }
 
     @FXML

@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.gui.model;
 
+import com.github.makosful.shoreline.be.SortedListICell;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
@@ -23,6 +24,7 @@ public class MainWindowModel
     // Mock Data
     ObservableList<String> strings = FXCollections.observableArrayList("One 1", "Two 2", "Three 3", "Four 4", "Five 5", "Six 6", "Seven 7", "Eight 8", "Nine 9", "Ten10");
     ObservableList<String> selectedStrings = FXCollections.observableArrayList();
+    ObservableList<SortedListICell> selectedStrings = FXCollections.observableArrayList();
 
     public MainWindowModel()
     {
