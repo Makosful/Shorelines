@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
@@ -74,19 +75,23 @@ public class MainWindowController implements Initializable {
     //</editor-fold>
 
     @FXML
-    private CheckListView<String> chklistSelectData;
-    @FXML
-    private ListView<String> listViewSorted;
-    @FXML
     private Button btnMoveUp;
     @FXML
     private Button btnMoveDown;
     @FXML
     private Button btnConvert;
     @FXML
+    private Button btnChecklistCheck;
+
+    @FXML
+    private CheckListView<String> chklistSelectData;
+    @FXML
+    private ListView<String> listViewSorted;
+    @FXML
     private ColumnConstraints gridOutputColumn;
 
-    private Boolean movable;
+    private Boolean movable = false;
+    private Boolean isChecked = false;
     private Integer currentIndex;
 
     /**
@@ -165,8 +170,12 @@ public class MainWindowController implements Initializable {
      * Checks if the selected item is moveable
      */
     private void checkIfValidToRelocate() {
-        movable = listViewSorted.getSelectionModel().getSelectedIndex() >= 0
-                && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size();
+        if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
+                && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size()) {
+            movable = true;
+        } else {
+
+        }
     }
 
     /**
@@ -190,13 +199,7 @@ public class MainWindowController implements Initializable {
      * Adds listeners to the the View
      */
     private void AddListeners() {
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c)
-                -> {
-            if (c.next()) {
-                model.getSelectedStrings().addAll(c.getAddedSubList());
-                model.getSelectedStrings().removeAll(c.getRemoved());
-            }
-        });
+        listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
 
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable)
                 -> {
@@ -204,5 +207,24 @@ public class MainWindowController implements Initializable {
 
             disableBtnOnIndex();
         });
+
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) -> {
+            if (c.next()) {
+                model.getSelectedStrings().addAll(c.getAddedSubList());
+                model.getSelectedStrings().removeAll(c.getRemoved());
+            }
+        });
+
+    }
+
+    @FXML
+    private void handleChecklistItemsStatus(ActionEvent event) {
+        if (!isChecked) {
+            chklistSelectData.getCheckModel().checkAll();
+            isChecked = !isChecked;
+        } else if (isChecked) {
+            chklistSelectData.getCheckModel().clearChecks();
+            isChecked = !isChecked;
+        }
     }
 }
