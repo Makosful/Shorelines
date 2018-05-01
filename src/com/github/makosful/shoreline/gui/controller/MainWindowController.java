@@ -165,9 +165,13 @@ public class MainWindowController implements Initializable {
     {
         hashMapPut();
         model.readFromExcel("import_data.xlsx", cellOrder);
+        int y = 0;
        for(ExcelRow ex : model.getExcelRowsList())
        {
            ex.getSiteName();
+           System.out.println(ex.getPriority());
+           System.out.println(y++);
+           
        }
     }
 

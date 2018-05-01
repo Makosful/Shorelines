@@ -87,8 +87,8 @@ public class ExcelReader
         columnNames.clear();
         Row row;
         int rows; // Number of rows
-        rows = sheet.getPhysicalNumberOfRows();
-        rows = sheet.getLastRowNum();
+        // +1 So it takes last row along, pga. nul indeksering.
+        rows = sheet.getPhysicalNumberOfRows() + 1;
 
         Cell cell;
         int cols = 0; // Number of columns
