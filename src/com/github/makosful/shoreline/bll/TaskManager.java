@@ -4,7 +4,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -39,8 +39,8 @@ public class TaskManager
                 {
                     for (ExcelRow row : list)
                     {
-                        Map map = new HashMap();
-                        Map planning = new HashMap();
+                        Map map = new LinkedHashMap();
+                        Map planning = new LinkedHashMap();
 
                         map.put("siteName", row.getSiteName());
                         map.put("assetSerialNumber", row.getAssetSerialNumber());
