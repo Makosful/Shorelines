@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.ArrayList;
@@ -9,12 +10,12 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -93,6 +94,8 @@ public class MainWindowController implements Initializable {
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Integer currentIndex;
+    @FXML
+    private ComboBox<Config> comboBoxConfig;
 
     /**
      * Initializes the controller class.
@@ -110,6 +113,8 @@ public class MainWindowController implements Initializable {
         listViewSorted.setItems(model.getSelectedStrings());
 
         AddListeners();
+        
+        addConfigs();
     }
 
     /**
@@ -226,5 +231,42 @@ public class MainWindowController implements Initializable {
             chklistSelectData.getCheckModel().clearChecks();
             isChecked = !isChecked;
         }
+    }
+
+    private void addConfigs()
+    {
+        Config c = new Config();
+        c.setName("IBM");
+        
+        comboBoxConfig.getItems().add(c);
+        comboBoxConfig.setConverter(new StringConverter<Config>() {
+
+            @Override
+            public String toString(Config config)
+            {
+                return config.getName();
+            }
+
+            @Override
+            public Config fromString(String configName)
+            {
+                return comboBoxConfig.getItems().stream().filter(ap -> 
+                ap.getName().equals(configName)).findFirst().orElse(null);
+            }
+        });
+        
+        comboBoxConfig.valueProperty().addListener((obs, oldval, newval) -> {
+       
+                System.out.println("Selected airport: " + newval.getName());
+        });
+       
+        
+        
+    }
+
+    @FXML
+    private void handleSelectedConfig(ActionEvent event)
+    {
+        
     }
 }
