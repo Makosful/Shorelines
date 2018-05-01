@@ -2,8 +2,6 @@ package com.github.makosful.shoreline.gui.controller;
 
 
 import com.github.makosful.shoreline.BE.ColumnObject;
-import com.github.makosful.shoreline.BE.ExcelRow;
-import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.*;
@@ -15,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -97,8 +94,8 @@ public class MainWindowController implements Initializable
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Integer currentIndex;
-    @FXML
-    private ComboBox<Config> comboBoxConfig;
+//    @FXML
+//    private ComboBox<Config> comboBoxConfig;
 
     /**
      * Initializes the controller class.
