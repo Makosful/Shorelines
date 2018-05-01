@@ -139,18 +139,23 @@ public class ExcelReader
             }
         }
     }
-
+    /**
+     * Creates excelRow Objects - holds information about a single excel row.
+     * Uses HashMap to know which variables are supposed to hold specific columns
+     * in specific row.
+     * @param cellOrder 
+     */
     private void excelCreation(HashMap<String, Integer> cellOrder)
     {
         ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
             excelRows.add(excelRow);
     }
-
+    // Excel Row objects.
     public List<ExcelRow> getExcelRowsList()
     {
         return excelRows;
     }
-
+    // Column names - for example Country.
     public List<ColumnObject> getColumnNames()
     {
         return columnNames;
