@@ -265,8 +265,10 @@ public class MainWindowController implements Initializable
         }
     }
 
-
-
+    /**
+     * HashMap to save the column number of columnObject, and the name of
+     * the json static label for example "siteName"
+     */
     private void hashMapPut()
     {
         // Clearing hashMap.
