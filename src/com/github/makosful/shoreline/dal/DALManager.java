@@ -1,8 +1,6 @@
 package com.github.makosful.shoreline.dal;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A facade for the Data Access Layer as a whole.
@@ -24,18 +22,6 @@ public class DALManager implements IDAL
     {
         excel = new ExcelReader();
         jWriter = new JsonWriter();
-
-        try
-        {
-            jWriter.put("MyInt", 6.9f);
-            jWriter.put("MyFloat", 6.9f);
-            jWriter.remove("Myfloat");
-            jWriter.write();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(DALManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @Override
