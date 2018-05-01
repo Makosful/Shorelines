@@ -234,6 +234,7 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+
         listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
 
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
@@ -243,7 +244,7 @@ public class MainWindowController implements Initializable
             disableBtnOnIndex();
         });
 
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c)->
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c) ->
         {
             if (c.next())
             {
@@ -261,11 +262,14 @@ public class MainWindowController implements Initializable
         {
             chklistSelectData.getCheckModel().checkAll();
             isChecked = !isChecked;
+            btnChecklistCheck.setText("Check all");
+
         }
         else if (isChecked)
         {
             chklistSelectData.getCheckModel().clearChecks();
             isChecked = !isChecked;
+            btnChecklistCheck.setText("Uncheck all");
         }
     }
 
