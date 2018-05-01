@@ -255,6 +255,7 @@ public class MainWindowController implements Initializable {
             }
         });
         
+        
         comboBoxConfig.valueProperty().addListener((obs, oldval, newval) -> {
        
                 System.out.println("Selected airport: " + newval.getName());
