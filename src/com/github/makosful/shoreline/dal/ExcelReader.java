@@ -143,10 +143,7 @@ public class ExcelReader
     private void excelCreation(HashMap<String, Integer> cellOrder)
     {
         ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
-        //if (excelRow.getSiteName() != null)
-        //{
             excelRows.add(excelRow);
-        //}
     }
 
     public List<ExcelRow> getExcelRowsList()

@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.BE.ColumnObject;
 import com.github.makosful.shoreline.BE.ExcelRow;
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.*;
@@ -96,8 +97,8 @@ public class MainWindowController implements Initializable
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Integer currentIndex;
-    //@FXML
-    //private ComboBox<Config> comboBoxConfig;
+    @FXML
+    private ComboBox<Config> comboBoxConfig;
 
     /**
      * Initializes the controller class.
@@ -118,7 +119,6 @@ public class MainWindowController implements Initializable
 
         AddListeners();
 
-        //addConfigs();
     }
 
     /**
@@ -178,15 +178,7 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event)
     {
         hashMapPut();
-        model.readFromExcel("import_data.xlsx", cellOrder);
-        int y = 0;
-        for (ExcelRow ex : model.getExcelRowsList())
-        {
-            ex.getSiteName();
-            System.out.println(ex.getPriority());
-            System.out.println(y++);
-
-        }
+        model.readFromExcel("import_data.xlsx", cellOrder, true);
     }
 
     /**
@@ -279,8 +271,7 @@ public class MainWindowController implements Initializable
     {
         // Clearing hashMap.
         cellOrder.clear();
-        int i = 0;
-        String[] s = new String[]
+        String[] hashmapStrings = new String[]
         {
             "siteName", "assetSerialNumber", "orderType", "workerOrderId", "systemStatus",
             "userStatus", "createdOn", "createdBy", "nameDescription",
@@ -288,18 +279,21 @@ public class MainWindowController implements Initializable
         };
         List<ColumnObject> listOfStrings = listViewSorted.getItems();
 
-        for (ColumnObject col : listOfStrings)
+        for(int i = 0;i<listOfStrings.size();i++)
         {
-            cellOrder.put(s[i], col.getColumnID());
-            i++;
+            ColumnObject col = listOfStrings.get(i);
+            cellOrder.put(hashmapStrings[i], col.getColumnID());
         }
-
     }
-
+    
+    /**
+     * Loading File - Static file.
+     * @param event 
+     */
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.readFromExcel("import_data.xlsx", cellOrder);
+        model.readFromExcel("import_data.xlsx", cellOrder, false);
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }
