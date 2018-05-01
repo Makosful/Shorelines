@@ -5,7 +5,6 @@
  */
 package com.github.makosful.shoreline.be;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +13,7 @@ import java.util.List;
  */
 public class Config
 {
+
     private String name;
     private List<Integer> chosenColums;
 
@@ -36,6 +36,4 @@ public class Config
     {
         this.chosenColums = chosenColums;
     }
-    
-    
 }
