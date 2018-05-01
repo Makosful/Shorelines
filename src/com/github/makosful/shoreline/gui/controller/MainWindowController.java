@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -117,7 +118,7 @@ public class MainWindowController implements Initializable
         listViewSorted.setItems(model.getSelectedStrings());
 
         AddListeners();
-        //addConfigs();
+        addConfigs();
     }
 
     /**
@@ -299,6 +300,36 @@ public class MainWindowController implements Initializable
         AddListeners();
     }
     
-    
+    private void addConfigs()
+    {
+        Config c = new Config();
+        c.setName("IBM");
+
+        comboBoxConfig.getItems().add(c);
+        comboBoxConfig.setConverter(new StringConverter<Config>()
+        {
+
+            @Override
+            public String toString(Config config)
+            {
+                return config.getName();
+            }
+
+            @Override
+            public Config fromString(String configName)
+            {
+                return comboBoxConfig.getItems().stream().filter(ap
+                        -> ap.getName().equals(configName)).findFirst().orElse(null);
+            }
+        });
+
+        comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
+        {
+
+            System.out.println("Selected config: " + newval.getName());
+        });
+
+    }
+
 
 }
