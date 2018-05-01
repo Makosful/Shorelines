@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.DALManager;
+import com.github.makosful.shoreline.dal.IDAL;
 import org.json.simple.JSONObject;
 
 /**
@@ -14,6 +11,14 @@ import org.json.simple.JSONObject;
  */
 public class ExcelConverter
 {
+
+    private final IDAL dal;
+
+    public ExcelConverter()
+    {
+        dal = new DALManager();
+    }
+
     public void convertToJSon(ExcelRow excel)
     {
         JSONObject json = new JSONObject();

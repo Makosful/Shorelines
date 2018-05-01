@@ -1,9 +1,12 @@
 package com.github.makosful.shoreline;
 
+import com.github.makosful.shoreline.gui.model.Cache;
+import com.github.makosful.stage.exception.IlligalIdException;
+import com.github.makosful.stage.utils.StageManager;
+import java.io.File;
+import java.io.IOException;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -17,12 +20,17 @@ public class Main extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/view/MainWindow.fxml"));
+        StageManager sm = new StageManager(stage);
+        Cache c = Cache.getInstance();
+        c.setStageManager(sm);
 
-        Scene scene = new Scene(root);
+        registerScenes(sm);
 
-        stage.setScene(scene);
-        stage.show();
+        sm.getStage().show();
+
+        File file = new File("./res/logo.png");
+        Image icon = new Image(file.toURI().toString());
+        sm.getStage().getIcons().add(icon);
     }
 
     /**
@@ -31,6 +39,17 @@ public class Main extends Application
     public static void main(String[] args)
     {
         launch(args);
+    }
+
+    private void registerScenes(StageManager sm) throws IOException,
+                                                        IlligalIdException
+    {
+        sm.registerScene(0, "Shoreline",
+                         getClass().getResource("gui/view/MainWindow.fxml"));
+        sm.registerScene(1, "Login",
+                         getClass().getResource("gui/view/Login.fxml"));
+
+        sm.setActiveScene(0);
     }
 
 }

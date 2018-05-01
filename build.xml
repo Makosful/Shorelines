@@ -50,5 +50,7 @@
     nbproject/build-impl.xml and nbproject/jfx-impl.xml.
 
     -->
-
+    <copy todir="${basedir}/dist/res">
+        <fileset dir="res"/>
+    </copy>
 </project>
