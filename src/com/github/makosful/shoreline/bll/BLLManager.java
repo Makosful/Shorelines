@@ -1,8 +1,12 @@
 package com.github.makosful.shoreline.bll;
 
+import com.github.makosful.shoreline.BE.ColumnObject;
+import com.github.makosful.shoreline.BE.ExcelRow;
 import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to
@@ -29,15 +33,27 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void readFromExcelFile(String file) throws BLLException
+    public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder) throws BLLException
     {
         try
         {
-            dal.readFromXlsxFile(file);
+            dal.readFromXlsxFile(file, cellOrder);
         }
         catch (DALException ex)
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
+    }
+
+    @Override
+    public List<ExcelRow> getExcelRowsList()
+    {
+        return dal.getExcelRowsList();
+    }
+
+    @Override
+    public List<ColumnObject> getColumnNames()
+    {
+        return dal.getColumnNames();
     }
 }
