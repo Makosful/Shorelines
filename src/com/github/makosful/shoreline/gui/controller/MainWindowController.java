@@ -1,9 +1,10 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.BE.ColumnObject;
+import com.github.makosful.shoreline.BE.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.Collections;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,8 @@ import org.controlsfx.control.CheckListView;
 public class MainWindowController implements Initializable {
 
     private MainWindowModel model;
+    
+    private HashMap<String, Integer> cellOrder;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -74,9 +77,9 @@ public class MainWindowController implements Initializable {
     //</editor-fold>
 
     @FXML
-    private CheckListView<String> chklistSelectData;
+    private CheckListView<ColumnObject> chklistSelectData;
     @FXML
-    private ListView<String> listViewSorted;
+    private ListView<ColumnObject> listViewSorted;
     @FXML
     private Button btnMoveUp;
     @FXML
@@ -99,8 +102,9 @@ public class MainWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         model = new MainWindowModel();
+        cellOrder = new HashMap<String, Integer>();
 
-        chklistSelectData.setItems(model.getMockStrings());
+        chklistSelectData.setItems(model.getColumnNames());
 
         listViewSorted.setItems(model.getSelectedStrings());
 
@@ -157,8 +161,14 @@ public class MainWindowController implements Initializable {
      * @param event FXML Parameter
      */
     @FXML
-    private void handleConversion(ActionEvent event) {
-        model.readFromExcel("Import_data.xlsx");
+    private void handleConversion(ActionEvent event) 
+    {
+        hashMapPut();
+        model.readFromExcel("import_data.xlsx", cellOrder);
+       for(ExcelRow ex : model.getExcelRowsList())
+       {
+           ex.getSiteName();
+       }
     }
 
     /**
@@ -190,7 +200,7 @@ public class MainWindowController implements Initializable {
      * Adds listeners to the the View
      */
     private void AddListeners() {
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c)
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c)
                 -> {
             if (c.next()) {
                 model.getSelectedStrings().addAll(c.getAddedSubList());
@@ -204,5 +214,34 @@ public class MainWindowController implements Initializable {
 
             disableBtnOnIndex();
         });
+    }
+    
+    private void hashMapPut()
+    {
+        // Clearing hashMap.
+        cellOrder.clear();
+        int i = 0;
+        String[] s = new String[]
+        {
+            "siteName", "assetSerialNumber", "orderType", "workerOrderId", "systemStatus",
+             "userStatus", "createdOn", "createdBy", "nameDescription",
+             "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
+        };
+        List<ColumnObject> listOfStrings = listViewSorted.getItems();
+
+        for(ColumnObject col : listOfStrings)
+        {  
+            cellOrder.put(s[i], col.getColumnID());
+            i++;
+        }
+
+    }
+
+    @FXML
+    private void loadFile(ActionEvent event)
+    {
+        model.readFromExcel("import_data.xlsx", cellOrder);
+        chklistSelectData.setItems(model.getColumnNames());
+        AddListeners();
     }
 }

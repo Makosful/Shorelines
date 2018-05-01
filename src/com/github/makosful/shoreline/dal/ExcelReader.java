@@ -1,8 +1,13 @@
 package com.github.makosful.shoreline.dal;
 
+import com.github.makosful.shoreline.BE.ColumnObject;
+import com.github.makosful.shoreline.BE.ExcelRow;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -21,6 +26,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelReader
 {
 
+    private List<ExcelRow> excelRows;
+    private List<Cell> cells;
+    private final ExcelRowCreation excelRowCreation;
+    private final List<ColumnObject> columnNames;
+
+    public ExcelReader()
+    {
+        excelRowCreation = new ExcelRowCreation();
+        excelRows = new ArrayList();
+        columnNames = new ArrayList();
+        excelRows = new ArrayList();
+    }
+
     /**
      * Simply reads an XLS file and prints out the cell adress of every item
      * TODO: Make it return useable data
@@ -29,14 +47,14 @@ public class ExcelReader
      *
      * @throws java.io.IOException
      */
-    public void readFromXlsFile(String file) throws IOException
+    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder) throws IOException
     {
         // Set up
         POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
         HSSFWorkbook wb = new HSSFWorkbook(fs);
         HSSFSheet sheet = wb.getSheetAt(0);
 
-        readExcelSheet(sheet);
+        readExcelSheet(sheet, cellOrder);
     }
 
     /**
@@ -47,7 +65,7 @@ public class ExcelReader
      *
      * @throws IOException
      */
-    public void readFromXlsxFiles(String file) throws IOException
+    public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder) throws IOException
     {
         // Set up
         XSSFWorkbook wb = new XSSFWorkbook(
@@ -55,7 +73,7 @@ public class ExcelReader
                         new FileInputStream(file)));
         XSSFSheet sheet = wb.getSheetAt(0);
 
-        readExcelSheet(sheet);
+        readExcelSheet(sheet, cellOrder);
     }
 
     /**
@@ -63,11 +81,14 @@ public class ExcelReader
      *
      * @param sheet An object implimenting the Sheet interface from ss.usermodel
      */
-    private void readExcelSheet(Sheet sheet)
+    private void readExcelSheet(Sheet sheet, HashMap<String, Integer> cellOrder)
     {
+        excelRows.clear();
+        columnNames.clear();
         Row row;
         int rows; // Number of rows
         rows = sheet.getPhysicalNumberOfRows();
+        rows = sheet.getLastRowNum();
 
         Cell cell;
         int cols = 0; // Number of columns
@@ -93,15 +114,49 @@ public class ExcelReader
             row = sheet.getRow(r);
             if (row != null)
             {
+                cells = new ArrayList();
                 for (int c = 0; c < cols; c++)
                 {
                     cell = row.getCell((short) c);
                     if (cell != null)
                     {
-                        System.out.println(cell.getAddress());
+
+                        if (r == 0)
+                        {
+                            ColumnObject col = new ColumnObject(cell.getStringCellValue(), cell.getColumnIndex());
+                            columnNames.add(col);
+                        }
+                        else
+                        {
+                            cells.add(cell);
+                        }
                     }
+                }
+                if (!cells.isEmpty())
+                {
+                    excelCreation(cellOrder);
                 }
             }
         }
     }
+
+    private void excelCreation(HashMap<String, Integer> cellOrder)
+    {
+        ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
+        if (excelRow.getSiteName() != null)
+        {
+            excelRows.add(excelRow);
+        }
+    }
+
+    public List<ExcelRow> getExcelRowsList()
+    {
+        return excelRows;
+    }
+
+    public List<ColumnObject> getColumnNames()
+    {
+        return columnNames;
+    }
+
 }

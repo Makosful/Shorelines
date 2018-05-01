@@ -1,6 +1,10 @@
 package com.github.makosful.shoreline.dal;
 
+import com.github.makosful.shoreline.BE.ColumnObject;
+import com.github.makosful.shoreline.BE.ExcelRow;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,11 +43,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void readFromXlsFile(String file) throws DALException
+    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder) throws DALException
     {
         try
         {
-            excel.readFromXlsFile(file);
+            excel.readFromXlsFile(file, cellOrder);
         }
         catch (IOException ex)
         {
@@ -52,15 +56,29 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void readFromXlsxFile(String file) throws DALException
+    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder) throws DALException
     {
         try
         {
-            excel.readFromXlsxFiles(file);
+            excel.readFromXlsxFiles(file, cellOrder);
         }
         catch (IOException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
+
+    @Override
+    public List<ExcelRow> getExcelRowsList()
+    {
+        return excel.getExcelRowsList();
+    }
+
+    @Override
+    public List<ColumnObject> getColumnNames()
+    {
+        return excel.getColumnNames();
+    }
+    
+    
 }
