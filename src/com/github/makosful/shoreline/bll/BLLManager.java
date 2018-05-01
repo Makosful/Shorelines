@@ -1,7 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
-import com.github.makosful.shoreline.BE.ColumnObject;
-import com.github.makosful.shoreline.BE.ExcelRow;
+import com.github.makosful.shoreline.be.ColumnObject;
+import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;

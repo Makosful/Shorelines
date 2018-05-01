@@ -5,7 +5,7 @@
  */
 package com.github.makosful.shoreline.dal;
 
-import com.github.makosful.shoreline.BE.ExcelRow;
+import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;

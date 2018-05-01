@@ -5,7 +5,7 @@
  */
 package com.github.makosful.shoreline.bll;
 
-import com.github.makosful.shoreline.BE.ExcelRow;
+import com.github.makosful.shoreline.be.ExcelRow;
 import org.json.simple.JSONObject;
 
 /**
