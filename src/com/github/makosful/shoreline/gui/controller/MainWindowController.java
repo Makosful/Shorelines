@@ -5,24 +5,18 @@ import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-<<<<<<< HEAD
 import java.util.*;
 import javafx.collections.FXCollections;
-=======
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
->>>>>>> dev
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -314,22 +308,15 @@ public class MainWindowController implements Initializable
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }
-<<<<<<< HEAD
-    
     
     /**
-     * 
+     * Set up the configurations in combobox
      */
-=======
-
->>>>>>> dev
     private void addConfigs()
     {
         Config c = new Config();
         c.setName("IBM");
 
-        
-        
         comboBoxConfig.getItems().add(c);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
@@ -348,6 +335,15 @@ public class MainWindowController implements Initializable
             }
         });
 
+        addConfigListener();
+
+    }
+
+    /**
+     * Add listener to when a configuration is selected
+     */
+    private void addConfigListener()
+    {
         comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
         {
             
@@ -357,21 +353,12 @@ public class MainWindowController implements Initializable
             listViewSorted.setItems(n);
           
         });
-
     }
-<<<<<<< HEAD
 
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
     {
-        for(ColumnObject n : listViewSorted.getItems())
-        {
-            System.out.println(n.getColumnID());
-            System.out.println(n.getColumnName());
-        }
+        model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
     }
 
-
-=======
->>>>>>> dev
 }

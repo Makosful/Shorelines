@@ -29,6 +29,7 @@ public class DALManager implements IDAL
 
     public DALManager()
     {
+        cDAO = new ConfigDAO();
         excel = new ExcelReader();
         jWriter = new JsonWriter();
     }

@@ -15,14 +15,26 @@ import javafx.collections.ObservableList;
 public class ConfigDAO
 {
 
+    /**
+     * Insert the new configuration in the db with its name and return its id(generated keys) 
+     * @param configName
+     * @return 
+     */
     public int saveConfiguration(String configName)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(configName);
+        return 0;
     }
 
+    /**
+     * save the column in db
+     * @param configId
+     * @param column 
+     */
     public void saveConfigColumns(int configId, ColumnObject column)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("id:"+configId+"column:"+column.getColumnName());
+        
     }
 
 }
