@@ -183,7 +183,7 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event)
     {
         hashMapPut();
-        model.readFromExcel("import_data.xlsx", cellOrder, true);
+        model.convert("import_data.xlsx", cellOrder, true);
     }
 
     /**
@@ -301,7 +301,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.readFromExcel("import_data.xlsx", cellOrder, false);
+        model.convert("import_data.xlsx", cellOrder, false);
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }

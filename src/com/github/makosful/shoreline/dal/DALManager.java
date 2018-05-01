@@ -5,7 +5,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 /**
  * A facade for the Data Access Layer as a whole.
@@ -66,6 +66,24 @@ public class DALManager implements IDAL
     {
         return excel.getColumnNames();
     }
-    
-    
+
+    @Override
+    public void jsonAdd(Map jsonObj) throws DALException
+    {
+        jWriter.addObject(jsonObj);
+    }
+
+    @Override
+    public void jsonWrite() throws DALException
+    {
+        try
+        {
+            jWriter.write();
+        }
+        catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
 }

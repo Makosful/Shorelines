@@ -27,9 +27,13 @@ public class BLLManager implements IBLL
 
     private final IDAL dal;
 
+    private final TaskManager tasks;
+
     public BLLManager()
     {
         dal = new DALManager();
+
+        tasks = new TaskManager();
     }
 
     @Override
@@ -55,5 +59,11 @@ public class BLLManager implements IBLL
     public List<ColumnObject> getColumnNames()
     {
         return dal.getColumnNames();
+    }
+
+    @Override
+    public void addTask(List<ExcelRow> list)
+    {
+        tasks.addTask(list);
     }
 }
