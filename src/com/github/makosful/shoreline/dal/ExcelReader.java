@@ -47,14 +47,14 @@ public class ExcelReader
      *
      * @throws java.io.IOException
      */
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder) throws IOException
+    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException
     {
         // Set up
         POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
         HSSFWorkbook wb = new HSSFWorkbook(fs);
         HSSFSheet sheet = wb.getSheetAt(0);
 
-        readExcelSheet(sheet, cellOrder);
+        readExcelSheet(sheet, cellOrder, conversion);
     }
 
     /**
@@ -65,7 +65,7 @@ public class ExcelReader
      *
      * @throws IOException
      */
-    public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder) throws IOException
+    public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException
     {
         // Set up
         XSSFWorkbook wb = new XSSFWorkbook(
@@ -73,7 +73,7 @@ public class ExcelReader
                         new FileInputStream(file)));
         XSSFSheet sheet = wb.getSheetAt(0);
 
-        readExcelSheet(sheet, cellOrder);
+        readExcelSheet(sheet, cellOrder, conversion);
     }
 
     /**
@@ -81,7 +81,7 @@ public class ExcelReader
      *
      * @param sheet An object implimenting the Sheet interface from ss.usermodel
      */
-    private void readExcelSheet(Sheet sheet, HashMap<String, Integer> cellOrder)
+    private void readExcelSheet(Sheet sheet, HashMap<String, Integer> cellOrder, boolean conversion)
     {
         excelRows.clear();
         columnNames.clear();
@@ -132,7 +132,7 @@ public class ExcelReader
                         }
                     }
                 }
-                if (!cells.isEmpty())
+                if (!cells.isEmpty() && conversion)
                 {
                     excelCreation(cellOrder);
                 }
@@ -143,10 +143,10 @@ public class ExcelReader
     private void excelCreation(HashMap<String, Integer> cellOrder)
     {
         ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
-        if (excelRow.getSiteName() != null)
-        {
+        //if (excelRow.getSiteName() != null)
+        //{
             excelRows.add(excelRow);
-        }
+        //}
     }
 
     public List<ExcelRow> getExcelRowsList()

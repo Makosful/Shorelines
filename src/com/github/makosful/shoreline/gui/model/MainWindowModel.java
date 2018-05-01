@@ -52,11 +52,11 @@ public class MainWindowModel
         return selectedColumns;
     }
 
-    public void readFromExcel(String import_dataxlsx, HashMap<String, Integer> cellOrder)
+    public void readFromExcel(String import_dataxlsx, HashMap<String, Integer> cellOrder, boolean conversion)
     {
         try
         {
-            bll.readFromExcelFile(import_dataxlsx, cellOrder);
+            bll.readFromExcelFile(import_dataxlsx, cellOrder, conversion);
         }
         catch (BLLException ex)
         {

@@ -30,11 +30,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder) throws DALException
+    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
         try
         {
-            excel.readFromXlsFile(file, cellOrder);
+            excel.readFromXlsFile(file, cellOrder, conversion);
         }
         catch (IOException ex)
         {
@@ -43,11 +43,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder) throws DALException
+    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
         try
         {
-            excel.readFromXlsxFiles(file, cellOrder);
+            excel.readFromXlsxFiles(file, cellOrder, conversion);
         }
         catch (IOException ex)
         {
