@@ -1,20 +1,26 @@
 package com.github.makosful.shoreline.gui.controller;
 
-
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -99,7 +105,6 @@ public class MainWindowController implements Initializable
     @FXML
     private ComboBox<Config> comboBoxConfig;
 
-
     /**
      * Initializes the controller class.
      *
@@ -118,7 +123,7 @@ public class MainWindowController implements Initializable
         listViewSorted.setItems(model.getSelectedStrings());
 
         AddListeners();
-        //addConfigs();
+        addConfigs();
     }
 
     /**
@@ -179,13 +184,6 @@ public class MainWindowController implements Initializable
     {
         hashMapPut();
         model.readFromExcel("import_data.xlsx", cellOrder, true);
-        for(ExcelRow e : model.getExcelRowsList())
-        {
-            System.out.println(e.getSiteName());
-            System.out.println(e.getLfDate());
-            System.out.println(e.getEsTime());
-        }
-        
     }
 
     /**
@@ -288,16 +286,17 @@ public class MainWindowController implements Initializable
         };
         List<ColumnObject> listOfStrings = listViewSorted.getItems();
 
-        for(int i = 0;i<listOfStrings.size();i++)
+        for (int i = 0; i < listOfStrings.size(); i++)
         {
             ColumnObject col = listOfStrings.get(i);
             cellOrder.put(hashmapStrings[i], col.getColumnID());
         }
     }
-    
+
     /**
      * Loading File - Static file.
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void loadFile(ActionEvent event)
@@ -306,7 +305,35 @@ public class MainWindowController implements Initializable
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }
-    
-    
 
+    private void addConfigs()
+    {
+        Config c = new Config();
+        c.setName("IBM");
+
+        comboBoxConfig.getItems().add(c);
+        comboBoxConfig.setConverter(new StringConverter<Config>()
+        {
+
+            @Override
+            public String toString(Config config)
+            {
+                return config.getName();
+            }
+
+            @Override
+            public Config fromString(String configName)
+            {
+                return comboBoxConfig.getItems().stream().filter(ap
+                        -> ap.getName().equals(configName)).findFirst().orElse(null);
+            }
+        });
+
+        comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
+        {
+
+            System.out.println("Selected config: " + newval.getName());
+        });
+
+    }
 }
