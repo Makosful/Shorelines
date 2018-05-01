@@ -7,6 +7,7 @@ import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;
 import java.util.HashMap;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to
@@ -27,9 +28,13 @@ public class BLLManager implements IBLL
 
     private final IDAL dal;
 
+    private final TaskManager tasks;
+
     public BLLManager()
     {
         dal = new DALManager();
+
+        tasks = new TaskManager();
     }
 
     @Override
@@ -55,5 +60,17 @@ public class BLLManager implements IBLL
     public List<ColumnObject> getColumnNames()
     {
         return dal.getColumnNames();
+    }
+
+    @Override
+    public void addTask(List<ExcelRow> list)
+    {
+        tasks.addTask(list);
+    }
+
+    @Override
+    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    {
+        dal.saveConfig(configName, items);
     }
 }

@@ -1,18 +1,28 @@
 package com.github.makosful.shoreline.gui.controller;
 
-
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
+<<<<<<< HEAD
 import java.util.*;
 import javafx.collections.FXCollections;
+=======
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ResourceBundle;
+>>>>>>> dev
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -103,7 +113,6 @@ public class MainWindowController implements Initializable
     @FXML
     private TextField txtFieldConfig;
 
-
     /**
      * Initializes the controller class.
      *
@@ -183,7 +192,7 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event)
     {
         hashMapPut();
-        model.readFromExcel("import_data.xlsx", cellOrder, true);
+        model.convert("import_data.xlsx", cellOrder, true);
     }
 
     /**
@@ -286,29 +295,34 @@ public class MainWindowController implements Initializable
         };
         List<ColumnObject> listOfStrings = listViewSorted.getItems();
 
-        for(int i = 0;i<listOfStrings.size();i++)
+        for (int i = 0; i < listOfStrings.size(); i++)
         {
             ColumnObject col = listOfStrings.get(i);
             cellOrder.put(hashmapStrings[i], col.getColumnID());
         }
     }
-    
+
     /**
      * Loading File - Static file.
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.readFromExcel("import_data.xlsx", cellOrder, false);
+        model.convert("import_data.xlsx", cellOrder, false);
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }
+<<<<<<< HEAD
     
     
     /**
      * 
      */
+=======
+
+>>>>>>> dev
     private void addConfigs()
     {
         Config c = new Config();
@@ -345,6 +359,7 @@ public class MainWindowController implements Initializable
         });
 
     }
+<<<<<<< HEAD
 
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
@@ -357,4 +372,6 @@ public class MainWindowController implements Initializable
     }
 
 
+=======
+>>>>>>> dev
 }

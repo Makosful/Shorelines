@@ -19,10 +19,13 @@ public interface IBLL
 {
 
     public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws BLLException;
-    
+
     public List<ExcelRow> getExcelRowsList();
 
     public List<ColumnObject> getColumnNames();
 
     public void saveConfig(String configName, ObservableList<ColumnObject> items);
+
+    public void addTask(List<ExcelRow> excelRowsList);
+
 }

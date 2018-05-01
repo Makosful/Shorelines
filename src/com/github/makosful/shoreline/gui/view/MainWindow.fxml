@@ -181,7 +181,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                     </padding>
                 </Button>
-                <Button fx:id="btnChecklistCheck" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Button" />
+                <Button fx:id="btnChecklistCheck" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" />
                 <ComboBox fx:id="comboBoxConfig" layoutX="94.0" layoutY="7.0" prefWidth="150.0" promptText="Configuration" />
             <TextField fx:id="txtFieldConfig" layoutX="531.0" layoutY="7.0" />
             <Button layoutX="688.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" />

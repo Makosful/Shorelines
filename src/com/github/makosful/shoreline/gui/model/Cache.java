@@ -1,5 +1,7 @@
 package com.github.makosful.shoreline.gui.model;
 
+import com.github.makosful.stage.utils.StageManager;
+
 /**
  * This Model class will serve as a data cache, storing data that should be
  * shared between Model classes.
@@ -26,8 +28,37 @@ public class Cache
     }
     //</editor-fold>
 
+    private StageManager stageManager;
+
     // Singleton constructor
     private Cache()
     {
     }
+
+    //<editor-fold defaultstate="collapsed" desc="StageManager">
+    public void setStageManager(StageManager stageManager)
+    {
+        this.stageManager = stageManager;
+    }
+
+    public StageManager getStageManager()
+    {
+        return this.stageManager;
+    }
+
+    public void clearStageManager()
+    {
+        this.stageManager = null;
+    }
+
+    public void changeScene(int sceneId)
+    {
+        this.stageManager.setActiveScene(sceneId);
+    }
+
+    public Object getSceneController()
+    {
+        return this.stageManager.getController();
+    }
+    //</editor-fold>
 }

@@ -5,7 +5,9 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 import javafx.collections.ObservableList;
+import java.util.Map;
 
 
 /**
@@ -80,4 +82,22 @@ public class DALManager implements IDAL
     }
     
     
+    public void jsonAdd(Map jsonObj) throws DALException
+    {
+        jWriter.addObject(jsonObj);
+    }
+
+    @Override
+    public void jsonWrite() throws DALException
+    {
+        try
+        {
+            jWriter.write();
+        }
+        catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
 }

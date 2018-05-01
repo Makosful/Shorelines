@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -30,6 +31,8 @@ public class ExcelReader
     private List<Cell> cells;
     private final ExcelRowCreation excelRowCreation;
     private final List<ColumnObject> columnNames;
+    
+    private Cell cell;
 
     public ExcelReader()
     {
@@ -90,7 +93,6 @@ public class ExcelReader
         // +1 So it takes last row along, pga. nul indeksering.
         rows = sheet.getPhysicalNumberOfRows() + 1;
 
-        Cell cell;
         int cols = 0; // Number of columns
         int tmp;
 
@@ -123,7 +125,8 @@ public class ExcelReader
 
                         if (r == 0)
                         {
-                            ColumnObject col = new ColumnObject(cell.getStringCellValue(), cell.getColumnIndex());
+
+                            ColumnObject col = new ColumnObject(getStringValue(), cell.getColumnIndex());
                             columnNames.add(col);
                         }
                         else
@@ -159,6 +162,20 @@ public class ExcelReader
     public List<ColumnObject> getColumnNames()
     {
         return columnNames;
+    }
+    
+    public String getStringValue()
+    {
+        String cellValue;
+        if (cell.getCellTypeEnum() == CellType.NUMERIC)
+        {
+             cellValue = String.valueOf(cell.getNumericCellValue());
+        }
+        else 
+        {
+            return cell.getStringCellValue();
+        }
+        return cellValue;
     }
 
 }
