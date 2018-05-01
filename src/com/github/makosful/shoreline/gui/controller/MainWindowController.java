@@ -6,7 +6,9 @@ import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -98,6 +100,8 @@ public class MainWindowController implements Initializable
     private Integer currentIndex;
     @FXML
     private ComboBox<Config> comboBoxConfig;
+    @FXML
+    private TextField txtFieldConfig;
 
 
     /**
@@ -110,6 +114,7 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
 
+        
         model = new MainWindowModel();
         cellOrder = new HashMap<String, Integer>();
 
@@ -300,11 +305,17 @@ public class MainWindowController implements Initializable
         AddListeners();
     }
     
+    
+    /**
+     * 
+     */
     private void addConfigs()
     {
         Config c = new Config();
         c.setName("IBM");
 
+        
+        
         comboBoxConfig.getItems().add(c);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
@@ -325,10 +336,24 @@ public class MainWindowController implements Initializable
 
         comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
         {
-
+            
             System.out.println("Selected config: " + newval.getName());
+            ObservableList<ColumnObject> n = FXCollections.observableArrayList();
+            n.add(new ColumnObject("noget", 1));
+            listViewSorted.setItems(n);
+          
         });
 
+    }
+
+    @FXML
+    private void handleBtnSaveConfig(ActionEvent event)
+    {
+        for(ColumnObject n : listViewSorted.getItems())
+        {
+            System.out.println(n.getColumnID());
+            System.out.println(n.getColumnName());
+        }
     }
 
 

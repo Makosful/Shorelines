@@ -64,4 +64,10 @@ public class MainWindowModel
         }
     }
 
+
+    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    {
+        bll.saveConfig(configName, items);
+    }
+
 }

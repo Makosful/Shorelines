@@ -5,6 +5,8 @@
  */
 package com.github.makosful.shoreline.be;
 
+import java.util.List;
+
 /**
  *
  * @author B
@@ -12,7 +14,9 @@ package com.github.makosful.shoreline.be;
 public class Config
 {
     private String name;
+    private List<ColumnObject> chosenColumns;
 
+ 
     public String getName()
     {
         return name;
@@ -21,6 +25,16 @@ public class Config
     public void setName(String name)
     {
         this.name = name;
+    }
+    
+    public List<ColumnObject> getChosenColumns()
+    {
+        return chosenColumns;
+    }
+
+    public void setChosenColumns(List<ColumnObject> chosenColumns)
+    {
+        this.chosenColumns = chosenColumns;
     }
     
 }

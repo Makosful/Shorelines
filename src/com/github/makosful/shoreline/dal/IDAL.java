@@ -4,6 +4,7 @@ import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 /**
  * An interface holding all methods a DAL Facade will need to handle.
@@ -23,5 +24,7 @@ public interface IDAL
     public List<ExcelRow> getExcelRowsList();
 
     public List<ColumnObject> getColumnNames();
+
+    public void saveConfig(String configName, ObservableList<ColumnObject> items);
     
 }

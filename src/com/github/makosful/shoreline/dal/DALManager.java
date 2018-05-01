@@ -5,6 +5,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -22,6 +23,7 @@ public class DALManager implements IDAL
 
     private final ExcelReader excel;
     private final JsonWriter jWriter;
+    private ConfigDAO cDAO;
 
     public DALManager()
     {
@@ -65,6 +67,16 @@ public class DALManager implements IDAL
     public List<ColumnObject> getColumnNames()
     {
         return excel.getColumnNames();
+    }
+
+    @Override
+    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    {
+        int configId = cDAO.saveConfiguration(configName);
+        
+        for(ColumnObject column : items){
+            cDAO.saveConfigColumns(configId, column);
+        }
     }
     
     
