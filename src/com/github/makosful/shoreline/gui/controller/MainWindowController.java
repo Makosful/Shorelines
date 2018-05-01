@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
@@ -14,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -265,9 +263,4 @@ public class MainWindowController implements Initializable {
         
     }
 
-    @FXML
-    private void handleSelectedConfig(ActionEvent event)
-    {
-        
-    }
 }
