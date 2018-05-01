@@ -33,11 +33,11 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder) throws BLLException
+    public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws BLLException
     {
         try
         {
-            dal.readFromXlsxFile(file, cellOrder);
+            dal.readFromXlsxFile(file, cellOrder, conversion);
         }
         catch (DALException ex)
         {

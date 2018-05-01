@@ -17,7 +17,7 @@ import java.util.List;
 public interface IBLL
 {
 
-    public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder) throws BLLException;
+    public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws BLLException;
     
     public List<ExcelRow> getExcelRowsList();
 

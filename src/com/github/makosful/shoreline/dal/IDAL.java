@@ -16,9 +16,9 @@ import java.util.List;
 public interface IDAL
 {
 
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder) throws DALException;
+    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
 
-    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder) throws DALException;
+    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
     
     public List<ExcelRow> getExcelRowsList();
 

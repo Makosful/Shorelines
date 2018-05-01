@@ -24,13 +24,13 @@ public class ExcelReaderAdapter implements IReader
     }
 
     @Override
-    public void readFile(String file, HashMap<String, Integer> cellOrder)
+    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion)
     {
         
    
         try
         {
-            excelReader.readFromXlsxFiles(file, cellOrder);
+            excelReader.readFromXlsxFiles(file, cellOrder, conversion);
         }
         catch (IOException ex)
         {

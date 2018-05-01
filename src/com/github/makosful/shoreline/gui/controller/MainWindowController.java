@@ -1,6 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
-import com.github.makosful.shoreline.be.Config;
+
 import com.github.makosful.shoreline.BE.ColumnObject;
 import com.github.makosful.shoreline.BE.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
@@ -96,8 +96,8 @@ public class MainWindowController implements Initializable
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Integer currentIndex;
-    @FXML
-    private ComboBox<Config> comboBoxConfig;
+    //@FXML
+    //private ComboBox<Config> comboBoxConfig;
 
     /**
      * Initializes the controller class.
@@ -118,7 +118,7 @@ public class MainWindowController implements Initializable
 
         AddListeners();
 
-        addConfigs();
+        //addConfigs();
     }
 
     /**
@@ -273,36 +273,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    private void addConfigs()
-    {
-        Config c = new Config();
-        c.setName("IBM");
 
-        comboBoxConfig.getItems().add(c);
-        comboBoxConfig.setConverter(new StringConverter<Config>()
-        {
-
-            @Override
-            public String toString(Config config)
-            {
-                return config.getName();
-            }
-
-            @Override
-            public Config fromString(String configName)
-            {
-                return comboBoxConfig.getItems().stream().filter(ap
-                        -> ap.getName().equals(configName)).findFirst().orElse(null);
-            }
-        });
-
-        comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
-        {
-
-            System.out.println("Selected airport: " + newval.getName());
-        });
-
-    }
 
     private void hashMapPut()
     {
