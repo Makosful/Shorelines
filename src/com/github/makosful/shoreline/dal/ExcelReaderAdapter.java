@@ -7,6 +7,7 @@ package com.github.makosful.shoreline.dal;
 
 
 import java.io.IOException;
+import java.util.HashMap;
 
 
 /**
@@ -23,13 +24,13 @@ public class ExcelReaderAdapter implements IReader
     }
 
     @Override
-    public void readFile(String file)
+    public void readFile(String file, HashMap<String, Integer> cellOrder)
     {
         
    
         try
         {
-            excelReader.readFromXlsxFiles(file);
+            excelReader.readFromXlsxFiles(file, cellOrder);
         }
         catch (IOException ex)
         {

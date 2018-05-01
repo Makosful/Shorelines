@@ -6,6 +6,7 @@
 package com.github.makosful.shoreline.dal;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  *
@@ -13,6 +14,6 @@ import java.io.File;
  */
 public interface IReader
 {
-    public void readFile(String file);
+    public void readFile(String file, HashMap<String, Integer> cellOrder);
     
 }

@@ -1,8 +1,12 @@
 package com.github.makosful.shoreline.gui.model;
 
+import com.github.makosful.shoreline.BE.ColumnObject;
+import com.github.makosful.shoreline.BE.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -19,36 +23,45 @@ public class MainWindowModel
     // Objects
     private final Cache cache;
     private final IBLL bll;
-
+    
     // Mock Data
-    ObservableList<String> strings = FXCollections.observableArrayList("One 1", "Two 2", "Three 3", "Four 4", "Five 5", "Six 6", "Seven 7", "Eight 8", "Nine 9", "Ten10");
-    ObservableList<String> selectedStrings = FXCollections.observableArrayList();
+    ObservableList<ColumnObject> columns;
+    ObservableList<ColumnObject> selectedColumns;
 
     public MainWindowModel()
     {
         cache = Cache.getInstance();
         bll = new BLLManager();
+             
+     selectedColumns = FXCollections.observableArrayList();
     }
 
-    public ObservableList<String> getMockStrings()
+    public ObservableList<ColumnObject> getColumnNames()
     {
-        return strings;
+        columns = FXCollections.observableArrayList(bll.getColumnNames());
+        return columns;
     }
-
-    public ObservableList<String> getSelectedStrings()
+    
+    public List<ExcelRow> getExcelRowsList()
     {
-        return selectedStrings;
+        return bll.getExcelRowsList();
+    }
+    
+    public ObservableList<ColumnObject> getSelectedStrings()
+    {
+        return selectedColumns;
     }
 
-    public void readFromExcel(String import_dataxlsx)
+    public void readFromExcel(String import_dataxlsx, HashMap<String, Integer> cellOrder)
     {
         try
         {
-            bll.readFromExcelFile(import_dataxlsx);
+            bll.readFromExcelFile(import_dataxlsx, cellOrder);
         }
         catch (BLLException ex)
         {
             Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
