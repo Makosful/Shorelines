@@ -29,12 +29,14 @@ public class BLLManager implements IBLL
     private final IDAL dal;
 
     private final TaskManager tasks;
+    private final PasswordGenerator pass;
 
     public BLLManager()
     {
         dal = new DALManager();
 
         tasks = new TaskManager();
+        pass = new PasswordGenerator(12);
     }
 
     @Override
@@ -97,5 +99,11 @@ public class BLLManager implements IBLL
     public void saveConfig(String configName, ObservableList<ColumnObject> items)
     {
         dal.saveConfig(configName, items);
+    }
+
+    @Override
+    public String generatePassword() throws BLLException
+    {
+        return pass.nextString();
     }
 }
