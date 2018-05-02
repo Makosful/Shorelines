@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.gui.model;
 
+import com.github.makosful.shoreline.be.User;
 import com.github.makosful.stage.utils.StageManager;
 
 /**
@@ -29,6 +30,7 @@ public class Cache
     //</editor-fold>
 
     private StageManager stageManager;
+    private User user;
 
     // Singleton constructor
     private Cache()
@@ -59,6 +61,41 @@ public class Cache
     public Object getSceneController()
     {
         return this.stageManager.getController();
+    }
+
+    public enum Scenes
+    {
+        Main(0),
+        Login(1);
+
+        private final int id;
+
+        Scenes(int id)
+        {
+            this.id = id;
+        }
+
+        public int getValue()
+        {
+            return this.id;
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="User">
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public User getUser()
+    {
+        return this.user;
+    }
+
+    public void clearUser()
+    {
+        this.user = null;
     }
     //</editor-fold>
 }

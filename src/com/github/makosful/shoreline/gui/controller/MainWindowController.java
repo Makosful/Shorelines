@@ -2,15 +2,13 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.*;
-import javafx.collections.FXCollections;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -117,7 +115,6 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
 
-        
         model = new MainWindowModel();
         cellOrder = new HashMap<String, Integer>();
 
@@ -308,7 +305,7 @@ public class MainWindowController implements Initializable
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }
-    
+
     /**
      * Set up the configurations in combobox
      */
@@ -346,12 +343,12 @@ public class MainWindowController implements Initializable
     {
         comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
         {
-            
+
             System.out.println("Selected config: " + newval.getName());
             ObservableList<ColumnObject> n = FXCollections.observableArrayList();
             n.add(new ColumnObject("noget", 1));
             listViewSorted.setItems(n);
-          
+
         });
     }
 
@@ -361,4 +358,9 @@ public class MainWindowController implements Initializable
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
     }
 
+    @FXML
+    private void handleLogout(ActionEvent event)
+    {
+        model.logout();
+    }
 }
