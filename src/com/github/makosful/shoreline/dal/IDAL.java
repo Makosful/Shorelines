@@ -4,9 +4,8 @@ import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
-import javafx.collections.ObservableList;
-
 import java.util.Map;
+import javafx.collections.ObservableList;
 
 /**
  * An interface holding all methods a DAL Facade will need to handle.
@@ -23,15 +22,15 @@ public interface IDAL
 
     public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
 
-    public List<ExcelRow> getExcelRowsList();
+    public List<ExcelRow> getExcelRowsList() throws DALException;
 
-    public List<ColumnObject> getColumnNames();
+    public List<ColumnObject> getColumnNames() throws DALException;
 
     public void savePassword(String userName, String password) throws DALException;
 
     public String[] getPassword() throws DALException;
-    
-    public void saveConfig(String configName, ObservableList<ColumnObject> items);
+
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException;
 
     public void jsonAdd(Map jsonObj) throws DALException;
 

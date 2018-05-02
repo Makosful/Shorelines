@@ -66,11 +66,17 @@ public class MainWindowModel
             Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     public void saveConfig(String configName, ObservableList<ColumnObject> items)
     {
-        bll.saveConfig(configName, items);
+        try
+        {
+            bll.saveConfig(configName, items);
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void logout()

@@ -2,7 +2,6 @@ package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;
-import com.github.makosful.shoreline.dal.DALException;
 import java.util.HashMap;
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -29,9 +28,9 @@ public interface IBLL
 
     public String[] getPassword() throws BLLException;
 
-    public void saveConfig(String configName, ObservableList<ColumnObject> items);
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException;
 
-    public void addTask(List<ExcelRow> excelRowsList);
+    public void addTask(List<ExcelRow> excelRowsList) throws BLLException;
 
     public String generatePassword() throws BLLException;
 

@@ -53,15 +53,29 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public List<ExcelRow> getExcelRowsList()
+    public List<ExcelRow> getExcelRowsList() throws BLLException
     {
-        return dal.getExcelRowsList();
+        try
+        {
+            return dal.getExcelRowsList();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override
-    public List<ColumnObject> getColumnNames()
+    public List<ColumnObject> getColumnNames() throws BLLException
     {
-        return dal.getColumnNames();
+        try
+        {
+            return dal.getColumnNames();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override
@@ -86,19 +100,27 @@ public class BLLManager implements IBLL
         }
         catch (DALException ex)
         {
-           throw new BLLException(ex.getMessage());
+            throw new BLLException(ex.getMessage());
         }
     }
-    
+
+    @Override
     public void addTask(List<ExcelRow> list)
     {
         tasks.addTask(list);
     }
 
     @Override
-    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException
     {
-        dal.saveConfig(configName, items);
+        try
+        {
+            dal.saveConfig(configName, items);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override
