@@ -56,6 +56,10 @@ public class DALManager implements IDAL
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
+        catch (Exception ex)
+        {
+             throw new DALException(ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override
@@ -68,6 +72,10 @@ public class DALManager implements IDAL
         catch (IOException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+        catch (Exception ex)
+        {
+             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
 

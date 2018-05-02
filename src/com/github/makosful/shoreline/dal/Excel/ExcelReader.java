@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -50,14 +52,21 @@ public class ExcelReader
      *
      * @throws java.io.IOException
      */
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException
+    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException, Exception
     {
         // Set up
         POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
         HSSFWorkbook wb = new HSSFWorkbook(fs);
         HSSFSheet sheet = wb.getSheetAt(0);
 
-        readExcelSheet(sheet, cellOrder, conversion);
+        try
+        {
+            readExcelSheet(sheet, cellOrder, conversion);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.getMessage());
+        }
     }
 
     /**
@@ -68,7 +77,7 @@ public class ExcelReader
      *
      * @throws IOException
      */
-    public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException
+    public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException, Exception
     {
         // Set up
         XSSFWorkbook wb = new XSSFWorkbook(
@@ -76,7 +85,14 @@ public class ExcelReader
                         new FileInputStream(file)));
         XSSFSheet sheet = wb.getSheetAt(0);
 
-        readExcelSheet(sheet, cellOrder, conversion);
+        try
+        {
+            readExcelSheet(sheet, cellOrder, conversion);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.getMessage());
+        }
     }
 
     /**
@@ -84,7 +100,7 @@ public class ExcelReader
      *
      * @param sheet An object implimenting the Sheet interface from ss.usermodel
      */
-    private void readExcelSheet(Sheet sheet, HashMap<String, Integer> cellOrder, boolean conversion)
+    private void readExcelSheet(Sheet sheet, HashMap<String, Integer> cellOrder, boolean conversion) throws Exception
     {
         excelRows.clear();
         columnNames.clear();
@@ -137,7 +153,14 @@ public class ExcelReader
                 }
                 if (!cells.isEmpty() && conversion)
                 {
-                    excelCreation(cellOrder);
+                    try
+                    {
+                        excelCreation(cellOrder);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.getMessage());
+                    }
                 }
             }
         }
@@ -148,10 +171,17 @@ public class ExcelReader
      * in specific row.
      * @param cellOrder 
      */
-    private void excelCreation(HashMap<String, Integer> cellOrder)
+    private void excelCreation(HashMap<String, Integer> cellOrder) throws Exception
     {
-        ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
+        try
+        {
+            ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
             excelRows.add(excelRow);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.getMessage());
+        }
     }
     // Excel Row objects.
     public List<ExcelRow> getExcelRowsList()

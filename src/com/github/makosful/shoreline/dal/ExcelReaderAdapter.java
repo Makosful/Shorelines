@@ -9,6 +9,8 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -36,6 +38,10 @@ public class ExcelReaderAdapter implements IReader
         catch (IOException ex)
         {
             
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(ExcelReaderAdapter.class.getName()).log(Level.SEVERE, null, ex);
         }
    
         
