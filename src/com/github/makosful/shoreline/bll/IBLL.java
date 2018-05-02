@@ -20,13 +20,13 @@ public interface IBLL
 
     public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws BLLException;
 
-    public List<ExcelRow> getExcelRowsList();
+    public List<ExcelRow> getExcelRowsList() throws BLLException;
 
-    public List<ColumnObject> getColumnNames();
+    public List<ColumnObject> getColumnNames() throws BLLException;
 
-    public void saveConfig(String configName, ObservableList<ColumnObject> items);
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException;
 
-    public void addTask(List<ExcelRow> excelRowsList);
+    public void addTask(List<ExcelRow> excelRowsList) throws BLLException;
 
     public String generatePassword() throws BLLException;
 
