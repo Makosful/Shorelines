@@ -2,7 +2,6 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.Collections;
@@ -335,5 +334,11 @@ public class MainWindowController implements Initializable
             System.out.println("Selected config: " + newval.getName());
         });
 
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event)
+    {
+        model.logout();
     }
 }

@@ -5,6 +5,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -66,4 +67,9 @@ public class MainWindowModel
         }
     }
 
+    public void logout()
+    {
+        cache.clearUser();
+        cache.changeScene(Scenes.Login.getValue()); // ID 1
+    }
 }
