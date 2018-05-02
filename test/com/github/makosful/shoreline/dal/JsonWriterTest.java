@@ -2,6 +2,9 @@ package com.github.makosful.shoreline.dal;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.apache.commons.collections4.map.LinkedMap;
 import static org.junit.Assert.*;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -52,9 +55,11 @@ public class JsonWriterTest
         try
         {
             System.out.println("Testing: Putting string into Json");
-            json.put("fruit", "Apple");
+            Map map = new LinkedHashMap();
+            map.put("Fruit", "Apple");
+            json.addObject(map);
 
-            String expectedResult = "{\"fruit\":\"Apple\"}";
+            String expectedResult = "[{\"fruit\":\"Apple\"}]";
             json.write(out);
 
             assertTrue(expectedResult.equalsIgnoreCase(out.toString()));
@@ -71,9 +76,11 @@ public class JsonWriterTest
         try
         {
             System.out.println("Testing: Putting a simple int datatype into JSON");
-            json.put("MyInt", 69);
+            Map map = new LinkedHashMap();
+            map.put("MyInt", 69);
+            json.addObject(map);
 
-            String expectedResult = "{\"myint\":69}";
+            String expectedResult = "[{\"myint\":69}]";
             json.write(out);
 
             assertTrue(expectedResult.equalsIgnoreCase(out.toString()));
@@ -90,9 +97,11 @@ public class JsonWriterTest
         try
         {
             System.out.println("Testing: Putting a simple float datatype into JSON");
-            json.put("MyInt", 6.9);
+            Map map = new LinkedHashMap();
+            map.put("MyFloat", 6.9f);
+            json.addObject(map);
 
-            String expectedResult = "{\"myint\":6.9}";
+            String expectedResult = "[{\"MyFloat\":6.9}]";
             json.write(out);
 
             assertTrue(expectedResult.equalsIgnoreCase(out.toString()));
@@ -109,11 +118,15 @@ public class JsonWriterTest
         try
         {
             System.out.println("Testing: Removing a value from jason with a key");
-            json.put("MyInt", 6.9);
-            json.put("Myfloat", 6.9f);
-            json.remove("Myfloat");
+            Map map = new LinkedHashMap();
 
-            String expectedResult = "{\"myint\":6.9}";
+            map.put("MyInt", 6.9);
+            map.put("Myfloat", 6.9f);
+            map.remove("Myfloat");
+
+            json.addObject(map);
+
+            String expectedResult = "[{\"myint\":6.9}]";
             json.write(out);
 
             assertTrue(expectedResult.equalsIgnoreCase(out.toString()));
@@ -130,11 +143,13 @@ public class JsonWriterTest
         try
         {
             System.out.println("Testing: Removing a key that doesn't exist");
-            json.put("MyInt", 6.9);
-            json.put("Myfloat", 6.9f);
-            json.remove("Myfloater");
+            Map map = new LinkedMap();
 
-            String expectedResult = "{\"myint\":6.9}";
+            map.put("MyInt", 6.9);
+            map.put("Myfloat", 6.9f);
+            map.remove("Myfloater");
+
+            String expectedResult = "[{\"myint\":6.9}]";
             json.write(out);
 
             assertFalse(expectedResult.equalsIgnoreCase(out.toString()));
