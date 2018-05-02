@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.dal;
 
 import com.github.makosful.shoreline.be.ColumnObject;
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
@@ -23,15 +24,17 @@ public interface IDAL
 
     public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
 
-    public List<ExcelRow> getExcelRowsList();
+    public List<ExcelRow> getExcelRowsList() throws DALException;
 
-    public List<ColumnObject> getColumnNames();
+    public List<ColumnObject> getColumnNames() throws DALException;
 
-    public void saveConfig(String configName, ObservableList<ColumnObject> items);
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException;
 
     public void jsonAdd(Map jsonObj) throws DALException;
 
     public void jsonWrite() throws DALException;
+
+    public ObservableList<Config> getAllConfigs() throws DALException;
 
 
 }

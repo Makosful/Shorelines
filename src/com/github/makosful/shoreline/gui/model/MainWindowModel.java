@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.gui.model;
 
 import com.github.makosful.shoreline.be.ColumnObject;
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
@@ -27,7 +28,7 @@ public class MainWindowModel
     // Mock Data
     ObservableList<ColumnObject> columns;
     ObservableList<ColumnObject> selectedColumns;
-
+    ObservableList<Config> configs;
     public MainWindowModel()
     {
         cache = Cache.getInstance();
@@ -38,13 +39,29 @@ public class MainWindowModel
 
     public ObservableList<ColumnObject> getColumnNames()
     {
-        columns = FXCollections.observableArrayList(bll.getColumnNames());
+        try
+        {
+            columns = FXCollections.observableArrayList(bll.getColumnNames());
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return columns;
     }
 
     public List<ExcelRow> getExcelRowsList()
     {
-        return bll.getExcelRowsList();
+        try
+        {
+            return bll.getExcelRowsList();
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        
     }
 
     public ObservableList<ColumnObject> getSelectedStrings()
@@ -66,10 +83,56 @@ public class MainWindowModel
         }
     }
 
-
+    /**
+     * Pass the column objects and configname down for storing it in the db
+     * @param configName
+     * @param items 
+     */
     public void saveConfig(String configName, ObservableList<ColumnObject> items)
     {
-        bll.saveConfig(configName, items);
+        try
+        {
+            bll.saveConfig(configName, items);
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Select a specific config from the observable list based on the selected id 
+     * @param id
+     * @return 
+     */
+    public Config getConfig(int id)
+    {
+        for(Config config : configs)
+        {
+            if(config.getId() == id)
+            {
+                return config;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Call down to the db for retrieving the configs 
+     * @return 
+     */
+    public ObservableList<Config> getAllConfigs()
+    {
+        try
+        {
+            configs = bll.getAllConfigs();
+            return configs;
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 }

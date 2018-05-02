@@ -1,13 +1,17 @@
 package com.github.makosful.shoreline.dal;
 
 import com.github.makosful.shoreline.be.ColumnObject;
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -73,12 +77,19 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException
     {
-        int configId = cDAO.saveConfiguration(configName);
-        
-        for(ColumnObject column : items){
-            cDAO.saveConfigColumns(configId, column);
+        try
+        {
+            int configId = cDAO.saveConfiguration(configName);
+            
+            for(ColumnObject column : items){
+                cDAO.saveConfigColumns(configId, column);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
     
@@ -96,6 +107,19 @@ public class DALManager implements IDAL
             jWriter.write();
         }
         catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public ObservableList<Config> getAllConfigs() throws DALException
+    {
+        try
+        {
+            return cDAO.getAllConfigs();
+        }
+        catch (SQLException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }

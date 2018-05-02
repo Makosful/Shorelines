@@ -314,10 +314,8 @@ public class MainWindowController implements Initializable
      */
     private void addConfigs()
     {
-        Config c = new Config();
-        c.setName("IBM");
-
-        comboBoxConfig.getItems().add(c);
+        ObservableList<Config> configs = model.getAllConfigs();
+        comboBoxConfig.getItems().addAll(configs);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
 
@@ -345,12 +343,10 @@ public class MainWindowController implements Initializable
     private void addConfigListener()
     {
         comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
-        {
-            
+        { 
+            Config config = model.getConfig(newval.getId());
             System.out.println("Selected config: " + newval.getName());
-            ObservableList<ColumnObject> n = FXCollections.observableArrayList();
-            n.add(new ColumnObject("noget", 1));
-            listViewSorted.setItems(n);
+            listViewSorted.setItems(config.getChosenColumns());
           
         });
     }
@@ -359,6 +355,8 @@ public class MainWindowController implements Initializable
     private void handleBtnSaveConfig(ActionEvent event)
     {
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
+        comboBoxConfig.getItems().clear();
+        addConfigs();
     }
 
 }

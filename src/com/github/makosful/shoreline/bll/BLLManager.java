@@ -1,12 +1,15 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.ColumnObject;
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 
 /**
@@ -51,15 +54,33 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public List<ExcelRow> getExcelRowsList()
+    public List<ExcelRow> getExcelRowsList() throws BLLException
     {
-        return dal.getExcelRowsList();
+    
+        try
+        {
+            return dal.getExcelRowsList();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+   
     }
 
     @Override
-    public List<ColumnObject> getColumnNames()
+    public List<ColumnObject> getColumnNames() throws BLLException
     {
-        return dal.getColumnNames();
+
+        try
+        {
+            return dal.getColumnNames();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+
     }
 
     @Override
@@ -69,8 +90,29 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException
     {
-        dal.saveConfig(configName, items);
+        try
+        {
+            dal.saveConfig(configName, items);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+
+    }
+
+    @Override
+    public ObservableList<Config> getAllConfigs() throws BLLException
+    {
+        try
+        {
+            return dal.getAllConfigs();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 }

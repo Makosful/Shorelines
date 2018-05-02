@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.ColumnObject;
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +21,14 @@ public interface IBLL
 
     public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws BLLException;
 
-    public List<ExcelRow> getExcelRowsList();
+    public List<ExcelRow> getExcelRowsList() throws BLLException;
 
-    public List<ColumnObject> getColumnNames();
+    public List<ColumnObject> getColumnNames() throws BLLException;
 
-    public void saveConfig(String configName, ObservableList<ColumnObject> items);
+    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException;
 
-    public void addTask(List<ExcelRow> excelRowsList);
+    public void addTask(List<ExcelRow> excelRowsList) throws BLLException;
+
+    public ObservableList<Config> getAllConfigs() throws BLLException;
 
 }
