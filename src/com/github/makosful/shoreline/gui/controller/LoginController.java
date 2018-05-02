@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.gui.model.LoginModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -22,6 +19,8 @@ import javafx.scene.control.TextField;
 public class LoginController implements Initializable
 {
 
+    private LoginModel model;
+
     @FXML
     private TextField txtFieldUsername;
     @FXML
@@ -35,11 +34,20 @@ public class LoginController implements Initializable
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    }    
-    
+        model = new LoginModel();
+    }
+
+    @FXML
+    private void handleLogin(ActionEvent event)
+    {
+        model.attemptLogin(txtFieldUsername.getText(), txtFieldPassword.getText());
+    }
+
 }
