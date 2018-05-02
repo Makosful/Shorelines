@@ -14,6 +14,6 @@ import java.util.HashMap;
  */
 public interface IReader
 {
-    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion);
+    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
     
 }

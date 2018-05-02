@@ -27,22 +27,19 @@ public class ExcelReaderAdapter implements IReader
     }
 
     @Override
-    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion)
+    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
         
-   
+
         try
         {
             excelReader.readFromXlsxFiles(file, cellOrder, conversion);
         }
-        catch (IOException ex)
-        {
-            
-        }
         catch (Exception ex)
         {
-            Logger.getLogger(ExcelReaderAdapter.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DALException(ex.getLocalizedMessage(), ex);
         }
+   
    
         
     }
