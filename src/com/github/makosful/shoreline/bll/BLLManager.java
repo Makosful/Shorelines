@@ -7,6 +7,8 @@ import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.IDAL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to
@@ -55,5 +57,31 @@ public class BLLManager implements IBLL
     public List<ColumnObject> getColumnNames()
     {
         return dal.getColumnNames();
+    }
+
+    @Override
+    public void savePassword(String userName, String password) throws BLLException
+    {
+        try
+        {
+            dal.savePassword(userName, password);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public String[] getPassword() throws BLLException
+    {
+        try
+        {
+            return dal.getPassword();
+        }
+        catch (DALException ex)
+        {
+           throw new BLLException(ex.getMessage());
+        }
     }
 }

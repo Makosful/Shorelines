@@ -25,7 +25,6 @@ public class ExcelRowCreation
         excelRow = new ExcelRow();
         if (!cellOrder.isEmpty())
         {
-
             int cellNumber = cellOrder.get("siteName");
             excelRow.setSiteName(cells.get(cellNumber).getStringCellValue());
             cellNumber = cellOrder.get("assetSerialNumber");

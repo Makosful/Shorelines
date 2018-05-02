@@ -2,7 +2,6 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
 import java.util.Collections;

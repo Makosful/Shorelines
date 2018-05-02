@@ -63,5 +63,6 @@ public class MainWindowModel
             Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 
 }

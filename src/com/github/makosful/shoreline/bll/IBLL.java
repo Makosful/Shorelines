@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.DALException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,4 +23,9 @@ public interface IBLL
     public List<ExcelRow> getExcelRowsList();
 
     public List<ColumnObject> getColumnNames();
+    
+    
+    public void savePassword(String userName, String password) throws BLLException;
+
+    public String[] getPassword() throws BLLException;
 }

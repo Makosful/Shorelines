@@ -23,5 +23,9 @@ public interface IDAL
     public List<ExcelRow> getExcelRowsList();
 
     public List<ColumnObject> getColumnNames();
+
+    public void savePassword(String userName, String password) throws DALException;
+
+    public String[] getPassword() throws DALException;
     
 }

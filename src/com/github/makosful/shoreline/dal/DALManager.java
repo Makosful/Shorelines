@@ -2,9 +2,13 @@ package com.github.makosful.shoreline.dal;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -22,11 +26,13 @@ public class DALManager implements IDAL
 
     private final ExcelReader excel;
     private final JsonWriter jWriter;
+    private final StoreLogIn storeLogIn;
 
     public DALManager()
     {
         excel = new ExcelReader();
         jWriter = new JsonWriter();
+        storeLogIn = new StoreLogIn();
     }
 
     @Override
@@ -65,6 +71,31 @@ public class DALManager implements IDAL
     public List<ColumnObject> getColumnNames()
     {
         return excel.getColumnNames();
+    }
+    
+    @Override
+    public void savePassword(String userName, String password) throws DALException
+    {
+        try
+        {
+            storeLogIn.savePassword(userName, password);
+        }
+        catch (IOException ex)
+        {
+            throw new DALException("Error writing file");
+        }
+    }
+    @Override
+    public String[] getPassword() throws DALException
+    {
+        try
+        {
+            return storeLogIn.getPassword();
+        }
+        catch (FileNotFoundException ex)
+        {
+            throw new DALException("Error with password.txt");
+        }
     }
     
     

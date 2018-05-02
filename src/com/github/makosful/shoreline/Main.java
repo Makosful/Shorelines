@@ -45,7 +45,7 @@ public class Main extends Application
                                                         IlligalIdException
     {
         sm.registerScene(0, "Shoreline",
-                         getClass().getResource("gui/view/MainWindow.fxml"));
+                         getClass().getResource("gui/view/Login.fxml"));
         sm.registerScene(1, "Login",
                          getClass().getResource("gui/view/Login.fxml"));
 
