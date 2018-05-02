@@ -5,6 +5,8 @@ import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,5 +56,18 @@ public class LoginModel
     public String[] getPassword() throws BLLException
     {
         return bll.getPassword();
+    }
+    
+    public String getNewPassword()
+    {
+        try
+        {
+            return bll.generatePassword();
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return new String(); // Empty string
+        }
     }
 }

@@ -37,13 +37,13 @@ public class MainWindowModel
         selectedColumns = FXCollections.observableArrayList();
     }
 
-    public ObservableList<ColumnObject> getColumnNames()
+    public ObservableList<ColumnObject> getColumnNames() throws BLLException
     {
         columns = FXCollections.observableArrayList(bll.getColumnNames());
         return columns;
     }
 
-    public List<ExcelRow> getExcelRowsList()
+    public List<ExcelRow> getExcelRowsList() throws BLLException
     {
         return bll.getExcelRowsList();
     }
