@@ -6,6 +6,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,7 +38,7 @@ public class MainWindowModel
         selectedColumns = FXCollections.observableArrayList();
     }
 
-    public ObservableList<ColumnObject> getColumnNames()
+    public ObservableList<ColumnObject> getColumnNames() throws BLLException
     {
         try
         {
@@ -50,7 +51,7 @@ public class MainWindowModel
         return columns;
     }
 
-    public List<ExcelRow> getExcelRowsList()
+    public List<ExcelRow> getExcelRowsList() throws BLLException
     {
         try
         {
@@ -83,6 +84,7 @@ public class MainWindowModel
         }
     }
 
+    
     /**
      * Pass the column objects and configname down for storing it in the db
      * @param configName
@@ -135,4 +137,9 @@ public class MainWindowModel
         return null;
     }
 
+    public void logout()
+    {
+        cache.clearUser();
+        cache.changeScene(Scenes.Login.getValue()); // ID 1
+    }
 }

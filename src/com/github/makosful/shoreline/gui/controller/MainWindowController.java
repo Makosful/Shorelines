@@ -3,14 +3,16 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.*;
-import javafx.collections.FXCollections;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -117,13 +119,8 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
 
-        
         model = new MainWindowModel();
         cellOrder = new HashMap<String, Integer>();
-
-        chklistSelectData.setItems(model.getColumnNames());
-
-        listViewSorted.setItems(model.getSelectedStrings());
 
         AddListeners();
         addConfigs();
@@ -183,10 +180,15 @@ public class MainWindowController implements Initializable
      * @param event FXML Parameter
      */
     @FXML
-    private void handleConversion(ActionEvent event)
+    private void handleConversion(ActionEvent event) throws BLLException
     {
         hashMapPut();
         model.convert("import_data.xlsx", cellOrder, true);
+        
+        for(ExcelRow e : model.getExcelRowsList())
+        {
+            System.out.println(e.getSiteName());
+        }
     }
 
     /**
@@ -305,10 +307,17 @@ public class MainWindowController implements Initializable
     private void loadFile(ActionEvent event)
     {
         model.convert("import_data.xlsx", cellOrder, false);
-        chklistSelectData.setItems(model.getColumnNames());
+        try
+        {
+            chklistSelectData.setItems(model.getColumnNames());
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         AddListeners();
     }
-    
+
     /**
      * Set up the configurations in combobox
      */
@@ -359,4 +368,9 @@ public class MainWindowController implements Initializable
         addConfigs();
     }
 
+    @FXML
+    private void handleLogout(ActionEvent event)
+    {
+        model.logout();
+    }
 }

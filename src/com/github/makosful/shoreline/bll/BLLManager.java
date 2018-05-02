@@ -32,12 +32,14 @@ public class BLLManager implements IBLL
     private final IDAL dal;
 
     private final TaskManager tasks;
+    private final PasswordGenerator pass;
 
     public BLLManager()
     {
         dal = new DALManager();
 
         tasks = new TaskManager();
+        pass = new PasswordGenerator(12);
     }
 
     @Override
@@ -56,7 +58,6 @@ public class BLLManager implements IBLL
     @Override
     public List<ExcelRow> getExcelRowsList() throws BLLException
     {
-    
         try
         {
             return dal.getExcelRowsList();
@@ -65,13 +66,11 @@ public class BLLManager implements IBLL
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
-   
     }
 
     @Override
     public List<ColumnObject> getColumnNames() throws BLLException
     {
-
         try
         {
             return dal.getColumnNames();
@@ -80,7 +79,32 @@ public class BLLManager implements IBLL
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
+    }
 
+    @Override
+    public void savePassword(String userName, String password) throws BLLException
+    {
+        try
+        {
+            dal.savePassword(userName, password);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public String[] getPassword() throws BLLException
+    {
+        try
+        {
+            return dal.getPassword();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getMessage());
+        }
     }
 
     @Override
@@ -114,5 +138,12 @@ public class BLLManager implements IBLL
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
+
+    }
+
+    @Override
+    public String generatePassword() throws BLLException
+    {
+        return pass.nextString();
     }
 }

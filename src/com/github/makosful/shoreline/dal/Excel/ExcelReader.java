@@ -1,4 +1,4 @@
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Excel;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;
@@ -166,16 +166,8 @@ public class ExcelReader
     
     public String getStringValue()
     {
-        String cellValue;
-        if (cell.getCellTypeEnum() == CellType.NUMERIC)
-        {
-             cellValue = String.valueOf(cell.getNumericCellValue());
-        }
-        else 
-        {
-            return cell.getStringCellValue();
-        }
-        return cellValue;
+       return excelRowCreation.getStringValue(cell);
     }
+    
 
 }

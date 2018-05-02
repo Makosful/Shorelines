@@ -1,12 +1,17 @@
 package com.github.makosful.shoreline.dal;
 
+import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import java.util.Map;
@@ -29,6 +34,7 @@ public class DALManager implements IDAL
 
     private final ExcelReader excel;
     private final JsonWriter jWriter;
+    private final StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
 
     public DALManager()
@@ -36,6 +42,7 @@ public class DALManager implements IDAL
         cDAO = new ConfigDAO();
         excel = new ExcelReader();
         jWriter = new JsonWriter();
+        storeLogIn = new StoreLogIn();
     }
 
     @Override
@@ -90,6 +97,31 @@ public class DALManager implements IDAL
         catch (SQLException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    
+    @Override
+    public void savePassword(String userName, String password) throws DALException
+    {
+        try
+        {
+            storeLogIn.savePassword(userName, password);
+        }
+        catch (IOException ex)
+        {
+            throw new DALException("Error writing file");
+        }
+    }
+    @Override
+    public String[] getPassword() throws DALException
+    {
+        try
+        {
+            return storeLogIn.getPassword();
+        }
+        catch (FileNotFoundException ex)
+        {
+            throw new DALException("Error with password.txt");
         }
     }
     

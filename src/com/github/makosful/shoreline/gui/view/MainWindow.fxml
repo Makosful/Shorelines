@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -39,6 +39,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Preferences…" />
                         <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                         <MenuItem mnemonicParsing="false" text="Quit" />
                     </items>
                 </Menu>
@@ -183,8 +184,8 @@
                 </Button>
                 <Button fx:id="btnChecklistCheck" layoutX="14.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" />
                 <ComboBox fx:id="comboBoxConfig" layoutX="94.0" layoutY="7.0" prefWidth="150.0" promptText="Configuration" />
-            <TextField fx:id="txtFieldConfig" layoutX="531.0" layoutY="7.0" />
-            <Button layoutX="688.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" />
+                <TextField fx:id="txtFieldConfig" layoutX="531.0" layoutY="7.0" />
+                <Button layoutX="688.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" />
             </children>
         </Pane>
     </children>

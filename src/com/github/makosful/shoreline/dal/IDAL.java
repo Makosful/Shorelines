@@ -5,9 +5,8 @@ import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
-import javafx.collections.ObservableList;
-
 import java.util.Map;
+import javafx.collections.ObservableList;
 
 /**
  * An interface holding all methods a DAL Facade will need to handle.
@@ -28,6 +27,10 @@ public interface IDAL
 
     public List<ColumnObject> getColumnNames() throws DALException;
 
+    public void savePassword(String userName, String password) throws DALException;
+
+    public String[] getPassword() throws DALException;
+
     public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException;
 
     public void jsonAdd(Map jsonObj) throws DALException;
@@ -35,6 +38,5 @@ public interface IDAL
     public void jsonWrite() throws DALException;
 
     public ObservableList<Config> getAllConfigs() throws DALException;
-
 
 }

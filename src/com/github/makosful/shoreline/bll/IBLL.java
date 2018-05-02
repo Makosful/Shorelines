@@ -30,5 +30,12 @@ public interface IBLL
     public void addTask(List<ExcelRow> excelRowsList) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
+    
+    public void savePassword(String userName, String password) throws BLLException;
+
+    public String[] getPassword() throws BLLException;
+
+
+    public String generatePassword() throws BLLException;
 
 }
