@@ -82,6 +82,5 @@ public class LoginController implements Initializable
         {
 
         }
-        model = new LoginModel();
     }
 }

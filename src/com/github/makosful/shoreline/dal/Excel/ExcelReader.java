@@ -1,4 +1,4 @@
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Excel;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.ExcelRow;

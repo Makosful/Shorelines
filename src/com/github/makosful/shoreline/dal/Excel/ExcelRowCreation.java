@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Excel;
 
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
