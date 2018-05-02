@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
@@ -179,10 +180,15 @@ public class MainWindowController implements Initializable
      * @param event FXML Parameter
      */
     @FXML
-    private void handleConversion(ActionEvent event)
+    private void handleConversion(ActionEvent event) throws BLLException
     {
         hashMapPut();
         model.convert("import_data.xlsx", cellOrder, true);
+        
+        for(ExcelRow e : model.getExcelRowsList())
+        {
+            System.out.println(e.getSiteName());
+        }
     }
 
     /**

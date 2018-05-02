@@ -166,16 +166,8 @@ public class ExcelReader
     
     public String getStringValue()
     {
-        String cellValue;
-        if (cell.getCellTypeEnum() == CellType.NUMERIC)
-        {
-             cellValue = String.valueOf(cell.getNumericCellValue());
-        }
-        else 
-        {
-            return cell.getStringCellValue();
-        }
-        return cellValue;
+       return excelRowCreation.getStringValue(cell);
     }
+    
 
 }

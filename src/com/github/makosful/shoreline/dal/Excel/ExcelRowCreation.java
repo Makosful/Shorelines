@@ -9,6 +9,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 
 /**
  *
@@ -19,9 +20,10 @@ public class ExcelRowCreation
 
     ExcelRow excelRow;
 
-    public ExcelRow ExcelCreation(HashMap<String, Integer> cellOrder, List<Cell> cells)
+    public ExcelRow ExcelCreation(HashMap<String, Integer> cellOrder, List<Cell> cells) throws Exception
     {
-
+        try
+        {
         excelRow = new ExcelRow();
         if (!cellOrder.isEmpty())
         {
@@ -38,27 +40,46 @@ public class ExcelRowCreation
             excelRow.setSystemStatus(cells.get(cellNumber).getStringCellValue());
 
             cellNumber = cellOrder.get("userStatus");
-            excelRow.setUserStatus(cells.get(cellNumber).getStringCellValue());
+            excelRow.setUserStatus(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("createdOn");
-            excelRow.setCreatedOn(cells.get(cellNumber).getStringCellValue());
+            excelRow.setCreatedOn(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("createdBy");
-            excelRow.setCreatedBy(cells.get(cellNumber).getStringCellValue());
+            excelRow.setCreatedBy(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("nameDescription");
-            excelRow.setNameDescription(cells.get(cellNumber).getStringCellValue());
+            excelRow.setNameDescription(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("priority");
-            excelRow.setPriority(cells.get(cellNumber).getStringCellValue());
+            excelRow.setPriority(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("status");
-            excelRow.setStatus(cells.get(cellNumber).getStringCellValue());
+            excelRow.setStatus(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("esDate");
-            excelRow.setEsDate(cells.get(cellNumber).getStringCellValue());
+            excelRow.setEsDate(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("lsDate");
-            excelRow.setLsDate(cells.get(cellNumber).getStringCellValue());
+            excelRow.setLsDate(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("lfDate");
-            excelRow.setLfDate(cells.get(cellNumber).getStringCellValue());
+            excelRow.setLfDate(getStringValue(cells.get(cellNumber)));
             cellNumber = cellOrder.get("esTime");
-            excelRow.setEsTime(cells.get(cellNumber).getStringCellValue());
-
+            excelRow.setEsTime(getStringValue(cells.get(cellNumber)));
         }
         return excelRow;
+        }
+        catch(Exception e)
+        {
+            throw new Exception(e.getMessage());
+        }
+        
+    }
+
+    public String getStringValue(Cell cell)
+    {
+        String cellValue;
+        if (cell.getCellTypeEnum() == CellType.NUMERIC)
+        {
+            cellValue = String.valueOf(cell.getNumericCellValue());
+        }
+        else
+        {
+            return cell.getStringCellValue();
+        }
+        return cellValue;
     }
 }
