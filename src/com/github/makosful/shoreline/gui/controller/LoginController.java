@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.*;
 
 /**
  * FXML Controller class
@@ -17,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class LoginController implements Initializable
 {
+
     private Alert errorAlert;
 
     private LoginModel model;
@@ -79,15 +80,8 @@ public class LoginController implements Initializable
         }
         catch (BLLException ex)
         {
-            
+
         }
         model = new LoginModel();
     }
-
-    @FXML
-    private void handleLogin(ActionEvent event)
-    {
-        model.attemptLogin(txtFieldUsername.getText(), txtFieldPassword.getText());
-    }
-
 }
