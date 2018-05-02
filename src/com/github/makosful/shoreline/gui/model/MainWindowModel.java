@@ -5,6 +5,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +24,7 @@ public class MainWindowModel
     // Objects
     private final Cache cache;
     private final IBLL bll;
-    
+
     // Mock Data
     ObservableList<ColumnObject> columns;
     ObservableList<ColumnObject> selectedColumns;
@@ -32,8 +33,8 @@ public class MainWindowModel
     {
         cache = Cache.getInstance();
         bll = new BLLManager();
-             
-     selectedColumns = FXCollections.observableArrayList();
+
+        selectedColumns = FXCollections.observableArrayList();
     }
 
     public ObservableList<ColumnObject> getColumnNames()
@@ -41,22 +42,24 @@ public class MainWindowModel
         columns = FXCollections.observableArrayList(bll.getColumnNames());
         return columns;
     }
-    
+
     public List<ExcelRow> getExcelRowsList()
     {
         return bll.getExcelRowsList();
     }
-    
+
     public ObservableList<ColumnObject> getSelectedStrings()
     {
         return selectedColumns;
     }
 
-    public void readFromExcel(String import_dataxlsx, HashMap<String, Integer> cellOrder, boolean conversion)
+    public void convert(String import_dataxlsx, HashMap<String, Integer> cellOrder, boolean conversion)
     {
         try
         {
             bll.readFromExcelFile(import_dataxlsx, cellOrder, conversion);
+
+            bll.addTask(getExcelRowsList());
         }
         catch (BLLException ex)
         {
@@ -65,4 +68,14 @@ public class MainWindowModel
     }
     
 
+    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    {
+        bll.saveConfig(configName, items);
+    }
+
+    public void logout()
+    {
+        cache.clearUser();
+        cache.changeScene(Scenes.Login.getValue()); // ID 1
+    }
 }

@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.bll.BLLException;
-import com.github.makosful.shoreline.gui.model.LogInModel;
+import com.github.makosful.shoreline.gui.model.LoginModel;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,8 +17,9 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class LoginController implements Initializable
 {
-    private LogInModel liModel;
     private Alert errorAlert;
+
+    private LoginModel model;
 
     @FXML
     private TextField txtFieldUsername;
@@ -40,11 +34,14 @@ public class LoginController implements Initializable
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        liModel = new LogInModel();
+        model = new LoginModel();
         setCredentials();
     }
 
@@ -55,11 +52,11 @@ public class LoginController implements Initializable
         {
             if (checkBoxRememberMe.isSelected())
             {
-                liModel.savePassword(txtFieldUsername.getText(), txtFieldPassword.getText());
+                model.savePassword(txtFieldUsername.getText(), txtFieldPassword.getText());
             }
             else
             {
-                liModel.savePassword("", "");
+                model.savePassword("", "");
             }
 
         }
@@ -76,7 +73,7 @@ public class LoginController implements Initializable
     {
         try
         {
-            String[] credentials = liModel.getPassword();
+            String[] credentials = model.getPassword();
             txtFieldUsername.setText(credentials[0]);
             txtFieldPassword.setText(credentials[1]);
         }
@@ -84,6 +81,13 @@ public class LoginController implements Initializable
         {
             
         }
+        model = new LoginModel();
+    }
+
+    @FXML
+    private void handleLogin(ActionEvent event)
+    {
+        model.attemptLogin(txtFieldUsername.getText(), txtFieldPassword.getText());
     }
 
 }

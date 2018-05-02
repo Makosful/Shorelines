@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
+import java.util.Map;
+
 
 /**
  * A facade for the Data Access Layer as a whole.
@@ -27,9 +30,11 @@ public class DALManager implements IDAL
     private final ExcelReader excel;
     private final JsonWriter jWriter;
     private final StoreLogIn storeLogIn;
+    private ConfigDAO cDAO;
 
     public DALManager()
     {
+        cDAO = new ConfigDAO();
         excel = new ExcelReader();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
@@ -72,6 +77,16 @@ public class DALManager implements IDAL
     {
         return excel.getColumnNames();
     }
+
+    @Override
+    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    {
+        int configId = cDAO.saveConfiguration(configName);
+        
+        for(ColumnObject column : items){
+            cDAO.saveConfigColumns(configId, column);
+        }
+    }
     
     @Override
     public void savePassword(String userName, String password) throws DALException
@@ -99,4 +114,22 @@ public class DALManager implements IDAL
     }
     
     
+    public void jsonAdd(Map jsonObj) throws DALException
+    {
+        jWriter.addObject(jsonObj);
+    }
+
+    @Override
+    public void jsonWrite() throws DALException
+    {
+        try
+        {
+            jWriter.write();
+        }
+        catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
 }

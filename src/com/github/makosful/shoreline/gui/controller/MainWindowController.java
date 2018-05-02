@@ -8,14 +8,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -103,6 +102,8 @@ public class MainWindowController implements Initializable
     private Integer currentIndex;
     @FXML
     private ComboBox<Config> comboBoxConfig;
+    @FXML
+    private TextField txtFieldConfig;
 
     /**
      * Initializes the controller class.
@@ -182,7 +183,7 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event)
     {
         hashMapPut();
-        model.readFromExcel("import_data.xlsx", cellOrder, true);
+        model.convert("import_data.xlsx", cellOrder, true);
     }
 
     /**
@@ -300,11 +301,14 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.readFromExcel("import_data.xlsx", cellOrder, false);
+        model.convert("import_data.xlsx", cellOrder, false);
         chklistSelectData.setItems(model.getColumnNames());
         AddListeners();
     }
 
+    /**
+     * Set up the configurations in combobox
+     */
     private void addConfigs()
     {
         Config c = new Config();
@@ -328,11 +332,35 @@ public class MainWindowController implements Initializable
             }
         });
 
+        addConfigListener();
+
+    }
+
+    /**
+     * Add listener to when a configuration is selected
+     */
+    private void addConfigListener()
+    {
         comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
         {
 
             System.out.println("Selected config: " + newval.getName());
-        });
+            ObservableList<ColumnObject> n = FXCollections.observableArrayList();
+            n.add(new ColumnObject("noget", 1));
+            listViewSorted.setItems(n);
 
+        });
+    }
+
+    @FXML
+    private void handleBtnSaveConfig(ActionEvent event)
+    {
+        model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
+    }
+
+    @FXML
+    private void handleLogout(ActionEvent event)
+    {
+        model.logout();
     }
 }
