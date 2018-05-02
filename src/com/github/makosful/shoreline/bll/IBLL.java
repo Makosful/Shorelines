@@ -28,4 +28,6 @@ public interface IBLL
 
     public void addTask(List<ExcelRow> excelRowsList);
 
+    public String generatePassword() throws BLLException;
+
 }

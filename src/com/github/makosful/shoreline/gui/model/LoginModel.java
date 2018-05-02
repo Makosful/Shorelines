@@ -1,7 +1,12 @@
 package com.github.makosful.shoreline.gui.model;
 
 import com.github.makosful.shoreline.be.User;
+import com.github.makosful.shoreline.bll.BLLException;
+import com.github.makosful.shoreline.bll.BLLManager;
+import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,10 +16,12 @@ public class LoginModel
 {
 
     private final Cache cache;
+    private final IBLL bll;
 
     public LoginModel()
     {
         cache = Cache.getInstance();
+        bll = new BLLManager();
     }
 
     public boolean attemptLogin(String userName, String password)
@@ -38,6 +45,19 @@ public class LoginModel
         {
             // Return false for failed login
             return false;
+        }
+    }
+
+    public String getNewPassword()
+    {
+        try
+        {
+            return bll.generatePassword();
+        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            return new String(); // Empty string
         }
     }
 }
