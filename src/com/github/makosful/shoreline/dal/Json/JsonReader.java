@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.dal.Json;
 
 import com.github.makosful.shoreline.dal.Exception.DALException;
+import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import com.google.gson.*;
 import java.io.BufferedReader;
@@ -25,7 +26,7 @@ public class JsonReader implements IReader
     }
 
     @Override
-    public boolean loadFile(String file)
+    public boolean loadFile(String file) throws ReaderException
     {
         try (BufferedReader br = new BufferedReader(new FileReader(file)))
         {
@@ -47,17 +48,17 @@ public class JsonReader implements IReader
         }
         catch (IOException ex)
         {
-            return false;
+            throw new ReaderException(ex.getLocalizedMessage(), ex);
         }
     }
 
     @Override
-    public List<String> getHeaders()
+    public List<String> getHeaders() throws ReaderException
     {
         if (element == null)
         {
             String s = "Call loadJson on this object before using this method";
-            throw new IllegalStateException(s);
+            throw new ReaderException(s);
         }
         else if (!element.isJsonArray())
         {
@@ -83,17 +84,17 @@ public class JsonReader implements IReader
         else
         {
             String s = "The loaded JSON is of an unsupported type";
-            throw new IllegalStateException(s);
+            throw new ReaderException(s);
         }
     }
 
     @Override
-    public List<Map> getValues(Map<String, String> keys)
+    public List<Map> getValues(Map<String, String> keys) throws ReaderException
     {
         if (element == null)
         {
             String s = "Call loadJson on this object before using this method";
-            throw new IllegalStateException(s);
+            throw new ReaderException(s);
         }
         else if (!element.isJsonArray())
         {
@@ -121,7 +122,7 @@ public class JsonReader implements IReader
         else
         {
             String s = "The loaded JSON is of an unsupported type";
-            throw new IllegalStateException(s);
+            throw new ReaderException(s);
         }
     }
 
