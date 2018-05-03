@@ -319,7 +319,8 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Set up the configurations in combobox
+     * Set up the configurations in combobox, with the setConverter, the objects name
+     * as string is shown in the comboboc and makes a reference to the object from the string
      */
     private void addConfigs()
     {
@@ -337,8 +338,8 @@ public class MainWindowController implements Initializable
             @Override
             public Config fromString(String configName)
             {
-                return comboBoxConfig.getItems().stream().filter(ap
-                        -> ap.getName().equals(configName)).findFirst().orElse(null);
+                return comboBoxConfig.getItems().stream().filter(config
+                        -> config.getName().equals(configName)).findFirst().orElse(null);
             }
         });
 
