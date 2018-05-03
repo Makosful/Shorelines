@@ -43,17 +43,6 @@ public class Main extends Application
         sm.getStage().getIcons().add(icon);
         
 
-        
-        ConversionLog cd = new ConversionLog();
-        cd.setUserId(2);
-        cd.setMessage("Hey Dude MAn Whats up bro, why u readin dis?");
-        cd.setFileName("someFolder/SOmeFile.dumDavid");
-        cd.setLogType("Convertion of Exel");
-        
-        ObservableList<ConversionLog> lodg = FXCollections.observableArrayList();
-        lodg.add(cd);
-        DALManager dal = new DALManager();
-        dal.saveLog(lodg);
     }
 
     /**
