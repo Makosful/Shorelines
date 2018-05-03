@@ -352,10 +352,9 @@ public class MainWindowController implements Initializable
      */
     private void addConfigListener()
     {
-        comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
+        comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         { 
-            Config config = model.getConfig(newval.getId());
-            System.out.println("Selected config: " + newval.getName());
+            Config config = model.getConfig(newConfig.getId());
             listViewSorted.setItems(config.getChosenColumns());
           
         });
