@@ -35,7 +35,6 @@ public interface IBLL
 
     public String[] getPassword() throws BLLException;
 
-
     public String generatePassword() throws BLLException;
 
 }
