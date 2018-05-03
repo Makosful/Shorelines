@@ -1,10 +1,12 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,16 +14,19 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -184,8 +189,8 @@ public class MainWindowController implements Initializable
     {
         hashMapPut();
         model.convert("import_data.xlsx", cellOrder, true);
-        
-        for(ExcelRow e : model.getExcelRowsList())
+
+        for (ExcelRow e : model.getExcelRowsList())
         {
             System.out.println(e.getSiteName());
         }
@@ -319,8 +324,10 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Set up the configurations in combobox, with the setConverter, the objects name
-     * as string is shown in the comboboc and makes a reference to the object from the string
+     * Set up the configurations in combobox, with the setConverter, the objects
+     * name
+     * as string is shown in the comboboc and makes a reference to the object
+     * from the string
      */
     private void addConfigs()
     {
@@ -353,10 +360,10 @@ public class MainWindowController implements Initializable
     private void addConfigListener()
     {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
-        { 
+        {
             Config config = model.getConfig(newConfig.getId());
             listViewSorted.setItems(config.getChosenColumns());
-          
+
         });
     }
 
@@ -372,5 +379,25 @@ public class MainWindowController implements Initializable
     private void handleLogout(ActionEvent event)
     {
         model.logout();
+    }
+
+    @FXML
+    private void handleOpenLog(ActionEvent event)
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("gui/view/LogWindow.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Log");
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
