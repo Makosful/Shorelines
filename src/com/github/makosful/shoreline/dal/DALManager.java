@@ -5,6 +5,7 @@ import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.LoggingFolder.LoggingManager;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import javafx.collections.ObservableList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -33,7 +36,7 @@ public class DALManager implements IDAL
     private final JsonWriter jWriter;
     private final StoreLogIn storeLogIn;
     private final ConfigDAO cDAO;
-    private final LogDAO lDAO;
+    private final LoggingManager lDAO;
 
     public DALManager()
     {
@@ -41,7 +44,7 @@ public class DALManager implements IDAL
         excel = new ExcelReader();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
-        lDAO = new LogDAO();
+        lDAO = new LoggingManager();
     }
 
     @Override
@@ -169,7 +172,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return lDAO.getAllLogs(userId);
+            return lDAO.getLogs(userId);
         }
         catch (SQLException ex)
         {
@@ -180,7 +183,18 @@ public class DALManager implements IDAL
     @Override
     public void saveLog(ObservableList<ConversionLog> conversionLog) throws DALException
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(ConversionLog log : conversionLog)
+        {
+            try
+            {
+                lDAO.makeLog(log);
+            }
+            catch (SQLException ex)
+            {
+                throw new DALException(ex.getLocalizedMessage(), ex);
+            }
+        }
+        
     }
 
 

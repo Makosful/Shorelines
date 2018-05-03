@@ -1,14 +1,21 @@
 package com.github.makosful.shoreline;
 
+import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.LoggingFolder.LoggingManager;
 import com.github.makosful.shoreline.gui.model.Cache;
 import com.github.makosful.stage.exception.IlligalIdException;
 import com.github.makosful.stage.utils.StageManager;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -35,12 +42,18 @@ public class Main extends Application
         Image icon = new Image(file.toURI().toString());
         sm.getStage().getIcons().add(icon);
         
-        LoggingManager log = new LoggingManager();
-        log.makeLog(1, "msg", "filename", "errorlog");
-        for(ConversionLog cc : log.getLogs())
-        {
-            System.out.println(cc.getLogType());
-        }
+
+        
+        ConversionLog cd = new ConversionLog();
+        cd.setUserId(2);
+        cd.setMessage("Hey Dude MAn Whats up bro, why u readin dis?");
+        cd.setFileName("someFolder/SOmeFile.dumDavid");
+        cd.setLogType("Convertion of Exel");
+        
+        ObservableList<ConversionLog> lodg = FXCollections.observableArrayList();
+        lodg.add(cd);
+        DALManager dal = new DALManager();
+        dal.saveLog(lodg);
     }
 
     /**
@@ -49,6 +62,10 @@ public class Main extends Application
     public static void main(String[] args)
     {
         launch(args);
+        
+
+
+        
     }
 
     private void registerScenes(StageManager sm) throws IOException,
