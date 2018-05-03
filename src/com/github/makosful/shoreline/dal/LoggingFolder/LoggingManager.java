@@ -32,7 +32,7 @@ public class LoggingManager
      * @param conversionLog
      * @throws SQLException 
      */
-    public void makeLog(ConversionLog conversionLog) throws SQLException
+    public void saveLog(ConversionLog conversionLog) throws SQLException
     {
         try (Connection con = dbConnector.getConnection())
         {

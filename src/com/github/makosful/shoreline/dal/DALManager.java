@@ -187,7 +187,7 @@ public class DALManager implements IDAL
         {
             try
             {
-                lDAO.makeLog(log);
+                lDAO.saveLog(log);
             }
             catch (SQLException ex)
             {
