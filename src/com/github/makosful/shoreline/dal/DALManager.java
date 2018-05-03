@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
@@ -35,7 +36,8 @@ public class DALManager implements IDAL
     private final ExcelReader excel;
     private final JsonWriter jWriter;
     private final StoreLogIn storeLogIn;
-    private ConfigDAO cDAO;
+    private final ConfigDAO cDAO;
+    private final LogDAO lDAO;
 
     public DALManager()
     {
@@ -43,6 +45,7 @@ public class DALManager implements IDAL
         excel = new ExcelReader();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
+        lDAO = new LogDAO();
     }
 
     @Override
@@ -164,5 +167,19 @@ public class DALManager implements IDAL
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
+
+    @Override
+    public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException
+    {
+        try
+        {
+            return lDAO.getAllLogs(userId);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.dal;
 
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.ExcelRow;
 import java.util.HashMap;
 import java.util.List;
@@ -38,5 +39,7 @@ public interface IDAL
     public void jsonWrite() throws DALException;
 
     public ObservableList<Config> getAllConfigs() throws DALException;
+
+    public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException;
 
 }
