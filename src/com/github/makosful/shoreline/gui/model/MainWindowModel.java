@@ -1,18 +1,25 @@
 package com.github.makosful.shoreline.gui.model;
 
+import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import com.github.makosful.shoreline.gui.controller.MainWindowController;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * This Model handles the data specific to the MainWindow MVC
@@ -30,6 +37,7 @@ public class MainWindowModel
     ObservableList<ColumnObject> columns;
     ObservableList<ColumnObject> selectedColumns;
     ObservableList<Config> configs;
+
     public MainWindowModel()
     {
         cache = Cache.getInstance();
@@ -62,7 +70,7 @@ public class MainWindowModel
             Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-        
+
     }
 
     public ObservableList<ColumnObject> getSelectedStrings()
@@ -84,11 +92,11 @@ public class MainWindowModel
         }
     }
 
-    
     /**
      * Pass the column objects and configname down for storing it in the db
+     *
      * @param configName
-     * @param items 
+     * @param items
      */
     public void saveConfig(String configName, ObservableList<ColumnObject> items)
     {
@@ -103,15 +111,18 @@ public class MainWindowModel
     }
 
     /**
-     * Select a specific config from the observable list based on the selected id 
+     * Select a specific config from the observable list based on the selected
+     * id
+     *
      * @param id
-     * @return 
+     *
+     * @return
      */
     public Config getConfig(int id)
     {
-        for(Config config : configs)
+        for (Config config : configs)
         {
-            if(config.getId() == id)
+            if (config.getId() == id)
             {
                 return config;
             }
@@ -120,8 +131,9 @@ public class MainWindowModel
     }
 
     /**
-     * Call down to the db for retrieving the configs 
-     * @return 
+     * Call down to the db for retrieving the configs
+     *
+     * @return
      */
     public ObservableList<Config> getAllConfigs()
     {
@@ -141,5 +153,24 @@ public class MainWindowModel
     {
         cache.clearUser();
         cache.changeScene(Scenes.Login.getValue()); // ID 1
+    }
+
+    public void openLogWindow()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("gui/view/LogWindow.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Log");
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

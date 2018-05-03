@@ -1,12 +1,10 @@
 package com.github.makosful.shoreline.gui.controller;
 
-import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,15 +16,11 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -384,20 +378,6 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleOpenLog(ActionEvent event)
     {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("gui/view/LogWindow.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Log");
-            stage.show();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        model.openLogWindow();
     }
 }
