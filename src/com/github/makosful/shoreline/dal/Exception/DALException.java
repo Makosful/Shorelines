@@ -1,4 +1,4 @@
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Exception;
 
 /**
  * A custom Exception for the DAL Facade to use. The only Exception that may be

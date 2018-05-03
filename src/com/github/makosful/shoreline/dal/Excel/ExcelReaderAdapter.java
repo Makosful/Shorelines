@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Excel;
 
-
+import com.github.makosful.shoreline.dal.Interfaces.IReader;
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -19,8 +11,9 @@ import java.util.logging.Logger;
  */
 public class ExcelReaderAdapter implements IReader
 {
+
     private ExcelReader excelReader;
-    
+
     public ExcelReaderAdapter(ExcelReader excelReader)
     {
         this.excelReader = excelReader;
@@ -29,7 +22,6 @@ public class ExcelReaderAdapter implements IReader
     @Override
     public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
-        
 
         try
         {
@@ -39,12 +31,7 @@ public class ExcelReaderAdapter implements IReader
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
-   
-   
-        
+
     }
 
-
-
-    
 }

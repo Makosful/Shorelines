@@ -1,5 +1,6 @@
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Interfaces;
 
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;

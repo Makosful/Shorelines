@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Database;
 
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.dal.DataBaseConnector.DataBaseConnector;
+import com.github.makosful.shoreline.dal.Database.DataBaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

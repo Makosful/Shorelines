@@ -6,7 +6,7 @@
 package com.github.makosful.shoreline.dal.LoggingFolder;
 
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.dal.DataBaseConnector.DataBaseConnector;
+import com.github.makosful.shoreline.dal.Database.DataBaseConnector;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
