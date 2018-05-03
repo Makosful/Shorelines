@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -184,8 +183,8 @@ public class MainWindowController implements Initializable
     {
         hashMapPut();
         model.convert("import_data.xlsx", cellOrder, true);
-        
-        for(ExcelRow e : model.getExcelRowsList())
+
+        for (ExcelRow e : model.getExcelRowsList())
         {
             System.out.println(e.getSiteName());
         }
@@ -319,8 +318,10 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Set up the configurations in combobox, with the setConverter, the objects name
-     * as string is shown in the comboboc and makes a reference to the object from the string
+     * Set up the configurations in combobox, with the setConverter, the objects
+     * name
+     * as string is shown in the comboboc and makes a reference to the object
+     * from the string
      */
     private void addConfigs()
     {
@@ -353,10 +354,10 @@ public class MainWindowController implements Initializable
     private void addConfigListener()
     {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
-        { 
+        {
             Config config = model.getConfig(newConfig.getId());
             listViewSorted.setItems(config.getChosenColumns());
-          
+
         });
     }
 
@@ -372,5 +373,11 @@ public class MainWindowController implements Initializable
     private void handleLogout(ActionEvent event)
     {
         model.logout();
+    }
+
+    @FXML
+    private void handleOpenLog(ActionEvent event)
+    {
+        model.openLogWindow();
     }
 }
