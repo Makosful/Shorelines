@@ -8,13 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -33,7 +30,7 @@ public class ExcelReader
     private List<Cell> cells;
     private final ExcelRowCreation excelRowCreation;
     private final List<ColumnObject> columnNames;
-    
+
     private Cell cell;
 
     public ExcelReader()
@@ -48,7 +45,9 @@ public class ExcelReader
      * Simply reads an XLS file and prints out the cell adress of every item
      * TODO: Make it return useable data
      *
-     * @param file The XLS file path to read as String
+     * @param file       The XLS file path to read as String
+     * @param cellOrder
+     * @param conversion
      *
      * @throws java.io.IOException
      */
@@ -73,7 +72,9 @@ public class ExcelReader
      * Simply reads XLSX files and prints out the cell adress
      * TODO: Make it return usable data
      *
-     * @param file The XLSX file path to read as String 
+     * @param file       The XLSX file path to read as String
+     * @param cellOrder
+     * @param conversion
      *
      * @throws IOException
      */
@@ -165,11 +166,14 @@ public class ExcelReader
             }
         }
     }
+
     /**
      * Creates excelRow Objects - holds information about a single excel row.
-     * Uses HashMap to know which variables are supposed to hold specific columns
+     * Uses HashMap to know which variables are supposed to hold specific
+     * columns
      * in specific row.
-     * @param cellOrder 
+     *
+     * @param cellOrder
      */
     private void excelCreation(HashMap<String, Integer> cellOrder) throws Exception
     {
@@ -183,21 +187,22 @@ public class ExcelReader
             throw new Exception(ex.getMessage());
         }
     }
+
     // Excel Row objects.
     public List<ExcelRow> getExcelRowsList()
     {
         return excelRows;
     }
+
     // Column names - for example Country.
     public List<ColumnObject> getColumnNames()
     {
         return columnNames;
     }
-    
+
     public String getStringValue()
     {
-       return excelRowCreation.getStringValue(cell);
+        return excelRowCreation.getStringValue(cell);
     }
-    
 
 }
