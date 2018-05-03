@@ -48,7 +48,7 @@ public class MainWindowModel
         return bll.getExcelRowsList();
     }
 
-    public ObservableList<ColumnObject> getSelectedStrings()
+    public ObservableList<ColumnObject> getSelectedObject()
     {
         return selectedColumns;
     }

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -31,7 +33,7 @@ public class ExcelReader
     private List<Cell> cells;
     private final ExcelRowCreation excelRowCreation;
     private final List<ColumnObject> columnNames;
-    
+
     private Cell cell;
 
     public ExcelReader()
@@ -64,7 +66,7 @@ public class ExcelReader
      * Simply reads XLSX files and prints out the cell adress
      * TODO: Make it return usable data
      *
-     * @param file The XLSX file path to read as String 
+     * @param file The XLSX file path to read as String
      *
      * @throws IOException
      */
@@ -137,37 +139,48 @@ public class ExcelReader
                 }
                 if (!cells.isEmpty() && conversion)
                 {
-                    excelCreation(cellOrder);
+                    try
+                    {
+                        excelCreation(cellOrder);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.getLogger(ExcelReader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
     }
+
     /**
      * Creates excelRow Objects - holds information about a single excel row.
-     * Uses HashMap to know which variables are supposed to hold specific columns
+     * Uses HashMap to know which variables are supposed to hold specific
+     * columns
      * in specific row.
-     * @param cellOrder 
+     *
+     * @param cellOrder
      */
-    private void excelCreation(HashMap<String, Integer> cellOrder)
+    private void excelCreation(HashMap<String, Integer> cellOrder) throws Exception
     {
         ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
-            excelRows.add(excelRow);
+        excelRows.add(excelRow);
     }
+
     // Excel Row objects.
     public List<ExcelRow> getExcelRowsList()
     {
         return excelRows;
     }
+
     // Column names - for example Country.
     public List<ColumnObject> getColumnNames()
     {
         return columnNames;
     }
-    
+
     public String getStringValue()
     {
-       return excelRowCreation.getStringValue(cell);
+        return excelRowCreation.getStringValue(cell);
     }
-    
 
 }

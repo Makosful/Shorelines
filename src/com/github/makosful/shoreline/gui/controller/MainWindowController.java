@@ -6,10 +6,7 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -19,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -34,7 +32,6 @@ public class MainWindowController implements Initializable
 {
 
     private MainWindowModel model;
-
     private HashMap<String, Integer> cellOrder;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
@@ -120,9 +117,9 @@ public class MainWindowController implements Initializable
     {
 
         model = new MainWindowModel();
-        cellOrder = new HashMap<String, Integer>();
 
-        AddListeners();
+//        listViewSorted.setCellFactory(param -> new ListCell<>());
+        cellOrder = new HashMap<String, Integer>();
         addConfigs();
     }
 
@@ -142,7 +139,7 @@ public class MainWindowController implements Initializable
             int prevIndex = currentIndex - 1;
 
             // Swaps the two indecies
-            Collections.swap(model.getSelectedStrings(), currentIndex, prevIndex);
+            Collections.swap(model.getSelectedObject(), currentIndex, prevIndex);
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prevIndex);
@@ -166,7 +163,7 @@ public class MainWindowController implements Initializable
             int prev = currentIndex + 1;
 
             // Swaps the two items
-            Collections.swap(model.getSelectedStrings(), currentIndex, prev);
+            Collections.swap(model.getSelectedObject(), currentIndex, prev);
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prev);
@@ -184,8 +181,8 @@ public class MainWindowController implements Initializable
     {
         hashMapPut();
         model.convert("import_data.xlsx", cellOrder, true);
-        
-        for(ExcelRow e : model.getExcelRowsList())
+
+        for (ExcelRow e : model.getExcelRowsList())
         {
             System.out.println(e.getSiteName());
         }
@@ -197,13 +194,13 @@ public class MainWindowController implements Initializable
     private void checkIfValidToRelocate()
     {
         if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
-            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size())
+            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedObject().size())
         {
             movable = true;
         }
         else
         {
-
+            movable = false;
         }
     }
 
@@ -236,8 +233,7 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
-
-        listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
+        listViewSorted.setItems(model.getSelectedObject());
 
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
@@ -246,33 +242,90 @@ public class MainWindowController implements Initializable
             disableBtnOnIndex();
         });
 
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c) ->
+        chklistSelectData.getItems().addListener(new ListChangeListener<ColumnObject>()
         {
-            if (c.next())
+            @Override
+            public void onChanged(Change<? extends ColumnObject> c)
             {
-                model.getSelectedStrings().addAll(c.getAddedSubList());
-                model.getSelectedStrings().removeAll(c.getRemoved());
+                c.next();
+                if (c.wasAdded())
+                {
+                    chklistSelectData.getSelectionModel().select(c.getAddedSubList().get(0));
+                    System.out.println(c.getAddedSubList().get(0));
+                }
             }
         });
+
+        chklistSelectData.getCheckModel().getCheckedItems().addListener(new ListChangeListener<ColumnObject>()
+        {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends ColumnObject> c)
+            {
+                boolean changable = false;
+                c.next();
+                if (c.wasAdded())
+                {
+                    System.out.println("Item Checked : " + c.getAddedSubList().get(0));
+                    model.getSelectedObject().addAll(c.getAddedSubList().get(0));
+                }
+                else if (c.wasRemoved())
+                {
+                    System.out.println("Item Unchecked : " + c.getRemoved().get(0));
+                    model.getSelectedObject().removeAll(c.getRemoved());
+                }
+            }
+        });
+//        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c) ->
+//        {
+//
+//            if(c.)
+//            if (c.next())
+//            {
+//                model.getSelectedObject().addAll(c.getAddedSubList());
+//                model.getSelectedObject().removeAll(c.getRemoved());
+//            }
+//        });
 
     }
 
     @FXML
     private void handleChecklistItemsStatus(ActionEvent event)
     {
-        if (!isChecked)
-        {
-            chklistSelectData.getCheckModel().checkAll();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Check all");
+//        if (!isChecked)
+//        {
+//            for (ColumnObject item : chklistSelectData.getItems())
+//            {
+//
+//                chklistSelectData.getCheckModel().check(item);
+//            }
+//            btnChecklistCheck.setText("Uncheck all");
+//        }
+//        else
+//        {
+//            for (ColumnObject checkedItem : chklistSelectData.getItems())
+//            {
+//                chklistSelectData.getCheckModel().clearCheck(checkedItem);
+//            }
+////            chklistSelectData.getCheckModel().clearChecks();
+//            btnChecklistCheck.setText("Check all");
+//        }
+//        isChecked = !isChecked;
 
-        }
-        else if (isChecked)
+    }
+
+    public boolean contains(ListView<ColumnObject> listView, ColumnObject cO)
+    {
+        for (ColumnObject item : chklistSelectData.getCheckModel().getCheckedItems())
         {
-            chklistSelectData.getCheckModel().clearChecks();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Uncheck all");
+            if (item.equals(cO))
+            {
+                System.out.println("Matching");
+                return true;
+            }
         }
+        System.out.println("Not matching");
+
+        return false;
     }
 
     /**
@@ -310,10 +363,12 @@ public class MainWindowController implements Initializable
         try
         {
             chklistSelectData.setItems(model.getColumnNames());
+
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainWindowController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         AddListeners();
     }
@@ -374,5 +429,102 @@ public class MainWindowController implements Initializable
     private void handleLogout(ActionEvent event)
     {
         model.logout();
+
+    }
+
+    public class listViewCell extends ListCell<ColumnObject>
+    {
+
+        private listViewCell()
+        {
+            ListCell thisCell = this;
+
+            setOnDragDetected(event ->
+            {
+                if (getItem() == null)
+                {
+                    return;
+                }
+
+                ObservableList<ColumnObject> listItems = listViewSorted.getItems();
+
+                Dragboard dragboard = startDragAndDrop(TransferMode.MOVE);
+                ClipboardContent content = new ClipboardContent();
+                content.putString(getItem().toString());
+
+                event.consume();
+            });
+
+            setOnDragOver(event ->
+            {
+                if (event.getGestureSource() != thisCell)
+                {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+
+                event.consume();
+            });
+
+            setOnDragEntered(event ->
+            {
+                if (event.getGestureSource() != thisCell)
+                {
+                    setOpacity(0.3);
+                }
+            });
+
+            setOnDragExited(event ->
+            {
+                if (event.getGestureSource() != thisCell)
+                {
+                    setOpacity(1);
+                }
+            });
+
+            setOnDragDropped(event ->
+            {
+                if (getItem() == null)
+                {
+                    return;
+                }
+
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+
+                if (db.hasString())
+                {
+                    ObservableList<ColumnObject> items = listViewSorted.getItems();
+                    int draggedIdx = items.indexOf(db.getString());
+                    int thisIdx = items.indexOf(getItem());
+
+                    items.set(draggedIdx, getItem());
+
+                    List<ColumnObject> listItemsCopy = new ArrayList<>(listViewSorted.getItems());
+                    getListView().getItems().setAll(listItemsCopy);
+
+                    success = true;
+                }
+                event.setDropCompleted(success);
+
+                event.consume();
+            });
+
+            setOnDragDone(DragEvent::consume);
+        }
+
+        @Override
+        protected void updateItem(ColumnObject item, boolean empty)
+        {
+            super.updateItem(item, empty);
+
+            if (empty || item == null)
+            {
+                setGraphic(null);
+            }
+            else
+            {
+                listViewSorted.getItems().indexOf(item);
+            }
+        }
     }
 }
