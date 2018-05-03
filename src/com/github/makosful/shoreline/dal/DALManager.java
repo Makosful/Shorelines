@@ -11,13 +11,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 /**
@@ -179,6 +175,12 @@ public class DALManager implements IDAL
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
+    }
+
+    @Override
+    public void saveLog(ObservableList<ConversionLog> conversionLog) throws DALException
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

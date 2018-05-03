@@ -7,10 +7,7 @@ package com.github.makosful.shoreline.dal;
 
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.DataBaseConnector.DataBaseConnector;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -59,6 +56,28 @@ public class LogDAO
             return allLogs;
         }
         catch (SQLException ex)
+        {
+            throw new SQLException(ex.getMessage());
+        }
+    }
+
+    public void saveLog(ConversionLog conversionLog) throws SQLException
+    {
+        try(Connection con = db.getConnection())
+        {
+            String sql = "INSERT INTO Logs (UserId, Message, FileName, LogType, Date) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            int i = 1;
+            ps.setInt(i++, conversionLog.getUserId());
+            ps.setString(i++, conversionLog.getMessage());
+            ps.setString(i++, conversionLog.getFileName());
+            ps.setString(i++, conversionLog.getLogType());
+            ps.setDate(i++, (Date) conversionLog.getDate());
+            
+            ps.executeUpdate();
+        }
+        catch(SQLException ex)
         {
             throw new SQLException(ex.getMessage());
         }
