@@ -126,54 +126,6 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Moves the selected item up the list once
-     *
-     * @param event FXML parameter
-     */
-    @FXML
-    private void handleMoveItemUp(ActionEvent event)
-    {
-        // Checks if the selected index has been marked as moveable
-        if (movable)
-        {
-            // Gets the two indexes
-            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-            int prevIndex = currentIndex - 1;
-
-            // Swaps the two indecies
-            Collections.swap(model.getSelectedStrings(), currentIndex, prevIndex);
-
-            // Reselects the item that was just moved
-            listViewSorted.getSelectionModel().select(prevIndex);
-            listViewSorted.requestFocus();
-        }
-    }
-
-    /**
-     * Moves the currently selected item down the list once
-     *
-     * @param event FXML Parameter
-     */
-    @FXML
-    private void handleMoveItemDown(ActionEvent event)
-    {
-        // Checks of the current item is marked as moveable
-        if (movable)
-        {
-            // Retrives the indicies for the two items to swap
-            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-            int prev = currentIndex + 1;
-
-            // Swaps the two items
-            Collections.swap(model.getSelectedStrings(), currentIndex, prev);
-
-            // Reselects the item that was just moved
-            listViewSorted.getSelectionModel().select(prev);
-            listViewSorted.requestFocus();
-        }
-    }
-
-    /**
      * TODO
      *
      * @param event FXML Parameter
@@ -196,13 +148,13 @@ public class MainWindowController implements Initializable
     private void checkIfValidToRelocate()
     {
         if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
-            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size())
+            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedList().size())
         {
             movable = true;
         }
         else
         {
-
+            movable = false;
         }
     }
 
@@ -236,7 +188,7 @@ public class MainWindowController implements Initializable
     private void AddListeners()
     {
 
-        listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
+        listViewSorted.setItems(model.getSelectedList());
 
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
@@ -249,8 +201,16 @@ public class MainWindowController implements Initializable
         {
             if (c.next())
             {
-                model.getSelectedStrings().addAll(c.getAddedSubList());
-                model.getSelectedStrings().removeAll(c.getRemoved());
+
+                for (ColumnObject co : c.getAddedSubList())
+                {
+                    if (!model.getSelectedList().contains(co))
+                    {
+                        model.getSelectedList().add(co);
+                    }
+                }
+//                model.getSelectedList().addAll(c.getAddedSubList());
+                model.getSelectedList().removeAll(c.getRemoved());
             }
         });
 
@@ -271,6 +231,54 @@ public class MainWindowController implements Initializable
             chklistSelectData.getCheckModel().clearChecks();
             isChecked = !isChecked;
             btnChecklistCheck.setText("Uncheck all");
+        }
+    }
+
+    /**
+     * Moves the selected item up the list once
+     *
+     * @param event FXML parameter
+     */
+    @FXML
+    private void handleMoveItemUp(ActionEvent event)
+    {
+        // Checks if the selected index has been marked as moveable
+        if (movable)
+        {
+            // Gets the two indexes
+            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
+            int prevIndex = currentIndex - 1;
+
+            // Swaps the two indecies
+            Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
+
+            // Reselects the item that was just moved
+            listViewSorted.getSelectionModel().select(prevIndex);
+            listViewSorted.requestFocus();
+        }
+    }
+
+    /**
+     * Moves the currently selected item down the list once
+     *
+     * @param event FXML Parameter
+     */
+    @FXML
+    private void handleMoveItemDown(ActionEvent event)
+    {
+        // Checks of the current item is marked as moveable
+        if (movable)
+        {
+            // Retrives the indicies for the two items to swap
+            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
+            int prev = currentIndex + 1;
+
+            // Swaps the two items
+            Collections.swap(model.getSelectedList(), currentIndex, prev);
+
+            // Reselects the item that was just moved
+            listViewSorted.getSelectionModel().select(prev);
+            listViewSorted.requestFocus();
         }
     }
 

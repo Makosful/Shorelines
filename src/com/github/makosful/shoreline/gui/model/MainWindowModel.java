@@ -35,7 +35,7 @@ public class MainWindowModel
 
     // Mock Data
     ObservableList<ColumnObject> columns;
-    ObservableList<ColumnObject> selectedColumns;
+    ObservableList<ColumnObject> selectedList;
     ObservableList<Config> configs;
 
     public MainWindowModel()
@@ -43,7 +43,7 @@ public class MainWindowModel
         cache = Cache.getInstance();
         bll = new BLLManager();
 
-        selectedColumns = FXCollections.observableArrayList();
+        selectedList = FXCollections.observableArrayList();
     }
 
     public ObservableList<ColumnObject> getColumnNames() throws BLLException
@@ -73,9 +73,9 @@ public class MainWindowModel
 
     }
 
-    public ObservableList<ColumnObject> getSelectedStrings()
+    public ObservableList<ColumnObject> getSelectedList()
     {
-        return selectedColumns;
+        return selectedList;
     }
 
     public void convert(String import_dataxlsx, HashMap<String, Integer> cellOrder, boolean conversion)
