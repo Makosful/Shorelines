@@ -1,11 +1,9 @@
 package com.github.makosful.shoreline.dal.Interfaces;
 
-import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.be.ExcelRow;
-import java.util.HashMap;
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -21,13 +19,12 @@ import javafx.collections.ObservableList;
 public interface IDAL
 {
 
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
+    //<editor-fold defaultstate="collapsed" desc="comment">
+    public boolean excelLoad(String path) throws DALException;
 
-    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
+    public List<String> excelGetHeader() throws DALException;
 
-    public List<ExcelRow> getExcelRowsList() throws DALException;
-
-    public List<ColumnObject> getColumnNames() throws DALException;
+    public List<Map> excelGetValues(Map<String, String> keys) throws DALException;
 
     public void savePassword(String userName, String password) throws DALException;
 

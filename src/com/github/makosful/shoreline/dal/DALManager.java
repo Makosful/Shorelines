@@ -1,21 +1,21 @@
 package com.github.makosful.shoreline.dal;
 
-import com.github.makosful.shoreline.dal.Database.ConfigDAO;
-import com.github.makosful.shoreline.dal.Database.LogDAO;
-import com.github.makosful.shoreline.dal.Interfaces.IDAL;
-import com.github.makosful.shoreline.dal.Exception.DALException;
-import com.github.makosful.shoreline.dal.Json.JsonReader;
-import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.Database.ConfigDAO;
+import com.github.makosful.shoreline.dal.Database.LogDAO;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
+import com.github.makosful.shoreline.dal.Exception.DALException;
+import com.github.makosful.shoreline.dal.Exception.ReaderException;
+import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import com.github.makosful.shoreline.dal.Interfaces.IReader;
+import com.github.makosful.shoreline.dal.Json.JsonReader;
+import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -33,9 +33,10 @@ import javafx.collections.ObservableList;
 public class DALManager implements IDAL
 {
 
-    private final ExcelReader excel;
     private final JsonWriter jWriter;
-    private final JsonReader jReader;
+    private final IReader jReader;
+    private final IReader excel;
+
     private final StoreLogIn storeLogIn;
     private final ConfigDAO cDAO;
     private final LogDAO lDAO;
@@ -48,48 +49,6 @@ public class DALManager implements IDAL
         jReader = new JsonReader();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDAO();
-    }
-
-    @Override
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
-    {
-        try
-        {
-            excel.readFromXlsFile(file, cellOrder, conversion);
-        }
-        catch (Exception ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
-    @Override
-    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
-    {
-        try
-        {
-            excel.readFromXlsxFiles(file, cellOrder, conversion);
-        }
-        catch (IOException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-        catch (Exception ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
-    @Override
-    public List<ExcelRow> getExcelRowsList()
-    {
-        return excel.getExcelRowsList();
-    }
-
-    @Override
-    public List<ColumnObject> getColumnNames()
-    {
-        return excel.getColumnNames();
     }
 
     @Override
@@ -181,4 +140,42 @@ public class DALManager implements IDAL
         }
     }
 
+    @Override
+    public boolean excelLoad(String path) throws DALException
+    {
+        try
+        {
+            return excel.loadFile(path);
+        }
+        catch (ReaderException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public List<String> excelGetHeader() throws DALException
+    {
+        try
+        {
+            return excel.getHeaders();
+        }
+        catch (ReaderException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public List<Map> excelGetValues(Map<String, String> keys) throws DALException
+    {
+        try
+        {
+            return excel.getValues(keys);
+        }
+        catch (ReaderException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
 }
