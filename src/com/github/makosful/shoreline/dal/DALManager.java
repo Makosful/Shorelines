@@ -5,7 +5,9 @@ import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.ExcelRow;
-import com.github.makosful.shoreline.dal.LoggingFolder.LoggingManager;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogContext;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogFileDAO;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class DALManager implements IDAL
     private final JsonWriter jWriter;
     private final StoreLogIn storeLogIn;
     private final ConfigDAO cDAO;
-    private final LoggingManager lDAO;
+    private final LogDBDAO lDAO;
 
     public DALManager()
     {
@@ -44,7 +46,7 @@ public class DALManager implements IDAL
         excel = new ExcelReader();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
-        lDAO = new LoggingManager();
+        lDAO = new LogDBDAO();
     }
 
     @Override
@@ -183,13 +185,17 @@ public class DALManager implements IDAL
     @Override
     public void saveLog(ObservableList<ConversionLog> conversionLog) throws DALException
     {
+        LogContext logContextDB = new LogContext(lDAO);
+        LogContext logContextFile = new LogContext(new LogFileDAO());
+        
         for(ConversionLog log : conversionLog)
         {
             try
             {
-                lDAO.saveLog(log);
+                logContextDB.saveLog(log);
+                logContextFile.saveLog(log);
             }
-            catch (SQLException ex)
+            catch (DALException ex)
             {
                 throw new DALException(ex.getLocalizedMessage(), ex);
             }

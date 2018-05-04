@@ -3,7 +3,7 @@ package com.github.makosful.shoreline;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.DALManager;
-import com.github.makosful.shoreline.dal.LoggingFolder.LoggingManager;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
 import com.github.makosful.shoreline.gui.model.Cache;
 import com.github.makosful.stage.exception.IlligalIdException;
 import com.github.makosful.stage.utils.StageManager;
