@@ -1,13 +1,15 @@
 package com.github.makosful.shoreline.dal.Json;
 
-import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import com.google.gson.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,14 +18,7 @@ import java.util.*;
 public class JsonReader implements IReader
 {
 
-    private final Gson gson;
-
     private JsonElement element;
-
-    public JsonReader()
-    {
-        gson = new Gson();
-    }
 
     @Override
     public boolean loadFile(String file) throws ReaderException
@@ -40,6 +35,7 @@ public class JsonReader implements IReader
             }
 
             // Converts the JSON to a Map
+            Gson gson = new Gson();
             GsonBuilder builder = gson.newBuilder();
             Object obj = builder.create().fromJson(sb.toString(), Object.class);
             element = gson.toJsonTree(obj);
@@ -124,21 +120,6 @@ public class JsonReader implements IReader
             String s = "The loaded JSON is of an unsupported type";
             throw new ReaderException(s);
         }
-    }
-
-    /**
-     * @deprecated
-     *
-     * @param file
-     * @param cellOrder
-     * @param conversion
-     *
-     * @throws DALException
-     */
-    @Override
-    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private Map createMap(JsonObject obj, Map<String, String> keys)

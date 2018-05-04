@@ -1,14 +1,11 @@
 package com.github.makosful.shoreline.dal.Interfaces;
 
-import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * this interface is used to collectively refer to classes that load file types,
- * and forcing them to behave similarly.
+ * This interface is used to create Reader objects
  *
  * Standard usage of classes implimenting this interface is:
  * <ul>
@@ -17,22 +14,11 @@ import java.util.Map;
  * <li>Call getValues(Map) to get the desired values</li>
  * </ul>
  *
- * @author B
- * @author Axl
+ * @author David
+ * @author Malthe
  */
 public interface IReader
 {
-
-    /**
-     * @deprecated
-     *
-     * @param file
-     * @param cellOrder
-     * @param conversion
-     *
-     * @throws DALException
-     */
-    public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
 
     /**
      * This method must be claeed before any other method works.
