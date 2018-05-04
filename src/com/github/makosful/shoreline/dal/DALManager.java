@@ -5,7 +5,7 @@ import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.ExcelRow;
-import com.github.makosful.shoreline.dal.LoggingFolder.LoggingManager;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class DALManager implements IDAL
     private final JsonWriter jWriter;
     private final StoreLogIn storeLogIn;
     private final ConfigDAO cDAO;
-    private final LoggingManager lDAO;
+    private final LogDBDAO lDAO;
 
     public DALManager()
     {
@@ -44,7 +44,7 @@ public class DALManager implements IDAL
         excel = new ExcelReader();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
-        lDAO = new LoggingManager();
+        lDAO = new LogDBDAO();
     }
 
     @Override

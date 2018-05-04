@@ -8,6 +8,7 @@ package com.github.makosful.shoreline.dal.LoggingFolder;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.DataBaseConnector.DataBaseConnector;
+import com.github.makosful.shoreline.dal.ILog;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,12 @@ import javafx.collections.ObservableList;
  *
  * @author Hussain
  */
-public class LoggingManager
+public class LogDBDAO implements ILog
 {
 
     DataBaseConnector dbConnector;
 
-    public LoggingManager()
+    public LogDBDAO()
     {
         dbConnector = new DataBaseConnector();
     }
