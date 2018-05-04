@@ -7,8 +7,8 @@ package com.github.makosful.shoreline.dal.LoggingFolder;
 
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.DataBaseConnector.DataBaseConnector;
-import com.github.makosful.shoreline.dal.ILog;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +31,9 @@ public class LogDBDAO implements ILog
     /**
      * Making a log.
      * @param conversionLog
-     * @throws SQLException 
+     * @throws com.github.makosful.shoreline.dal.DALException
      */
-    public void saveLog(ConversionLog conversionLog) throws SQLException
+    public void saveLog(ConversionLog conversionLog) throws DALException
     {
         try (Connection con = dbConnector.getConnection())
         {
@@ -48,8 +48,7 @@ public class LogDBDAO implements ILog
         }
         catch (SQLException ex)
         {
-            System.out.println(ex.getMessage());
-            throw new SQLException(ex.getMessage());
+            throw new DALException(ex.getLocalizedMessage(), ex);
         }
 
     }
