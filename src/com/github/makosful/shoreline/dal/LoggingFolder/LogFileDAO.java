@@ -22,7 +22,7 @@ public class LogFileDAO implements ILog
     @Override
     public void saveLog(ConversionLog conversionLog) throws DALException
     {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("")))
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true)))
         {
             writer.write("------------------------------------------------------");
             writer.newLine();

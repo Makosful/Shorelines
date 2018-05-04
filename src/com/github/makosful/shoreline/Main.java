@@ -2,6 +2,8 @@ package com.github.makosful.shoreline;
 
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.bll.BLLException;
+import com.github.makosful.shoreline.bll.Log;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
 import com.github.makosful.shoreline.gui.model.Cache;
@@ -48,12 +50,11 @@ public class Main extends Application
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
+    public static void main(String[] args) throws BLLException
     {
         launch(args);
         
-
-
+        test();
         
     }
 
@@ -66,6 +67,21 @@ public class Main extends Application
                          getClass().getResource("gui/view/Login.fxml"));
 
         sm.setActiveScene(0);
+    }
+    
+    private static void test() throws BLLException
+    {
+    
+        ObservableList<ConversionLog> log = FXCollections.observableArrayList();
+        ConversionLog c = new ConversionLog();
+        c.setMessage("hej");
+        c.setFileName("filename");
+        c.setUserId(2);
+        c.setLogType("test");
+        log.add(c);
+        
+        Log l = new Log();
+        l.saveLog(log);
     }
 
 }
