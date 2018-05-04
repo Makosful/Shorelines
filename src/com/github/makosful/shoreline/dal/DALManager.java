@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline.dal;
 
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
@@ -52,15 +51,15 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException
+    public void saveConfig(String configName, ObservableList<String> items) throws DALException
     {
         try
         {
             int configId = cDAO.saveConfiguration(configName);
 
-            for (ColumnObject column : items)
+            for (String column : items)
             {
-                cDAO.saveConfigColumns(configId, column);
+                //cDAO.saveConfigColumns(configId, column);
             }
         }
         catch (SQLException ex)

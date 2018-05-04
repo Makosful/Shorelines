@@ -1,19 +1,18 @@
 package com.github.makosful.shoreline.gui.model;
 
 import com.github.makosful.shoreline.Main;
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.controller.MainWindowController;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -33,72 +32,106 @@ public class MainWindowModel
     private final Cache cache;
     private final IBLL bll;
 
+    // Properties
+    private final SimpleStringProperty errorMessage;
+
     // Mock Data
-    ObservableList<ColumnObject> columns;
-    ObservableList<ColumnObject> selectedColumns;
     ObservableList<Config> configs;
+    ObservableList<String> available;
+    ObservableList<String> selected;
 
     public MainWindowModel()
     {
         cache = Cache.getInstance();
         bll = new BLLManager();
 
-        selectedColumns = FXCollections.observableArrayList();
+        errorMessage = new SimpleStringProperty();
     }
 
-    public ObservableList<ColumnObject> getColumnNames() throws BLLException
+    //<editor-fold defaultstate="collapsed" desc="Properties">
+    public SimpleStringProperty getErrorMessageProperty()
+    {
+        return this.errorMessage;
+    }
+    //</editor-fold>
+
+    public ObservableList<String> getAvailableList()
+    {
+        return this.available;
+    }
+
+    public ObservableList<String> getSelectedList()
+    {
+        return this.selected;
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Basic File Handling">
+    public boolean loadFile(String path)
     {
         try
         {
-            columns = FXCollections.observableArrayList(bll.getColumnNames());
+            return bll.loadFile(path);
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessage.setValue(ex.getLocalizedMessage());
+            return false;
         }
-        return columns;
     }
 
-    public List<ExcelRow> getExcelRowsList() throws BLLException
+    /**
+     * Gets the
+     *
+     * @return
+     */
+    public ObservableList<String> getCategories()
     {
         try
         {
-            return bll.getExcelRowsList();
+            return FXCollections.observableArrayList(bll.getHeaders());
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessage.setValue(ex.getLocalizedMessage());
+            return FXCollections.observableArrayList();
+        }
+    }
+
+    public List<Map> getValues()
+    {
+        try
+        {
+            return bll.getValues(null);
+        }
+        catch (BLLException ex)
+        {
+            errorMessage.setValue(ex.getLocalizedMessage());
             return null;
         }
 
     }
+    //</editor-fold>
 
-    public ObservableList<ColumnObject> getSelectedStrings()
+    //<editor-fold defaultstate="collapsed" desc="Convertion">
+    public void queueTask()
     {
-        return selectedColumns;
+        //TODO
     }
 
-    public void convert(String import_dataxlsx, HashMap<String, Integer> cellOrder, boolean conversion)
+    public void executeTasks()
     {
-        try
-        {
-            bll.readFromExcelFile(import_dataxlsx, cellOrder, conversion);
-
-            bll.addTask(getExcelRowsList());
-        }
-        catch (BLLException ex)
-        {
-            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //TODO
     }
+    //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Configs">
     /**
      * Pass the column objects and configname down for storing it in the db
      *
      * @param configName
      * @param items
      */
-    public void saveConfig(String configName, ObservableList<ColumnObject> items)
+    public void saveConfig(String configName, ObservableList<String> items)
     {
         try
         {
@@ -148,13 +181,9 @@ public class MainWindowModel
         }
         return null;
     }
+    //</editor-fold>
 
-    public void logout()
-    {
-        cache.clearUser();
-        cache.changeScene(Scenes.Login.getValue()); // ID 1
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Logging">
     public void openLogWindow()
     {
         try
@@ -172,5 +201,12 @@ public class MainWindowModel
         {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    //</editor-fold>
+
+    public void logout()
+    {
+        cache.clearUser();
+        cache.changeScene(Scenes.Login.getValue()); // ID 1
     }
 }

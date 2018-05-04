@@ -1,8 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.net.URL;
@@ -10,8 +8,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -85,9 +81,9 @@ public class MainWindowController implements Initializable
     //</editor-fold>
 
     @FXML
-    private CheckListView<ColumnObject> chklistSelectData;
+    private CheckListView<String> chklistSelectData;
     @FXML
-    private ListView<ColumnObject> listViewSorted;
+    private ListView<String> listViewSorted;
     @FXML
     private Button btnMoveUp;
     @FXML
@@ -119,7 +115,7 @@ public class MainWindowController implements Initializable
     {
 
         model = new MainWindowModel();
-        cellOrder = new HashMap<String, Integer>();
+        cellOrder = new HashMap();
 
         AddListeners();
         addConfigs();
@@ -141,7 +137,7 @@ public class MainWindowController implements Initializable
             int prevIndex = currentIndex - 1;
 
             // Swaps the two indecies
-            Collections.swap(model.getSelectedStrings(), currentIndex, prevIndex);
+            Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prevIndex);
@@ -165,7 +161,7 @@ public class MainWindowController implements Initializable
             int prev = currentIndex + 1;
 
             // Swaps the two items
-            Collections.swap(model.getSelectedStrings(), currentIndex, prev);
+            Collections.swap(model.getSelectedList(), currentIndex, prev);
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prev);
@@ -182,12 +178,7 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException
     {
         hashMapPut();
-        model.convert("import_data.xlsx", cellOrder, true);
-
-        for (ExcelRow e : model.getExcelRowsList())
-        {
-            System.out.println(e.getSiteName());
-        }
+        //model.convert("import_data.xlsx", cellOrder, true);
     }
 
     /**
@@ -195,8 +186,8 @@ public class MainWindowController implements Initializable
      */
     private void checkIfValidToRelocate()
     {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
-            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedStrings().size())
+        int index = listViewSorted.getSelectionModel().getSelectedIndex();
+        if (index >= 0 && index < model.getSelectedList().size())
         {
             movable = true;
         }
@@ -245,14 +236,19 @@ public class MainWindowController implements Initializable
             disableBtnOnIndex();
         });
 
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c) ->
-        {
-            if (c.next())
-            {
-                model.getSelectedStrings().addAll(c.getAddedSubList());
-                model.getSelectedStrings().removeAll(c.getRemoved());
-            }
-        });
+        chklistSelectData
+                .getCheckModel()
+                .getCheckedItems()
+                .addListener(
+                        (ListChangeListener.Change<? extends String> c)
+                        ->
+                {
+                    if (c.next())
+                    {
+                        model.getSelectedList().addAll(c.getAddedSubList());
+                        model.getSelectedList().removeAll(c.getRemoved());
+                    }
+                });
 
     }
 
@@ -275,7 +271,7 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * HashMap to save the column number of columnObject, and the name of
+     * HashMap to save the column number of columnObject. and the name of
      * the json static label for example "siteName"
      */
     private void hashMapPut()
@@ -288,12 +284,12 @@ public class MainWindowController implements Initializable
             "userStatus", "createdOn", "createdBy", "nameDescription",
             "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
         };
-        List<ColumnObject> listOfStrings = listViewSorted.getItems();
+        List<String> listOfStrings = listViewSorted.getItems();
 
         for (int i = 0; i < listOfStrings.size(); i++)
         {
-            ColumnObject col = listOfStrings.get(i);
-            cellOrder.put(hashmapStrings[i], col.getColumnID());
+            String col = listOfStrings.get(i);
+            //cellOrder.put(hashmapStrings[i], col.getColumnID());
         }
     }
 
@@ -305,20 +301,13 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.convert("import_data.xlsx", cellOrder, false);
-        try
-        {
-            chklistSelectData.setItems(model.getColumnNames());
-        }
-        catch (BLLException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //model.convert("import_data.xlsx", cellOrder, false);
+        chklistSelectData.setItems(model.getCategories());
         AddListeners();
     }
 
     /**
-     * Set up the configurations in combobox, with the setConverter, the objects
+     * Set up the configurations in combobox. with the setConverter, the objects
      * name
      * as string is shown in the comboboc and makes a reference to the object
      * from the string
@@ -340,7 +329,8 @@ public class MainWindowController implements Initializable
             public Config fromString(String configName)
             {
                 return comboBoxConfig.getItems().stream().filter(config
-                        -> config.getName().equals(configName)).findFirst().orElse(null);
+                        -> config.getName().equals(configName)).
+                        findFirst().orElse(null);
             }
         });
 
@@ -356,7 +346,7 @@ public class MainWindowController implements Initializable
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
             Config config = model.getConfig(newConfig.getId());
-            listViewSorted.setItems(config.getChosenColumns());
+            //listViewSorted.setItems(config.getChosenColumns());
 
         });
     }

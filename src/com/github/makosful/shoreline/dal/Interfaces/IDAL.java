@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline.dal.Interfaces;
 
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Exception.DALException;
@@ -39,7 +38,7 @@ public interface IDAL
 
     public String[] getPassword() throws DALException;
 
-    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException;
+    public void saveConfig(String configName, ObservableList<String> items) throws DALException;
 
     public void jsonAdd(Map jsonObj) throws DALException;
 

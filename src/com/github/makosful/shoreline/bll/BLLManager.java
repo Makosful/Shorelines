@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline.bll;
 
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.DALManager;
@@ -73,7 +72,7 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException
+    public void saveConfig(String configName, ObservableList<String> items) throws BLLException
     {
         try
         {
