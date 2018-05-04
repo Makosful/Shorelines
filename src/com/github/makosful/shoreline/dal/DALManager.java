@@ -140,6 +140,7 @@ public class DALManager implements IDAL
         }
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Excel">
     @Override
     public boolean excelLoad(String path) throws DALException
     {
@@ -178,4 +179,25 @@ public class DALManager implements IDAL
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="JSON">
+    @Override
+    public boolean jsonLoad(String path) throws DALException
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<String> jsonGetHeader() throws DALException
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Map> jsonGetValues(Map<String, String> keys) throws DALException
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    //</editor-fold>
 }

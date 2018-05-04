@@ -3,8 +3,8 @@ package com.github.makosful.shoreline.bll;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.collections.ObservableList;
 
 /**
@@ -19,18 +19,18 @@ import javafx.collections.ObservableList;
 public interface IBLL
 {
 
-    public void readFromExcelFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws BLLException;
+    public boolean loadFile(String path) throws BLLException;
 
-    public List<ExcelRow> getExcelRowsList() throws BLLException;
+    public List<String> getHeaders() throws BLLException;
 
-    public List<ColumnObject> getColumnNames() throws BLLException;
+    public List<Map> getValues(Map<String, String> keys) throws BLLException;
 
     public void saveConfig(String configName, ObservableList<ColumnObject> items) throws BLLException;
 
     public void addTask(List<ExcelRow> excelRowsList) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
-    
+
     public void savePassword(String userName, String password) throws BLLException;
 
     public String[] getPassword() throws BLLException;

@@ -19,12 +19,21 @@ import javafx.collections.ObservableList;
 public interface IDAL
 {
 
-    //<editor-fold defaultstate="collapsed" desc="comment">
+    //<editor-fold defaultstate="collapsed" desc="Excel">
     public boolean excelLoad(String path) throws DALException;
 
     public List<String> excelGetHeader() throws DALException;
 
     public List<Map> excelGetValues(Map<String, String> keys) throws DALException;
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="JSON">
+    public boolean jsonLoad(String path) throws DALException;
+
+    public List<String> jsonGetHeader() throws DALException;
+
+    public List<Map> jsonGetValues(Map<String, String> keys) throws DALException;
+    //</editor-fold>
 
     public void savePassword(String userName, String password) throws DALException;
 
