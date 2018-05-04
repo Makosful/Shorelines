@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
+import java.io.File;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -301,7 +303,9 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
-        //model.convert("import_data.xlsx", cellOrder, false);
+        FileChooser fc = new FileChooser();
+        File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+        model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
     }
