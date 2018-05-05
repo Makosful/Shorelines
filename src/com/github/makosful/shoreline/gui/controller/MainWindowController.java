@@ -123,6 +123,7 @@ public class MainWindowController implements Initializable
 
         AddListeners();
         addConfigs();
+        addConfigListener();
     }
 
     /**
@@ -213,7 +214,7 @@ public class MainWindowController implements Initializable
                 model.getSelectedList().removeAll(c.getRemoved());
             }
         });
-
+        
     }
 
     @FXML
@@ -355,8 +356,6 @@ public class MainWindowController implements Initializable
             }
         });
 
-        addConfigListener();
-
     }
 
     /**
@@ -366,14 +365,13 @@ public class MainWindowController implements Initializable
     {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
-            if(newConfig.getName().equals("No config"))
-            {
+            if(newConfig != null){
                 chklistSelectData.getCheckModel().clearChecks();
-            }
-            else
-            {
-                for(ColumnObject c : newConfig.getChosenColumns()){
-                    chklistSelectData.getCheckModel().check(c.getColumnID());
+                if(!newConfig.getName().equals("No config"))
+                {
+                    for(ColumnObject c : newConfig.getChosenColumns()){
+                        chklistSelectData.getCheckModel().check(c.getColumnID());
+                    }
                 }
             }
         });
@@ -385,6 +383,7 @@ public class MainWindowController implements Initializable
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
         comboBoxConfig.getItems().clear();
         addConfigs();
+        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size()-1);
     }
 
     @FXML
