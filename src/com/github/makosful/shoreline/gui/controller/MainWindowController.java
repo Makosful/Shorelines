@@ -334,6 +334,9 @@ public class MainWindowController implements Initializable
     private void addConfigs()
     {
         ObservableList<Config> configs = model.getAllConfigs();
+        Config c = new Config();
+        c.setName("No config");
+        comboBoxConfig.getItems().add(c);
         comboBoxConfig.getItems().addAll(configs);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
@@ -363,9 +366,16 @@ public class MainWindowController implements Initializable
     {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
-            Config config = model.getConfig(newConfig.getId());
-            listViewSorted.setItems(config.getChosenColumns());
-
+            if(newConfig.getName().equals("No config"))
+            {
+                chklistSelectData.getCheckModel().clearChecks();
+            }
+            else
+            {
+                for(ColumnObject c : newConfig.getChosenColumns()){
+                    chklistSelectData.getCheckModel().check(c.getColumnID());
+                }
+            }
         });
     }
 

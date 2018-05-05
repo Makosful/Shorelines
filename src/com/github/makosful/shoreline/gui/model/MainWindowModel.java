@@ -110,25 +110,6 @@ public class MainWindowModel
         }
     }
 
-    /**
-     * Select a specific config from the observable list based on the selected
-     * id
-     *
-     * @param id
-     *
-     * @return
-     */
-    public Config getConfig(int id)
-    {
-        for (Config config : configs)
-        {
-            if (config.getId() == id)
-            {
-                return config;
-            }
-        }
-        return null;
-    }
 
     /**
      * Call down to the db for retrieving the configs
