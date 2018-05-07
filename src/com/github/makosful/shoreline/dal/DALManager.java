@@ -34,8 +34,7 @@ public class DALManager implements IDAL
 {
 
     private JsonWriter jWriter;
-    private IReader jReader;
-    private IReader excel;
+    private IReader reader;
 
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
@@ -45,7 +44,9 @@ public class DALManager implements IDAL
     {
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
-        jReader = new JsonReader();
+
+        reader = new JsonReader();
+
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
     }
@@ -56,7 +57,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return jReader.loadFile(path);
+            return reader.loadFile(path);
         }
         catch (ReaderException ex)
         {
@@ -69,7 +70,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return jReader.getHeaders();
+            return reader.getHeaders();
         }
         catch (ReaderException ex)
         {
@@ -82,7 +83,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return jReader.getValues(keys);
+            return reader.getValues(keys);
         }
         catch (ReaderException ex)
         {
