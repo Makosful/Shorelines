@@ -5,7 +5,7 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
-import java.io.File;
+import com.github.makosful.shoreline.gui.model.HelpWindowModel;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import com.github.makosful.shoreline.gui.model.HelpWindowModel;
 
 /**
  * FXML Controller class
@@ -31,18 +28,21 @@ public class HelpWindowController implements Initializable
 
     private HelpWindowModel model;
     private final List<Image> images = new ArrayList<>();
+    private final List<String> imageList = new ArrayList<>();
     private int imageIdx = 0;
 
     @FXML
-    private AnchorPane anchorPane;
+    private Button btnPrevImg;
     @FXML
-    private Button btnPrevPic;
-    @FXML
-    private Label lblInstructions;
+    private Button btnNextImg;
+
     @FXML
     private ImageView imageView;
+
     @FXML
-    private Button btnNextPic;
+    private Label lblCurrentImage;
+    @FXML
+    private Label lblInstructions;
 
     /**
      * Initializes the controller class.
@@ -50,23 +50,27 @@ public class HelpWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        SetImages();
+//        Image img1 = new Image("./res/instruction1.png");
+//        Image img2 = new Image("./res/instruction2.png");
+//        Image img3 = new Image("./res/instruction3.png");
+//        Image img4 = new Image("./res/instruction4.png");
+//        Image img5 = new Image("./res/instruction5.png");
+//
+//        imageList.add(img1.toString());
+//        imageList.add(img2.toString());
+//        imageList.add(img3.toString());
+//        imageList.add(img4.toString());
+//        imageList.add(img5.toString());
 
-        File file = new File("./res/logo.png");
-        Stage stage = new Stage();
+        model = new HelpWindowModel();
 
-        Image icon = new Image(file.toURI().toString());
-        stage.getIcons().add(icon);
-
-    }
-
-    private void SetImages()
-    {
-        model.getImages();
+//        getImages();
+//
+//        displayImage();
     }
 
     @FXML
-    private void handlePreviousPicture(ActionEvent event)
+    private void handlePreviousImage(ActionEvent event)
     {
         if (images.size() > 0)
         {
@@ -76,7 +80,7 @@ public class HelpWindowController implements Initializable
     }
 
     @FXML
-    private void handleNextPicture(ActionEvent event)
+    private void handleNextImage(ActionEvent event)
     {
         if (!images.isEmpty())
         {
@@ -93,4 +97,13 @@ public class HelpWindowController implements Initializable
         }
     }
 
+    private void getImages()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            images.add(new Image(imageList.toString()));
+            System.out.println(imageList);
+        }
+//        model.createImages();
+    }
 }
