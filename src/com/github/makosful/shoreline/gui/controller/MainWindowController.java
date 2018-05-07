@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
@@ -287,11 +288,13 @@ public class MainWindowController implements Initializable
      */
     private void hashMapPut()
     {
+        try
+        {
         // Clearing hashMap.
         cellOrder.clear();
         String[] hashmapStrings = new String[]
         {
-            "siteName", "assetSerialNumber", "orderType", "workerOrderId", "systemStatus",
+            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
             "userStatus", "createdOn", "createdBy", "nameDescription",
             "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
         };
@@ -301,6 +304,11 @@ public class MainWindowController implements Initializable
         {
             String col = listOfStrings.get(i);
             //cellOrder.put(hashmapStrings[i], col.getColumnID());
+        }
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            
         }
     }
 
@@ -357,6 +365,8 @@ public class MainWindowController implements Initializable
      */
     private void addConfigListener()
     {
+        try
+        {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
 
@@ -374,6 +384,14 @@ public class MainWindowController implements Initializable
                 }
             }
         });
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Config Error");
+            alert.setContentText("Failed to select amount of columns /n, "
+                    + " are you sure you've selected the correct config? ");
+        }
     }
 
     @FXML

@@ -5,12 +5,16 @@ import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -24,7 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelReader implements IReader
 {
-
+    
     private Sheet sheet;
 
     //<editor-fold defaultstate="collapsed" desc="File Load">
@@ -44,7 +48,7 @@ public class ExcelReader implements IReader
             throw new ReaderException("Unsupported file format");
         }
     }
-
+    
     private boolean loadXls(String path) throws ReaderException
     {
         try
@@ -53,7 +57,7 @@ public class ExcelReader implements IReader
             POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(path));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             HSSFSheet s = wb.getSheetAt(0);
-
+            
             this.sheet = s;
             return true;
         }
@@ -61,9 +65,9 @@ public class ExcelReader implements IReader
         {
             throw new ReaderException(ex.getLocalizedMessage(), ex);
         }
-
+        
     }
-
+    
     private boolean loadXlsX(String path) throws ReaderException
     {
         try
@@ -73,7 +77,7 @@ public class ExcelReader implements IReader
                     new FileInputStream(path));
             XSSFWorkbook wb = new XSSFWorkbook(fs);
             XSSFSheet s = wb.getSheetAt(0);
-
+            
             this.sheet = s;
             return true;
         }
@@ -88,13 +92,13 @@ public class ExcelReader implements IReader
     public List<String> getHeaders()
     {
         List<String> list = new ArrayList<>();
-
+        
         Row row; // Generic row
         Cell cell; // Generic cell
 
         int rows; // No of rows
         rows = sheet.getPhysicalNumberOfRows();
-
+        
         int cols = 0; // No of columns
         int tmp;
 
@@ -132,7 +136,7 @@ public class ExcelReader implements IReader
 
         return list;
     }
-
+    
     @Override
     public List<Map> getValues(Map<String, String> keys) throws ReaderException
     {
@@ -146,13 +150,13 @@ public class ExcelReader implements IReader
 
         List<Map> list = new ArrayList();
         Map<String, Integer> headers = new HashMap();
-
+        
         Row row; // Generic row
         Cell cell; // Generic cell
 
         int rows; // No of rows
         rows = sheet.getPhysicalNumberOfRows();
-
+        
         int cols = 0; // No of columns
         int tmp;
 
@@ -202,7 +206,7 @@ public class ExcelReader implements IReader
                 for (Entry<String, String> entry : keys.entrySet())
                 {
                     Cell c = sheet.getRow(i).getCell(headers.get(entry.getValue()));
-                    map.put(entry.getKey(), c.getStringCellValue());
+                    map.put(entry.getKey(), getValueAsString(c));
                 }
                 list.add(map);
             }
@@ -210,5 +214,23 @@ public class ExcelReader implements IReader
         //</editor-fold>
 
         return list;
+    }
+    /**
+     * Gets the value out of the cell as a string.
+     * @param cell
+     * @return 
+     */
+    public String getValueAsString(Cell cell)
+    {
+        String cellValue;
+        if (cell.getCellTypeEnum() == CellType.NUMERIC)
+        {
+            cellValue = String.valueOf(cell.getNumericCellValue());
+        }
+        else
+        {
+            return cell.getStringCellValue();
+        }
+        return cellValue;
     }
 }

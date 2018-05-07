@@ -1,10 +1,11 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import com.github.makosful.shoreline.dal.Interfaces.IReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -66,7 +67,7 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void addTask(List<ExcelRow> list)
+    public void addTask(List<HashMap> list)
     {
         tasks.addTask(list);
     }

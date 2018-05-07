@@ -1,9 +1,10 @@
 package com.github.makosful.shoreline.bll;
 
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import com.github.makosful.shoreline.dal.Interfaces.IReader;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class TaskManager
         dal = new DALManager();
     }
 
-    public void addTask(List<ExcelRow> list)
+    public void addTask(List<HashMap> list)
     {
         ExecutorService executor = Executors.newCachedThreadPool();
 
@@ -37,30 +38,8 @@ public class TaskManager
             {
                 try
                 {
-                    for (ExcelRow row : list)
+                    for (HashMap map : list )
                     {
-                        Map map = new LinkedHashMap();
-                        Map planning = new LinkedHashMap();
-
-                        map.put("siteName", row.getSiteName());
-                        map.put("assetSerialNumber", row.getAssetSerialNumber());
-                        map.put("type", row.getOrderType());
-                        map.put("externalWorkOrderId", row.getWorkOrderId());
-                        map.put("systemStatus", row.getSystemStatus());
-                        map.put("userStatus", row.getUserStatus());
-                        map.put("createdOn", row.getCreatedOn());
-                        map.put("createdBy", row.getCreatedBy());
-                        map.put("name", row.getNameDescription());
-                        map.put("priority", row.getPriority());
-                        map.put("status", row.getStatus());
-
-                        planning.put("latestFinishDate", row.getLfDate());
-                        planning.put("earliestStartDate", row.getEsDate());
-                        planning.put("latestStartDate", row.getLsDate());
-                        planning.put("estimatedTime", row.getEsTime());
-
-                        map.put("planning", planning);
-
                         dal.jsonAdd(map);
                     }
                     dal.jsonWrite();
