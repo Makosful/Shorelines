@@ -1,13 +1,15 @@
 package com.github.makosful.shoreline.dal.Excel;
 
-import com.github.makosful.shoreline.be.ColumnObject;
-import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.Exception.ReaderException;
+import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -23,94 +25,85 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author Axl
  */
-public class ExcelReader
+public class ExcelReader implements IReader
 {
 
-    private List<ExcelRow> excelRows;
-    private List<Cell> cells;
-    private final ExcelRowCreation excelRowCreation;
-    private final List<ColumnObject> columnNames;
-    
-    private Cell cell;
+    private Sheet sheet;
 
-    public ExcelReader()
+    //<editor-fold defaultstate="collapsed" desc="File Load">
+    @Override
+    public boolean loadFile(String path) throws ReaderException
     {
-        excelRowCreation = new ExcelRowCreation();
-        excelRows = new ArrayList();
-        columnNames = new ArrayList();
-        excelRows = new ArrayList();
+        if (path.endsWith(".xls"))
+        {
+            return loadXls(path);
+        }
+        else if (path.endsWith(".xlsx"))
+        {
+            return loadXlsX(path);
+        }
+        else
+        {
+            throw new ReaderException("Unsupported file format");
+        }
     }
 
-    /**
-     * Simply reads an XLS file and prints out the cell adress of every item
-     * TODO: Make it return useable data
-     *
-     * @param file The XLS file path to read as String
-     *
-     * @throws java.io.IOException
-     */
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException, Exception
+    private boolean loadXls(String path) throws ReaderException
     {
-        // Set up
-        POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(file));
-        HSSFWorkbook wb = new HSSFWorkbook(fs);
-        HSSFSheet sheet = wb.getSheetAt(0);
-
         try
         {
-            readExcelSheet(sheet, cellOrder, conversion);
+            // Set up
+            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(path));
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            HSSFSheet s = wb.getSheetAt(0);
+
+            this.sheet = s;
+            return true;
         }
-        catch (Exception ex)
+        catch (IOException ex)
         {
-            throw new Exception(ex.getMessage());
+            throw new ReaderException(ex.getLocalizedMessage(), ex);
         }
+
     }
 
-    /**
-     * Simply reads XLSX files and prints out the cell adress
-     * TODO: Make it return usable data
-     *
-     * @param file The XLSX file path to read as String 
-     *
-     * @throws IOException
-     */
-    public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException, Exception
+    private boolean loadXlsX(String path) throws ReaderException
     {
-        // Set up
-        XSSFWorkbook wb = new XSSFWorkbook(
-                new BufferedInputStream(
-                        new FileInputStream(file)));
-        XSSFSheet sheet = wb.getSheetAt(0);
-
         try
         {
-            readExcelSheet(sheet, cellOrder, conversion);
+            // Set up
+            BufferedInputStream fs = new BufferedInputStream(
+                    new FileInputStream(path));
+            XSSFWorkbook wb = new XSSFWorkbook(fs);
+            XSSFSheet s = wb.getSheetAt(0);
+
+            this.sheet = s;
+            return true;
         }
-        catch (Exception ex)
+        catch (IOException ex)
         {
-            throw new Exception(ex.getMessage());
+            throw new ReaderException(ex.getLocalizedMessage(), ex);
         }
     }
+    //</editor-fold>
 
-    /**
-     * Modualized reading of Excel files
-     *
-     * @param sheet An object implimenting the Sheet interface from ss.usermodel
-     */
-    private void readExcelSheet(Sheet sheet, HashMap<String, Integer> cellOrder, boolean conversion) throws Exception
+    @Override
+    public List<String> getHeaders()
     {
-        excelRows.clear();
-        columnNames.clear();
-        Row row;
-        int rows; // Number of rows
-        // +1 So it takes last row along, pga. nul indeksering.
-        rows = sheet.getPhysicalNumberOfRows() + 1;
+        List<String> list = new ArrayList<>();
 
-        int cols = 0; // Number of columns
+        Row row; // Generic row
+        Cell cell; // Generic cell
+
+        int rows; // No of rows
+        rows = sheet.getPhysicalNumberOfRows();
+
+        int cols = 0; // No of columns
         int tmp;
 
-        // Scans the first few rows in case the data starts lower
-        for (int i = 0; i < 10; i++)
+        // Reads a few lines down to find some data
+        //<editor-fold defaultstate="collapsed" desc="For Loop">
+        for (int i = 0; i < 10 || i < rows; i++)
         {
             row = sheet.getRow(i);
             if (row != null)
@@ -122,79 +115,103 @@ public class ExcelReader
                 }
             }
         }
+        //</editor-fold>
 
-        // The core loop that goes through every cell
-        for (int r = 0; r < rows; r++)
+        // The handling of each cell
+        //<editor-fold defaultstate="collapsed" desc="For Loop">
+        row = sheet.getRow(0);
+        if (row != null)
         {
-            row = sheet.getRow(r);
-            if (row != null)
+            for (int c = 0; c < cols; c++)
             {
-                cells = new ArrayList();
-                for (int c = 0; c < cols; c++)
+                cell = row.getCell((short) c);
+                if (cell != null)
                 {
-                    cell = row.getCell((short) c);
-                    if (cell != null)
-                    {
-
-                        if (r == 0)
-                        {
-
-                            ColumnObject col = new ColumnObject(getStringValue(), cell.getColumnIndex());
-                            columnNames.add(col);
-                        }
-                        else
-                        {
-                            cells.add(cell);
-                        }
-                    }
-                }
-                if (!cells.isEmpty() && conversion)
-                {
-                    try
-                    {
-                        excelCreation(cellOrder);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.getMessage());
-                    }
+                    list.add(cell.getStringCellValue());
                 }
             }
         }
-    }
-    /**
-     * Creates excelRow Objects - holds information about a single excel row.
-     * Uses HashMap to know which variables are supposed to hold specific columns
-     * in specific row.
-     * @param cellOrder 
-     */
-    private void excelCreation(HashMap<String, Integer> cellOrder) throws Exception
-    {
-        try
-        {
-            ExcelRow excelRow = excelRowCreation.ExcelCreation(cellOrder, cells);
-            excelRows.add(excelRow);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.getMessage());
-        }
-    }
-    // Excel Row objects.
-    public List<ExcelRow> getExcelRowsList()
-    {
-        return excelRows;
-    }
-    // Column names - for example Country.
-    public List<ColumnObject> getColumnNames()
-    {
-        return columnNames;
-    }
-    
-    public String getStringValue()
-    {
-       return excelRowCreation.getStringValue(cell);
-    }
-    
+        //</editor-fold>
 
+        return list;
+    }
+
+    @Override
+    public List<Map> getValues(Map<String, String> keys) throws ReaderException
+    {
+        //<editor-fold defaultstate="collapsed" desc="State Handling">
+        if (sheet == null)
+        {
+            String s = "File must be loaded before calling this method";
+            throw new ReaderException(s);
+        }
+        //</editor-fold>
+
+        List<Map> list = new ArrayList();
+        Map<String, Integer> headers = new HashMap();
+
+        Row row; // Generic row
+        Cell cell; // Generic cell
+
+        int rows; // No of rows
+        rows = sheet.getPhysicalNumberOfRows();
+
+        int cols = 0; // No of columns
+        int tmp;
+
+        // Reads a few lines down to find some data
+        //<editor-fold defaultstate="collapsed" desc="For Loop">
+        for (int i = 0; i < 10 || i < rows; i++)
+        {
+            row = sheet.getRow(i);
+            if (row != null)
+            {
+                tmp = sheet.getRow(i).getPhysicalNumberOfCells();
+                if (tmp > cols)
+                {
+                    cols = tmp;
+                }
+            }
+        }
+        //</editor-fold>
+
+        // Getting the headers
+        //<editor-fold defaultstate="collapsed" desc="For Loop">
+        row = sheet.getRow(0);
+        if (row != null)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                cell = row.getCell((short) c);
+                if (cell != null)
+                {
+                    headers.put(
+                            cell.getStringCellValue(),
+                            cell.getAddress().getColumn()
+                    );
+                }
+            }
+        }
+        //</editor-fold>
+
+        // The handling of each cell
+        //<editor-fold defaultstate="collapsed" desc="For Loop">
+        for (int i = 0; i < rows; i++)
+        {
+            row = sheet.getRow(i);
+            if (row != null)
+            {
+                Map<String, String> map = new LinkedHashMap();
+                for (Entry<String, String> entry : keys.entrySet())
+                {
+                    Cell c = sheet.getRow(i).getCell(headers.get(entry.getValue()));
+                    map.put(entry.getKey(), c.getStringCellValue());
+                }
+                list.add(map);
+            }
+        }
+        //</editor-fold>
+
+        return list;
+    }
 }

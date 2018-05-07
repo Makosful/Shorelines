@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.dal;
 
+import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.LinkedHashMap;

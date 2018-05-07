@@ -1,4 +1,4 @@
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Json;
 
 import java.io.*;
 import java.util.Map;
@@ -9,7 +9,6 @@ import org.json.simple.JSONArray;
  * create a new class
  *
  * @author Axl
- * @param <T>
  */
 public class JsonWriter
 {

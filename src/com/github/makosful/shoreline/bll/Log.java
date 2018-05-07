@@ -6,9 +6,9 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.dal.DALException;
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.DALManager;
-import com.github.makosful.shoreline.dal.IDAL;
+import com.github.makosful.shoreline.dal.Interfaces.IDAL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;

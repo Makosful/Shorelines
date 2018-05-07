@@ -1,26 +1,34 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -85,9 +93,9 @@ public class MainWindowController implements Initializable
     //</editor-fold>
 
     @FXML
-    private CheckListView<ColumnObject> chklistSelectData;
+    private CheckListView<String> chklistSelectData;
     @FXML
-    private ListView<ColumnObject> listViewSorted;
+    private ListView<String> listViewSorted;
     @FXML
     private Button btnMoveUp;
     @FXML
@@ -107,6 +115,8 @@ public class MainWindowController implements Initializable
     private ComboBox<Config> comboBoxConfig;
     @FXML
     private TextField txtFieldConfig;
+    @FXML
+    private MenuItem menuItemInstructions;
 
     /**
      * Initializes the controller class.
@@ -119,120 +129,10 @@ public class MainWindowController implements Initializable
     {
 
         model = new MainWindowModel();
-        cellOrder = new HashMap<String, Integer>();
+        cellOrder = new HashMap();
 
         AddListeners();
         addConfigs();
-        addConfigListener();
-    }
-
-    /**
-     * TODO
-     *
-     * @param event FXML Parameter
-     */
-    @FXML
-    private void handleConversion(ActionEvent event) throws BLLException
-    {
-        hashMapPut();
-        model.convert("import_data.xlsx", cellOrder, true);
-
-        for (ExcelRow e : model.getExcelRowsList())
-        {
-            System.out.println(e.getSiteName());
-        }
-    }
-
-    /**
-     * Checks if the selected item is moveable
-     */
-    private void checkIfValidToRelocate()
-    {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
-            && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedList().size())
-        {
-            movable = true;
-        }
-        else
-        {
-            movable = false;
-        }
-    }
-
-    /**
-     * Handles the disabling and reenabling of the Up/Down butons
-     */
-    private void disableBtnOnIndex()
-    {
-        if (listViewSorted.getSelectionModel().getSelectedIndex() == 0)
-        {
-            btnMoveUp.setDisable(true);
-        }
-        else
-        {
-            btnMoveUp.setDisable(false);
-        }
-
-        if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1)
-        {
-            btnMoveDown.setDisable(true);
-        }
-        else
-        {
-            btnMoveDown.setDisable(false);
-        }
-    }
-
-    /**
-     * Adds listeners to the the View
-     */
-    private void AddListeners()
-    {
-
-        listViewSorted.setItems(model.getSelectedList());
-
-        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
-        {
-            checkIfValidToRelocate();
-
-            disableBtnOnIndex();
-        });
-
-        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends ColumnObject> c) ->
-        {
-            if (c.next())
-            {
-
-                for (ColumnObject co : c.getAddedSubList())
-                {
-                    if (!model.getSelectedList().contains(co))
-                    {
-                        model.getSelectedList().add(co);
-                    }
-                }
-//                model.getSelectedList().addAll(c.getAddedSubList());
-                model.getSelectedList().removeAll(c.getRemoved());
-            }
-        });
-        
-    }
-
-    @FXML
-    private void handleChecklistItemsStatus(ActionEvent event)
-    {
-        if (!isChecked)
-        {
-            chklistSelectData.getCheckModel().checkAll();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Check all");
-
-        }
-        else if (isChecked)
-        {
-            chklistSelectData.getCheckModel().clearChecks();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Uncheck all");
-        }
     }
 
     /**
@@ -281,6 +181,104 @@ public class MainWindowController implements Initializable
             listViewSorted.getSelectionModel().select(prev);
             listViewSorted.requestFocus();
         }
+        addConfigListener();
+    }
+
+    /**
+     * TODO
+     *
+     * @param event FXML Parameter
+     */
+    @FXML
+    private void handleConversion(ActionEvent event) throws BLLException
+    {
+        hashMapPut();
+        //model.convert("import_data.xlsx", cellOrder, true);
+    }
+
+    /**
+     * Checks if the selected item is moveable
+     */
+    private void checkIfValidToRelocate()
+    {
+        int index = listViewSorted.getSelectionModel().getSelectedIndex();
+        if (index >= 0 && index < model.getSelectedList().size())
+        {
+            movable = true;
+        }
+        else
+        {
+            movable = false;
+        }
+    }
+
+    /**
+     * Handles the disabling and reenabling of the Up/Down butons
+     */
+    private void disableBtnOnIndex()
+    {
+        if (listViewSorted.getSelectionModel().getSelectedIndex() == 0)
+        {
+            btnMoveUp.setDisable(true);
+        }
+        else
+        {
+            btnMoveUp.setDisable(false);
+        }
+
+        if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1)
+        {
+            btnMoveDown.setDisable(true);
+        }
+        else
+        {
+            btnMoveDown.setDisable(false);
+        }
+    }
+
+    /**
+     * Adds listeners to the the View
+     */
+    private void AddListeners()
+    {
+
+        listViewSorted.setItems(model.getSelectedList());
+
+        listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
+        {
+            checkIfValidToRelocate();
+            disableBtnOnIndex();
+        });
+
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
+        {
+            for (String s : c.getAddedSubList())
+            {
+                if (!model.getSelectedList().contains(s))
+                {
+                    model.getSelectedList().add(s);
+                }
+            }
+            model.getSelectedList().removeAll(c.getRemoved());
+        });
+    }
+
+    @FXML
+    private void handleChecklistItemsStatus(ActionEvent event)
+    {
+        if (!isChecked)
+        {
+            chklistSelectData.getCheckModel().checkAll();
+            isChecked = !isChecked;
+            btnChecklistCheck.setText("Check all");
+
+        }
+        else if (isChecked)
+        {
+            chklistSelectData.getCheckModel().clearChecks();
+            isChecked = !isChecked;
+            btnChecklistCheck.setText("Uncheck all");
+        }
     }
 
     /**
@@ -299,12 +297,12 @@ public class MainWindowController implements Initializable
             "userStatus", "createdOn", "createdBy", "nameDescription",
             "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
         };
-        List<ColumnObject> listOfStrings = listViewSorted.getItems();
+        List<String> listOfStrings = listViewSorted.getItems();
 
         for (int i = 0; i < listOfStrings.size(); i++)
         {
-            ColumnObject col = listOfStrings.get(i);
-            cellOrder.put(hashmapStrings[i], col.getColumnID());
+            String col = listOfStrings.get(i);
+            //cellOrder.put(hashmapStrings[i], col.getColumnID());
         }
         }
         catch(IndexOutOfBoundsException e)
@@ -321,20 +319,15 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.convert("import_data.xlsx", cellOrder, false);
-        try
-        {
-            chklistSelectData.setItems(model.getColumnNames());
-        }
-        catch (BLLException ex)
-        {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        FileChooser fc = new FileChooser();
+        File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+        model.loadFile(file.getAbsolutePath());
+        chklistSelectData.setItems(model.getCategories());
         AddListeners();
     }
 
     /**
-     * Set up the configurations in combobox, with the setConverter, the objects
+     * Set up the configurations in combobox. with the setConverter, the objects
      * name
      * as string is shown in the comboboc and makes a reference to the object
      * from the string
@@ -359,7 +352,8 @@ public class MainWindowController implements Initializable
             public Config fromString(String configName)
             {
                 return comboBoxConfig.getItems().stream().filter(config
-                        -> config.getName().equals(configName)).findFirst().orElse(null);
+                        -> config.getName().equals(configName)).
+                        findFirst().orElse(null);
             }
         });
 
@@ -372,11 +366,16 @@ public class MainWindowController implements Initializable
     {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
-            if(newConfig != null){
+
+            Config config = model.getConfig(newConfig.getId());
+            //listViewSorted.setItems(config.getChosenColumns());
+            if (newConfig != null)
+            {
                 chklistSelectData.getCheckModel().clearChecks();
-                if(!newConfig.getName().equals("No config"))
+                if (!newConfig.getName().equals("No config"))
                 {
-                    for(ColumnObject c : newConfig.getChosenColumns()){
+                    for (ColumnObject c : newConfig.getChosenColumns())
+                    {
                         chklistSelectData.getCheckModel().check(c.getColumnID());
                     }
                 }
@@ -390,7 +389,7 @@ public class MainWindowController implements Initializable
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
         comboBoxConfig.getItems().clear();
         addConfigs();
-        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size()-1);
+        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
     }
 
     @FXML
@@ -403,5 +402,28 @@ public class MainWindowController implements Initializable
     private void handleOpenLog(ActionEvent event)
     {
         model.openLogWindow();
+    }
+
+    @FXML
+    private void handleShowInstructionsWindow(ActionEvent event)
+    {
+        try
+        {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Shoreline | Instructions");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            System.out.println("failed to open window");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error opening the window");
+            alert.setContentText(ex.getMessage());
+            alert.show();
+        }
     }
 }

@@ -27,11 +27,11 @@ public class LoginController implements Initializable
     @FXML
     private PasswordField txtFieldPassword;
     @FXML
+    private CheckBox checkBoxRememberMe;
+    @FXML
     private Button btnLogin;
     @FXML
     private Button btnForgotPassword;
-    @FXML
-    private CheckBox checkBoxRememberMe;
 
     /**
      * Initializes the controller class.
@@ -83,4 +83,5 @@ public class LoginController implements Initializable
 
         }
     }
+
 }

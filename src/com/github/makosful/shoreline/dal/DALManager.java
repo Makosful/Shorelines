@@ -1,10 +1,14 @@
 package com.github.makosful.shoreline.dal;
 
-import com.github.makosful.shoreline.dal.Excel.ExcelReader;
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.Database.ConfigDAO;
+import com.github.makosful.shoreline.dal.Exception.DALException;
+import com.github.makosful.shoreline.dal.Exception.ReaderException;
+import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import com.github.makosful.shoreline.dal.Interfaces.IReader;
+import com.github.makosful.shoreline.dal.Json.JsonReader;
+import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogContext;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogFileDAO;
@@ -12,14 +16,9 @@ import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import javafx.collections.ObservableList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
+import javafx.collections.ObservableList;
 
 /**
  * A facade for the Data Access Layer as a whole.
@@ -34,88 +33,65 @@ import java.util.logging.Logger;
 public class DALManager implements IDAL
 {
 
+    private JsonWriter jWriter;
+    private IReader jReader;
+    private IReader excel;
 
-    private final JsonWriter jWriter;
-    private final StoreLogIn storeLogIn;
-    private final ConfigDAO cDAO;
-    private final LogDBDAO lDAO;
-    private final ExcelReaderAdapter excelReader;
+    private StoreLogIn storeLogIn;
+    private ConfigDAO cDAO;
+    private LogDBDAO lDAO;
+
     public DALManager()
     {
-        excelReader = new ExcelReaderAdapter(new ExcelReader());
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
+        jReader = new JsonReader();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Core File In">
     @Override
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
-    {
-        excelReader.readFile(file, cellOrder, conversion);
-    }
-
-    @Override
-    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
-    {
-        excelReader.readFile(file, cellOrder, conversion);
-    }
-
-    @Override
-    public List<ExcelRow> getExcelRowsList()
-    {
-        return excelReader.getRowList();
-    }
-
-    @Override
-    public List<ColumnObject> getColumnNames()
-    {
-        return excelReader.getColumnNames();
-    }
-
-    @Override
-    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException
+    public boolean fileLoad(String path) throws DALException
     {
         try
         {
-            int configId = cDAO.saveConfiguration(configName);
-            
-            for(ColumnObject column : items){
-                cDAO.saveConfigColumns(configId, column);
-            }
+            return jReader.loadFile(path);
         }
-        catch (SQLException ex)
+        catch (ReaderException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+
     @Override
-    public void savePassword(String userName, String password) throws DALException
+    public List<String> fileGetHeader() throws DALException
     {
         try
         {
-            storeLogIn.savePassword(userName, password);
+            return jReader.getHeaders();
         }
-        catch (IOException ex)
+        catch (ReaderException ex)
         {
-            throw new DALException("Error writing file");
+            throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
+
     @Override
-    public String[] getPassword() throws DALException
+    public List<Map> fileGetValues(Map<String, String> keys) throws DALException
     {
         try
         {
-            return storeLogIn.getPassword();
+            return jReader.getValues(keys);
         }
-        catch (FileNotFoundException ex)
+        catch (ReaderException ex)
         {
-            throw new DALException("Error with password.txt");
+            throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
-    
-    
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Core File Out">
     @Override
     public void jsonAdd(Map jsonObj) throws DALException
     {
@@ -134,6 +110,26 @@ public class DALManager implements IDAL
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Config">
+    @Override
+    public void saveConfig(String configName, ObservableList<String> items) throws DALException
+    {
+        try
+        {
+            int configId = cDAO.saveConfiguration(configName);
+
+            for (String column : items)
+            {
+                //cDAO.saveConfigColumns(configId, column);
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
 
     @Override
     public ObservableList<Config> getAllConfigs() throws DALException
@@ -148,6 +144,36 @@ public class DALManager implements IDAL
         }
     }
 
+
+    //<editor-fold defaultstate="collapsed" desc="Password">
+    @Override
+    public void savePassword(String userName, String password) throws DALException
+    {
+        try
+        {
+            storeLogIn.savePassword(userName, password);
+        }
+        catch (IOException ex)
+        {
+            throw new DALException("Error writing file");
+        }
+    }
+
+    @Override
+    public String[] getPassword() throws DALException
+    {
+        try
+        {
+            return storeLogIn.getPassword();
+        }
+        catch (FileNotFoundException ex)
+        {
+            throw new DALException("Error with password.txt");
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Logs">
     @Override
     public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException
     {
@@ -166,21 +192,13 @@ public class DALManager implements IDAL
     {
         LogContext logContextDB = new LogContext(lDAO);
         LogContext logContextFile = new LogContext(new LogFileDAO());
-        
-        for(ConversionLog log : conversionLog)
+
+        for (ConversionLog log : conversionLog)
         {
-            try
-            {
-                logContextDB.saveLog(log);
-                logContextFile.saveLog(log);
-            }
-            catch (DALException ex)
-            {
-                throw new DALException(ex.getLocalizedMessage(), ex);
-            }
+            logContextDB.saveLog(log);
+            logContextFile.saveLog(log);
         }
-        
+
     }
-
-
+    //</editor-fold>
 }

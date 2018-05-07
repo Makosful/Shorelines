@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.dal.LoggingFolder;
 
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.dal.DALException;
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
 
 /**
  *
@@ -26,15 +20,15 @@ public class LogFileDAO implements ILog
         {
             writer.write("------------------------------------------------------");
             writer.newLine();
-            writer.write("Log Date: "+conversionLog.getDate());
+            writer.write("Log Date: " + conversionLog.getDate());
             writer.newLine();
-            writer.write("User id: "+conversionLog.getUserId());
+            writer.write("User id: " + conversionLog.getUserId());
             writer.newLine();
-            writer.write("Message: "+conversionLog.getMessage());
+            writer.write("Message: " + conversionLog.getMessage());
             writer.newLine();
-            writer.write("File: "+conversionLog.getFileName());
+            writer.write("File: " + conversionLog.getFileName());
             writer.newLine();
-            writer.write("Message:"+conversionLog.getLogType());
+            writer.write("Message:" + conversionLog.getLogType());
             writer.newLine();
             writer.write("------------------------------------------------------");
             writer.newLine();
@@ -46,5 +40,5 @@ public class LogFileDAO implements ILog
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+
 }
