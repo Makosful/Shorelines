@@ -40,4 +40,6 @@ public interface IDAL
 
     public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException;
 
+    public void saveLog(ObservableList<ConversionLog> conversionLog) throws DALException;
+
 }

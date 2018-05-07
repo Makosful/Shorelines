@@ -63,6 +63,7 @@ public class ConfigDAO
      */
     public void saveConfigColumns(int configId, ColumnObject column) throws SQLException
     {
+        System.out.println(column.getColumnName());
         try (Connection con = db.getConnection())   
         {
             String sql = "INSERT INTO ConfigColumn (ConfigId, ColumnId, ColumnName) VALUES(?, ?, ?)";

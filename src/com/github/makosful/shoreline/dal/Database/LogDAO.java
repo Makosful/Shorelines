@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.dal.Database;
 
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.dal.Database.DataBaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,26 +14,28 @@ import javafx.collections.ObservableList;
  */
 public class LogDAO
 {
-    
+
     DataBaseConnector db;
-    
+
     public LogDAO()
     {
         db = new DataBaseConnector();
     }
 
-    
     /**
      * Get all logs for a specific user
+     *
      * @param userId
+     *
      * @return
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public ObservableList<ConversionLog> getAllLogs(int userId) throws SQLException
     {
-        try (Connection con = db.getConnection())   
+        try (Connection con = db.getConnection())
         {
-            
+
             ObservableList<ConversionLog> allLogs = FXCollections.observableArrayList();
             String sql = "SELECT * FROM Logs WHERE UserId = ?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -47,11 +43,11 @@ public class LogDAO
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next())
-            {   
-                ConversionLog conversionLog = new ConversionLog(rs.getInt("UserId"), 
-                                                                rs.getString("Message"), 
-                                                                rs.getString("FileName"), 
-                                                                rs.getString("LogType"), 
+            {
+                ConversionLog conversionLog = new ConversionLog(rs.getInt("UserId"),
+                                                                rs.getString("Message"),
+                                                                rs.getString("FileName"),
+                                                                rs.getString("LogType"),
                                                                 rs.getDate("Date"));
                 allLogs.add(conversionLog);
             }
@@ -63,5 +59,5 @@ public class LogDAO
             throw new SQLException(ex.getMessage());
         }
     }
-    
+
 }

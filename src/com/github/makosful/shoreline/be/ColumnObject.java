@@ -11,9 +11,10 @@ package com.github.makosful.shoreline.be;
  */
 public class ColumnObject
 {
+
     private final String columnName;
     private final int columnID;
-    
+
     public ColumnObject(String name, int columnID)
     {
         this.columnName = name;
@@ -29,10 +30,10 @@ public class ColumnObject
     {
         return columnID;
     }
-    
+
     @Override
     public String toString()
     {
-        return columnName;
+        return getColumnID() + " " + columnName;
     }
 }

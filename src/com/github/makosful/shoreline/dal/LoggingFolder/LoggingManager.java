@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.dal.LoggingFolder;
 
 import com.github.makosful.shoreline.be.ConversionLog;
@@ -25,14 +20,16 @@ public class LoggingManager
     {
         dbConnector = new DataBaseConnector();
     }
+
     /**
      * Making a log.
+     *
      * @param userId
      * @param message
      * @param fileName
      * @param logType
-     * @param date
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public void makeLog(int userId, String message, String fileName, String logType) throws SQLException
     {
@@ -54,10 +51,13 @@ public class LoggingManager
         }
 
     }
+
     /**
      * Getting all logs from DB.
+     *
      * @return
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public List<ConversionLog> getLogs() throws SQLException
     {
@@ -84,8 +84,8 @@ public class LoggingManager
         }
         catch (SQLException ex)
         {
-             System.out.println(ex.getMessage());
-           throw new SQLException(ex.getMessage());
+            System.out.println(ex.getMessage());
+            throw new SQLException(ex.getMessage());
         }
 
     }

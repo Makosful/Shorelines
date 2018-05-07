@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
@@ -169,6 +170,7 @@ public class MainWindowController implements Initializable
             listViewSorted.getSelectionModel().select(prev);
             listViewSorted.requestFocus();
         }
+        addConfigListener();
     }
 
     /**
@@ -195,7 +197,7 @@ public class MainWindowController implements Initializable
         }
         else
         {
-
+            movable = false;
         }
     }
 
@@ -229,7 +231,7 @@ public class MainWindowController implements Initializable
     private void AddListeners()
     {
 
-        listViewSorted.setItems(chklistSelectData.getCheckModel().getCheckedItems());
+        listViewSorted.setItems(model.getSelectedList());
 
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
@@ -237,20 +239,17 @@ public class MainWindowController implements Initializable
             disableBtnOnIndex();
         });
 
-        chklistSelectData
-                .getCheckModel()
-                .getCheckedItems()
-                .addListener(
-                        (ListChangeListener.Change<? extends String> c)
-                        ->
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
+        {
+            for (String s : c.getAddedSubList())
+            {
+                if (!model.getSelectedList().contains(s))
                 {
-                    if (c.next())
-                    {
-                        model.getSelectedList().addAll(c.getAddedSubList());
-                        model.getSelectedList().removeAll(c.getRemoved());
-                    }
-                });
-
+                    model.getSelectedList().add(s);
+                }
+            }
+            model.getSelectedList().removeAll(c.getRemoved());
+        });
     }
 
     @FXML
@@ -272,7 +271,7 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * HashMap to save the column number of columnObject. and the name of
+     * HashMap to save the column number of columnObject, and the name of
      * the json static label for example "siteName"
      */
     private void hashMapPut()
@@ -318,6 +317,9 @@ public class MainWindowController implements Initializable
     private void addConfigs()
     {
         ObservableList<Config> configs = model.getAllConfigs();
+        Config c = new Config();
+        c.setName("No config");
+        comboBoxConfig.getItems().add(c);
         comboBoxConfig.getItems().addAll(configs);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
@@ -337,8 +339,6 @@ public class MainWindowController implements Initializable
             }
         });
 
-        addConfigListener();
-
     }
 
     /**
@@ -351,6 +351,17 @@ public class MainWindowController implements Initializable
             Config config = model.getConfig(newConfig.getId());
             //listViewSorted.setItems(config.getChosenColumns());
 
+            if (newConfig != null)
+            {
+                chklistSelectData.getCheckModel().clearChecks();
+                if (!newConfig.getName().equals("No config"))
+                {
+                    for (ColumnObject c : newConfig.getChosenColumns())
+                    {
+                        chklistSelectData.getCheckModel().check(c.getColumnID());
+                    }
+                }
+            }
         });
     }
 
@@ -360,6 +371,7 @@ public class MainWindowController implements Initializable
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
         comboBoxConfig.getItems().clear();
         addConfigs();
+        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
     }
 
     @FXML

@@ -3,14 +3,15 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
-import com.github.makosful.shoreline.dal.Database.LogDAO;
-import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import com.github.makosful.shoreline.dal.Json.JsonReader;
 import com.github.makosful.shoreline.dal.Json.JsonWriter;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogContext;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
+import com.github.makosful.shoreline.dal.LoggingFolder.LogFileDAO;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,22 +33,21 @@ import javafx.collections.ObservableList;
 public class DALManager implements IDAL
 {
 
-    private final JsonWriter jWriter;
-    private final IReader jReader;
-    private final IReader excel;
+    private JsonWriter jWriter;
+    private IReader jReader;
+    private IReader excel;
 
-    private final StoreLogIn storeLogIn;
-    private final ConfigDAO cDAO;
-    private final LogDAO lDAO;
+    private StoreLogIn storeLogIn;
+    private ConfigDAO cDAO;
+    private LogDBDAO lDAO;
 
     public DALManager()
     {
         cDAO = new ConfigDAO();
-        excel = new ExcelReader();
         jWriter = new JsonWriter();
         jReader = new JsonReader();
         storeLogIn = new StoreLogIn();
-        lDAO = new LogDAO();
+        lDAO = new LogDBDAO();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Core File In">
@@ -179,12 +179,26 @@ public class DALManager implements IDAL
     {
         try
         {
-            return lDAO.getAllLogs(userId);
+            return lDAO.getLogs(userId);
         }
         catch (SQLException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
+    }
+
+    @Override
+    public void saveLog(ObservableList<ConversionLog> conversionLog) throws DALException
+    {
+        LogContext logContextDB = new LogContext(lDAO);
+        LogContext logContextFile = new LogContext(new LogFileDAO());
+
+        for (ConversionLog log : conversionLog)
+        {
+            logContextDB.saveLog(log);
+            logContextFile.saveLog(log);
+        }
+
     }
     //</editor-fold>
 }

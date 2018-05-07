@@ -26,11 +26,32 @@ public class Log
         dal = new DALManager();
     }
     
-    public void saveLog(ObservableList<ConversionLog> logData)
+    
+    /**
+     * Methad tp pass down the conversionLog to the db to be stored
+     * @param conversionLog
+     * @throws BLLException 
+     */
+    public void saveLog(ObservableList<ConversionLog> conversionLog) throws BLLException
     {
-        
+        try
+        {
+            dal.saveLog(conversionLog);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
     
+    
+    /**
+     * Method to call down to the logging manager for getting all the logs in the db
+     * for a specific user
+     * @param userId
+     * @return
+     * @throws BLLException 
+     */
     public ObservableList<ConversionLog> getAllLogs(int userId) throws BLLException
     {
         try
