@@ -94,9 +94,9 @@ public class DALManager implements IDAL
 
     //<editor-fold defaultstate="collapsed" desc="Core File Out">
     @Override
-    public void jsonAdd(Map jsonObj) throws DALException
+    public void jsonAdd(List<Map> maps)
     {
-        jWriter.addObject(jsonObj);
+        jWriter.setJson(maps);
     }
 
     @Override
