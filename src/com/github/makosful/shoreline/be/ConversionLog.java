@@ -29,6 +29,11 @@ public class ConversionLog
         this.date = date;
     }
 
+    public ConversionLog()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     public int getUserId()
     {
         return userId;
