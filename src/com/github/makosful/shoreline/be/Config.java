@@ -5,7 +5,8 @@
  */
 package com.github.makosful.shoreline.be;
 
-import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -13,9 +14,21 @@ import java.util.List;
  */
 public class Config
 {
+    private int id;
     private String name;
-    private List<ColumnObject> chosenColumns;
+    private ObservableList<ColumnObject> chosenColumns  = FXCollections.observableArrayList();
 
+    
+    
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
  
     public String getName()
     {
@@ -27,14 +40,15 @@ public class Config
         this.name = name;
     }
     
-    public List<ColumnObject> getChosenColumns()
+    public ObservableList<ColumnObject> getChosenColumns()
     {
         return chosenColumns;
     }
 
-    public void setChosenColumns(List<ColumnObject> chosenColumns)
+    public void setChosenColumns(ObservableList<ColumnObject> chosenColumns)
     {
         this.chosenColumns = chosenColumns;
     }
+   
     
 }

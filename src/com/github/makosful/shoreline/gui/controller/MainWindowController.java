@@ -1,25 +1,45 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+<<<<<<< HEAD
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+=======
+import java.util.Collections;
+import java.util.List;
+import java.util.ResourceBundle;
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+<<<<<<< HEAD
 import javafx.scene.input.*;
+=======
+import javafx.scene.control.Alert.AlertType;
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -32,7 +52,11 @@ public class MainWindowController implements Initializable
 {
 
     private MainWindowModel model;
+<<<<<<< HEAD
     private HashMap<String, Integer> cellOrder;
+=======
+    private List<Task> listOfTasks;
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -83,9 +107,9 @@ public class MainWindowController implements Initializable
     //</editor-fold>
 
     @FXML
-    private CheckListView<ColumnObject> chklistSelectData;
+    private CheckListView<String> chklistSelectData;
     @FXML
-    private ListView<ColumnObject> listViewSorted;
+    private ListView<String> listViewSorted;
     @FXML
     private Button btnMoveUp;
     @FXML
@@ -105,6 +129,8 @@ public class MainWindowController implements Initializable
     private ComboBox<Config> comboBoxConfig;
     @FXML
     private TextField txtFieldConfig;
+    @FXML
+    private MenuItem menuItemInstructions;
 
     /**
      * Initializes the controller class.
@@ -121,6 +147,7 @@ public class MainWindowController implements Initializable
 //        listViewSorted.setCellFactory(param -> new ListCell<>());
         cellOrder = new HashMap<String, Integer>();
         addConfigs();
+        addConfigListener();
     }
 
     /**
@@ -139,7 +166,11 @@ public class MainWindowController implements Initializable
             int prevIndex = currentIndex - 1;
 
             // Swaps the two indecies
+<<<<<<< HEAD
             Collections.swap(model.getSelectedObject(), currentIndex, prevIndex);
+=======
+            Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prevIndex);
@@ -163,12 +194,17 @@ public class MainWindowController implements Initializable
             int prev = currentIndex + 1;
 
             // Swaps the two items
+<<<<<<< HEAD
             Collections.swap(model.getSelectedObject(), currentIndex, prev);
+=======
+            Collections.swap(model.getSelectedList(), currentIndex, prev);
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 
             // Reselects the item that was just moved
             listViewSorted.getSelectionModel().select(prev);
             listViewSorted.requestFocus();
         }
+        
     }
 
     /**
@@ -179,6 +215,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
+<<<<<<< HEAD
         hashMapPut();
         model.convert("import_data.xlsx", cellOrder, true);
 
@@ -186,6 +223,9 @@ public class MainWindowController implements Initializable
         {
             System.out.println(e.getSiteName());
         }
+=======
+//        listOfTasks.add();
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
     }
 
     /**
@@ -193,8 +233,13 @@ public class MainWindowController implements Initializable
      */
     private void checkIfValidToRelocate()
     {
+<<<<<<< HEAD
         if (listViewSorted.getSelectionModel().getSelectedIndex() >= 0
             && listViewSorted.getSelectionModel().getSelectedIndex() < model.getSelectedObject().size())
+=======
+        int index = listViewSorted.getSelectionModel().getSelectedIndex();
+        if (index >= 0 && index < model.getSelectedList().size())
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
         {
             movable = true;
         }
@@ -233,15 +278,20 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+<<<<<<< HEAD
         listViewSorted.setItems(model.getSelectedObject());
+=======
+
+        listViewSorted.setItems(model.getSelectedList());
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
             checkIfValidToRelocate();
-
             disableBtnOnIndex();
         });
 
+<<<<<<< HEAD
         chklistSelectData.getItems().addListener(new ListChangeListener<ColumnObject>()
         {
             @Override
@@ -252,9 +302,20 @@ public class MainWindowController implements Initializable
                 {
                     chklistSelectData.getSelectionModel().select(c.getAddedSubList().get(0));
                     System.out.println(c.getAddedSubList().get(0));
+=======
+        chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
+        {
+            for (String s : c.getAddedSubList())
+            {
+                if (!model.getSelectedList().contains(s))
+                {
+                    model.getSelectedList().add(s);
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
                 }
             }
+            model.getSelectedList().removeAll(c.getRemoved());
         });
+<<<<<<< HEAD
 
         chklistSelectData.getCheckModel().getCheckedItems().addListener(new ListChangeListener<ColumnObject>()
         {
@@ -286,6 +347,8 @@ public class MainWindowController implements Initializable
 //            }
 //        });
 
+=======
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
     }
 
     @FXML
@@ -329,29 +392,6 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * HashMap to save the column number of columnObject, and the name of
-     * the json static label for example "siteName"
-     */
-    private void hashMapPut()
-    {
-        // Clearing hashMap.
-        cellOrder.clear();
-        String[] hashmapStrings = new String[]
-        {
-            "siteName", "assetSerialNumber", "orderType", "workerOrderId", "systemStatus",
-            "userStatus", "createdOn", "createdBy", "nameDescription",
-            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-        };
-        List<ColumnObject> listOfStrings = listViewSorted.getItems();
-
-        for (int i = 0; i < listOfStrings.size(); i++)
-        {
-            ColumnObject col = listOfStrings.get(i);
-            cellOrder.put(hashmapStrings[i], col.getColumnID());
-        }
-    }
-
-    /**
      * Loading File - Static file.
      *
      * @param event
@@ -359,6 +399,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
+<<<<<<< HEAD
         model.convert("import_data.xlsx", cellOrder, false);
         try
         {
@@ -370,18 +411,28 @@ public class MainWindowController implements Initializable
             Logger.getLogger(MainWindowController.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
+=======
+        FileChooser fc = new FileChooser();
+        File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+        model.loadFile(file.getAbsolutePath());
+        chklistSelectData.setItems(model.getCategories());
+>>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
         AddListeners();
     }
 
     /**
-     * Set up the configurations in combobox
+     * Set up the configurations in combobox. with the setConverter, the objects
+     * name
+     * as string is shown in the comboboc and makes a reference to the object
+     * from the string
      */
     private void addConfigs()
     {
+        ObservableList<Config> configs = model.getAllConfigs();
         Config c = new Config();
-        c.setName("IBM");
-
+        c.setName("No config");
         comboBoxConfig.getItems().add(c);
+        comboBoxConfig.getItems().addAll(configs);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
 
@@ -394,12 +445,11 @@ public class MainWindowController implements Initializable
             @Override
             public Config fromString(String configName)
             {
-                return comboBoxConfig.getItems().stream().filter(ap
-                        -> ap.getName().equals(configName)).findFirst().orElse(null);
+                return comboBoxConfig.getItems().stream().filter(config
+                        -> config.getName().equals(configName)).
+                        findFirst().orElse(null);
             }
         });
-
-        addConfigListener();
 
     }
 
@@ -408,21 +458,42 @@ public class MainWindowController implements Initializable
      */
     private void addConfigListener()
     {
-        comboBoxConfig.valueProperty().addListener((obs, oldval, newval) ->
+        try
         {
+            comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
+            {
 
-            System.out.println("Selected config: " + newval.getName());
-            ObservableList<ColumnObject> n = FXCollections.observableArrayList();
-            n.add(new ColumnObject("noget", 1));
-            listViewSorted.setItems(n);
-
-        });
+            
+                if (newConfig != null)
+                {
+                    chklistSelectData.getCheckModel().clearChecks();
+                    if (!newConfig.getName().equals("No config"))
+                    {
+                        for (ColumnObject c : newConfig.getChosenColumns())
+                        {
+                            chklistSelectData.getCheckModel().check(c.getColumnID());
+                        }
+                    }
+                }
+            });
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Config Error");
+            alert.setContentText("Failed to select amount of columns /n, "
+                                 + " are you sure you've selected the correct config? ");
+            alert.show();
+        }
     }
 
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
     {
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
+        comboBoxConfig.getItems().clear();
+        addConfigs();
+        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
     }
 
     @FXML
@@ -525,6 +596,36 @@ public class MainWindowController implements Initializable
             {
                 listViewSorted.getItems().indexOf(item);
             }
+        }
+    }
+
+    @FXML
+    private void handleOpenLog(ActionEvent event)
+    {
+        model.openLogWindow();
+    }
+
+    @FXML
+    private void handleShowInstructionsWindow(ActionEvent event)
+    {
+        try
+        {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Shoreline | Instructions");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.show();
+
+        }
+        catch (IOException ex)
+        {
+            System.out.println("failed to open window");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error opening the window");
+            alert.setContentText(ex.getMessage());
+            alert.show();
+            System.out.println(ex.getLocalizedMessage());
         }
     }
 }
