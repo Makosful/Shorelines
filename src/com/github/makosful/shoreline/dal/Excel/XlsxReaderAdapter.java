@@ -10,11 +10,8 @@ import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.IReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -44,8 +41,6 @@ public class XlsxReaderAdapter implements IReader
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
    
-   
-        
     }
 
     @Override

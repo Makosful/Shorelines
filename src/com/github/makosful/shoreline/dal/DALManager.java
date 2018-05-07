@@ -43,14 +43,17 @@ public class DALManager implements IDAL
     private final LogDBDAO lDAO;
     private final XlsxReaderAdapter xlsxReader;
     private final XlsReaderAdapter xlsReader;
+    private final ReaderFactoryProducer readerFactory;
     public DALManager()
-    {
+    {   
+        readerFactory = new ReaderFactoryProducer();
         xlsxReader = new XlsxReaderAdapter(new ExcelReader());
         xlsReader = new XlsReaderAdapter(new ExcelReader());
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
+        
     }
 
     @Override
@@ -62,7 +65,11 @@ public class DALManager implements IDAL
     @Override
     public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
-        xlsxReader.readFile(file, cellOrder, conversion);
+        
+        
+        readerFactory.getReaderFactory().getReader("xlsx").readFile(file, cellOrder, conversion);
+       
+        //xlsxReader.readFile(file, cellOrder, conversion);
     }
 
     @Override
