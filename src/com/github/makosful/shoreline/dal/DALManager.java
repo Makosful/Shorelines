@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
-import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -17,7 +16,6 @@ import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -36,8 +34,7 @@ public class DALManager implements IDAL
 {
 
     private JsonWriter jWriter;
-    private IReader jReader;
-    private IReader excel;
+    private IReader reader;
 
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
@@ -47,8 +44,9 @@ public class DALManager implements IDAL
     {
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
-        jReader = new JsonReader();
-        excel = new ExcelReader();
+
+        reader = new JsonReader();
+
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
     }
@@ -59,19 +57,7 @@ public class DALManager implements IDAL
     {
         try
         {
-//            System.out.println(path);
-//            int y = path.lastIndexOf(".") + 1;
-//            String sub = path.substring(y);
-//            System.out.println(sub);
-//            if(sub != "xlsx")
-//            {
-//            return jReader.loadFile(path);
-//            }
-//            else
-//            {
-                return excel.loadFile(path);
-//            }
-            
+            return reader.loadFile(path);
         }
         catch (ReaderException ex)
         {
@@ -84,7 +70,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return excel.getHeaders();
+            return reader.getHeaders();
         }
         catch (ReaderException ex)
         {
@@ -97,7 +83,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return excel.getValues(keys);
+            return reader.getValues(keys);
         }
         catch (ReaderException ex)
         {
@@ -108,9 +94,9 @@ public class DALManager implements IDAL
 
     //<editor-fold defaultstate="collapsed" desc="Core File Out">
     @Override
-    public void jsonAdd(Map jsonObj) throws DALException
+    public void jsonAdd(List<Map> maps)
     {
-        jWriter.addObject(jsonObj);
+        jWriter.setJson(maps);
     }
 
     @Override
@@ -158,7 +144,7 @@ public class DALManager implements IDAL
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
-
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Password">
     @Override
