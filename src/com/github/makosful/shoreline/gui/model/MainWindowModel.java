@@ -46,6 +46,10 @@ public class MainWindowModel
         bll = new BLLManager();
 
         errorMessage = new SimpleStringProperty();
+
+        configs = FXCollections.observableArrayList();
+        selected = FXCollections.observableArrayList();
+        available = FXCollections.observableArrayList();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Properties">
