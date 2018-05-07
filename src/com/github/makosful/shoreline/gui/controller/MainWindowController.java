@@ -1,10 +1,13 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,11 +19,18 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -107,6 +117,8 @@ public class MainWindowController implements Initializable
     private ComboBox<Config> comboBoxConfig;
     @FXML
     private TextField txtFieldConfig;
+    @FXML
+    private MenuItem menuItemInstructions;
 
     /**
      * Initializes the controller class.
@@ -214,7 +226,7 @@ public class MainWindowController implements Initializable
                 model.getSelectedList().removeAll(c.getRemoved());
             }
         });
-        
+
     }
 
     @FXML
@@ -365,11 +377,13 @@ public class MainWindowController implements Initializable
     {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
-            if(newConfig != null){
+            if (newConfig != null)
+            {
                 chklistSelectData.getCheckModel().clearChecks();
-                if(!newConfig.getName().equals("No config"))
+                if (!newConfig.getName().equals("No config"))
                 {
-                    for(ColumnObject c : newConfig.getChosenColumns()){
+                    for (ColumnObject c : newConfig.getChosenColumns())
+                    {
                         chklistSelectData.getCheckModel().check(c.getColumnID());
                     }
                 }
@@ -383,7 +397,7 @@ public class MainWindowController implements Initializable
         model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
         comboBoxConfig.getItems().clear();
         addConfigs();
-        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size()-1);
+        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
     }
 
     @FXML
@@ -396,5 +410,31 @@ public class MainWindowController implements Initializable
     private void handleOpenLog(ActionEvent event)
     {
         model.openLogWindow();
+    }
+
+    @FXML
+    private void handleShowInstructionsWindow(ActionEvent event)
+    {
+        try
+        {
+            File file = new File("./res/logo.png");
+            Image icon = new Image(file.toURI().toString());
+
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
+            stage.setScene(new Scene(root));
+            stage.setTitle("Shoreline | Instructions");
+            stage.getIcons().add(icon);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            System.out.println("failed to open the window");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(ex.getMessage());
+            alert.show();
+        }
     }
 }
