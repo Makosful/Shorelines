@@ -8,6 +8,7 @@ import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.controller.MainWindowController;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -197,5 +198,10 @@ public class MainWindowModel
     public Config getConfig(int id)
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public void makeTask(List<HashMap> list) throws BLLException
+    {
+        bll.makeTask(list);
     }
 }

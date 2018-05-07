@@ -20,38 +20,25 @@ import javafx.concurrent.Task;
 public class TaskManager
 {
 
-    private final IDAL dal;
-
     public TaskManager()
     {
-        dal = new DALManager();
+        
     }
 
-    public void addTask(List<HashMap> list)
+    public Task makeTask(List<HashMap> list)
     {
-        ExecutorService executor = Executors.newCachedThreadPool();
-
-        Future<?> submit = executor.submit(new Task<Boolean>()
+        Task task = new Task()
         {
             @Override
-            protected Boolean call() throws Exception
+            protected Object call() throws Exception
             {
-                try
+                for (HashMap map : list)
                 {
-                    for (HashMap map : list )
-                    {
-                        dal.jsonAdd(map);
-                    }
-                    dal.jsonWrite();
-                    return true;
+                    
                 }
-                catch (DALException ex)
-                {
-                    return false;
-                }
+                return null;
             }
-        });
-
-        executor.shutdown();
+        };
+        return task;
     }
 }

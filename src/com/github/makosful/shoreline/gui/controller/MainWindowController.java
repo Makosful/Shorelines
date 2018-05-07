@@ -193,8 +193,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        hashMapPut();
-        //model.convert("import_data.xlsx", cellOrder, true);
+        
     }
 
     /**
@@ -283,36 +282,6 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * HashMap to save the column number of columnObject, and the name of
-     * the json static label for example "siteName"
-     */
-    private void hashMapPut()
-    {
-        try
-        {
-        // Clearing hashMap.
-        cellOrder.clear();
-        String[] hashmapStrings = new String[]
-        {
-            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
-            "userStatus", "createdOn", "createdBy", "nameDescription",
-            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-        };
-        List<String> listOfStrings = listViewSorted.getItems();
-
-        for (int i = 0; i < listOfStrings.size(); i++)
-        {
-            String col = listOfStrings.get(i);
-            //cellOrder.put(hashmapStrings[i], col.getColumnID());
-        }
-        }
-        catch(IndexOutOfBoundsException e)
-        {
-            
-        }
-    }
-
-    /**
      * Loading File - Static file.
      *
      * @param event
@@ -391,6 +360,7 @@ public class MainWindowController implements Initializable
             alert.setTitle("Config Error");
             alert.setContentText("Failed to select amount of columns /n, "
                     + " are you sure you've selected the correct config? ");
+            alert.show();
         }
     }
 
