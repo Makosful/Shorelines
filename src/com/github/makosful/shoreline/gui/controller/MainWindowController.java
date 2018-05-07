@@ -190,7 +190,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        listOfTasks.add()
+//        listOfTasks.add();
     }
 
     /**
@@ -333,30 +333,30 @@ public class MainWindowController implements Initializable
     {
         try
         {
-        comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
-        {
-
-            Config config = model.getConfig(newConfig.getId());
-            //listViewSorted.setItems(config.getChosenColumns());
-            if (newConfig != null)
+            comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
             {
-                chklistSelectData.getCheckModel().clearChecks();
-                if (!newConfig.getName().equals("No config"))
+
+                Config config = model.getConfig(newConfig.getId());
+                //listViewSorted.setItems(config.getChosenColumns());
+                if (newConfig != null)
                 {
-                    for (ColumnObject c : newConfig.getChosenColumns())
+                    chklistSelectData.getCheckModel().clearChecks();
+                    if (!newConfig.getName().equals("No config"))
                     {
-                        chklistSelectData.getCheckModel().check(c.getColumnID());
+                        for (ColumnObject c : newConfig.getChosenColumns())
+                        {
+                            chklistSelectData.getCheckModel().check(c.getColumnID());
+                        }
                     }
                 }
-            }
-        });
+            });
         }
-        catch(IndexOutOfBoundsException e)
+        catch (IndexOutOfBoundsException e)
         {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Config Error");
             alert.setContentText("Failed to select amount of columns /n, "
-                    + " are you sure you've selected the correct config? ");
+                                 + " are you sure you've selected the correct config? ");
             alert.show();
         }
     }
