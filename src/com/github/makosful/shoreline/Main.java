@@ -1,20 +1,13 @@
 package com.github.makosful.shoreline;
 
-import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.Log;
-import com.github.makosful.shoreline.dal.DALManager;
-import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
 import com.github.makosful.shoreline.gui.model.Cache;
 import com.github.makosful.stage.exception.IlligalIdException;
 import com.github.makosful.stage.utils.StageManager;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

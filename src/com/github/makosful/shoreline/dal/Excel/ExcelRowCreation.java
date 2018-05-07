@@ -18,57 +18,42 @@ import org.apache.poi.ss.usermodel.CellType;
 public class ExcelRowCreation
 {
 
-    ExcelRow excelRow;
+    private ExcelRow excelRow;
+    
+    private final String[] hashmapStrings = new String[]
+    {
+        "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
+        "userStatus", "createdOn", "createdBy", "nameDescription",
+        "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
+    };
+    
+    private HashMap<String, Integer> cellOrder;
+    private List<Cell> cells;
+    private int i = 0;
 
     public ExcelRow ExcelCreation(HashMap<String, Integer> cellOrder, List<Cell> cells) throws Exception
     {
         try
         {
-        excelRow = new ExcelRow();
-        if (!cellOrder.isEmpty())
-        {
-            int cellNumber = cellOrder.get("siteName");
-            excelRow.setSiteName(cells.get(cellNumber).getStringCellValue());
-            cellNumber = cellOrder.get("assetSerialNumber");
-
-            excelRow.setAssetSerialNumber(cells.get(cellNumber).getStringCellValue());
-
-            cellNumber = cellOrder.get("orderType");
-            excelRow.setOrderType(cells.get(cellNumber).getStringCellValue());
-
-            cellNumber = cellOrder.get("systemStatus");
-            excelRow.setSystemStatus(cells.get(cellNumber).getStringCellValue());
-
-            cellNumber = cellOrder.get("userStatus");
-            excelRow.setUserStatus(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("createdOn");
-            excelRow.setCreatedOn(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("createdBy");
-            excelRow.setCreatedBy(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("nameDescription");
-            excelRow.setNameDescription(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("priority");
-            excelRow.setPriority(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("status");
-            excelRow.setStatus(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("esDate");
-            excelRow.setEsDate(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("lsDate");
-            excelRow.setLsDate(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("lfDate");
-            excelRow.setLfDate(getStringValue(cells.get(cellNumber)));
-            cellNumber = cellOrder.get("esTime");
-            excelRow.setEsTime(getStringValue(cells.get(cellNumber)));
+            this.cellOrder = cellOrder;
+            this.cells = cells;
+            if (!cellOrder.isEmpty())
+            {
+                return makeExcelRow();
+            }
         }
-        return excelRow;
-        }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw new Exception(e.getMessage());
         }
-        
+        return null;
     }
-
+    
+    public int getCellNumber()
+    {
+        return cellOrder.get(hashmapStrings[i++]);
+    }
+     
     public String getStringValue(Cell cell)
     {
         String cellValue;
@@ -81,5 +66,27 @@ public class ExcelRowCreation
             return cell.getStringCellValue();
         }
         return cellValue;
+    }
+    
+    public ExcelRow makeExcelRow()
+    {
+        excelRow = new ExcelRow();
+        excelRow.setSiteName(cells.get(getCellNumber()).getStringCellValue());
+        excelRow.setAssetSerialNumber(cells.get(getCellNumber()).getStringCellValue());
+        excelRow.setOrderType(cells.get(getCellNumber()).getStringCellValue());
+        excelRow.setWorkOrderId(cells.get(getCellNumber()).getStringCellValue());
+        excelRow.setSystemStatus(cells.get(getCellNumber()).getStringCellValue());
+        excelRow.setUserStatus(getStringValue(cells.get(getCellNumber())));
+        excelRow.setCreatedOn(getStringValue(cells.get(getCellNumber())));
+        excelRow.setCreatedBy(getStringValue(cells.get(getCellNumber())));
+        excelRow.setNameDescription(getStringValue(cells.get(getCellNumber())));
+        excelRow.setPriority(getStringValue(cells.get(getCellNumber())));
+        excelRow.setStatus(getStringValue(cells.get(getCellNumber())));
+        excelRow.setEsDate(getStringValue(cells.get(getCellNumber())));
+        excelRow.setLsDate(getStringValue(cells.get(getCellNumber())));
+        excelRow.setLfDate(getStringValue(cells.get(getCellNumber())));
+        excelRow.setEsTime(getStringValue(cells.get(getCellNumber())));
+        i = 0;
+        return excelRow;
     }
 }

@@ -289,11 +289,13 @@ public class MainWindowController implements Initializable
      */
     private void hashMapPut()
     {
+        try
+        {
         // Clearing hashMap.
         cellOrder.clear();
         String[] hashmapStrings = new String[]
         {
-            "siteName", "assetSerialNumber", "orderType", "workerOrderId", "systemStatus",
+            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
             "userStatus", "createdOn", "createdBy", "nameDescription",
             "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
         };
@@ -303,6 +305,11 @@ public class MainWindowController implements Initializable
         {
             ColumnObject col = listOfStrings.get(i);
             cellOrder.put(hashmapStrings[i], col.getColumnID());
+        }
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            
         }
     }
 

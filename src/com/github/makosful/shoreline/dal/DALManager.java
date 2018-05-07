@@ -116,6 +116,7 @@ public class DALManager implements IDAL
     }
     
     
+    @Override
     public void jsonAdd(Map jsonObj) throws DALException
     {
         jWriter.addObject(jsonObj);
