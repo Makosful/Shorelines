@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.dal.Excel;
 
+import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import java.io.BufferedInputStream;
@@ -8,13 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
-=======
 import java.util.*;
 import java.util.Map.Entry;
->>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -33,18 +31,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExcelReader implements IReader
 {
-<<<<<<< HEAD
 
     private List<ExcelRow> excelRows;
     private List<Cell> cells;
     private final ExcelRowCreation excelRowCreation;
-    private final List<ColumnObject> columnNames;
+    private final List<String> columnNames;
 
     private Cell cell;
-=======
-    
     private Sheet sheet;
->>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 
     //<editor-fold defaultstate="collapsed" desc="File Load">
     @Override
@@ -63,7 +57,7 @@ public class ExcelReader implements IReader
             throw new ReaderException("Unsupported file format");
         }
     }
-    
+
     private boolean loadXls(String path) throws ReaderException
     {
         try
@@ -72,7 +66,7 @@ public class ExcelReader implements IReader
             POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(path));
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             HSSFSheet s = wb.getSheetAt(0);
-            
+
             this.sheet = s;
             return true;
         }
@@ -80,9 +74,8 @@ public class ExcelReader implements IReader
         {
             throw new ReaderException(ex.getLocalizedMessage(), ex);
         }
-        
+
     }
-<<<<<<< HEAD
 
     /**
      * Simply reads XLSX files and prints out the cell adress
@@ -93,10 +86,12 @@ public class ExcelReader implements IReader
      * @throws IOException
      */
     public void readFromXlsxFiles(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws IOException
-=======
-    
+    {
+        // Denne var tom ???
+    }
+
     private boolean loadXlsX(String path) throws ReaderException
->>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
+
     {
         try
         {
@@ -105,7 +100,7 @@ public class ExcelReader implements IReader
                     new FileInputStream(path));
             XSSFWorkbook wb = new XSSFWorkbook(fs);
             XSSFSheet s = wb.getSheetAt(0);
-            
+
             this.sheet = s;
             return true;
         }
@@ -120,13 +115,13 @@ public class ExcelReader implements IReader
     public List<String> getHeaders()
     {
         List<String> list = new ArrayList<>();
-        
+
         Row row; // Generic row
         Cell cell; // Generic cell
 
         int rows; // No of rows
         rows = sheet.getPhysicalNumberOfRows();
-        
+
         int cols = 0; // No of columns
         int tmp;
 
@@ -164,7 +159,7 @@ public class ExcelReader implements IReader
 
         return list;
     }
-    
+
     @Override
     public List<Map> getValues(Map<String, String> keys) throws ReaderException
     {
@@ -178,13 +173,13 @@ public class ExcelReader implements IReader
 
         List<Map> list = new ArrayList();
         Map<String, Integer> headers = new HashMap();
-        
+
         Row row; // Generic row
         Cell cell; // Generic cell
 
         int rows; // No of rows
         rows = sheet.getPhysicalNumberOfRows();
-        
+
         int cols = 0; // No of columns
         int tmp;
 
@@ -214,7 +209,6 @@ public class ExcelReader implements IReader
                 cell = row.getCell((short) c);
                 if (cell != null)
                 {
-<<<<<<< HEAD
                     try
                     {
                         excelCreation(cellOrder);
@@ -223,12 +217,10 @@ public class ExcelReader implements IReader
                     {
                         Logger.getLogger(ExcelReader.class.getName()).log(Level.SEVERE, null, ex);
                     }
-=======
                     headers.put(
                             cell.getStringCellValue(),
                             cell.getAddress().getColumn()
                     );
->>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
                 }
             }
         }
@@ -245,7 +237,7 @@ public class ExcelReader implements IReader
                 for (Entry<String, String> entry : keys.entrySet())
                 {
                     Cell c = sheet.getRow(i).getCell(headers.get(entry.getValue()));
-                    map.put(entry.getKey(), getValueAsString(c));
+                    map.put(entry.getKey(), c.getStringCellValue());
                 }
                 list.add(map);
             }
@@ -256,7 +248,6 @@ public class ExcelReader implements IReader
     }
 
     /**
-<<<<<<< HEAD
      * Creates excelRow Objects - holds information about a single excel row.
      * Uses HashMap to know which variables are supposed to hold specific
      * columns
@@ -277,7 +268,7 @@ public class ExcelReader implements IReader
     }
 
     // Column names - for example Country.
-    public List<ColumnObject> getColumnNames()
+    public List<String> getColumnNames()
     {
         return columnNames;
     }
@@ -287,8 +278,7 @@ public class ExcelReader implements IReader
         return excelRowCreation.getStringValue(cell);
     }
 
-=======
-     * Gets the value out of the cell as a string.
+    /* Gets the value out of the cell as a string.
      * @param cell
      * @return 
      */
@@ -305,5 +295,4 @@ public class ExcelReader implements IReader
         }
         return cellValue;
     }
->>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
 }

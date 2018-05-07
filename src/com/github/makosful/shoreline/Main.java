@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline;
 
-
 import com.github.makosful.shoreline.gui.model.Cache;
 import com.github.makosful.stage.exception.IlligalIdException;
 import com.github.makosful.stage.utils.StageManager;

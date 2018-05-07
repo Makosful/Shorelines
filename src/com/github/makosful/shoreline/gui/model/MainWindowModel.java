@@ -8,7 +8,6 @@ import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.controller.MainWindowController;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -65,11 +64,7 @@ public class MainWindowModel
         return this.available;
     }
 
-<<<<<<< HEAD
-    public ObservableList<ColumnObject> getSelectedObject()
-=======
     public ObservableList<String> getSelectedList()
->>>>>>> 6f0ceef1e2f9ce8c46fa0bd696d8ee71721451ed
     {
         return this.selected;
     }
@@ -202,5 +197,10 @@ public class MainWindowModel
     public void makeTask(List<Map> list) throws BLLException
     {
         bll.makeTask(list);
+    }
+
+    public Config getConfig(int id)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

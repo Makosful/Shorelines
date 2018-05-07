@@ -32,7 +32,7 @@ public interface IDAL
 
     public void saveConfig(String configName, ObservableList<String> items) throws DALException;
 
-    public void jsonAdd(List<Map> maps) throws DALException;
+    public void jsonAdd(Map jsonObj) throws DALException;
 
     public void jsonWrite() throws DALException;
 

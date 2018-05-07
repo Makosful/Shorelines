@@ -36,18 +36,25 @@ public class DALManager implements IDAL
 
     private JsonWriter jWriter;
     private IReader reader;
+    private IReader jReader;
+    private IReader excel;
+
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
     private LogDBDAO lDAO;
     private AbstractFactoryReader readerFactory;
+
     public DALManager()
     {
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
         readerFactory = FactoryProducer.getFactory();
+
+        jReader = new JsonReader();
+
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
-       
+
     }
 
     //<editor-fold defaultstate="collapsed" desc="Core File In">
@@ -64,7 +71,7 @@ public class DALManager implements IDAL
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+
     @Override
     public void setReader(String path)
     {
@@ -76,7 +83,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return reader.getHeaders();
+            return jReader.getHeaders();
         }
         catch (ReaderException ex)
         {
@@ -89,7 +96,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return reader.getValues(keys);
+            return jReader.getValues(keys);
         }
         catch (ReaderException ex)
         {
@@ -100,9 +107,9 @@ public class DALManager implements IDAL
 
     //<editor-fold defaultstate="collapsed" desc="Core File Out">
     @Override
-    public void jsonAdd(List<Map> maps)
+    public void jsonAdd(Map jsonObj) throws DALException
     {
-        jWriter.setJson(maps);
+        jWriter.addObject(jsonObj);
     }
 
     @Override
