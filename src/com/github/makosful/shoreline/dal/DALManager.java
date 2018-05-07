@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
+import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -35,20 +36,18 @@ public class DALManager implements IDAL
 
     private JsonWriter jWriter;
     private IReader reader;
-
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
     private LogDBDAO lDAO;
-
+    private AbstractFactoryReader readerFactory;
     public DALManager()
     {
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
-
-        reader = new JsonReader();
-
+        readerFactory = FactoryProducer.getFactory();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
+       
     }
 
     //<editor-fold defaultstate="collapsed" desc="Core File In">
@@ -57,12 +56,19 @@ public class DALManager implements IDAL
     {
         try
         {
+            setReader(path);
             return reader.loadFile(path);
         }
         catch (ReaderException ex)
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
+    }
+    
+    @Override
+    public void setReader(String path)
+    {
+        reader = readerFactory.getReader(path);
     }
 
     @Override
