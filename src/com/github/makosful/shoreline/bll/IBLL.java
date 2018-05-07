@@ -1,7 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.be.ExcelRow;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -26,7 +26,7 @@ public interface IBLL
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 
-    public void addTask(List<ExcelRow> excelRowsList) throws BLLException;
+    public void makeTask(List<Map> fileDataList) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
 

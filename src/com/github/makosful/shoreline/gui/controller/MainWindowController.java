@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -41,8 +41,7 @@ public class MainWindowController implements Initializable
 {
 
     private MainWindowModel model;
-
-    private HashMap<String, Integer> cellOrder;
+    private List<Task> listOfTasks;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -129,7 +128,6 @@ public class MainWindowController implements Initializable
     {
 
         model = new MainWindowModel();
-        cellOrder = new HashMap();
 
         AddListeners();
         addConfigs();
@@ -192,8 +190,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        hashMapPut();
-        //model.convert("import_data.xlsx", cellOrder, true);
+        listOfTasks.add()
     }
 
     /**
@@ -282,29 +279,6 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * HashMap to save the column number of columnObject, and the name of
-     * the json static label for example "siteName"
-     */
-    private void hashMapPut()
-    {
-        // Clearing hashMap.
-        cellOrder.clear();
-        String[] hashmapStrings = new String[]
-        {
-            "siteName", "assetSerialNumber", "orderType", "workerOrderId", "systemStatus",
-            "userStatus", "createdOn", "createdBy", "nameDescription",
-            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-        };
-        List<String> listOfStrings = listViewSorted.getItems();
-
-        for (int i = 0; i < listOfStrings.size(); i++)
-        {
-            String col = listOfStrings.get(i);
-            //cellOrder.put(hashmapStrings[i], col.getColumnID());
-        }
-    }
-
-    /**
      * Loading File - Static file.
      *
      * @param event
@@ -357,6 +331,8 @@ public class MainWindowController implements Initializable
      */
     private void addConfigListener()
     {
+        try
+        {
         comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
         {
 
@@ -374,6 +350,15 @@ public class MainWindowController implements Initializable
                 }
             }
         });
+        }
+        catch(IndexOutOfBoundsException e)
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Config Error");
+            alert.setContentText("Failed to select amount of columns /n, "
+                    + " are you sure you've selected the correct config? ");
+            alert.show();
+        }
     }
 
     @FXML

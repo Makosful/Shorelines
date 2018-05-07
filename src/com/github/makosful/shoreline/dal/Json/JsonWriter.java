@@ -1,8 +1,9 @@
 package com.github.makosful.shoreline.dal.Json;
 
+import com.google.gson.Gson;
 import java.io.*;
+import java.util.List;
 import java.util.Map;
-import org.json.simple.JSONArray;
 
 /**
  * This class will be responsible for writing JSON files. To read JSON files,
@@ -13,7 +14,7 @@ import org.json.simple.JSONArray;
 public class JsonWriter
 {
 
-    private final JSONArray json;
+    private final Gson gson;
     private final StringWriter string;
     private String path;
 
@@ -23,30 +24,28 @@ public class JsonWriter
      */
     public JsonWriter()
     {
-        json = new JSONArray();
+        gson = new Gson();
         path = "output.json";
         string = new StringWriter();
     }
 
     /**
-     * Creates a new JSON object based on a map
+     * Creates a new JSON with the desired output path
      *
-     * @param map The map with the key value pair
+     * @param path
      */
-    public JsonWriter(Map map)
+    public JsonWriter(String path)
     {
-        json = new JSONArray();
-        path = "output.json";
+        gson = new Gson();
+        this.path = path;
         string = new StringWriter();
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Implimented methods">
-    public void addObject(Map jsonObj)
+    public void setJson(List<Map> maps)
     {
-        json.add(jsonObj);
+        string.write(gson.toJson(maps));
     }
-    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Output">
     /**
@@ -72,6 +71,8 @@ public class JsonWriter
     /**
      * Writes the stored JSON to the given output.
      *
+     * Uses a BufferedWriter as default
+     *
      * @see #setOutput(java.lang.String) Use this to set the output path and
      * file name. It defaults to [App Path]/output.json
      *
@@ -81,14 +82,19 @@ public class JsonWriter
     {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
         {
-            json.writeJSONString(bw);
-            json.writeJSONString(string);
+            write(bw);
         }
     }
 
     /**
      * Writes the JSON using the Writer given. Said Writer will have the output
      * path.
+     *
+     * Uses a BufferedWriter as default.
+     *
+     * Try-with-resource must be done manually when supplying the Writer. The
+     * Writer is expected to have it's own location and will not use the
+     * locaiton sat by this class' call
      *
      * @see #generateJsonString() Use this instead if you with to only get a
      * String object with the JSON instead of writing to afile
@@ -99,8 +105,7 @@ public class JsonWriter
      */
     public void write(Writer out) throws IOException
     {
-        json.writeJSONString(out);
-        json.writeJSONString(string);
+        out.write(string.toString());
     }
     //</editor-fold>
 }
