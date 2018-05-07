@@ -52,29 +52,13 @@ public class DALManager implements IDAL
     @Override
     public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
-        try
-        {
-            ExcelReaderAdapter excelReader = new ExcelReaderAdapter(new ExcelReader());
-            excelReader.readFile(file, cellOrder, conversion);
-        }
-        catch (Exception ex)
-        {
-             throw new DALException(ex.getLocalizedMessage(), ex);
-        }
+        excelReader.readFile(file, cellOrder, conversion);
     }
 
     @Override
     public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
-        try
-        {
-            
-            excelReader.readFile(file, cellOrder, conversion);
-        }
-        catch (Exception ex)
-        {
-             throw new DALException(ex.getLocalizedMessage(), ex);
-        }
+        excelReader.readFile(file, cellOrder, conversion);
     }
 
     @Override
