@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
+import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -16,6 +17,7 @@ import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -46,6 +48,7 @@ public class DALManager implements IDAL
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
         jReader = new JsonReader();
+        excel = new ExcelReader();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
     }
@@ -56,7 +59,19 @@ public class DALManager implements IDAL
     {
         try
         {
-            return jReader.loadFile(path);
+//            System.out.println(path);
+//            int y = path.lastIndexOf(".") + 1;
+//            String sub = path.substring(y);
+//            System.out.println(sub);
+//            if(sub != "xlsx")
+//            {
+//            return jReader.loadFile(path);
+//            }
+//            else
+//            {
+                return excel.loadFile(path);
+//            }
+            
         }
         catch (ReaderException ex)
         {
@@ -69,7 +84,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return jReader.getHeaders();
+            return excel.getHeaders();
         }
         catch (ReaderException ex)
         {
@@ -82,7 +97,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return jReader.getValues(keys);
+            return excel.getValues(keys);
         }
         catch (ReaderException ex)
         {
