@@ -200,7 +200,7 @@ public class MainWindowModel
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public void makeTask(List<HashMap> list) throws BLLException
+    public void makeTask(List<Map> list) throws BLLException
     {
         bll.makeTask(list);
     }

@@ -67,7 +67,7 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void makeTask(List<HashMap> list)
+    public void makeTask(List<Map> list)
     {
         tasks.makeTask(list);
     }

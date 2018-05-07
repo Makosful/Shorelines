@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -42,8 +41,7 @@ public class MainWindowController implements Initializable
 {
 
     private MainWindowModel model;
-
-    private HashMap<String, Integer> cellOrder;
+    private List<Task> listOfTasks;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -130,7 +128,6 @@ public class MainWindowController implements Initializable
     {
 
         model = new MainWindowModel();
-        cellOrder = new HashMap();
 
         AddListeners();
         addConfigs();
@@ -193,7 +190,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        
+        listOfTasks.add()
     }
 
     /**
