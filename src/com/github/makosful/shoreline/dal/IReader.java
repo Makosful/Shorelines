@@ -7,6 +7,7 @@ package com.github.makosful.shoreline.dal;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -15,5 +16,9 @@ import java.util.HashMap;
 public interface IReader
 {
     public void readFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
+    
+    public List getRowList();
+    
+    public List getColumnNames();
     
 }

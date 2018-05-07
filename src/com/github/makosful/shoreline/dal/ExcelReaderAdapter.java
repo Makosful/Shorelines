@@ -6,9 +6,11 @@
 package com.github.makosful.shoreline.dal;
 
 
+import com.github.makosful.shoreline.be.ExcelRow;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,6 +44,18 @@ public class ExcelReaderAdapter implements IReader
    
    
         
+    }
+
+    @Override
+    public List<ExcelRow> getRowList()
+    {
+        return excelReader.getExcelRowsList();
+    }
+
+    @Override
+    public List getColumnNames()
+    {
+        return excelReader.getColumnNames();
     }
 
 

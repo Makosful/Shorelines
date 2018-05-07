@@ -34,16 +34,16 @@ import java.util.logging.Logger;
 public class DALManager implements IDAL
 {
 
-    private final ExcelReader excel;
+
     private final JsonWriter jWriter;
     private final StoreLogIn storeLogIn;
     private final ConfigDAO cDAO;
     private final LogDBDAO lDAO;
-
+    private final ExcelReaderAdapter excelReader;
     public DALManager()
     {
+        excelReader = new ExcelReaderAdapter(new ExcelReader());
         cDAO = new ConfigDAO();
-        excel = new ExcelReader();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
@@ -54,11 +54,8 @@ public class DALManager implements IDAL
     {
         try
         {
-            excel.readFromXlsFile(file, cellOrder, conversion);
-        }
-        catch (IOException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
+            ExcelReaderAdapter excelReader = new ExcelReaderAdapter(new ExcelReader());
+            excelReader.readFile(file, cellOrder, conversion);
         }
         catch (Exception ex)
         {
@@ -71,11 +68,8 @@ public class DALManager implements IDAL
     {
         try
         {
-            excel.readFromXlsxFiles(file, cellOrder, conversion);
-        }
-        catch (IOException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
+            
+            excelReader.readFile(file, cellOrder, conversion);
         }
         catch (Exception ex)
         {
@@ -86,13 +80,13 @@ public class DALManager implements IDAL
     @Override
     public List<ExcelRow> getExcelRowsList()
     {
-        return excel.getExcelRowsList();
+        return excelReader.getRowList();
     }
 
     @Override
     public List<ColumnObject> getColumnNames()
     {
-        return excel.getColumnNames();
+        return excelReader.getColumnNames();
     }
 
     @Override
