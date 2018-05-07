@@ -108,18 +108,39 @@ public class BLLManager implements IBLL
     @Override
     public boolean loadFile(String path) throws BLLException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            return dal.fileLoad(path);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override
     public List<String> getHeaders() throws BLLException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            return dal.fileGetHeader();
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 
     @Override
     public List<Map> getValues(Map<String, String> keys) throws BLLException
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try
+        {
+            return dal.fileGetValues(keys);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
     }
 }

@@ -50,6 +50,69 @@ public class DALManager implements IDAL
         lDAO = new LogDAO();
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Core File In">
+    @Override
+    public boolean fileLoad(String path) throws DALException
+    {
+        try
+        {
+            return jReader.loadFile(path);
+        }
+        catch (ReaderException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public List<String> fileGetHeader() throws DALException
+    {
+        try
+        {
+            return jReader.getHeaders();
+        }
+        catch (ReaderException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public List<Map> fileGetValues(Map<String, String> keys) throws DALException
+    {
+        try
+        {
+            return jReader.getValues(keys);
+        }
+        catch (ReaderException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Core File Out">
+    @Override
+    public void jsonAdd(Map jsonObj) throws DALException
+    {
+        jWriter.addObject(jsonObj);
+    }
+
+    @Override
+    public void jsonWrite() throws DALException
+    {
+        try
+        {
+            jWriter.write();
+        }
+        catch (IOException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Config">
     @Override
     public void saveConfig(String configName, ObservableList<String> items) throws DALException
     {
@@ -68,6 +131,21 @@ public class DALManager implements IDAL
         }
     }
 
+    @Override
+    public ObservableList<Config> getAllConfigs() throws DALException
+    {
+        try
+        {
+            return cDAO.getAllConfigs();
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Password">
     @Override
     public void savePassword(String userName, String password) throws DALException
     {
@@ -93,39 +171,9 @@ public class DALManager implements IDAL
             throw new DALException("Error with password.txt");
         }
     }
+    //</editor-fold>
 
-    @Override
-    public void jsonAdd(Map jsonObj) throws DALException
-    {
-        jWriter.addObject(jsonObj);
-    }
-
-    @Override
-    public void jsonWrite() throws DALException
-    {
-        try
-        {
-            jWriter.write();
-        }
-        catch (IOException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
-    @Override
-    public ObservableList<Config> getAllConfigs() throws DALException
-    {
-        try
-        {
-            return cDAO.getAllConfigs();
-        }
-        catch (SQLException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="Logs">
     @Override
     public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException
     {
@@ -137,66 +185,6 @@ public class DALManager implements IDAL
         {
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
-    }
-
-    //<editor-fold defaultstate="collapsed" desc="Excel">
-    @Override
-    public boolean excelLoad(String path) throws DALException
-    {
-        try
-        {
-            return excel.loadFile(path);
-        }
-        catch (ReaderException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
-    @Override
-    public List<String> excelGetHeader() throws DALException
-    {
-        try
-        {
-            return excel.getHeaders();
-        }
-        catch (ReaderException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
-    @Override
-    public List<Map> excelGetValues(Map<String, String> keys) throws DALException
-    {
-        try
-        {
-            return excel.getValues(keys);
-        }
-        catch (ReaderException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="JSON">
-    @Override
-    public boolean jsonLoad(String path) throws DALException
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<String> jsonGetHeader() throws DALException
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<Map> jsonGetValues(Map<String, String> keys) throws DALException
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     //</editor-fold>
 }
