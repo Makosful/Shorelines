@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.dal.LoggingFolder;
 
-import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.dal.DALException;
-import com.github.makosful.shoreline.dal.DataBaseConnector.DataBaseConnector;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import com.github.makosful.shoreline.dal.Database.DataBaseConnector;
+import com.github.makosful.shoreline.dal.Exception.DALException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -28,11 +23,15 @@ public class LogDBDAO implements ILog
     {
         dbConnector = new DataBaseConnector();
     }
+
     /**
      * Making a log.
+     *
      * @param conversionLog
-     * @throws com.github.makosful.shoreline.dal.DALException
+     *
+     * @throws com.github.makosful.shoreline.dal.Exception.DALException
      */
+    @Override
     public void saveLog(ConversionLog conversionLog) throws DALException
     {
         try (Connection con = dbConnector.getConnection())
@@ -52,11 +51,15 @@ public class LogDBDAO implements ILog
         }
 
     }
+
     /**
      * Getting all logs from DB.
+     *
      * @param userId
+     *
      * @return
-     * @throws SQLException 
+     *
+     * @throws SQLException
      */
     public ObservableList<ConversionLog> getLogs(int userId) throws SQLException
     {
@@ -71,21 +74,21 @@ public class LogDBDAO implements ILog
             while (rs.next())
             {
                 ConversionLog conversionLogger = new ConversionLog();
-                
+
                 conversionLogger.setUserId(userId);
                 conversionLogger.setMessage(rs.getString("Message"));
                 conversionLogger.setFileName(rs.getString("FileName"));
                 conversionLogger.setLogType(rs.getString("LogType"));
                 conversionLogger.setDate(rs.getDate("Date"));
-                
+
                 logs.add(conversionLogger);
             }
             return logs;
         }
         catch (SQLException ex)
         {
-             System.out.println(ex.getMessage());
-           throw new SQLException(ex.getMessage());
+            System.out.println(ex.getMessage());
+            throw new SQLException(ex.getMessage());
         }
 
     }

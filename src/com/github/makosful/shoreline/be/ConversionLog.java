@@ -13,11 +13,26 @@ import java.util.Date;
  */
 public class ConversionLog
 {
+
     private int userId;
     private String message;
     private String fileName;
     private String logType;
     private Date date;
+
+    public ConversionLog(int userId, String message, String logType, String fileName, Date date)
+    {
+        this.userId = userId;
+        this.message = message;
+        this.logType = logType;
+        this.fileName = fileName;
+        this.date = date;
+    }
+
+    public ConversionLog()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     public int getUserId()
     {
@@ -68,8 +83,5 @@ public class ConversionLog
     {
         this.date = date;
     }
-    
-    
-    
-    
+
 }

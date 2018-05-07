@@ -1,10 +1,8 @@
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Interfaces;
 
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
-import com.github.makosful.shoreline.be.ExcelRow;
-import java.util.HashMap;
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -20,19 +18,19 @@ import javafx.collections.ObservableList;
 public interface IDAL
 {
 
-    public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
+    //<editor-fold defaultstate="collapsed" desc="File handling">
+    public boolean fileLoad(String path) throws DALException;
 
-    public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException;
+    public List<String> fileGetHeader() throws DALException;
 
-    public List<ExcelRow> getExcelRowsList() throws DALException;
-
-    public List<ColumnObject> getColumnNames() throws DALException;
+    public List<Map> fileGetValues(Map<String, String> keys) throws DALException;
+    //</editor-fold>
 
     public void savePassword(String userName, String password) throws DALException;
 
     public String[] getPassword() throws DALException;
 
-    public void saveConfig(String configName, ObservableList<ColumnObject> items) throws DALException;
+    public void saveConfig(String configName, ObservableList<String> items) throws DALException;
 
     public void jsonAdd(Map jsonObj) throws DALException;
 
