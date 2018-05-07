@@ -414,26 +414,19 @@ public class MainWindowController implements Initializable
         {
             comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
             {
-
-                Config config = model.getConfig(newConfig.getId());
-                //listViewSorted.setItems(config.getChosenColumns());
+                
                 if (newConfig != null)
                 {
-                }
-
-                {
-                    if (newConfig != null)
+                    chklistSelectData.getCheckModel().clearChecks();
+                    if (!newConfig.getName().equals("No config"))
                     {
-                        chklistSelectData.getCheckModel().clearChecks();
-                        if (!newConfig.getName().equals("No config"))
+                        for (ColumnObject c : newConfig.getChosenColumns())
                         {
-                            for (ColumnObject c : newConfig.getChosenColumns())
-                            {
-                                chklistSelectData.getCheckModel().check(c.getColumnID());
-                            }
+                            chklistSelectData.getCheckModel().check(c.getColumnID());
                         }
                     }
                 }
+                
             });
         }
 
