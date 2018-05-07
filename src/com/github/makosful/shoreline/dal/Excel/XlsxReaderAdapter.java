@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.makosful.shoreline.dal;
+package com.github.makosful.shoreline.dal.Excel;
 
 
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.DALException;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
+import com.github.makosful.shoreline.dal.IReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +21,11 @@ import java.util.logging.Logger;
  *
  * @author B
  */
-public class ExcelReaderAdapter implements IReader
+public class XlsxReaderAdapter implements IReader
 {
     private ExcelReader excelReader;
     
-    public ExcelReaderAdapter(ExcelReader excelReader)
+    public XlsxReaderAdapter(ExcelReader excelReader)
     {
         this.excelReader = excelReader;
     }

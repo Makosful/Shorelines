@@ -1,10 +1,12 @@
 package com.github.makosful.shoreline.dal;
 
+import com.github.makosful.shoreline.dal.Excel.XlsxReaderAdapter;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.ExcelRow;
+import com.github.makosful.shoreline.dal.Excel.XlsReaderAdapter;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogContext;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogFileDAO;
@@ -39,10 +41,12 @@ public class DALManager implements IDAL
     private final StoreLogIn storeLogIn;
     private final ConfigDAO cDAO;
     private final LogDBDAO lDAO;
-    private final ExcelReaderAdapter excelReader;
+    private final XlsxReaderAdapter xlsxReader;
+    private final XlsReaderAdapter xlsReader;
     public DALManager()
     {
-        excelReader = new ExcelReaderAdapter(new ExcelReader());
+        xlsxReader = new XlsxReaderAdapter(new ExcelReader());
+        xlsReader = new XlsReaderAdapter(new ExcelReader());
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
         storeLogIn = new StoreLogIn();
@@ -52,25 +56,25 @@ public class DALManager implements IDAL
     @Override
     public void readFromXlsFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
-        excelReader.readFile(file, cellOrder, conversion);
+        xlsReader.readFile(file, cellOrder, conversion);
     }
 
     @Override
     public void readFromXlsxFile(String file, HashMap<String, Integer> cellOrder, boolean conversion) throws DALException
     {
-        excelReader.readFile(file, cellOrder, conversion);
+        xlsxReader.readFile(file, cellOrder, conversion);
     }
 
     @Override
     public List<ExcelRow> getExcelRowsList()
     {
-        return excelReader.getRowList();
+        return xlsxReader.getRowList();
     }
 
     @Override
     public List<ColumnObject> getColumnNames()
     {
-        return excelReader.getColumnNames();
+        return xlsxReader.getColumnNames();
     }
 
     @Override
