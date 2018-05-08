@@ -8,6 +8,8 @@ import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 
@@ -68,9 +70,16 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public Task makeTask(List<Map> list)
+    public Task makeTask(List<Map> list) throws BLLException
     {
-        return tasks.makeTask(list);
+        try 
+        {
+            return tasks.makeTask(list);
+        }
+        catch (BLLException ex)
+        {
+           throw new BLLException(ex.getMessage());
+        }
     }
 
     @Override
