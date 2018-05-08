@@ -360,6 +360,7 @@ public class MainWindowController implements Initializable
             {
                 Config config = model.getConfig(newConfig.getId());
                 //listViewSorted.setItems(config.getChosenColumns());
+
                 if (newConfig != null)
                 {
                     chklistSelectData.getCheckModel().clearChecks();
