@@ -51,13 +51,6 @@ public class HelpWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         SetImages();
-
-        File file = new File("./res/logo.png");
-        Stage stage = new Stage();
-
-        Image icon = new Image(file.toURI().toString());
-        stage.getIcons().add(icon);
-
     }
 
     private void SetImages()
