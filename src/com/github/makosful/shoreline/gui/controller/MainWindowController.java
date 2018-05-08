@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.Map.Entry;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,7 +37,7 @@ import org.controlsfx.control.CheckListView;
  */
 public class MainWindowController implements Initializable
 {
-
+int i = 0;
     private MainWindowModel model;
 
     private Map<String, String> cellOrder;
@@ -189,9 +190,25 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
+                    String[] hashmapStrings = new String[]
+            {
+                "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
+                "userStatus", "createdOn", "createdBy", "nameDescription",
+                "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
+            };
         List<Map> mapTask = model.getValues(getMap());
         model.makeTask(mapTask);
-        
+        for(Map k : mapTask)
+        {
+            for(int i = 0;i<k.size();i++)
+            {
+                System.out.println(k.get(hashmapStrings[i]));
+            }
+            System.out.println(i++);
+        }
+
+
+
     }
 
     /**
@@ -250,15 +267,19 @@ public class MainWindowController implements Initializable
 
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
         {
-            for (String s : c.getAddedSubList())
+            if (c.next())
             {
-                if (!model.getSelectedList().contains(s))
+                for (String s : c.getAddedSubList())
                 {
-                    model.getSelectedList().add(s);
+                    if (!model.getSelectedList().contains(s))
+                    {
+                        model.getSelectedList().add(s);
+                    }
                 }
+                model.getSelectedList().removeAll(c.getRemoved());
             }
-            model.getSelectedList().removeAll(c.getRemoved());
         });
+
     }
 
     @FXML
@@ -301,6 +322,10 @@ public class MainWindowController implements Initializable
             {
                 String col = listOfStrings.get(i);
                 cellOrder.put(hashmapStrings[i], col);
+                if(i == 14)
+                {
+                    break;
+                }
             }
             return cellOrder;
         }
