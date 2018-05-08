@@ -198,3 +198,11 @@ File: filename
 Message:test
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Tue May 08 18:48:34 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+

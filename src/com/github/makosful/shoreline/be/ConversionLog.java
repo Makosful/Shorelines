@@ -31,7 +31,7 @@ public class ConversionLog
 
     public ConversionLog()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     public int getUserId()

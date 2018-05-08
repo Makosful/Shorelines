@@ -176,16 +176,17 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void saveLog(ObservableList<ConversionLog> conversionLog) throws DALException
+    public void saveLog(ConversionLog conversionLog) throws DALException
     {
+        //Get instance for calling the save log mehod, 
+        //which is part of a stategy pattern 
         LogContext logContextDB = new LogContext(lDAO);
         LogContext logContextFile = new LogContext(new LogFileDAO());
 
-        for (ConversionLog log : conversionLog)
-        {
-            logContextDB.saveLog(log);
-            logContextFile.saveLog(log);
-        }
+        //save log in db and locally
+        logContextDB.saveLog(conversionLog);
+        logContextFile.saveLog(conversionLog);
+        
 
     }
     //</editor-fold>

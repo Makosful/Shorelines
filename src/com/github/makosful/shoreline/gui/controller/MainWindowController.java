@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.io.File;
@@ -45,9 +46,11 @@ public class MainWindowController implements Initializable
    
     private MainWindowModel model;
     private Map<String, String> cellOrder;
+    private ConversionLog log;
     private List<Runnable> listTask;
     private String filePath;
     private int output = 0;
+
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
 
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
@@ -142,7 +145,9 @@ public class MainWindowController implements Initializable
         model = new MainWindowModel();
         cellOrder = new HashMap();
         listTask = new ArrayList();
-
+        log = new ConversionLog();
+        
+        AddListeners();
         addConfigs();
         addConfigListener();
     }
@@ -248,7 +253,9 @@ public class MainWindowController implements Initializable
     {
         output++;
         List<Map> mapTask = model.getValues(getMap());
+
         Runnable task = model.makeTask(mapTask, "output" + output + ".json");
+
         listTask.add(task);
     }
 
@@ -259,6 +266,7 @@ public class MainWindowController implements Initializable
          
         for (Runnable run : listTask)
         {
+
             exService.execute(run);
         }
 
@@ -270,6 +278,11 @@ public class MainWindowController implements Initializable
             alert.setContentText("You successfully converted the files to JSON");
             alert.setHeaderText("Info");
             alert.show();
+            
+            log.setMessage("Message");
+            log.setLogType("Conversion, no errors occured");
+            log.setDate(new Date());
+            model.saveLog(log);
 
         }
 
@@ -389,6 +402,7 @@ public class MainWindowController implements Initializable
      */
     private Map getMap()
     {
+        
         try
         {
             // Clearing hashMap.
@@ -399,17 +413,21 @@ public class MainWindowController implements Initializable
                 "userStatus", "createdOn", "createdBy", "nameDescription",
                 "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
             };
+            
+          
             List<String> listOfStrings = listViewSorted.getItems();
 
             for (int i = 0; i < listOfStrings.size(); i++)
             {
                 String col = listOfStrings.get(i);
                 cellOrder.put(hashmapStrings[i], col);
+
                 if (i == 14)
                 {
                     break;
                 }
             }
+
             return cellOrder;
         }
         catch (IndexOutOfBoundsException e)
@@ -432,6 +450,9 @@ public class MainWindowController implements Initializable
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
+        
+        //Set file name to log, which will be saved later
+        log.setFileName(file.getName());
     }
 
     /**

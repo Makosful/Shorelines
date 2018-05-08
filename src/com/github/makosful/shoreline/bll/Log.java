@@ -32,7 +32,7 @@ public class Log
      * @param conversionLog
      * @throws BLLException 
      */
-    public void saveLog(ObservableList<ConversionLog> conversionLog) throws BLLException
+    public void saveLog(ConversionLog conversionLog) throws BLLException
     {
         try
         {

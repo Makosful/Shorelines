@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,5 +37,7 @@ public interface IBLL
     public String[] getPassword() throws BLLException;
 
     public String generatePassword() throws BLLException;
+
+    public void saveLog(ConversionLog log) throws BLLException;
 
 }
