@@ -387,19 +387,22 @@ public class MainWindowController implements Initializable
     {
         try
         {
+            File file = new File("./res/logo.png");
+            Image icon = new Image(file.toURI().toString());
+
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Shoreline | Instructions");
+            stage.getIcons().add(icon);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         }
         catch (IOException ex)
         {
-            System.out.println("failed to open window");
+            System.out.println("failed to open the window");
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error opening the window");
             alert.setContentText(ex.getMessage());
             alert.show();
         }
