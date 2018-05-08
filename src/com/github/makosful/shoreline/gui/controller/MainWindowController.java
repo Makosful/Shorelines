@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -39,12 +41,12 @@ import org.controlsfx.control.CheckListView;
 public class MainWindowController implements Initializable
 {
 
-    
     private MainWindowModel model;
 
     private Map<String, String> cellOrder;
-    private List<Task> listTask;
-
+    private List<Runnable> listTask;
+    private String filePath;
+    private int output = 0;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
     private Color x211;
@@ -192,19 +194,33 @@ public class MainWindowController implements Initializable
      * @param event FXML Parameter
      */
     @FXML
-    private void handleConversion(ActionEvent event) throws BLLException
+    private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
-
+        output++;
         List<Map> mapTask = model.getValues(getMap());
-        Task task = model.makeTask(mapTask);
+        Runnable task = model.makeTask(mapTask, "output" + output + ".json");
         listTask.add(task);
-        Thread thread;
-        for(Task tsk : listTask)
+    }
+
+    @FXML
+    private synchronized void executeTaskBatch(ActionEvent event)
+    {
+        ExecutorService exService = Executors.newFixedThreadPool(4);
+        for (Runnable run : listTask)
         {
-            thread = new Thread(tsk);
-            thread.start();
+            exService.execute(run);
         }
 
+        exService.shutdown();
+        if (exService.isShutdown())
+        {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Convertion Info");
+            alert.setContentText("You successfully converted the files to JSON");
+            alert.setHeaderText("Info");
+            alert.show();
+
+        }
     }
 
     /**
@@ -465,4 +481,5 @@ public class MainWindowController implements Initializable
             alert.show();
         }
     }
+
 }

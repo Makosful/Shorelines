@@ -78,11 +78,15 @@ public class JsonWriter
      *
      * @throws IOException
      */
-    public void write() throws IOException
+    public void write() throws IOException 
     {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
         {
             write(bw);
+        }
+        catch(IOException ex)
+        {
+            throw new IOException(ex.getMessage());
         }
     }
 

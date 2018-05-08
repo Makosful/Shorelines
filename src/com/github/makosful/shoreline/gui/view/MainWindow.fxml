@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -77,13 +77,14 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-                <ButtonBar buttonMinWidth="150.0" buttonOrder="L+A+R">
+                <ButtonBar buttonMinWidth="150.0" buttonOrder="L+A+U+R">
                     <buttons>
                         <Button fx:id="btnChecklistCheck" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" ButtonBar.buttonData="LEFT" />
                         <ComboBox fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="LEFT" />
-                        <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Confirm &amp; Convert" ButtonBar.buttonData="APPLY" />
+                        <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add Task" ButtonBar.buttonData="APPLY" />
                         <TextField fx:id="txtFieldConfig" ButtonBar.buttonData="RIGHT" />
                         <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="RIGHT" />
+                  <Button mnemonicParsing="false" onAction="#executeTaskBatch" text="Convert Tasks" />
                     </buttons>
                 </ButtonBar>
          </children>

@@ -6,6 +6,10 @@ import com.github.makosful.shoreline.dal.Interfaces.IDAL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.concurrent.Task;
 
 /**
@@ -16,39 +20,32 @@ public class TaskManager
 {
 
     private IDAL dalManager;
-    Task task;
+    private Runnable task;
 
     public TaskManager()
     {
         dalManager = new DALManager();
     }
 
-    public Task makeTask(List<Map> list) throws BLLException
+    public Runnable makeTask(List<Map> list, String path) throws BLLException
     {
-        try
+         task = new Runnable()
         {
-            task = new Task()
+            @Override
+            public void run()
             {
-                @Override
-                protected Object call() throws Exception
+                try
                 {
-                    try
-                    {
-                        dalManager.jsonAdd(list);
-                        dalManager.jsonWrite();
-                        return task;
-                    }
-                    catch (Exception e)
-                    {
-                        throw new Exception("Failed to write to JSON");
-                    }
+                    dalManager.jsonSetOutPut(path);
+                    dalManager.jsonAdd(list);
+                    dalManager.jsonWrite();
                 }
-            };
-            return null;
-        }
-        catch (Exception e)
-        {
-            throw new BLLException("Failed to make new task");
-        }
+                catch (DALException ex)
+                {
+                    
+                }
+            }
+        };
+        return task;
     }
 }
