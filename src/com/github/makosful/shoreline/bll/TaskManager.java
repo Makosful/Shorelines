@@ -31,20 +31,14 @@ public class TaskManager
             {
                 try
                 {
-                    for (HashMap map : list)
-                    {
-//                        dal.jsonAdd(map);
-                    }
-                    dal.jsonWrite();
+                    dalManager.jsonAdd(list);
+                    dalManager.jsonWrite();
                     return true;
                 }
                 catch (DALException ex)
                 {
                     return false;
                 }
-                dalManager.jsonAdd(list);
-                dalManager.jsonWrite();
-                return null;
             }
         };
         return task;
