@@ -18,11 +18,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -133,6 +134,21 @@ public class MainWindowController implements Initializable
         addConfigs();
     }
 
+    public void handle(KeyEvent event)
+    {
+        if (listViewSorted.isFocused())
+        {
+            if (event.getCode() == KeyCode.UP && event.isControlDown())
+            {
+                moveItemDown();
+            }
+            if (event.getCode() == KeyCode.UP && event.isControlDown())
+            {
+                moveItemUp();
+            }
+        }
+    }
+
     /**
      * Moves the selected item up the list once
      *
@@ -140,6 +156,11 @@ public class MainWindowController implements Initializable
      */
     @FXML
     private void handleMoveItemUp(ActionEvent event)
+    {
+        moveItemUp();
+    }
+
+    private void moveItemUp()
     {
         // Checks if the selected index has been marked as moveable
         if (movable)
@@ -165,6 +186,11 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleMoveItemDown(ActionEvent event)
     {
+        moveItemDown();
+    }
+
+    private void moveItemDown()
+    {
         // Checks of the current item is marked as moveable
         if (movable)
         {
@@ -179,7 +205,6 @@ public class MainWindowController implements Initializable
             listViewSorted.getSelectionModel().select(prev);
             listViewSorted.requestFocus();
         }
-        addConfigListener();
     }
 
     /**
@@ -308,7 +333,6 @@ public class MainWindowController implements Initializable
         comboBoxConfig.getItems().addAll(configs);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
-
             @Override
             public String toString(Config config)
             {
@@ -323,7 +347,6 @@ public class MainWindowController implements Initializable
                         findFirst().orElse(null);
             }
         });
-
     }
 
     /**
@@ -335,7 +358,6 @@ public class MainWindowController implements Initializable
         {
             comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
             {
-
                 Config config = model.getConfig(newConfig.getId());
                 //listViewSorted.setItems(config.getChosenColumns());
                 if (newConfig != null)
