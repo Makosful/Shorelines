@@ -155,7 +155,7 @@ public class ExcelReader implements IReader
         Cell cell; // Generic cell
 
         int rows; // No of rows
-        rows = sheet.getPhysicalNumberOfRows();
+        rows = sheet.getPhysicalNumberOfRows() + 1;
         
         int cols = 0; // No of columns
         int tmp;
@@ -197,7 +197,7 @@ public class ExcelReader implements IReader
 
         // The handling of each cell
         //<editor-fold defaultstate="collapsed" desc="For Loop">
-        for (int i = 0; i < rows; i++)
+        for (int i = 1; i < rows; i++)
         {
             row = sheet.getRow(i);
             if (row != null)
