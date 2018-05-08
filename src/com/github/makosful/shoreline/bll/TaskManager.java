@@ -38,9 +38,9 @@ public class TaskManager
             {
                 try
                 {
-                    for (HashMap map : list )
+                    for (HashMap map : list)
                     {
-                        dal.jsonAdd(map);
+//                        dal.jsonAdd(map);
                     }
                     dal.jsonWrite();
                     return true;

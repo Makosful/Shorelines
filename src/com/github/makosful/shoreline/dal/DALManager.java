@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
+import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -45,7 +46,8 @@ public class DALManager implements IDAL
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
 
-        reader = new JsonReader();
+//        reader = new JsonReader();
+        reader = new ExcelReader();
 
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();

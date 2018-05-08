@@ -252,33 +252,47 @@ public class MainWindowController implements Initializable
 
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
         {
-            for (String s : c.getAddedSubList())
+            if (c.next())
             {
-                if (!model.getSelectedList().contains(s))
+                for (String s : c.getAddedSubList())
                 {
-                    model.getSelectedList().add(s);
+                    if (!model.getSelectedList().contains(s))
+                    {
+                        model.getSelectedList().add(s);
+                        System.out.println(s);
+                    }
                 }
+                model.getSelectedList().removeAll(c.getRemoved());
             }
-            model.getSelectedList().removeAll(c.getRemoved());
         });
     }
 
     @FXML
     private void handleChecklistItemsStatus(ActionEvent event)
     {
-        if (!isChecked)
-        {
-            chklistSelectData.getCheckModel().checkAll();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Check all");
-
-        }
-        else if (isChecked)
+        if (isChecked)
         {
             chklistSelectData.getCheckModel().clearChecks();
-            isChecked = !isChecked;
+            isChecked = false;
+            btnChecklistCheck.setText("Check all");
+        }
+        else
+        {
+            chklistSelectData.getCheckModel().checkAll();
+            isChecked = true;
             btnChecklistCheck.setText("Uncheck all");
         }
+
+//        if (!isChecked)
+//        {
+//            chklistSelectData.getCheckModel().checkAll();
+//
+//        }
+//        if (isChecked)
+//        {
+//            chklistSelectData.getCheckModel().clearChecks();
+//            btnChecklistCheck.setText("Uncheck all");
+//        }
     }
 
     /**
