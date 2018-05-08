@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.dal.Interfaces;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Exception.DALException;
+import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -31,12 +32,8 @@ public interface IDAL
     public String[] getPassword() throws DALException;
 
     public void saveConfig(String configName, ObservableList<String> items) throws DALException;
-
-    public void jsonAdd(List<Map> maps) throws DALException;
     
-    public void jsonSetOutPut(String path) throws DALException;
-
-    public void jsonWrite() throws DALException;
+    public void createFile(List<Map> list, String path) throws DALException;
 
     public ObservableList<Config> getAllConfigs() throws DALException;
 

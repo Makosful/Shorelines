@@ -153,16 +153,4 @@ public class BLLManager implements IBLL
         }
     }
 
-    @Override
-    public void jsonSetOutPut(String path) throws BLLException
-    {
-        try
-        {
-            dal.jsonSetOutPut(path);
-        }
-        catch (DALException ex)
-        {
-            throw new BLLException(ex.getMessage());
-        }
-    }
 }

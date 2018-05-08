@@ -34,20 +34,20 @@ import javafx.collections.ObservableList;
 public class DALManager implements IDAL
 {
 
-    private JsonWriter jWriter;
     private AbstractFactoryReader readerFactory;
     private IReader reader; 
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
     private LogDBDAO lDAO;
+    private JsonWriter jWriter;
 
     public DALManager()
     {
         cDAO = new ConfigDAO();
-        jWriter = new JsonWriter();
         readerFactory = FactoryProducer.getFactory();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
+        jWriter = new JsonWriter();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Core File In">
@@ -98,28 +98,7 @@ public class DALManager implements IDAL
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Core File Out">
-    @Override
-    public void jsonAdd(List<Map> maps)
-    {
-        jWriter.setJson(maps);
-    }
 
-    @Override
-    public void jsonWrite() throws DALException
-    {
-
-        try
-        {
-            jWriter.write();
-        }
-        catch (IOException ex)
-        {
-            throw new DALException("Could not write to JSON");
-        }
-        
-    }
-    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Config">
     @Override
@@ -211,9 +190,17 @@ public class DALManager implements IDAL
     }
     //</editor-fold>
 
+    
     @Override
-    public void jsonSetOutPut(String path) throws DALException
+    public void createFile(List<Map> list, String path) throws DALException 
     {
-        jWriter.setOutput(path);
+        try
+        {
+            jWriter.createFile(list, path);
+        }
+        catch (IOException ex)
+        {
+            throw new DALException("Could not write to file");
+        }
     }
 }

@@ -42,7 +42,7 @@ import org.controlsfx.control.CheckListView;
  */
 public class MainWindowController implements Initializable
 {
-
+   
     private MainWindowModel model;
     private Map<String, String> cellOrder;
     private List<Runnable> listTask;
@@ -253,9 +253,10 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private synchronized void executeTaskBatch(ActionEvent event)
+    private void executeTaskBatch(ActionEvent event)
     {
-        ExecutorService exService = Executors.newFixedThreadPool(4);
+         ExecutorService exService = Executors.newFixedThreadPool(4);
+         
         for (Runnable run : listTask)
         {
             exService.execute(run);

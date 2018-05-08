@@ -25,21 +25,9 @@ public class JsonWriter
     public JsonWriter()
     {
         gson = new Gson();
-        path = "output.json";
         string = new StringWriter();
     }
 
-    /**
-     * Creates a new JSON with the desired output path
-     *
-     * @param path
-     */
-    public JsonWriter(String path)
-    {
-        gson = new Gson();
-        this.path = path;
-        string = new StringWriter();
-    }
     //</editor-fold>
 
     public void setJson(List<Map> maps)
@@ -78,13 +66,13 @@ public class JsonWriter
      *
      * @throws IOException
      */
-    public void write() throws IOException 
+    public void write() throws IOException
     {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
         {
             write(bw);
         }
-        catch(IOException ex)
+        catch (IOException ex)
         {
             throw new IOException(ex.getMessage());
         }
@@ -110,6 +98,21 @@ public class JsonWriter
     public void write(Writer out) throws IOException
     {
         out.write(string.toString());
+    }
+
+    public void createFile(List<Map> list, String path) throws IOException
+    {
+        try
+        {
+            JsonWriter jWriter = new JsonWriter();
+            jWriter.setJson(list);
+            jWriter.setOutput(path);
+            jWriter.write();
+        }
+        catch (IOException ex)
+        {
+           ex.printStackTrace();
+        }
     }
     //</editor-fold>
 }

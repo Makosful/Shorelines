@@ -205,8 +205,4 @@ public class MainWindowModel
        return bll.makeTask(list, path);
     }
     
-    public void jsonSetOutPut(String path) throws BLLException
-    {
-        bll.jsonSetOutPut(path);
-    }
 }

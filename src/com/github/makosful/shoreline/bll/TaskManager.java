@@ -3,14 +3,12 @@ package com.github.makosful.shoreline.bll;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
-import java.util.HashMap;
+import com.github.makosful.shoreline.dal.Json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.concurrent.Task;
 
 /**
  *
@@ -36,9 +34,7 @@ public class TaskManager
             {
                 try
                 {
-                    dalManager.jsonSetOutPut(path);
-                    dalManager.jsonAdd(list);
-                    dalManager.jsonWrite();
+                    dalManager.createFile(list, path);
                 }
                 catch (DALException ex)
                 {
