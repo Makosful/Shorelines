@@ -16,7 +16,7 @@ public class Config
 {
     private int id;
     private String name;
-    private ObservableList<ColumnObject> chosenColumns  = FXCollections.observableArrayList();
+    private ObservableList<String> chosenColumns  = FXCollections.observableArrayList();
 
     
     
@@ -40,12 +40,12 @@ public class Config
         this.name = name;
     }
     
-    public ObservableList<ColumnObject> getChosenColumns()
+    public ObservableList<String> getChosenColumns()
     {
         return chosenColumns;
     }
 
-    public void setChosenColumns(ObservableList<ColumnObject> chosenColumns)
+    public void setChosenColumns(ObservableList<String> chosenColumns)
     {
         this.chosenColumns = chosenColumns;
     }

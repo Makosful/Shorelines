@@ -37,7 +37,8 @@ import org.controlsfx.control.CheckListView;
  */
 public class MainWindowController implements Initializable
 {
-int i = 0;
+
+    int i = 0;
     private MainWindowModel model;
 
     private Map<String, String> cellOrder;
@@ -190,24 +191,22 @@ int i = 0;
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-                    String[] hashmapStrings = new String[]
-            {
-                "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
-                "userStatus", "createdOn", "createdBy", "nameDescription",
-                "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-            };
+        String[] hashmapStrings = new String[]
+        {
+            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
+            "userStatus", "createdOn", "createdBy", "nameDescription",
+            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
+        };
         List<Map> mapTask = model.getValues(getMap());
         model.makeTask(mapTask);
-        for(Map k : mapTask)
+        for (Map k : mapTask)
         {
-            for(int i = 0;i<k.size();i++)
+            for (int i = 0; i < k.size(); i++)
             {
                 System.out.println(k.get(hashmapStrings[i]));
             }
             System.out.println(i++);
         }
-
-
 
     }
 
@@ -274,6 +273,7 @@ int i = 0;
                     if (!model.getSelectedList().contains(s))
                     {
                         model.getSelectedList().add(s);
+                        System.out.println(s);
                     }
                 }
                 model.getSelectedList().removeAll(c.getRemoved());
@@ -285,19 +285,29 @@ int i = 0;
     @FXML
     private void handleChecklistItemsStatus(ActionEvent event)
     {
-        if (!isChecked)
-        {
-            chklistSelectData.getCheckModel().checkAll();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Check all");
-
-        }
-        else if (isChecked)
+        if (isChecked)
         {
             chklistSelectData.getCheckModel().clearChecks();
-            isChecked = !isChecked;
+            isChecked = false;
+            btnChecklistCheck.setText("Check all");
+        }
+        else
+        {
+            chklistSelectData.getCheckModel().checkAll();
+            isChecked = true;
             btnChecklistCheck.setText("Uncheck all");
         }
+
+//        if (!isChecked)
+//        {
+//            chklistSelectData.getCheckModel().checkAll();
+//
+//        }
+//        if (isChecked)
+//        {
+//            chklistSelectData.getCheckModel().clearChecks();
+//            btnChecklistCheck.setText("Uncheck all");
+//        }
     }
 
     /**
@@ -322,7 +332,7 @@ int i = 0;
             {
                 String col = listOfStrings.get(i);
                 cellOrder.put(hashmapStrings[i], col);
-                if(i == 14)
+                if (i == 14)
                 {
                     break;
                 }
@@ -393,17 +403,14 @@ int i = 0;
         {
             comboBoxConfig.valueProperty().addListener((obs, oldConfig, newConfig) ->
             {
-
-                Config config = model.getConfig(newConfig.getId());
-                //listViewSorted.setItems(config.getChosenColumns());
                 if (newConfig != null)
                 {
                     chklistSelectData.getCheckModel().clearChecks();
                     if (!newConfig.getName().equals("No config"))
                     {
-                        for (ColumnObject c : newConfig.getChosenColumns())
+                        for (String c : newConfig.getChosenColumns())
                         {
-                            chklistSelectData.getCheckModel().check(c.getColumnID());
+                            chklistSelectData.getCheckModel().check((c));
                         }
                     }
                 }

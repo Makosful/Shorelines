@@ -1,7 +1,9 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.dal.DALManager;
+import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.concurrent.Task;
@@ -14,6 +16,7 @@ public class TaskManager
 {
 
     private IDAL dalManager;
+    Task task;
 
     public TaskManager()
     {
@@ -22,16 +25,23 @@ public class TaskManager
 
     public Task makeTask(List<Map> list)
     {
-        Task task = new Task()
+        task = new Task()
         {
             @Override
             protected Object call() throws Exception
             {
-                dalManager.jsonAdd(list);
-                dalManager.jsonWrite();
-                return null;
+                try
+                {
+                    dalManager.jsonAdd(list);
+                    dalManager.jsonWrite();
+                    return true;
+                }
+                catch (DALException ex)
+                {
+                    return false;
+                }
             }
         };
-        return task;
+        return null;
     }
 }

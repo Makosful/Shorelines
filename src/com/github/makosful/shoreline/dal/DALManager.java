@@ -45,6 +45,7 @@ public class DALManager implements IDAL
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
 
+//      reader = new JsonReader();
         reader = new ExcelReader();
 
         storeLogIn = new StoreLogIn();
@@ -123,7 +124,7 @@ public class DALManager implements IDAL
 
             for (String column : items)
             {
-                //cDAO.saveConfigColumns(configId, column);
+                cDAO.saveConfigColumns(configId, column);
             }
         }
         catch (SQLException ex)
