@@ -102,11 +102,11 @@ public class MainWindowModel
         }
     }
 
-    public List<Map> getValues()
+    public List<Map> getValues(Map<String, String> map)
     {
         try
         {
-            return bll.getValues(null);
+            return bll.getValues(map);
         }
         catch (BLLException ex)
         {

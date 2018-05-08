@@ -134,11 +134,11 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public List<Map> getValues(Map<String, String> keys) throws BLLException
+    public List<Map> getValues(Map<String, String> map) throws BLLException
     {
         try
         {
-            return dal.fileGetValues(keys);
+            return dal.fileGetValues(map);
         }
         catch (DALException ex)
         {
