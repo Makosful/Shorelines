@@ -14,7 +14,6 @@ import java.util.concurrent.Executors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,10 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -47,15 +43,9 @@ public class MainWindowController implements Initializable
     private MainWindowModel model;
     private Map<String, String> cellOrder;
     private ConversionLog log;
-    private List<Runnable> listTask;
-    private String filePath;
-    private int output = 0;
-
-    //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
 
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
 //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
-
     @FXML
     private Color x211;
     @FXML
@@ -128,7 +118,13 @@ public class MainWindowController implements Initializable
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Boolean ListViewInFocus = false;
+
     private Integer currentIndex;
+    private Integer output = 0;
+
+    private String filePath;
+
+    private List<Runnable> listTask;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
@@ -146,7 +142,7 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
-        
+
         AddListeners();
         addConfigs();
         addConfigListener();
@@ -265,7 +261,6 @@ public class MainWindowController implements Initializable
         ExecutorService exService = Executors.newFixedThreadPool(4);
         for (Runnable run : listTask)
         {
-
             exService.execute(run);
         }
 
@@ -277,7 +272,7 @@ public class MainWindowController implements Initializable
             alert.setContentText("You successfully converted the files to JSON");
             alert.setHeaderText("Info");
             alert.show();
-            
+
             log.setLogType("Conversion, no errors occured");
             log.setDate(new Date());
             model.saveLog(log);
@@ -292,14 +287,7 @@ public class MainWindowController implements Initializable
     private void checkIfValidToRelocate()
     {
         int index = listViewSorted.getSelectionModel().getSelectedIndex();
-        if (index >= 0 && index < model.getSelectedList().size())
-        {
-            movable = true;
-        }
-        else
-        {
-            movable = false;
-        }
+        movable = index >= 0 && index < model.getSelectedList().size();
     }
 
     /**
@@ -331,13 +319,9 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
-        listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
+        listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) ->
                               {
-                                  @Override
-                                  public void handle(KeyEvent event)
-                                  {
-                                      shortcutMoveItemListView(event);
-                                  }
+                                  shortcutMoveItemListView(event);
                               });
 
         listViewSorted.setItems(model.getSelectedList());
@@ -350,14 +334,7 @@ public class MainWindowController implements Initializable
 
         listViewSorted.focusedProperty().addListener((observable, oldValue, newValue) ->
         {
-            if (newValue)
-            {
-                ListViewInFocus = true;
-            }
-            else
-            {
-                ListViewInFocus = false;
-            }
+            ListViewInFocus = newValue;
         });
 
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
@@ -375,6 +352,8 @@ public class MainWindowController implements Initializable
                 model.getSelectedList().removeAll(c.getRemoved());
             }
         });
+
+//        listViewSorted.setCellFactory(param -> new headerCell());
     }
 
     @FXML
@@ -410,26 +389,26 @@ public class MainWindowController implements Initializable
                 "userStatus", "createdOn", "createdBy", "nameDescription",
                 "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
             };
-            
+
             //String for storing log info 
             String logMessage = "";
-            
+
             List<String> listOfStrings = listViewSorted.getItems();
 
             for (int i = 0; i < listOfStrings.size(); i++)
             {
                 String col = listOfStrings.get(i);
                 cellOrder.put(hashmapStrings[i], col);
-                
-                logMessage += hashmapStrings[i]+" : "+col+",";
-                
+
+                logMessage += hashmapStrings[i] + " : " + col + ",";
+
                 if (i == 14)
                 {
                     break;
                 }
             }
             log.setMessage(logMessage);
-            
+
             return cellOrder;
         }
         catch (IndexOutOfBoundsException e)
@@ -452,7 +431,7 @@ public class MainWindowController implements Initializable
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
-        
+
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
     }
@@ -563,4 +542,88 @@ public class MainWindowController implements Initializable
         }
     }
 
+    private class headerCell extends ListCell<String>
+    {
+
+        public headerCell()
+        {
+            ListCell thisCell = this;
+
+            setOnDragDetected(event ->
+            {
+                if (getItem() == null)
+                {
+                    return;
+                }
+                ObservableList<String> items = getListView().getItems();
+                ClipboardContent content = new ClipboardContent();
+                content.putString(getItem());
+                event.consume();
+            });
+
+            setOnDragOver(event ->
+            {
+                if (event.getGestureSource() != thisCell
+                    && event.getDragboard().hasString())
+                {
+                    event.acceptTransferModes(TransferMode.MOVE);
+                }
+                event.consume();
+            });
+
+            setOnDragEntered(event ->
+            {
+                if (event.getGestureSource() != thisCell
+                    && event.getDragboard().hasString())
+                {
+                    setOpacity(0.3);
+                }
+            });
+
+            setOnDragExited(event ->
+            {
+                if (event.getGestureSource() != thisCell
+                    && event.getDragboard().hasString())
+                {
+                    setOpacity(1);
+                }
+            });
+
+            setOnDragDropped(event ->
+            {
+                if (getItem() == null)
+                {
+                    return;
+                }
+
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+
+                if (db.hasString())
+                {
+                    ObservableList<String> items = getListView().getItems();
+                    int draggedIdx = items.indexOf(db.getString());
+                    int thisIdx = items.indexOf(getItem());
+
+                    items.set(draggedIdx, getItem());
+                    items.set(thisIdx, db.getString());
+
+                    List<String> itemscopy = new ArrayList<>(getListView().getItems());
+                    getListView().getItems().setAll(itemscopy);
+
+                    success = true;
+                }
+                event.setDropCompleted(success);
+                event.consume();
+            });
+
+            setOnDragDone(DragEvent::consume);
+        }
+
+        @Override
+        protected void updateItem(String item, boolean empty)
+        {
+            super.updateItem(item, empty);
+        }
+    }
 }
