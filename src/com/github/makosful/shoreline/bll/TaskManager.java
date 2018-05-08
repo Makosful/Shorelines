@@ -16,6 +16,7 @@ public class TaskManager
 {
 
     private IDAL dalManager;
+    Task task;
 
     public TaskManager()
     {
@@ -24,29 +25,17 @@ public class TaskManager
 
     public Task makeTask(List<Map> list)
     {
-        Task task = new Task()
+         task = new Task()
         {
             @Override
             protected Object call() throws Exception
             {
-                try
-                {
-                    for (HashMap map : list)
-                    {
-//                        dal.jsonAdd(map);
-                    }
-                    dal.jsonWrite();
-                    return true;
-                }
-                catch (DALException ex)
-                {
-                    return false;
-                }
+
                 dalManager.jsonAdd(list);
                 dalManager.jsonWrite();
-                return null;
+                return task;
             }
         };
-        return task;
+        return null;
     }
 }
