@@ -65,7 +65,6 @@
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                  <MenuItem fx:id="menuItemInstructions" mnemonicParsing="false" onAction="#handleShowInstructionsWindow" text="Instructions | Tutorial" />
                     </items>
                 </Menu>
             </menus>
