@@ -196,9 +196,19 @@ public class MainWindowModel
         cache.changeScene(Scenes.Login.getValue()); // ID 1
     }
 
-    public Task makeTask(List<Map> list) throws BLLException
+    public Config getConfig(int id)
     {
-       return bll.makeTask(list);
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public Runnable makeTask(List<Map> list, String path) throws BLLException
+    {
+       return bll.makeTask(list, path);
+    }
+    
+    public void jsonSetOutPut(String path) throws BLLException
+    {
+        bll.jsonSetOutPut(path);
     }
 
     /**

@@ -28,7 +28,9 @@ public interface IBLL
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 
-    public Task makeTask(List<Map> fileDataList) throws BLLException;
+    public Runnable makeTask(List<Map> fileDataList, String path) throws BLLException;
+    
+    public void jsonSetOutPut(String path) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
 

@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
-import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -109,14 +108,16 @@ public class DALManager implements IDAL
     @Override
     public void jsonWrite() throws DALException
     {
+
         try
         {
             jWriter.write();
         }
         catch (IOException ex)
         {
-            throw new DALException(ex.getLocalizedMessage(), ex);
+            throw new DALException("Could not write to JSON");
         }
+        
     }
     //</editor-fold>
 
@@ -210,4 +211,10 @@ public class DALManager implements IDAL
 
     }
     //</editor-fold>
+
+    @Override
+    public void jsonSetOutPut(String path) throws DALException
+    {
+        jWriter.setOutput(path);
+    }
 }

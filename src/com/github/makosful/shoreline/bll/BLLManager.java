@@ -5,8 +5,6 @@ import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
-import com.github.makosful.shoreline.dal.Interfaces.IReader;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -71,11 +69,11 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public Task makeTask(List<Map> list) throws BLLException
+    public Runnable makeTask(List<Map> list, String path) throws BLLException
     {
         try 
         {
-            return tasks.makeTask(list);
+            return tasks.makeTask(list, path);
         }
         catch (BLLException ex)
         {
@@ -160,5 +158,18 @@ public class BLLManager implements IBLL
     public void saveLog(ConversionLog conversionLog) throws BLLException
     {
         log.saveLog(conversionLog);
+    }
+    
+    @Override
+    public void jsonSetOutPut(String path) throws BLLException
+    {
+        try
+        {
+            dal.jsonSetOutPut(path);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getMessage());
+        }
     }
 }
