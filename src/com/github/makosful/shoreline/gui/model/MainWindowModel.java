@@ -195,11 +195,6 @@ public class MainWindowModel
         cache.changeScene(Scenes.Login.getValue()); // ID 1
     }
 
-    public Config getConfig(int id)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
     public Task makeTask(List<Map> list) throws BLLException
     {
        return bll.makeTask(list);
