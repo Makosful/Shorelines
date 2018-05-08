@@ -3,11 +3,11 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
+import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Exception.ReaderException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
-import com.github.makosful.shoreline.dal.Json.JsonReader;
 import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogContext;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
@@ -45,7 +45,8 @@ public class DALManager implements IDAL
         cDAO = new ConfigDAO();
         jWriter = new JsonWriter();
 
-        reader = new JsonReader();
+//      reader = new JsonReader();
+        reader = new ExcelReader();
 
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
@@ -79,11 +80,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public List<Map> fileGetValues(Map<String, String> keys) throws DALException
+    public List<Map> fileGetValues(Map<String, String> map) throws DALException
     {
         try
         {
-            return reader.getValues(keys);
+            return reader.getValues(map);
         }
         catch (ReaderException ex)
         {

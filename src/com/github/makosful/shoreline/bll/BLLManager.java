@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to
@@ -67,9 +68,9 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public void addTask(List<HashMap> list)
+    public Task makeTask(List<Map> list)
     {
-        tasks.addTask(list);
+        return tasks.makeTask(list);
     }
 
     @Override
@@ -133,11 +134,11 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public List<Map> getValues(Map<String, String> keys) throws BLLException
+    public List<Map> getValues(Map<String, String> map) throws BLLException
     {
         try
         {
-            return dal.fileGetValues(keys);
+            return dal.fileGetValues(map);
         }
         catch (DALException ex)
         {

@@ -8,10 +8,7 @@ import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,7 +39,7 @@ public class MainWindowController implements Initializable
 
     private MainWindowModel model;
 
-    private HashMap<String, String> cellOrder;
+    private Map<String, String> cellOrder;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -192,8 +189,9 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        hashMapPut();
-        //model.convert("import_data.xlsx", cellOrder, true);
+        List<Map> mapTask = model.getValues(getMap());
+        model.makeTask(mapTask);
+        
     }
 
     /**
@@ -252,40 +250,54 @@ public class MainWindowController implements Initializable
 
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
         {
-            for (String s : c.getAddedSubList())
+            if (c.next())
             {
-                if (!model.getSelectedList().contains(s))
+                for (String s : c.getAddedSubList())
                 {
-                    model.getSelectedList().add(s);
+                    if (!model.getSelectedList().contains(s))
+                    {
+                        model.getSelectedList().add(s);
+                        System.out.println(s);
+                    }
                 }
+                model.getSelectedList().removeAll(c.getRemoved());
             }
-            model.getSelectedList().removeAll(c.getRemoved());
         });
     }
 
     @FXML
     private void handleChecklistItemsStatus(ActionEvent event)
     {
-        if (!isChecked)
-        {
-            chklistSelectData.getCheckModel().checkAll();
-            isChecked = !isChecked;
-            btnChecklistCheck.setText("Check all");
-
-        }
-        else if (isChecked)
+        if (isChecked)
         {
             chklistSelectData.getCheckModel().clearChecks();
-            isChecked = !isChecked;
+            isChecked = false;
+            btnChecklistCheck.setText("Check all");
+        }
+        else
+        {
+            chklistSelectData.getCheckModel().checkAll();
+            isChecked = true;
             btnChecklistCheck.setText("Uncheck all");
         }
+
+//        if (!isChecked)
+//        {
+//            chklistSelectData.getCheckModel().checkAll();
+//
+//        }
+//        if (isChecked)
+//        {
+//            chklistSelectData.getCheckModel().clearChecks();
+//            btnChecklistCheck.setText("Uncheck all");
+//        }
     }
 
     /**
      * HashMap to save the column number of columnObject, and the name of
      * the json static label for example "siteName"
      */
-    private void hashMapPut()
+    private Map getMap()
     {
         try
         {
@@ -304,11 +316,13 @@ public class MainWindowController implements Initializable
                 String col = listOfStrings.get(i);
                 cellOrder.put(hashmapStrings[i], col);
             }
+            return cellOrder;
         }
         catch (IndexOutOfBoundsException e)
         {
 
         }
+        return null;
     }
 
     /**

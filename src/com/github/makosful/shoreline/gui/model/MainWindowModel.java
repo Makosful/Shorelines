@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -101,11 +102,11 @@ public class MainWindowModel
         }
     }
 
-    public List<Map> getValues()
+    public List<Map> getValues(Map<String, String> map)
     {
         try
         {
-            return bll.getValues(null);
+            return bll.getValues(map);
         }
         catch (BLLException ex)
         {
@@ -197,5 +198,10 @@ public class MainWindowModel
     public Config getConfig(int id)
     {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public Task makeTask(List<Map> list) throws BLLException
+    {
+       return bll.makeTask(list);
     }
 }
