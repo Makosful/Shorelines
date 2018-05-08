@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 /**
  * This interface will declare all the methods the Business Logic Layer's facade
@@ -26,7 +27,7 @@ public interface IBLL
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 
-    public void addTask(List<HashMap> fileDataList) throws BLLException;
+    public Task makeTask(List<Map> fileDataList) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
 
