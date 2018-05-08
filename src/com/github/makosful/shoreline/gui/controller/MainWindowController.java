@@ -12,6 +12,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,10 +39,11 @@ import org.controlsfx.control.CheckListView;
 public class MainWindowController implements Initializable
 {
 
-    int i = 0;
+    
     private MainWindowModel model;
 
     private Map<String, String> cellOrder;
+    private List<Task> listTask;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -129,6 +131,7 @@ public class MainWindowController implements Initializable
 
         model = new MainWindowModel();
         cellOrder = new HashMap();
+        listTask = new ArrayList();
 
         AddListeners();
         addConfigs();
@@ -191,21 +194,15 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        String[] hashmapStrings = new String[]
-        {
-            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
-            "userStatus", "createdOn", "createdBy", "nameDescription",
-            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-        };
+
         List<Map> mapTask = model.getValues(getMap());
-        model.makeTask(mapTask);
-        for (Map k : mapTask)
+        Task task = model.makeTask(mapTask);
+        listTask.add(task);
+        Thread thread;
+        for(Task tsk : listTask)
         {
-            for (int i = 0; i < k.size(); i++)
-            {
-                System.out.println(k.get(hashmapStrings[i]));
-            }
-            System.out.println(i++);
+            thread = new Thread(tsk);
+            thread.start();
         }
 
     }

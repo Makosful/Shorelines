@@ -23,25 +23,32 @@ public class TaskManager
         dalManager = new DALManager();
     }
 
-    public Task makeTask(List<Map> list)
+    public Task makeTask(List<Map> list) throws BLLException
     {
-        task = new Task()
+        try
         {
-            @Override
-            protected Object call() throws Exception
+            task = new Task()
             {
-                try
+                @Override
+                protected Object call() throws Exception
                 {
-                    dalManager.jsonAdd(list);
-                    dalManager.jsonWrite();
-                    return true;
+                    try
+                    {
+                        dalManager.jsonAdd(list);
+                        dalManager.jsonWrite();
+                        return task;
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Failed to write to JSON");
+                    }
                 }
-                catch (DALException ex)
-                {
-                    return false;
-                }
-            }
-        };
-        return null;
+            };
+            return null;
+        }
+        catch (Exception e)
+        {
+            throw new BLLException("Failed to make new task");
+        }
     }
 }
