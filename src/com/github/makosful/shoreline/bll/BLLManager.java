@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -31,14 +32,14 @@ public class BLLManager implements IBLL
 {
 
     private final IDAL dal;
-
+    private final Log log;
     private final TaskManager tasks;
     private final PasswordGenerator pass;
 
     public BLLManager()
     {
         dal = new DALManager();
-
+        log = new Log();
         tasks = new TaskManager();
         pass = new PasswordGenerator(12);
     }
@@ -153,5 +154,11 @@ public class BLLManager implements IBLL
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
+    }
+
+    @Override
+    public void saveLog(ConversionLog conversionLog) throws BLLException
+    {
+        log.saveLog(conversionLog);
     }
 }

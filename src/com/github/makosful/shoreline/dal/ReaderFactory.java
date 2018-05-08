@@ -10,28 +10,21 @@ import com.github.makosful.shoreline.dal.Json.JsonReader;
  */
 public class ReaderFactory extends AbstractFactoryReader{
 
-
-    
     @Override
     public IReader getReader(String path)
     {
         String extension = getExtension(path);
         
-        if(extension.equalsIgnoreCase("xlsx"))
+        switch(extension)
         {
-            return new ExcelReader();
-        }
-        else if(extension.equalsIgnoreCase("xls"))
-        {
-            return new ExcelReader();
-        }
-        else if(extension.equalsIgnoreCase("json"))
-        {
-            return new JsonReader();
-        }
-        else
-        {
-            return null;
+            case "xlsx":
+                return new ExcelReader();
+            case "xls":
+                return new ExcelReader();
+            case "json":
+                return new JsonReader();
+            default: 
+                throw new IllegalArgumentException("The filetype is not valid");
         }
         
     }

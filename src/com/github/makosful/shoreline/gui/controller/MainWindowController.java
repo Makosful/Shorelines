@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.io.File;
@@ -44,6 +45,7 @@ public class MainWindowController implements Initializable
 
     private Map<String, String> cellOrder;
     private List<Task> listTask;
+    private ConversionLog log;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
@@ -132,7 +134,8 @@ public class MainWindowController implements Initializable
         model = new MainWindowModel();
         cellOrder = new HashMap();
         listTask = new ArrayList();
-
+        log = new ConversionLog();
+        
         AddListeners();
         addConfigs();
         addConfigListener();
@@ -197,12 +200,18 @@ public class MainWindowController implements Initializable
 
         List<Map> mapTask = model.getValues(getMap());
         Task task = model.makeTask(mapTask);
+        
         listTask.add(task);
         Thread thread;
         for(Task tsk : listTask)
         {
             thread = new Thread(tsk);
             thread.start();
+            
+            log.setLogType("Conversion, no errors occured");
+            log.setDate(new Date());
+            model.saveLog(log);
+            
         }
 
     }
@@ -323,17 +332,26 @@ public class MainWindowController implements Initializable
                 "userStatus", "createdOn", "createdBy", "nameDescription",
                 "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
             };
+            
+            //String for storing log info 
+            String logMessage = "";
+            
             List<String> listOfStrings = listViewSorted.getItems();
 
             for (int i = 0; i < listOfStrings.size(); i++)
             {
                 String col = listOfStrings.get(i);
                 cellOrder.put(hashmapStrings[i], col);
+                
+                logMessage += hashmapStrings[i]+" : "+col+",";
+                
                 if (i == 14)
                 {
                     break;
                 }
             }
+            log.setMessage(logMessage);
+            
             return cellOrder;
         }
         catch (IndexOutOfBoundsException e)
@@ -356,6 +374,9 @@ public class MainWindowController implements Initializable
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
+        
+        //Set file name to log, which will be saved later
+        log.setFileName(file.getName());
     }
 
     /**

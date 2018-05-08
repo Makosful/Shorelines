@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.gui.model;
 
 import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.Config;
+import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
@@ -144,7 +145,7 @@ public class MainWindowModel
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessage.setValue(ex.getLocalizedMessage());
         }
     }
 
@@ -162,7 +163,7 @@ public class MainWindowModel
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(MainWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+            errorMessage.setValue(ex.getLocalizedMessage());
         }
         return null;
     }
@@ -198,5 +199,21 @@ public class MainWindowModel
     public Task makeTask(List<Map> list) throws BLLException
     {
        return bll.makeTask(list);
+    }
+
+    /**
+     * Method to pass the log down to data access objects for storing the log
+     * @param log 
+     */
+    public void saveLog(ConversionLog log)
+    {
+        try
+        {
+            bll.saveLog(log);
+        }
+        catch (BLLException ex)
+        {
+            errorMessage.setValue(ex.getLocalizedMessage());
+        }
     }
 }
