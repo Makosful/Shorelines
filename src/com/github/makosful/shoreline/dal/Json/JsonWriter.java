@@ -30,7 +30,7 @@ public class JsonWriter
 
     //</editor-fold>
 
-    public void setJson(List<Map> maps)
+    private void setJson(List<Map> maps)
     {
         string.write(gson.toJson(maps));
     }
@@ -41,19 +41,9 @@ public class JsonWriter
      *
      * @param path The path to save to
      */
-    public void setOutput(String path)
+    private void setOutput(String path)
     {
         this.path = path;
-    }
-
-    /**
-     * Returns the current output path
-     *
-     * @return Returns a String object with the current path
-     */
-    public String getOutput()
-    {
-        return this.path;
     }
 
     /**
@@ -66,7 +56,7 @@ public class JsonWriter
      *
      * @throws IOException
      */
-    public void write() throws IOException
+    private void write() throws IOException
     {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
         {
@@ -95,7 +85,7 @@ public class JsonWriter
      *
      * @throws IOException
      */
-    public void write(Writer out) throws IOException
+    private void write(Writer out) throws IOException
     {
         out.write(string.toString());
     }
