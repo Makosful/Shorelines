@@ -16,6 +16,7 @@ public class TaskManager
 {
 
     private IDAL dalManager;
+    Task task;
 
     public TaskManager()
     {
@@ -24,7 +25,7 @@ public class TaskManager
 
     public Task makeTask(List<Map> list)
     {
-        Task task = new Task()
+        task = new Task()
         {
             @Override
             protected Object call() throws Exception
@@ -41,6 +42,6 @@ public class TaskManager
                 }
             }
         };
-        return task;
+        return null;
     }
 }

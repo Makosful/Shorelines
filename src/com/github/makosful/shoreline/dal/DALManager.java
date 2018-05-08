@@ -124,7 +124,7 @@ public class DALManager implements IDAL
 
             for (String column : items)
             {
-                //cDAO.saveConfigColumns(configId, column);
+                cDAO.saveConfigColumns(configId, column);
             }
         }
         catch (SQLException ex)
