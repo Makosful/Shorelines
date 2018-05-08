@@ -130,6 +130,7 @@ public class MainWindowController implements Initializable
 
         AddListeners();
         addConfigs();
+        addConfigListener();
     }
 
     /**
@@ -178,7 +179,6 @@ public class MainWindowController implements Initializable
             listViewSorted.getSelectionModel().select(prev);
             listViewSorted.requestFocus();
         }
-        addConfigListener();
     }
 
     /**
@@ -389,7 +389,7 @@ public class MainWindowController implements Initializable
                     {
                         for (String c : newConfig.getChosenColumns())
                         {
-                            chklistSelectData.getCheckModel().check((c));
+                            chklistSelectData.getCheckModel().check(chklistSelectData.getCheckModel().getItemIndex(c));
                         }
                     }
                 }

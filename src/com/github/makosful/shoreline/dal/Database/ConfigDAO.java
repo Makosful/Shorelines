@@ -132,8 +132,7 @@ public class ConfigDAO
         try (Connection con = db.getConnection())   
         {
          String sql = "SELECT "
-                       + "ColumnName, "
-                       + "ColumnId "
+                       + "ColumnName "
                        + "FROM ConfigColumn "
                        + "WHERE ConfigId = ?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
