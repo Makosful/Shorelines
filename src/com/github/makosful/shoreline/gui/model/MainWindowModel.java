@@ -188,20 +188,7 @@ public class MainWindowModel
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //</editor-fold>
-
-    public void logout()
-    {
-        cache.clearUser();
-        cache.changeScene(Scenes.Login.getValue()); // ID 1
-    }
-
-    public Runnable makeTask(List<Map> list, String path) throws BLLException
-    {
-       return bll.makeTask(list, path);
-    }
     
-
     /**
      * Method to pass the log down to data access objects for storing the log
      * @param log 
@@ -217,4 +204,19 @@ public class MainWindowModel
             errorMessage.setValue(ex.getLocalizedMessage());
         }
     }
+    
+    //</editor-fold>
+
+    public void logout()
+    {
+        cache.clearUser();
+        cache.changeScene(Scenes.Login.getValue()); // ID 1
+    }
+
+    public Runnable makeTask(List<Map> list, String path) throws BLLException
+    {
+       return bll.makeTask(list, path);
+    }
+    
+
 }
