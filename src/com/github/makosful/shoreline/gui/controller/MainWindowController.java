@@ -241,6 +241,7 @@ public class MainWindowController implements Initializable
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
             checkIfValidToRelocate();
+
             disableBtnOnIndex();
         });
 
