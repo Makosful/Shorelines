@@ -1,7 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
 import com.github.makosful.shoreline.Main;
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
@@ -9,13 +8,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +22,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -42,12 +44,15 @@ public class MainWindowController implements Initializable
 {
 
     private MainWindowModel model;
-
     private Map<String, String> cellOrder;
     private List<Runnable> listTask;
     private String filePath;
     private int output = 0;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+
+    //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
+//<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+
     @FXML
     private Color x211;
     @FXML
@@ -107,19 +112,23 @@ public class MainWindowController implements Initializable
     private Button btnConvert;
     @FXML
     private Button btnChecklistCheck;
-
     @FXML
     private ColumnConstraints gridOutputColumn;
-
-    private Boolean movable = false;
-    private Boolean isChecked = false;
-    private Integer currentIndex;
     @FXML
     private ComboBox<Config> comboBoxConfig;
     @FXML
     private TextField txtFieldConfig;
     @FXML
     private MenuItem menuItemInstructions;
+//</editor-fold>
+
+    private Boolean movable = false;
+    private Boolean isChecked = false;
+    private Boolean ListViewInFocus = false;
+    private Integer currentIndex;
+
+    final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
+    final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
 
     /**
      * Initializes the controller class.
@@ -130,14 +139,29 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
         model = new MainWindowModel();
         cellOrder = new HashMap();
         listTask = new ArrayList();
 
-        AddListeners();
         addConfigs();
         addConfigListener();
+    }
+
+    private void shortcutMoveItemListView(KeyEvent event)
+    {
+        if (ListViewInFocus)
+        {
+            if (shortcutUp.match(event))
+            {
+                moveItemUpListViewNoFocus();
+                event.consume();
+            }
+            else if (shortcutDown.match(event))
+            {
+                moveItemDownListViewNoFocus();
+                event.consume();
+            }
+        }
     }
 
     /**
@@ -148,6 +172,21 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleMoveItemUp(ActionEvent event)
     {
+        moveItemUpListView();
+    }
+
+    private void moveItemUpListView()
+    {
+        // Checks if the selected index has been marked as moveable
+        if (movable)
+        {
+            moveItemUpListViewNoFocus();
+            listViewSorted.requestFocus();
+        }
+    }
+
+    private void moveItemUpListViewNoFocus()
+    {
         // Checks if the selected index has been marked as moveable
         if (movable)
         {
@@ -157,10 +196,8 @@ public class MainWindowController implements Initializable
 
             // Swaps the two indecies
             Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
-
-            // Reselects the item that was just moved
-            listViewSorted.getSelectionModel().select(prevIndex);
-            listViewSorted.requestFocus();
+            listViewSorted.getSelectionModel().clearAndSelect(prevIndex);
+            listViewSorted.scrollTo(prevIndex);
         }
     }
 
@@ -172,19 +209,32 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleMoveItemDown(ActionEvent event)
     {
+        moveItemDownListView();
+    }
+
+    private void moveItemDownListView()
+    {
+        // Checks of the current item is marked as moveable
+        if (movable)
+        {
+            moveItemDownListViewNoFocus();
+            listViewSorted.requestFocus();
+        }
+    }
+
+    private void moveItemDownListViewNoFocus()
+    {
         // Checks of the current item is marked as moveable
         if (movable)
         {
             // Retrives the indicies for the two items to swap
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-            int prev = currentIndex + 1;
+            int nextIndex = currentIndex + 1;
 
             // Swaps the two items
-            Collections.swap(model.getSelectedList(), currentIndex, prev);
-
-            // Reselects the item that was just moved
-            listViewSorted.getSelectionModel().select(prev);
-            listViewSorted.requestFocus();
+            Collections.swap(model.getSelectedList(), currentIndex, nextIndex);
+            listViewSorted.getSelectionModel().clearAndSelect(nextIndex);
+            listViewSorted.scrollTo(nextIndex);
         }
     }
 
@@ -221,6 +271,7 @@ public class MainWindowController implements Initializable
             alert.show();
 
         }
+
     }
 
     /**
@@ -268,6 +319,14 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+        listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
+                              {
+                                  @Override
+                                  public void handle(KeyEvent event)
+                                  {
+                                      shortcutMoveItemListView(event);
+                                  }
+                              });
 
         listViewSorted.setItems(model.getSelectedList());
 
@@ -275,6 +334,18 @@ public class MainWindowController implements Initializable
         {
             checkIfValidToRelocate();
             disableBtnOnIndex();
+        });
+
+        listViewSorted.focusedProperty().addListener((observable, oldValue, newValue) ->
+        {
+            if (newValue)
+            {
+                ListViewInFocus = true;
+            }
+            else
+            {
+                ListViewInFocus = false;
+            }
         });
 
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
@@ -292,7 +363,6 @@ public class MainWindowController implements Initializable
                 model.getSelectedList().removeAll(c.getRemoved());
             }
         });
-
     }
 
     @FXML
@@ -310,17 +380,6 @@ public class MainWindowController implements Initializable
             isChecked = true;
             btnChecklistCheck.setText("Uncheck all");
         }
-
-//        if (!isChecked)
-//        {
-//            chklistSelectData.getCheckModel().checkAll();
-//
-//        }
-//        if (isChecked)
-//        {
-//            chklistSelectData.getCheckModel().clearChecks();
-//            btnChecklistCheck.setText("Uncheck all");
-//        }
     }
 
     /**
@@ -389,7 +448,6 @@ public class MainWindowController implements Initializable
         comboBoxConfig.getItems().addAll(configs);
         comboBoxConfig.setConverter(new StringConverter<Config>()
         {
-
             @Override
             public String toString(Config config)
             {
@@ -404,7 +462,6 @@ public class MainWindowController implements Initializable
                         findFirst().orElse(null);
             }
         });
-
     }
 
     /**
