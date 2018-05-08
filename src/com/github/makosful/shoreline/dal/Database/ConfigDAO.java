@@ -61,16 +61,14 @@ public class ConfigDAO
      * @param column 
      * @throws java.sql.SQLException 
      */
-    public void saveConfigColumns(int configId, ColumnObject column) throws SQLException
+    public void saveConfigColumns(int configId, String column) throws SQLException
     {
-        System.out.println(column.getColumnName());
         try (Connection con = db.getConnection())   
         {
-            String sql = "INSERT INTO ConfigColumn (ConfigId, ColumnId, ColumnName) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO ConfigColumn (ConfigId, ColumnName) VALUES(?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, configId);
-            ps.setInt(2, column.getColumnID());
-            ps.setString(3, column.getColumnName());
+            ps.setString(2, column);
             
             ps.executeUpdate();
         }
@@ -109,9 +107,9 @@ public class ConfigDAO
 
                 config.setName(rs.getString("configName"));
 
-                ObservableList<ColumnObject> columnObjects = createColumns(rs.getInt("Id"));
+                ObservableList<String> columns = createColumns(rs.getInt("Id"));
 
-                config.setChosenColumns(columnObjects);
+                config.setChosenColumns(columns);
 
                 allConfigs.add(config);
             }
@@ -129,7 +127,7 @@ public class ConfigDAO
      * @param configId
      * @return 
      */
-    private ObservableList<ColumnObject> createColumns(int configId) throws SQLException
+    private ObservableList<String> createColumns(int configId) throws SQLException
     {
         try (Connection con = db.getConnection())   
         {
@@ -142,14 +140,14 @@ public class ConfigDAO
             preparedStatement.setInt(1, configId);
             ResultSet rs = preparedStatement.executeQuery();
 
-            ObservableList<ColumnObject> ColumnObjects = FXCollections.observableArrayList();
+            ObservableList<String> columns = FXCollections.observableArrayList();
      
             while (rs.next())
             {
-                ColumnObject columnObject = new ColumnObject(rs.getString("ColumnName"), rs.getInt("ColumnId"));
-                ColumnObjects.add(columnObject);
+                columns.add(rs.getString("ColumnName"));
             }
-            return ColumnObjects;
+            
+            return columns;
         
         }
         catch (SQLException ex)
