@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.*;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ public class MainWindowController implements Initializable
 
     private MainWindowModel model;
     private Map<String, String> cellOrder;
+    private List<Task> listTask;
 
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
 //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
@@ -119,6 +121,7 @@ public class MainWindowController implements Initializable
     private Boolean isChecked = false;
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
+
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
 
@@ -133,9 +136,27 @@ public class MainWindowController implements Initializable
     {
         model = new MainWindowModel();
         cellOrder = new HashMap();
+        listTask = new ArrayList();
 
         addConfigs();
         addConfigListener();
+    }
+
+    private void shortcutMoveItemListView(KeyEvent event)
+    {
+        if (ListViewInFocus)
+        {
+            if (shortcutUp.match(event))
+            {
+                moveItemUpListViewNoFocus();
+                event.consume();
+            }
+            else if (shortcutDown.match(event))
+            {
+                moveItemDownListViewNoFocus();
+                event.consume();
+            }
+        }
     }
 
     /**
@@ -146,28 +167,20 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleMoveItemUp(ActionEvent event)
     {
-        moveItemUp();
+        moveItemUpListView();
     }
 
-    private void moveItemUp()
+    private void moveItemUpListView()
     {
         // Checks if the selected index has been marked as moveable
         if (movable)
         {
-            // Gets the two indexes
-            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-            int prevIndex = currentIndex - 1;
-
-            // Swaps the two indecies
-            Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
-
-            // Reselects the item that was just moved
-            listViewSorted.getSelectionModel().select(prevIndex);
+            moveItemUpListViewNoFocus();
             listViewSorted.requestFocus();
         }
     }
 
-    private void moveItemUpNoFocus()
+    private void moveItemUpListViewNoFocus()
     {
         // Checks if the selected index has been marked as moveable
         if (movable)
@@ -178,8 +191,8 @@ public class MainWindowController implements Initializable
 
             // Swaps the two indecies
             Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
-            listViewSorted.getSelectionModel().select(prevIndex);
-
+            listViewSorted.getSelectionModel().clearAndSelect(prevIndex);
+            listViewSorted.scrollTo(prevIndex);
         }
     }
 
@@ -191,55 +204,32 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleMoveItemDown(ActionEvent event)
     {
-        moveItemDown();
+        moveItemDownListView();
     }
 
-    private void shortcutMoveItem(KeyEvent event)
-    {
-        if (ListViewInFocus)
-        {
-            if (shortcutUp.match(event))
-            {
-                moveItemUpNoFocus();
-            }
-            else if (shortcutDown.match(event))
-            {
-                moveItemUpNoFocus();
-            }
-        }
-    }
-
-    private void moveItemDown()
+    private void moveItemDownListView()
     {
         // Checks of the current item is marked as moveable
         if (movable)
         {
-            // Retrives the indicies for the two items to swap
-            currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-            int prev = currentIndex + 1;
-
-            // Swaps the two items
-            Collections.swap(model.getSelectedList(), currentIndex, prev);
-
-            // Reselects the item that was just moved
-            listViewSorted.getSelectionModel().select(prev);
+            moveItemDownListViewNoFocus();
             listViewSorted.requestFocus();
         }
     }
 
-    private void moveItemDownNoFocus()
+    private void moveItemDownListViewNoFocus()
     {
         // Checks of the current item is marked as moveable
         if (movable)
         {
             // Retrives the indicies for the two items to swap
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
-            int prev = currentIndex + 1;
+            int nextIndex = currentIndex + 1;
 
             // Swaps the two items
-            Collections.swap(model.getSelectedList(), currentIndex, prev);
-            listViewSorted.getSelectionModel().select(prev);
-
+            Collections.swap(model.getSelectedList(), currentIndex, nextIndex);
+            listViewSorted.getSelectionModel().clearAndSelect(nextIndex);
+            listViewSorted.scrollTo(nextIndex);
         }
     }
 
@@ -251,20 +241,18 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException
     {
-        String[] hashmapStrings = new String[]
-        {
-            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
-            "userStatus", "createdOn", "createdBy", "nameDescription",
-            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-        };
         List<Map> mapTask = model.getValues(getMap());
-        model.makeTask(mapTask);
-        for (Map k : mapTask)
+        Task task = model.makeTask(mapTask);
+        listTask.add(task);
+        Thread thread;
+        for (Task tsk : listTask)
         {
-            for (int i = 0; i < k.size(); i++)
-            {
-                System.out.println(k.get(hashmapStrings[i]));
-            }
+//            for (int i = 0; i < k.size(); i++)
+//            {
+//                System.out.println(k.get(hashmapStrings[i]));
+//            }
+//            thread = new Thread(tsk);
+//            thread.start();
         }
     }
 
@@ -318,7 +306,7 @@ public class MainWindowController implements Initializable
                                   @Override
                                   public void handle(KeyEvent event)
                                   {
-                                      shortcutMoveItem(event);
+                                      shortcutMoveItemListView(event);
                                   }
                               });
 
