@@ -279,8 +279,8 @@ public class MainWindowController implements Initializable
             alert.setHeaderText("Info");
             alert.show();
             
-            log.setMessage("Message");
-            log.setLogType("Conversion, no errors occured");
+            log.setMessage("No errors occured");
+            log.setLogType("Conversion");
             log.setDate(new Date());
             model.saveLog(log);
 
