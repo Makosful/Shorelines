@@ -25,6 +25,8 @@ public interface IDAL
     public List<String> fileGetHeader() throws DALException;
 
     public List<Map> fileGetValues(Map<String, String> keys) throws DALException;
+    
+    public void setReader(String path) throws DALException;
     //</editor-fold>
 
     public void savePassword(String userName, String password) throws DALException;
@@ -41,5 +43,5 @@ public interface IDAL
 
     public void saveLog(ConversionLog conversionLog) throws DALException;
     
-    public void setReader(String path);
+    
 }

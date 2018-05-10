@@ -11,7 +11,7 @@ import com.github.makosful.shoreline.dal.Json.JsonReader;
 public class ReaderFactory extends AbstractFactoryReader{
 
     @Override
-    public IReader getReader(String path)
+    public IReader getReader(String path) throws IllegalArgumentException
     {
         String extension = getExtension(path);
         
@@ -24,7 +24,7 @@ public class ReaderFactory extends AbstractFactoryReader{
             case "json":
                 return new JsonReader();
             default: 
-                throw new IllegalArgumentException("The filetype is not valid");
+                throw new IllegalArgumentException("The filetype '"+extension+"' is not valid");
         }
         
     }

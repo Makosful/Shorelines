@@ -120,6 +120,15 @@ public class BLLManager implements IBLL
     {
         try
         {
+            dal.setReader(path);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+        try
+        {
+            
             return dal.fileLoad(path);
         }
         catch (DALException ex)

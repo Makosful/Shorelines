@@ -447,12 +447,20 @@ public class MainWindowController implements Initializable
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-        model.loadFile(file.getAbsolutePath());
-        chklistSelectData.setItems(model.getCategories());
-        AddListeners();
-        
-        //Set file name to log, which will be saved later
-        log.setFileName(file.getName());
+        if(model.loadFile(file.getAbsolutePath())){
+            chklistSelectData.setItems(model.getCategories());
+            AddListeners();
+
+            //Set file name to log, which will be saved later
+            log.setFileName(file.getName());
+        }
+        else
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Reading File Error");
+            alert.setContentText(model.getErrorMessageProperty().getValue());
+            alert.show();
+        }
     }
 
     /**

@@ -8,7 +8,7 @@ import com.github.makosful.shoreline.dal.Interfaces.IReader;
  */
 public abstract class AbstractFactoryReader {
     
-    public abstract IReader getReader(String path);
+    public abstract IReader getReader(String path) throws IllegalArgumentException;
    
     public abstract String getExtension(String path);
    

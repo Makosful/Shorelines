@@ -56,7 +56,6 @@ public class DALManager implements IDAL
     {
         try
         {
-            setReader(path);
             return reader.loadFile(path);
         }
         catch (ReaderException ex)
@@ -66,9 +65,17 @@ public class DALManager implements IDAL
     }
     
     @Override
-    public void setReader(String path)
+    public void setReader(String path) throws DALException
     {
-        reader = readerFactory.getReader(path);
+        try
+        {
+            reader = readerFactory.getReader(path);
+        }
+        catch (IllegalArgumentException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+        
     }
 
     @Override
