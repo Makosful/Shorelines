@@ -269,7 +269,7 @@ public class MainWindowController implements Initializable
                             +model.getErrorMessageProperty().getValue(), "Convertion Error");
                 
                 setLog("An error occured while converting the file, "
-                        +model.getErrorMessageProperty().getValue(), "Conversion");
+                        +model.getErrorMessageProperty().getValue(), "Error");
                 model.saveLog(log);
             }
         }
@@ -279,7 +279,7 @@ public class MainWindowController implements Initializable
                        +model.getErrorMessageProperty().getValue(), "Conversion Error");
             
             setLog("An error occured while converting the file, "
-                    +model.getErrorMessageProperty().getValue(), "Conversion");
+                    +model.getErrorMessageProperty().getValue(), "Error");
                 model.saveLog(log);
         }
         
@@ -507,7 +507,7 @@ public class MainWindowController implements Initializable
             alert.show();
             
             setLog("An error occured while loading file for conversion, "
-                    +model.getErrorMessageProperty().getValue(), "Conversion");
+                    +model.getErrorMessageProperty().getValue(), "Error");
             model.saveLog(log);
         }
     }
@@ -591,7 +591,7 @@ public class MainWindowController implements Initializable
         else
         {
             setLog("An error occured while saving configuration, "
-                    +model.getErrorMessageProperty().getValue(), "Configuration");
+                    +model.getErrorMessageProperty().getValue(), "Error");
             model.saveLog(log);
         }
     }

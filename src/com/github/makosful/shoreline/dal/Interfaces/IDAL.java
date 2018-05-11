@@ -42,6 +42,8 @@ public interface IDAL
     public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException;
 
     public void saveLog(ConversionLog conversionLog) throws DALException;
+
+    public ObservableList<ConversionLog> searchLogs(String searchText) throws DALException;
     
     
 }

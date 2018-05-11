@@ -1,8 +1,11 @@
 package com.github.makosful.shoreline.gui.model;
 
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,7 +18,7 @@ public class LogWindowModel
 
     private final Cache cache;
     private final IBLL bll;
-
+    private String errorMessage;
     private ObservableList<ConversionLog> fullList;
 
     public LogWindowModel()
@@ -33,6 +36,7 @@ public class LogWindowModel
      */
     public ObservableList<ConversionLog> getErrorLog()
     {
+
         ObservableList<ConversionLog> errors = FXCollections.observableArrayList();
 
         // Extracts the errors from the list and puts them in a new list
@@ -54,6 +58,32 @@ public class LogWindowModel
      */
     public ObservableList<ConversionLog> getFullLog()
     {
-        return fullList;
+        try
+        {
+            fullList = bll.getAllLogs();
+            return fullList;
+        }
+        catch (BLLException ex)
+        {
+            errorMessage = ex.getLocalizedMessage();
+            return null;
+        }
+    }
+
+    /**
+     * Pass the searchtext down to the db, making a search for the specific searchtext,
+     * and return the searchresult
+     * @param searchText 
+     */
+    public void searchLogs(String searchText)
+    {
+        try
+        {
+            fullList.clear();
+            fullList.addAll(bll.searchLogs(searchText));        }
+        catch (BLLException ex)
+        {
+            Logger.getLogger(LogWindowModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -168,5 +168,24 @@ public class BLLManager implements IBLL
     {
         log.saveLog(conversionLog);
     }
+
+    @Override
+    public ObservableList<ConversionLog> getAllLogs() throws BLLException
+    {
+        return log.getAllLogs(0);
+    }
+
+    @Override
+    public ObservableList<ConversionLog> searchLogs(String searchText) throws BLLException
+    {
+        try
+        {
+            return dal.searchLogs(searchText);
+        }
+        catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
     
 }

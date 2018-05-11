@@ -41,8 +41,8 @@ public class LogDBDAO implements ILog
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(i++, log.getUserId());
             pstmt.setString(i++, log.getMessage());
-            pstmt.setString(i++, log.getFileName());
             pstmt.setString(i++, log.getLogType());
+            pstmt.setString(i++, log.getFileName());
             pstmt.executeUpdate();
         }
         catch (SQLException ex)
@@ -70,7 +70,7 @@ public class LogDBDAO implements ILog
             String sql = "SELECT * FROM Logs WHERE UserId = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, userId);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next())
             {
                 ConversionLog conversionLogger = new ConversionLog();
@@ -87,9 +87,50 @@ public class LogDBDAO implements ILog
         }
         catch (SQLException ex)
         {
-            System.out.println(ex.getMessage());
             throw new SQLException(ex.getMessage());
         }
 
+    }
+
+
+    /**
+     * Get logs based on the seachtext, using the LIKE keyword, so logs having the seachtext mid-sentence,
+     * will also be selected  
+     * @param searchText 
+     * @return  
+     * @throws java.sql.SQLException 
+     */
+    public ObservableList<ConversionLog> searchLogs(String searchText) throws SQLException
+    {
+        ObservableList<ConversionLog> logs = FXCollections.observableArrayList();
+        
+        try (Connection con = dbConnector.getConnection())
+        {
+            String sql = "SELECT * FROM Logs WHERE UserId LIKE ? OR Message LIKE ? OR FileName LIKE ? OR LogType LIKE ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int i = 1;
+            ps.setString(i++, "%"+searchText+"%");
+            ps.setString(i++, "%"+searchText+"%");
+            ps.setString(i++, "%"+searchText+"%");
+            ps.setString(i++, "%"+searchText+"%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                ConversionLog conversionLogger = new ConversionLog();
+
+                conversionLogger.setUserId(0);
+                conversionLogger.setMessage(rs.getString("Message"));
+                conversionLogger.setFileName(rs.getString("FileName"));
+                conversionLogger.setLogType(rs.getString("LogType"));
+                conversionLogger.setDate(rs.getDate("Date"));
+
+                logs.add(conversionLogger);
+            }
+            return logs;
+        }
+        catch (SQLException ex)
+        {
+            throw new SQLException(ex.getMessage());
+        }
     }
 }

@@ -39,5 +39,8 @@ public interface IBLL
     public String generatePassword() throws BLLException;
 
     public void saveLog(ConversionLog log) throws BLLException;
+    
+    public ObservableList<ConversionLog> getAllLogs() throws BLLException;
 
+    public ObservableList<ConversionLog> searchLogs(String searchText) throws BLLException;
 }

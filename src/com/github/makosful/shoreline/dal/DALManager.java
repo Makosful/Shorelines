@@ -185,6 +185,7 @@ public class DALManager implements IDAL
     @Override
     public void saveLog(ConversionLog conversionLog) throws DALException
     {
+        
         //Get instance for calling the save log mehod, 
         //which is part of a stategy pattern 
         LogContext logContextDB = new LogContext(lDAO);
@@ -194,7 +195,6 @@ public class DALManager implements IDAL
         logContextDB.saveLog(conversionLog);
         logContextFile.saveLog(conversionLog);
         
-
     }
     //</editor-fold>
 
@@ -209,6 +209,19 @@ public class DALManager implements IDAL
         catch (IOException ex)
         {
             throw new DALException("Could not write to file");
+        }
+    }
+
+    @Override
+    public ObservableList<ConversionLog> searchLogs(String searchText) throws DALException
+    {
+        try
+        {
+            return lDAO.searchLogs(searchText);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
 }
