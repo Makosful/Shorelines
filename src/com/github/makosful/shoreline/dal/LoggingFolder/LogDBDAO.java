@@ -27,22 +27,22 @@ public class LogDBDAO implements ILog
     /**
      * Making a log.
      *
-     * @param conversionLog
+     * @param log
      *
      * @throws com.github.makosful.shoreline.dal.Exception.DALException
      */
     @Override
-    public void saveLog(ConversionLog conversionLog) throws DALException
+    public void saveLog(ConversionLog log) throws DALException
     {
         try (Connection con = dbConnector.getConnection())
         {
             int i = 1;
             String sql = "INSERT INTO Logs VALUES(?, ?, ?, ?, GETDATE())";
             PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(i++, conversionLog.getUserId());
-            pstmt.setString(i++, conversionLog.getMessage());
-            pstmt.setString(i++, conversionLog.getFileName());
-            pstmt.setString(i++, conversionLog.getLogType());
+            pstmt.setInt(i++, log.getUserId());
+            pstmt.setString(i++, log.getMessage());
+            pstmt.setString(i++, log.getFileName());
+            pstmt.setString(i++, log.getLogType());
             pstmt.executeUpdate();
         }
         catch (SQLException ex)

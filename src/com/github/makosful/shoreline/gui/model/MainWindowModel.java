@@ -136,16 +136,19 @@ public class MainWindowModel
      *
      * @param configName
      * @param items
+     * @return boolean which tells if the saving of config was successful
      */
-    public void saveConfig(String configName, ObservableList<String> items)
+    public boolean saveConfig(String configName, ObservableList<String> items)
     {
         try
         {
             bll.saveConfig(configName, items);
+            return true;
         }
         catch (BLLException ex)
         {
             errorMessage.setValue(ex.getLocalizedMessage());
+            return false;
         }
     }
 

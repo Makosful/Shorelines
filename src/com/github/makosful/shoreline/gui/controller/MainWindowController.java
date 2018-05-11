@@ -152,6 +152,7 @@ public class MainWindowController implements Initializable
         addConfigListener();
     }
 
+    
     private void shortcutMoveItemListView(KeyEvent event)
     {
         if (ListViewInFocus)
@@ -252,17 +253,57 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
         output++;
+        
         List<Map> mapTask = model.getValues(getMap());
+        
+        if(mapTask != null)
+        {
+            Runnable task = model.makeTask(mapTask, "output" + output + ".json");
+            if(task != null)
+            {
+                listTask.add(task);
+            }
+            else
+            {
+                showAlert("Convertion Error", "An error occured while converting the file, "
+                            +model.getErrorMessageProperty().getValue(), "Convertion Error");
+                
+                setLog("An error occured while converting the file, "
+                        +model.getErrorMessageProperty().getValue(), "Conversion");
+                model.saveLog(log);
+            }
+        }
+        else
+        {
+            showAlert("Convertion Error", "An error occured while converting the file, "
+                       +model.getErrorMessageProperty().getValue(), "Conversion Error");
+            
+            setLog("An error occured while converting the file, "
+                    +model.getErrorMessageProperty().getValue(), "Conversion");
+                model.saveLog(log);
+        }
+        
+    }
 
-        Runnable task = model.makeTask(mapTask, "output" + output + ".json");
-
-        listTask.add(task);
+    /** 
+     * Creates a new alert, to show the user a specific error occured
+     * @param title
+     * @param message
+     * @param headerText 
+     */
+    private void showAlert(String title, String message, String headerText)
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(headerText);
+        alert.show();
     }
 
     @FXML
     private void executeTaskBatch(ActionEvent event)
     {
-         ExecutorService exService = Executors.newFixedThreadPool(4);
+        ExecutorService exService = Executors.newFixedThreadPool(4);
          
         for (Runnable run : listTask)
         {
@@ -279,13 +320,22 @@ public class MainWindowController implements Initializable
             alert.setHeaderText("Info");
             alert.show();
             
-            log.setMessage("No errors occured");
-            log.setLogType("Conversion");
-            log.setDate(new Date());
+            setLog("No errors occured, conversion successful", "Conversion");
             model.saveLog(log);
 
         }
 
+    }
+
+    /**
+     * Set the custom text for the log  
+     * @param message
+     * @param logType 
+     */
+    private void setLog(String message, String logType)
+    {
+        log.setMessage(message);
+        log.setLogType(logType);
     }
 
     /**
@@ -402,9 +452,6 @@ public class MainWindowController implements Initializable
      */
     private Map getMap()
     {
-        
-        try
-        {
             // Clearing hashMap.
             cellOrder.clear();
             String[] hashmapStrings = new String[]
@@ -429,12 +476,6 @@ public class MainWindowController implements Initializable
             }
 
             return cellOrder;
-        }
-        catch (IndexOutOfBoundsException e)
-        {
-
-        }
-        return null;
     }
 
     /**
@@ -447,12 +488,16 @@ public class MainWindowController implements Initializable
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+        
+        //Set file name to log, which will be saved later
+        log.setFileName(file.getName());
+        
         if(model.loadFile(file.getAbsolutePath())){
             chklistSelectData.setItems(model.getCategories());
             AddListeners();
-
-            //Set file name to log, which will be saved later
-            log.setFileName(file.getName());
+ 
+            setLog("No errors occured, filed loaded successfully", "Conversion");
+            model.saveLog(log);
         }
         else
         {
@@ -460,6 +505,10 @@ public class MainWindowController implements Initializable
             alert.setTitle("Reading File Error");
             alert.setContentText(model.getErrorMessageProperty().getValue());
             alert.show();
+            
+            setLog("An error occured while loading file for conversion, "
+                    +model.getErrorMessageProperty().getValue(), "Conversion");
+            model.saveLog(log);
         }
     }
 
@@ -496,6 +545,8 @@ public class MainWindowController implements Initializable
 
     /**
      * Add listener to when a configuration is selected
+     * the chklistSelectData listViews checkboxes are checked correspomding to the 
+     * configuration, therefore the listViewSorted is filled with the selected columnheaders
      */
     private void addConfigListener()
     {
@@ -528,10 +579,21 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
     {
-        model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
-        comboBoxConfig.getItems().clear();
-        addConfigs();
-        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
+        if(model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems()))
+        {
+            comboBoxConfig.getItems().clear();
+            addConfigs();
+            comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
+            
+            setLog("No errors occured, saved configuration successfully", "Configuration");
+            model.saveLog(log);
+        }
+        else
+        {
+            setLog("An error occured while saving configuration, "
+                    +model.getErrorMessageProperty().getValue(), "Configuration");
+            model.saveLog(log);
+        }
     }
 
     @FXML
