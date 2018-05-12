@@ -109,7 +109,6 @@ public class LogDBDAO implements ILog
         try (Connection con = dbConnector.getConnection())
         {
             String sql = "SELECT * FROM Logs WHERE "+searchCriteria;
-            System.out.println(sql);
             PreparedStatement ps = con.prepareStatement(sql);
 
             for(int i = 1; i <= checkedSize; i++)

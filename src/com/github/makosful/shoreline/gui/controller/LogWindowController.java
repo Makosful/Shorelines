@@ -55,6 +55,8 @@ public class LogWindowController implements Initializable
     private TableColumn<ConversionLog, String> errorName;
     @FXML
     private TextField txtFieldSearch;
+    @FXML
+    private TabPane tabPane;
 
 
     /**
@@ -119,6 +121,10 @@ public class LogWindowController implements Initializable
         txtFieldSearch.textProperty().addListener((observable, oldSearchValue, newSearchValue) -> {
             searchText = newSearchValue;
             model.searchLogs(searchText, checked);
+            if(tabPane.getSelectionModel().getSelectedItem().getText().equals("Errors"))
+            {
+                tblErrorLog.setItems(model.getErrorLog());
+            }
         });
     }
 
@@ -136,6 +142,12 @@ public class LogWindowController implements Initializable
             checked.remove(cBox.getText());
         }
         model.searchLogs(searchText, checked);
+        
+        if(tabPane.getSelectionModel().getSelectedItem().getText().equals("Errors"))
+        {
+            tblErrorLog.setItems(model.getErrorLog());
+        }
+       
     }
 
 }
