@@ -43,7 +43,7 @@ public interface IDAL
 
     public void saveLog(ConversionLog conversionLog) throws DALException;
 
-    public ObservableList<ConversionLog> searchLogs(String searchText) throws DALException;
+    public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException;
     
     
 }

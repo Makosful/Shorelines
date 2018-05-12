@@ -176,11 +176,11 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public ObservableList<ConversionLog> searchLogs(String searchText) throws BLLException
+    public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws BLLException
     {
         try
         {
-            return dal.searchLogs(searchText);
+            return dal.searchLogs(searchText, checked);
         }
         catch (DALException ex)
         {

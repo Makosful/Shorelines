@@ -3,7 +3,9 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.gui.model.LogWindowModel;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +24,11 @@ public class LogWindowController implements Initializable
 {
 
     private LogWindowModel model;
-
+    
+    //Search
+    private List<String> checked;
+    private String searchText;
+    
     @FXML
     private Button btnClose;
     @FXML
@@ -61,7 +67,8 @@ public class LogWindowController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         model = new LogWindowModel();
-
+        checked = new ArrayList();
+        
         createTableViewFactory();
         
         addSearchListener();
@@ -110,8 +117,25 @@ public class LogWindowController implements Initializable
     private void addSearchListener()
     {
         txtFieldSearch.textProperty().addListener((observable, oldSearchValue, newSearchValue) -> {
-            model.searchLogs(newSearchValue);
+            searchText = newSearchValue;
+            model.searchLogs(searchText, checked);
         });
+    }
+
+    
+    @FXML
+    private void handleCheckBox(ActionEvent event)
+    {
+        CheckBox cBox = (CheckBox) event.getSource();
+        if(cBox.isSelected())
+        {
+            checked.add(cBox.getText());
+        }
+        else
+        {
+            checked.remove(cBox.getText());
+        }
+        model.searchLogs(searchText, checked);
     }
 
 }

@@ -213,11 +213,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public ObservableList<ConversionLog> searchLogs(String searchText) throws DALException
+    public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException
     {
         try
         {
-            return lDAO.searchLogs(searchText);
+            return lDAO.prepareLogSeach(searchText, checked);
         }
         catch (SQLException ex)
         {

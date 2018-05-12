@@ -4,6 +4,7 @@ import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -74,13 +75,15 @@ public class LogWindowModel
      * Pass the searchtext down to the db, making a search for the specific searchtext,
      * and return the searchresult
      * @param searchText 
+     * @param checked 
      */
-    public void searchLogs(String searchText)
+    public void searchLogs(String searchText, List<String> checked)
     {
         try
         {
             fullList.clear();
-            fullList.addAll(bll.searchLogs(searchText));        }
+            fullList.addAll(bll.searchLogs(searchText, checked));        
+        }
         catch (BLLException ex)
         {
             Logger.getLogger(LogWindowModel.class.getName()).log(Level.SEVERE, null, ex);
