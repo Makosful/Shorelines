@@ -318,3 +318,11 @@ File: bi_1080p.jpg
 LogType:Error
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Sat May 12 23:24:00 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+

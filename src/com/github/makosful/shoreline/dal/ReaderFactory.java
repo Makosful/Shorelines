@@ -8,9 +8,9 @@ import com.github.makosful.shoreline.dal.Json.JsonReader;
  *
  * @author B
  */
-public class ReaderFactory extends AbstractFactoryReader{
+public class ReaderFactory{
 
-    @Override
+
     public IReader getReader(String path) throws IllegalArgumentException
     {
         String extension = getExtension(path);
@@ -29,7 +29,7 @@ public class ReaderFactory extends AbstractFactoryReader{
         
     }
 
-    @Override
+
     public String getExtension(String path)
     {
         String extension = "";

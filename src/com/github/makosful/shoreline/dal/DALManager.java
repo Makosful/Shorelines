@@ -34,7 +34,7 @@ import javafx.collections.ObservableList;
 public class DALManager implements IDAL
 {
 
-    private AbstractFactoryReader readerFactory;
+    private ReaderFactory readerFactory;
     private IReader reader; 
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
@@ -43,8 +43,8 @@ public class DALManager implements IDAL
 
     public DALManager()
     {
+        readerFactory = new ReaderFactory();
         cDAO = new ConfigDAO();
-        readerFactory = FactoryProducer.getFactory();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
         jWriter = new JsonWriter();
