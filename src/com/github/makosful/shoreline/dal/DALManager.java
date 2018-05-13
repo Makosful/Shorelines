@@ -196,6 +196,21 @@ public class DALManager implements IDAL
         logContextFile.saveLog(conversionLog);
         
     }
+    
+    @Override
+    public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException
+    {
+        try
+        {
+            //prepares the sql string so the logs can selected  
+            //based on the criteria in the checked arraylist
+            return lDAO.prepareLogSeach(searchText, checked);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
     //</editor-fold>
 
     
@@ -212,16 +227,4 @@ public class DALManager implements IDAL
         }
     }
 
-    @Override
-    public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException
-    {
-        try
-        {
-            return lDAO.prepareLogSeach(searchText, checked);
-        }
-        catch (SQLException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
 }

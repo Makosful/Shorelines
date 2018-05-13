@@ -80,7 +80,8 @@ public class BLLManager implements IBLL
            throw new BLLException(ex.getMessage());
         }
     }
-
+    
+    //<editor-fold defaultstate="collapsed" desc="Configuration">
     @Override
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException
     {
@@ -108,7 +109,8 @@ public class BLLManager implements IBLL
         }
 
     }
-
+    //</editor-fold>
+    
     @Override
     public String generatePassword() throws BLLException
     {
@@ -162,7 +164,8 @@ public class BLLManager implements IBLL
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
-
+    
+    //<editor-fold defaultstate="collapsed" desc="Logs">
     @Override
     public void saveLog(ConversionLog conversionLog) throws BLLException
     {
@@ -187,5 +190,5 @@ public class BLLManager implements IBLL
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+    //</editor-fold>
 }
