@@ -13,7 +13,7 @@ public class ReaderFactory{
 
     public IReader getReader(String path) throws IllegalArgumentException
     {
-        String extension = getExtension(path);
+        String extension = path.substring(path.lastIndexOf('.')+1);
         
         switch(extension)
         {
@@ -29,20 +29,6 @@ public class ReaderFactory{
         
     }
 
-
-    public String getExtension(String path)
-    {
-        String extension = "";
- 
-        int i = path.lastIndexOf('.');
-        int p = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
-
-        if (i > p) {
-            extension = path.substring(i+1);
-        }
-        
-        return extension;
-    }
 
 
 
