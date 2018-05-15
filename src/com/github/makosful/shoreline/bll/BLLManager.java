@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to

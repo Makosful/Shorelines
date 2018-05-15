@@ -7,6 +7,7 @@ import com.github.makosful.shoreline.be.UserNew;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 /**
  * This interface will declare all the methods the Business Logic Layer's facade
