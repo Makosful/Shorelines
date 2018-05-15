@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.CheckListView?>
+
+<AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.TaskManagerWindowController">
+   <children>
+      <VBox layoutX="67.0" layoutY="35.0" prefHeight="367.0" prefWidth="257.0">
+         <children>
+            <CheckListView fx:id="taskListView" />
+         </children>
+      </VBox>
+      <VBox layoutX="433.0" layoutY="35.0" prefHeight="367.0" prefWidth="257.0">
+         <children>
+            <CheckListView fx:id="runningListView" />
+         </children>
+      </VBox>
+      <Label alignment="CENTER" layoutX="121.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Task List" />
+      <Label alignment="CENTER" layoutX="496.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Running Tasks" />
+      <JFXButton layoutX="252.0" layoutY="418.0" onAction="#convertSelectedTasks" prefHeight="31.0" prefWidth="174.0" text="Convert Selected Tasks" />
+      <JFXButton layoutX="43.0" layoutY="418.0" onAction="#removeSelectedTasks" text="Remove Selected Tasks" />
+      <JFXButton layoutX="615.0" layoutY="418.0" onAction="#stopSelectedTasks" text="Stop Selected Tasks" />
+      <JFXButton layoutX="433.0" layoutY="418.0" onAction="#pauseSelectedTasks" text="Pause Selected Tasks" />
+   </children>
+</AnchorPane>

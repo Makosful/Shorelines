@@ -69,7 +69,7 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public Runnable makeTask(List<Map> list, String path) throws BLLException
+    public Task makeTask(List<Map> list, String path) throws BLLException
     {
         try 
         {

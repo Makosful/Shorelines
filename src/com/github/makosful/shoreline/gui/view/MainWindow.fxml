@@ -84,7 +84,7 @@
                         <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add Task" ButtonBar.buttonData="APPLY" />
                         <TextField fx:id="txtFieldConfig" ButtonBar.buttonData="RIGHT" />
                         <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="RIGHT" />
-                  <Button mnemonicParsing="false" onAction="#executeTaskBatch" text="Convert Tasks" />
+                  <Button mnemonicParsing="false" onAction="#taskWindow" text="Handle Tasks" />
                     </buttons>
                 </ButtonBar>
          </children>
