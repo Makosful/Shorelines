@@ -41,14 +41,17 @@
             </Pane>
          </right>
          <center>
-            <AnchorPane BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="imageViewPane" minHeight="405.0" minWidth="526.0" prefHeight="405.0" prefWidth="526.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="425.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+                  <ImageView fx:id="imageView" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <viewport>
-                        <Rectangle2D height="425.0" width="540.0" />
+                        <Rectangle2D />
                      </viewport>
                   </ImageView>
                </children>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
             </AnchorPane>
          </center>
       </BorderPane>

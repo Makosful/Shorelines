@@ -638,7 +638,6 @@ public class MainWindowController implements Initializable
             stage.setScene(new Scene(root));
             stage.setTitle("Shoreline | Instructions");
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         }
         catch (IOException ex)

@@ -5,20 +5,15 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
-import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import com.github.makosful.shoreline.gui.model.HelpWindowModel;
 
 /**
@@ -30,8 +25,9 @@ public class HelpWindowController implements Initializable
 {
 
     private HelpWindowModel model;
-    private final List<Image> images = new ArrayList<>();
-    private int imageIdx = 0;
+
+    private int imgIndex = 0;
+    private String tutString;
 
     @FXML
     private AnchorPane anchorPane;
@@ -43,6 +39,8 @@ public class HelpWindowController implements Initializable
     private ImageView imageView;
     @FXML
     private Button btnNextPic;
+    @FXML
+    private AnchorPane imageViewPane;
 
     /**
      * Initializes the controller class.
@@ -50,27 +48,24 @@ public class HelpWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        model = new HelpWindowModel();
+
         SetImages();
 
-        File file = new File("./res/logo.png");
-        Stage stage = new Stage();
-
-        Image icon = new Image(file.toURI().toString());
-        stage.getIcons().add(icon);
-
+        displayImage();
     }
 
     private void SetImages()
     {
-        model.getImages();
+        model.loadImages();
     }
 
     @FXML
     private void handlePreviousPicture(ActionEvent event)
     {
-        if (images.size() > 0)
+        if (model.getImages().size() > 0)
         {
-            imageIdx = (imageIdx - 1 + images.size()) % images.size();
+            imgIndex = (imgIndex - 1 + model.getImages().size()) % model.getImages().size();
             displayImage();
         }
     }
@@ -78,18 +73,20 @@ public class HelpWindowController implements Initializable
     @FXML
     private void handleNextPicture(ActionEvent event)
     {
-        if (!images.isEmpty())
+        if (!model.getImages().isEmpty())
         {
-            imageIdx = (imageIdx + 1) % images.size();
+            imgIndex = (imgIndex + 1) % model.getImages().size();
             displayImage();
         }
     }
 
     private void displayImage()
     {
-        if (images != null)
+        if (model.getImages() != null && !model.getImages().isEmpty())
         {
-            imageView.setImage(images.get(imageIdx));
+            imageView.setImage(model.getImages().get(imgIndex));
+            imageView.fitWidthProperty().bind(imageViewPane.widthProperty());
+            imageView.fitHeightProperty().bind(imageViewPane.heightProperty());
         }
     }
 
