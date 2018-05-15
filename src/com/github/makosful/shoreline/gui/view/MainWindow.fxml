@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -84,7 +84,7 @@
                         <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add Task" ButtonBar.buttonData="APPLY" />
                         <TextField fx:id="txtFieldConfig" ButtonBar.buttonData="RIGHT" />
                         <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="RIGHT" />
-                  <Button mnemonicParsing="false" onAction="#executeTaskBatch" text="Convert Tasks" />
+                  <Button mnemonicParsing="false" onAction="#taskWindow" text="Handle Tasks" />
                     </buttons>
                 </ButtonBar>
          </children>
@@ -93,7 +93,7 @@
    <right>
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" BorderPane.alignment="CENTER">
                 <children>
-                    <VBox alignment="CENTER" layoutX="4.0" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox alignment="CENTER" disable="true" layoutX="4.0" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
                             <Label alignment="CENTER" style="&#10;" text="Output Example (JSON)" textAlignment="CENTER" wrapText="false">
                                 <font>
@@ -139,23 +139,23 @@
                                     <Label text="Latest Start Date" GridPane.rowIndex="12" />
                                     <Label text="Latest Finish Date" GridPane.rowIndex="13" />
                                     <Label text="Estimated Time" GridPane.rowIndex="14" />
-                                    <Label fx:id="lblSiteName" text="Label" GridPane.columnIndex="1" />
-                                    <Label fx:id="lblAssetSerialNo" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label fx:id="lblExtWorkOrderID" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="lblSystemStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label fx:id="lblUserStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label fx:id="lblCreatedOn" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <Label fx:id="lblCreatedBy" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <Label fx:id="lblPriority" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                    <Label fx:id="lblStatus" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                    <Label fx:id="lblEarliestStart" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                    <Label fx:id="lblLatestStart" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                    <Label fx:id="lblLatestFinish" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                    <Label fx:id="lblEstimatedTime" prefWidth="35.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                    <Label fx:id="lblSiteName" GridPane.columnIndex="1" />
+                                    <Label fx:id="lblAssetSerialNo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="lblExtWorkOrderID" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label fx:id="lblSystemStatus" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="lblUserStatus" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="lblCreatedOn" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label fx:id="lblCreatedBy" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <Label fx:id="lblPriority" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <Label fx:id="lblStatus" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <Label fx:id="lblEarliestStart" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                    <Label fx:id="lblLatestStart" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                    <Label fx:id="lblLatestFinish" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                    <Label fx:id="lblEstimatedTime" prefWidth="35.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                                     <Label text="Name (Description)" GridPane.rowIndex="8" />
-                                    <Label fx:id="lblNameDescription" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <Label fx:id="lblNameDescription" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                                     <Label text="Order Type" GridPane.rowIndex="2" />
-                                    <Label fx:id="lblOrderType" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label fx:id="lblOrderType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 </children>
                             </GridPane>
                         </children>

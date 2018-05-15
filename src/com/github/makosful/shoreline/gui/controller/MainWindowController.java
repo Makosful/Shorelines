@@ -13,6 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,19 +44,17 @@ import org.controlsfx.control.CheckListView;
  */
 public class MainWindowController implements Initializable
 {
-   
+
     private MainWindowModel model;
     private Map<String, String> cellOrder;
     private ConversionLog log;
-    private List<Runnable> listTask;
+    private List<Task> listTask;
     private String filePath;
     private int output = 0;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
-
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
 //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
-
     @FXML
     private Color x211;
     @FXML
@@ -146,13 +145,12 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
-        
+
         AddListeners();
         addConfigs();
         addConfigListener();
     }
 
-    
     private void shortcutMoveItemListView(KeyEvent event)
     {
         if (ListViewInFocus)
@@ -253,43 +251,44 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
         output++;
-        
+
         List<Map> mapTask = model.getValues(getMap());
-        
-        if(mapTask != null)
+
+        if (mapTask != null)
         {
-            Runnable task = model.makeTask(mapTask, "output" + output + ".json");
-            if(task != null)
+            Task task = model.makeTask(mapTask, "output" + output + ".json");
+            if (task != null)
             {
                 listTask.add(task);
             }
             else
             {
                 showAlert("Convertion Error", "An error occured while converting the file, "
-                            +model.getErrorMessageProperty().getValue(), "Convertion Error");
-                
+                                              + model.getErrorMessageProperty().getValue(), "Convertion Error");
+
                 setLog("An error occured while converting the file, "
-                        +model.getErrorMessageProperty().getValue(), "Error");
+                       + model.getErrorMessageProperty().getValue(), "Error");
                 model.saveLog(log);
             }
         }
         else
         {
             showAlert("Convertion Error", "An error occured while converting the file, "
-                       +model.getErrorMessageProperty().getValue(), "Conversion Error");
-            
+                                          + model.getErrorMessageProperty().getValue(), "Conversion Error");
+
             setLog("An error occured while converting the file, "
-                    +model.getErrorMessageProperty().getValue(), "Error");
-                model.saveLog(log);
+                   + model.getErrorMessageProperty().getValue(), "Error");
+            model.saveLog(log);
         }
-        
+
     }
 
-    /** 
+    /**
      * Creates a new alert, to show the user a specific error occured
+     *
      * @param title
      * @param message
-     * @param headerText 
+     * @param headerText
      */
     private void showAlert(String title, String message, String headerText)
     {
@@ -300,39 +299,13 @@ public class MainWindowController implements Initializable
         alert.show();
     }
 
-    @FXML
-    private void executeTaskBatch(ActionEvent event)
-    {
-        ExecutorService exService = Executors.newFixedThreadPool(4);
-         
-        for (Runnable run : listTask)
-        {
-
-            exService.execute(run);
-        }
-
-        exService.shutdown();
-        if (exService.isShutdown())
-        {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Convertion Info");
-            alert.setContentText("You successfully converted the files to JSON");
-            alert.setHeaderText("Info");
-            alert.show();
-            
-            setLog("No errors occured, conversion successful", "Conversion");
-            model.saveLog(log);
-
-        }
-
-    }
-
     /**
-     * Set the custom text for the log  
+     * Set the custom text for the log
+     *
      * @param message
-     * @param logType 
+     * @param logType
      */
-    private void setLog(String message, String logType)
+    public void setLog(String message, String logType)
     {
         log.setMessage(message);
         log.setLogType(logType);
@@ -383,6 +356,15 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+        listViewSorted.getItems().addListener(new ListChangeListener()
+        {
+            @Override
+            public void onChanged(ListChangeListener.Change change)
+            {
+                System.out.println("Detected a change! \n");
+            }
+        });
+
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {
                                   @Override
@@ -452,30 +434,29 @@ public class MainWindowController implements Initializable
      */
     private Map getMap()
     {
-            // Clearing hashMap.
-            cellOrder.clear();
-            String[] hashmapStrings = new String[]
-            {
-                "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
-                "userStatus", "createdOn", "createdBy", "nameDescription",
-                "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-            };
-            
-          
-            List<String> listOfStrings = listViewSorted.getItems();
+        // Clearing hashMap.
+        cellOrder.clear();
+        String[] hashmapStrings = new String[]
+        {
+            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
+            "userStatus", "createdOn", "createdBy", "nameDescription",
+            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
+        };
 
-            for (int i = 0; i < listOfStrings.size(); i++)
-            {
-                String col = listOfStrings.get(i);
-                cellOrder.put(hashmapStrings[i], col);
+        List<String> listOfStrings = listViewSorted.getItems();
 
-                if (i == 14)
-                {
-                    break;
-                }
+        for (int i = 0; i < listOfStrings.size(); i++)
+        {
+            String col = listOfStrings.get(i);
+            cellOrder.put(hashmapStrings[i], col);
+
+            if (i == 14)
+            {
+                break;
             }
+        }
 
-            return cellOrder;
+        return cellOrder;
     }
 
     /**
@@ -484,18 +465,23 @@ public class MainWindowController implements Initializable
      * @param event
      */
     @FXML
-    private void loadFile(ActionEvent event)
+    private void loadFile(ActionEvent event
+    )
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-        
+        model.loadFile(file.getAbsolutePath());
+        chklistSelectData.setItems(model.getCategories());
+        AddListeners();
+
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
-        
-        if(model.loadFile(file.getAbsolutePath())){
+
+        if (model.loadFile(file.getAbsolutePath()))
+        {
             chklistSelectData.setItems(model.getCategories());
             AddListeners();
- 
+
             setLog("No errors occured, filed loaded successfully", "Conversion");
             model.saveLog(log);
         }
@@ -505,17 +491,19 @@ public class MainWindowController implements Initializable
             alert.setTitle("Reading File Error");
             alert.setContentText(model.getErrorMessageProperty().getValue());
             alert.show();
-            
+
             setLog("An error occured while loading file for conversion, "
-                    +model.getErrorMessageProperty().getValue(), "Error");
+                   + model.getErrorMessageProperty().getValue(), "Error");
             model.saveLog(log);
         }
     }
 
     /**
-     * Set up the configurations in combobox. with the setConverter, the objects
+     * Set up the configurations in combobox. with the setConverter, the
+     * objects
      * name
-     * as string is shown in the comboboc and makes a reference to the object
+     * as string is shown in the comboboc and makes a reference to the
+     * object
      * from the string
      */
     private void addConfigs()
@@ -545,8 +533,10 @@ public class MainWindowController implements Initializable
 
     /**
      * Add listener to when a configuration is selected
-     * the chklistSelectData listViews checkboxes are checked correspomding to the 
-     * configuration, therefore the listViewSorted is filled with the selected columnheaders
+     * the chklistSelectData listViews checkboxes are checked correspomding to
+     * the
+     * configuration, therefore the listViewSorted is filled with the selected
+     * columnheaders
      */
     private void addConfigListener()
     {
@@ -579,19 +569,19 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
     {
-        if(model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems()))
+        if (model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems()))
         {
             comboBoxConfig.getItems().clear();
             addConfigs();
             comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
-            
+
             setLog("No errors occured, saved configuration successfully", "Configuration");
             model.saveLog(log);
         }
         else
         {
             setLog("An error occured while saving configuration, "
-                    +model.getErrorMessageProperty().getValue(), "Error");
+                   + model.getErrorMessageProperty().getValue(), "Error");
             model.saveLog(log);
         }
     }
@@ -629,6 +619,38 @@ public class MainWindowController implements Initializable
             alert.setContentText(ex.getMessage());
             alert.show();
         }
+    }
+
+    @FXML
+    private void taskWindow(ActionEvent event)
+    {
+        try
+        {
+            FXMLLoader fxLoader = new FXMLLoader(Main.class.getResource("gui/view/TaskManagerWindow.fxml"));
+            Parent root = fxLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Task Handling");
+            TaskManagerWindowController controller = fxLoader.getController();
+            controller.getTaskList(listTask);
+            controller.getMainController(this);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Failed to open the window");
+            alert.setContentText(ex.getMessage());
+            alert.show();
+        }
+
+    }
+    // Saves log.
+    public void saveLog()
+    {
+        model.saveLog(log);
     }
 
 }
