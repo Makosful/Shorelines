@@ -5,6 +5,7 @@ import com.github.makosful.shoreline.dal.Exception.DALException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  *
@@ -14,21 +15,21 @@ public class LogFileDAO implements ILog
 {
 
     @Override
-    public void saveLog(ConversionLog conversionLog) throws DALException
+    public void saveLog(ConversionLog log) throws DALException
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true)))
         {
             writer.write("------------------------------------------------------");
             writer.newLine();
-            writer.write("Log Date: " + conversionLog.getDate());
+            writer.write("Log Date: " + new Date());
             writer.newLine();
-            writer.write("User id: " + conversionLog.getUserId());
+            writer.write("User id: " + log.getUserId());
             writer.newLine();
-            writer.write("Message: " + conversionLog.getMessage());
+            writer.write("Message: " + log.getMessage());
             writer.newLine();
-            writer.write("File: " + conversionLog.getFileName());
+            writer.write("File: " + log.getFileName());
             writer.newLine();
-            writer.write("Message:" + conversionLog.getLogType());
+            writer.write("LogType:" + log.getLogType());
             writer.newLine();
             writer.write("------------------------------------------------------");
             writer.newLine();

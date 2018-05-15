@@ -250,11 +250,52 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
         output++;
+
         List<Map> mapTask = model.getValues(getMap());
 
-        Runnable task = model.makeTask(mapTask, "output" + output + ".json");
+        if (mapTask != null)
+        {
+            Runnable task = model.makeTask(mapTask, "output" + output + ".json");
+            if (task != null)
+            {
+                listTask.add(task);
+            }
+            else
+            {
+                showAlert("Convertion Error", "An error occured while converting the file, "
+                                              + model.getErrorMessageProperty().getValue(), "Convertion Error");
 
-        listTask.add(task);
+                setLog("An error occured while converting the file, "
+                       + model.getErrorMessageProperty().getValue(), "Error");
+                model.saveLog(log);
+            }
+        }
+        else
+        {
+            showAlert("Convertion Error", "An error occured while converting the file, "
+                                          + model.getErrorMessageProperty().getValue(), "Conversion Error");
+
+            setLog("An error occured while converting the file, "
+                   + model.getErrorMessageProperty().getValue(), "Error");
+            model.saveLog(log);
+        }
+
+    }
+
+    /**
+     * Creates a new alert, to show the user a specific error occured
+     *
+     * @param title
+     * @param message
+     * @param headerText
+     */
+    private void showAlert(String title, String message, String headerText)
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(headerText);
+        alert.show();
     }
 
     @FXML
@@ -280,10 +321,23 @@ public class MainWindowController implements Initializable
             log.setMessage("Message");
             log.setLogType("Conversion, no errors occured");
             log.setDate(new Date());
-            model.saveLog(log);
 
+            setLog("No errors occured, conversion successful", "Conversion");
+            model.saveLog(log);
         }
 
+    }
+
+    /**
+     * Set the custom text for the log
+     *
+     * @param message
+     * @param logType
+     */
+    private void setLog(String message, String logType)
+    {
+        log.setMessage(message);
+        log.setLogType(logType);
     }
 
     /**
@@ -409,38 +463,29 @@ public class MainWindowController implements Initializable
      */
     private Map getMap()
     {
-
-        try
+        // Clearing hashMap.
+        cellOrder.clear();
+        String[] hashmapStrings = new String[]
         {
-            // Clearing hashMap.
-            cellOrder.clear();
-            String[] hashmapStrings = new String[]
+            "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
+            "userStatus", "createdOn", "createdBy", "nameDescription",
+            "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
+        };
+
+        List<String> listOfStrings = listViewSorted.getItems();
+
+        for (int i = 0; i < listOfStrings.size(); i++)
+        {
+            String col = listOfStrings.get(i);
+            cellOrder.put(hashmapStrings[i], col);
+
+            if (i == 14)
             {
-                "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
-                "userStatus", "createdOn", "createdBy", "nameDescription",
-                "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
-            };
-
-            List<String> listOfStrings = listViewSorted.getItems();
-
-            for (int i = 0; i < listOfStrings.size(); i++)
-            {
-                String col = listOfStrings.get(i);
-                cellOrder.put(hashmapStrings[i], col);
-
-                if (i == 14)
-                {
-                    break;
-                }
+                break;
             }
-
-            return cellOrder;
         }
-        catch (IndexOutOfBoundsException e)
-        {
 
-        }
-        return null;
+        return cellOrder;
     }
 
     /**
@@ -449,22 +494,46 @@ public class MainWindowController implements Initializable
      * @param event
      */
     @FXML
-    private void loadFile(ActionEvent event)
+    private void loadFile(ActionEvent event
+    )
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
 
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
+
+        if (model.loadFile(file.getAbsolutePath()))
+        {
+            chklistSelectData.setItems(model.getCategories());
+            AddListeners();
+
+            setLog("No errors occured, filed loaded successfully", "Conversion");
+            model.saveLog(log);
+        }
+        else
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Reading File Error");
+            alert.setContentText(model.getErrorMessageProperty().getValue());
+            alert.show();
+
+            setLog("An error occured while loading file for conversion, "
+                   + model.getErrorMessageProperty().getValue(), "Error");
+            model.saveLog(log);
+        }
     }
 
     /**
-     * Set up the configurations in combobox. with the setConverter, the objects
+     * Set up the configurations in combobox. with the setConverter, the
+     * objects
      * name
-     * as string is shown in the comboboc and makes a reference to the object
+     * as string is shown in the comboboc and makes a reference to the
+     * object
      * from the string
      */
     private void addConfigs()
@@ -494,6 +563,10 @@ public class MainWindowController implements Initializable
 
     /**
      * Add listener to when a configuration is selected
+     * the chklistSelectData listViews checkboxes are checked correspomding to
+     * the
+     * configuration, therefore the listViewSorted is filled with the selected
+     * columnheaders
      */
     private void addConfigListener()
     {
@@ -526,10 +599,21 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
     {
-        model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems());
-        comboBoxConfig.getItems().clear();
-        addConfigs();
-        comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
+        if (model.saveConfig(txtFieldConfig.getText(), listViewSorted.getItems()))
+        {
+            comboBoxConfig.getItems().clear();
+            addConfigs();
+            comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
+
+            setLog("No errors occured, saved configuration successfully", "Configuration");
+            model.saveLog(log);
+        }
+        else
+        {
+            setLog("An error occured while saving configuration, "
+                   + model.getErrorMessageProperty().getValue(), "Error");
+            model.saveLog(log);
+        }
     }
 
     @FXML

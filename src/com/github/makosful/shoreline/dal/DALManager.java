@@ -34,7 +34,7 @@ import javafx.collections.ObservableList;
 public class DALManager implements IDAL
 {
 
-    private AbstractFactoryReader readerFactory;
+    private ReaderFactory readerFactory;
     private IReader reader; 
     private StoreLogIn storeLogIn;
     private ConfigDAO cDAO;
@@ -43,8 +43,8 @@ public class DALManager implements IDAL
 
     public DALManager()
     {
+        readerFactory = new ReaderFactory();
         cDAO = new ConfigDAO();
-        readerFactory = FactoryProducer.getFactory();
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
         jWriter = new JsonWriter();
@@ -56,7 +56,6 @@ public class DALManager implements IDAL
     {
         try
         {
-            setReader(path);
             return reader.loadFile(path);
         }
         catch (ReaderException ex)
@@ -66,9 +65,17 @@ public class DALManager implements IDAL
     }
     
     @Override
-    public void setReader(String path)
+    public void setReader(String path) throws DALException
     {
-        reader = readerFactory.getReader(path);
+        try
+        {
+            reader = readerFactory.getReader(path);
+        }
+        catch (IllegalArgumentException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+        
     }
 
     @Override
@@ -178,6 +185,7 @@ public class DALManager implements IDAL
     @Override
     public void saveLog(ConversionLog conversionLog) throws DALException
     {
+        
         //Get instance for calling the save log mehod, 
         //which is part of a stategy pattern 
         LogContext logContextDB = new LogContext(lDAO);
@@ -187,7 +195,21 @@ public class DALManager implements IDAL
         logContextDB.saveLog(conversionLog);
         logContextFile.saveLog(conversionLog);
         
-
+    }
+    
+    @Override
+    public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException
+    {
+        try
+        {
+            //prepares the sql string so the logs can selected  
+            //based on the criteria in the checked arraylist
+            return lDAO.prepareLogSeach(searchText, checked);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
     }
     //</editor-fold>
 
@@ -204,4 +226,5 @@ public class DALManager implements IDAL
             throw new DALException("Could not write to file");
         }
     }
+
 }

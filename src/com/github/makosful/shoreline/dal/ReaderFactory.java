@@ -8,12 +8,12 @@ import com.github.makosful.shoreline.dal.Json.JsonReader;
  *
  * @author B
  */
-public class ReaderFactory extends AbstractFactoryReader{
+public class ReaderFactory{
 
-    @Override
-    public IReader getReader(String path)
+
+    public IReader getReader(String path) throws IllegalArgumentException
     {
-        String extension = getExtension(path);
+        String extension = path.substring(path.lastIndexOf('.')+1);
         
         switch(extension)
         {
@@ -24,25 +24,11 @@ public class ReaderFactory extends AbstractFactoryReader{
             case "json":
                 return new JsonReader();
             default: 
-                throw new IllegalArgumentException("The filetype is not valid");
+                throw new IllegalArgumentException("The filetype '"+extension+"' is not valid");
         }
         
     }
 
-    @Override
-    public String getExtension(String path)
-    {
-        String extension = "";
- 
-        int i = path.lastIndexOf('.');
-        int p = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
-
-        if (i > p) {
-            extension = path.substring(i+1);
-        }
-        
-        return extension;
-    }
 
 
 
