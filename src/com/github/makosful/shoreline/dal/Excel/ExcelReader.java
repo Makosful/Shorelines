@@ -122,7 +122,7 @@ public class ExcelReader implements IReader
         //<editor-fold defaultstate="collapsed" desc="For Loop">
         row = sheet.getRow(0);
         if (row != null)
-        {
+        {   
             for (int c = 0; c < cols; c++)
             {
                 cell = row.getCell((short) c);

@@ -334,3 +334,107 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Tue May 15 11:22:38 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, The filetype 'csv' is not valid
+File: MOCK_DATA.csv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 11:24:10 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 11:27:31 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, null
+File: MOCK_DATA.csv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 11:29:50 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, null
+File: MOCK_DATA.csv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:48:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:54:10 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:22:52 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:24:43 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:47:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:54:22 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:54:49 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:57:08 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:58:43 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
