@@ -23,6 +23,8 @@ public class CSVReader implements IReader{
     private List<CSVRecord> record;
     private Reader reader;
     private Map<String, Integer> headers = new HashMap();
+    
+    
     @Override
     public boolean loadFile(String path) throws ReaderException
     {
@@ -32,7 +34,7 @@ public class CSVReader implements IReader{
         }
         catch (IOException ex)
         {
-             throw new ReaderException(ex.getLocalizedMessage(), ex);
+             throw new ReaderException("File could not be read");
         }
         
         try
@@ -43,11 +45,11 @@ public class CSVReader implements IReader{
         }
         catch (IOException ex)
         {
-            Logger.getLogger(CSVReader.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ReaderException("File could not be read");
         }
         return true;
     }
-
+   
     @Override
     public List<String> getHeaders() throws ReaderException
     {
@@ -60,7 +62,6 @@ public class CSVReader implements IReader{
         }
        
         return list;   
-        
     }
 
     @Override
