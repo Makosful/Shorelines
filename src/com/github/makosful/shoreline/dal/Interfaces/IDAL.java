@@ -2,8 +2,9 @@ package com.github.makosful.shoreline.dal.Interfaces;
 
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.be.User;
+import com.github.makosful.shoreline.be.UserNew;
 import com.github.makosful.shoreline.dal.Exception.DALException;
-import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -25,7 +26,7 @@ public interface IDAL
     public List<String> fileGetHeader() throws DALException;
 
     public List<Map> fileGetValues(Map<String, String> keys) throws DALException;
-    
+
     public void setReader(String path) throws DALException;
     //</editor-fold>
 
@@ -34,7 +35,7 @@ public interface IDAL
     public String[] getPassword() throws DALException;
 
     public void saveConfig(String configName, ObservableList<String> items) throws DALException;
-    
+
     public void createFile(List<Map> list, String path) throws DALException;
 
     public ObservableList<Config> getAllConfigs() throws DALException;
@@ -44,6 +45,9 @@ public interface IDAL
     public void saveLog(ConversionLog conversionLog) throws DALException;
 
     public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException;
-    
-    
+
+    public boolean createUser(UserNew userNew) throws DALException;
+
+    public User getUser(String uName, String hashPass) throws DALException;
+
 }

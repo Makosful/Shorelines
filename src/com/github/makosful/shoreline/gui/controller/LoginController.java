@@ -18,10 +18,9 @@ import javafx.scene.control.*;
 public class LoginController implements Initializable
 {
 
-    private Alert errorAlert;
-
     private LoginModel model;
 
+    //<editor-fold defaultstate="collapsed" desc="FXML Variables">
     @FXML
     private TextField txtFieldUsername;
     @FXML
@@ -32,6 +31,13 @@ public class LoginController implements Initializable
     private Button btnLogin;
     @FXML
     private Button btnForgotPassword;
+    @FXML
+    private Button btnSignUp;
+    @FXML
+    private Label lblMessage;
+    //</editor-fold>
+
+    private Alert errorAlert;
 
     /**
      * Initializes the controller class.
@@ -44,6 +50,8 @@ public class LoginController implements Initializable
     {
         model = new LoginModel();
         setCredentials();
+
+        lblMessage.textProperty().bind(model.getMessageProperty());
     }
 
     @FXML
@@ -53,21 +61,25 @@ public class LoginController implements Initializable
         {
             if (checkBoxRememberMe.isSelected())
             {
-                model.savePassword(txtFieldUsername.getText(), txtFieldPassword.getText());
+                model.savePassword(txtFieldUsername.getText(),
+                                   txtFieldPassword.getText());
             }
             else
             {
                 model.savePassword("", "");
             }
-
         }
         catch (BLLException ex)
         {
             errorAlert = new Alert(AlertType.ERROR);
             errorAlert.setTitle("Error");
-            errorAlert.setContentText("Something went wrong, credentials failed to save.");
+            errorAlert.setContentText(
+                    "Something went wrong, credentials failed to save.");
             errorAlert.show();
         }
+
+        model.login(txtFieldUsername.getText(),
+                    txtFieldPassword.getText());
     }
 
     public void setCredentials()
@@ -82,6 +94,12 @@ public class LoginController implements Initializable
         {
 
         }
+    }
+
+    @FXML
+    private void handleSignUp(ActionEvent event)
+    {
+        model.openSignup();
     }
 
 }
