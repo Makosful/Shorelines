@@ -7,6 +7,7 @@ import com.github.makosful.shoreline.be.UserNew;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 /**
  * This interface will declare all the methods the Business Logic Layer's facade
@@ -28,7 +29,7 @@ public interface IBLL
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 
-    public Task makeTask(List<Map> fileDataList, String path) throws BLLException;
+    public Task makeTask(Map<String, String> map, String path) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
 

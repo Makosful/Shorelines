@@ -251,35 +251,12 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
         output++;
-
-        List<Map> mapTask = model.getValues(getMap());
-
-        if (mapTask != null)
-        {
-            Task task = model.makeTask(mapTask, "output" + output + ".json");
+            
+            Task task = model.makeTask(getMap(), "output" + output + ".json");
             if (task != null)
             {
                 listTask.add(task);
             }
-            else
-            {
-                showAlert("Convertion Error", "An error occured while converting the file, "
-                                              + model.getErrorMessageProperty().getValue(), "Convertion Error");
-
-                setLog("An error occured while converting the file, "
-                       + model.getErrorMessageProperty().getValue(), "Error");
-                model.saveLog(log);
-            }
-        }
-        else
-        {
-            showAlert("Convertion Error", "An error occured while converting the file, "
-                                          + model.getErrorMessageProperty().getValue(), "Conversion Error");
-
-            setLog("An error occured while converting the file, "
-                   + model.getErrorMessageProperty().getValue(), "Error");
-            model.saveLog(log);
-        }
 
     }
 
@@ -647,6 +624,7 @@ public class MainWindowController implements Initializable
         }
 
     }
+
     // Saves log.
     public void saveLog()
     {

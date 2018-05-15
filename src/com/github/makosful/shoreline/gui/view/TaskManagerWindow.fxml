@@ -20,9 +20,9 @@
       </VBox>
       <Label alignment="CENTER" layoutX="121.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Task List" />
       <Label alignment="CENTER" layoutX="496.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Running Tasks" />
-      <JFXButton layoutX="252.0" layoutY="418.0" onAction="#convertSelectedTasks" prefHeight="31.0" prefWidth="174.0" text="Convert Selected Tasks" />
+      <JFXButton layoutX="217.0" layoutY="418.0" onAction="#convertSelectedTasks" prefHeight="31.0" prefWidth="174.0" text="Convert Selected Tasks" />
       <JFXButton layoutX="43.0" layoutY="418.0" onAction="#removeSelectedTasks" text="Remove Selected Tasks" />
-      <JFXButton layoutX="615.0" layoutY="418.0" onAction="#stopSelectedTasks" text="Stop Selected Tasks" />
-      <JFXButton layoutX="433.0" layoutY="418.0" onAction="#pauseSelectedTasks" text="Pause Selected Tasks" />
+      <JFXButton layoutX="627.0" layoutY="418.0" onAction="#stopSelectedTasks" text="Stop Selected Tasks" />
+      <JFXButton layoutX="404.0" layoutY="418.0" onAction="#pauseResumeSelectedTasks" text="Pause/Resume Selected Tasks" />
    </children>
 </AnchorPane>

@@ -3,8 +3,10 @@ package com.github.makosful.shoreline.gui.model;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
+import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -17,12 +19,14 @@ public class LoginModel
     private final Cache cache;
     private final IBLL bll;
 
-    private StringProperty message;
+    private final StringProperty message;
 
     public LoginModel()
     {
         cache = Cache.getInstance();
         bll = new BLLManager();
+
+        message = new SimpleStringProperty();
     }
 
     public void savePassword(String userName, String password) throws BLLException
@@ -46,5 +50,27 @@ public class LoginModel
             Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
             return new String(); // Empty string
         }
+    }
+
+    public StringProperty getMessageProperty()
+    {
+        return message;
+    }
+
+    public void login(String name, String pass)
+    {
+        try
+        {
+            bll.login(name, pass);
+        }
+        catch (BLLException ex)
+        {
+            // Handle properly later
+        }
+    }
+
+    public void openSignup()
+    {
+        cache.changeScene(Scenes.SignUp.getValue());
     }
 }
