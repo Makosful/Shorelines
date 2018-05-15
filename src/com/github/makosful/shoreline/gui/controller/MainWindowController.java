@@ -299,7 +299,6 @@ public class MainWindowController implements Initializable
         alert.show();
     }
 
-
     /**
      * Set the custom text for the log
      *
@@ -357,6 +356,15 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+        listViewSorted.getItems().addListener(new ListChangeListener()
+        {
+            @Override
+            public void onChanged(ListChangeListener.Change change)
+            {
+                System.out.println("Detected a change! \n");
+            }
+        });
+
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {
                                   @Override
@@ -457,10 +465,14 @@ public class MainWindowController implements Initializable
      * @param event
      */
     @FXML
-    private void loadFile(ActionEvent event)
+    private void loadFile(ActionEvent event
+    )
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+        model.loadFile(file.getAbsolutePath());
+        chklistSelectData.setItems(model.getCategories());
+        AddListeners();
 
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
@@ -487,9 +499,11 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Set up the configurations in combobox. with the setConverter, the objects
+     * Set up the configurations in combobox. with the setConverter, the
+     * objects
      * name
-     * as string is shown in the comboboc and makes a reference to the object
+     * as string is shown in the comboboc and makes a reference to the
+     * object
      * from the string
      */
     private void addConfigs()
