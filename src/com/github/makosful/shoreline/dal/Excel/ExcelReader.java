@@ -138,8 +138,10 @@ public class ExcelReader implements IReader
     }
     
     @Override
-    public List<Map> getValues(Map<String, String> keys) throws ReaderException
+    public List<Map> getValues(Map<String, String> keys) 
     {
+        try
+        {
         //<editor-fold defaultstate="collapsed" desc="State Handling">
         if (sheet == null)
         {
@@ -214,6 +216,13 @@ public class ExcelReader implements IReader
         //</editor-fold>
 
         return list;
+        }
+        catch(ReaderException ex)
+        {
+            ex.printStackTrace();
+            
+        }
+        return null;
     }
     /**
      * Gets the value out of the cell as a string.

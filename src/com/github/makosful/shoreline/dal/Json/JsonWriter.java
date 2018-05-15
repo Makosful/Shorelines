@@ -90,7 +90,7 @@ public class JsonWriter
         out.write(string.toString());
     }
 
-    public void createFile(List<Map> list, String path) throws IOException
+    public void createFile(List<Map> list, String path) 
     {
         try
         {
