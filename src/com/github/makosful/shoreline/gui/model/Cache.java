@@ -66,7 +66,8 @@ public class Cache
     public enum Scenes
     {
         Main(0),
-        Login(1);
+        Login(1),
+        SignUp(2);
 
         private final int id;
 

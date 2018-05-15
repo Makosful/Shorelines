@@ -2,15 +2,16 @@ package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.be.User;
+import com.github.makosful.shoreline.be.UserNew;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to
@@ -71,16 +72,16 @@ public class BLLManager implements IBLL
     @Override
     public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
-        try 
+        try
         {
             return tasks.makeTask(map, path);
         }
         catch (BLLException ex)
         {
-           throw new BLLException(ex.getMessage());
+            throw new BLLException(ex.getMessage());
         }
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="Configuration">
     @Override
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException
@@ -110,7 +111,7 @@ public class BLLManager implements IBLL
 
     }
     //</editor-fold>
-    
+
     @Override
     public String generatePassword() throws BLLException
     {
@@ -130,7 +131,7 @@ public class BLLManager implements IBLL
         }
         try
         {
-            
+
             return dal.fileLoad(path);
         }
         catch (DALException ex)
@@ -164,7 +165,7 @@ public class BLLManager implements IBLL
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="Logs">
     @Override
     public void saveLog(ConversionLog conversionLog) throws BLLException
@@ -188,6 +189,45 @@ public class BLLManager implements IBLL
         catch (DALException ex)
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="User Handling">
+    @Override
+    public boolean createUser(UserNew u) throws BLLException
+    {
+        try
+        {
+            String hash = Hashing.hashPass(u.getPassword());
+
+            return dal.createUser(new UserNew(u.getFirstName(),
+                                              u.getLastName(),
+                                              u.getUserName(),
+                                              u.getEmail(),
+                                              hash));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public User login(String uName, String pass) throws BLLException
+    {
+        try
+        {
+            String hashPass = Hashing.hashPass(pass);
+            return dal.getUser(uName, hashPass);
+        }
+        catch (NoSuchAlgorithmException
+               | UnsupportedEncodingException
+               | DALException ex)
+        {
+            throw new BLLException(pass, ex);
         }
     }
     //</editor-fold>

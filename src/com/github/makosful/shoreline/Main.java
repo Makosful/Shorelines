@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline;
 
-
 import com.github.makosful.shoreline.gui.model.Cache;
 import com.github.makosful.stage.exception.IlligalIdException;
 import com.github.makosful.stage.utils.StageManager;
@@ -50,7 +49,9 @@ public class Main extends Application
                          getClass().getResource("gui/view/MainWindow.fxml"));
         sm.registerScene(1, "Login",
                          getClass().getResource("gui/view/Login.fxml"));
+        sm.registerScene(2, "Signup",
+                         getClass().getResource("gui/view/SignUpWindow.fxml"));
 
-        sm.setActiveScene(0);
+        sm.setActiveScene(1);
     }
 }
