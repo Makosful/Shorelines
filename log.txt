@@ -206,3 +206,27 @@ File: Import_data.xlsx
 Message:Conversion, no errors occured
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 09 12:05:16 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 09 12:05:32 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 09 13:18:44 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+

@@ -43,7 +43,7 @@ import org.controlsfx.control.CheckListView;
  */
 public class MainWindowController implements Initializable
 {
-   
+
     private MainWindowModel model;
     private Map<String, String> cellOrder;
     private ConversionLog log;
@@ -52,10 +52,8 @@ public class MainWindowController implements Initializable
     private int output = 0;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
-
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
 //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
-
     @FXML
     private Color x211;
     @FXML
@@ -146,7 +144,7 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
-        
+
         AddListeners();
         addConfigs();
         addConfigListener();
@@ -262,8 +260,8 @@ public class MainWindowController implements Initializable
     @FXML
     private void executeTaskBatch(ActionEvent event)
     {
-         ExecutorService exService = Executors.newFixedThreadPool(4);
-         
+        ExecutorService exService = Executors.newFixedThreadPool(4);
+
         for (Runnable run : listTask)
         {
 
@@ -278,7 +276,7 @@ public class MainWindowController implements Initializable
             alert.setContentText("You successfully converted the files to JSON");
             alert.setHeaderText("Info");
             alert.show();
-            
+
             log.setMessage("Message");
             log.setLogType("Conversion, no errors occured");
             log.setDate(new Date());
@@ -333,6 +331,15 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+        listViewSorted.getItems().addListener(new ListChangeListener()
+        {
+            @Override
+            public void onChanged(ListChangeListener.Change change)
+            {
+                System.out.println("Detected a change! \n");
+            }
+        });
+
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {
                                   @Override
@@ -402,7 +409,7 @@ public class MainWindowController implements Initializable
      */
     private Map getMap()
     {
-        
+
         try
         {
             // Clearing hashMap.
@@ -413,8 +420,7 @@ public class MainWindowController implements Initializable
                 "userStatus", "createdOn", "createdBy", "nameDescription",
                 "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
             };
-            
-          
+
             List<String> listOfStrings = listViewSorted.getItems();
 
             for (int i = 0; i < listOfStrings.size(); i++)
@@ -450,7 +456,7 @@ public class MainWindowController implements Initializable
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
-        
+
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
     }
