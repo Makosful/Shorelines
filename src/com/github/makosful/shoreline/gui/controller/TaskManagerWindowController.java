@@ -38,6 +38,8 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private CheckListView<Task> runningListView;
     private ObservableList<Task> runningTasks;
+    
+    Task task;
 
     /**
      * Initializes the controller class.
@@ -56,11 +58,15 @@ public class TaskManagerWindowController implements Initializable
 
         for (Task run : taskListView.getCheckModel().getCheckedItems())
         {
+            task = run;
             exService.execute(run);
             runningTasks.add(run);
             clearTasks(run);
         }
-
+        task.setOnFailed((even1t) ->
+        {
+          task.getException().printStackTrace();
+        });
         exService.shutdown();
         if (exService.isShutdown())
         {
