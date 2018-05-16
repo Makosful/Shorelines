@@ -400,6 +400,7 @@ public class MainWindowController implements Initializable
         });
 
         btnInsertCustom.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
+        btnDeleteSelected.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
 
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {

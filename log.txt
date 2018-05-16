@@ -566,3 +566,35 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 16 14:52:48 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 14:56:13 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 15:04:27 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 15:05:53 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
