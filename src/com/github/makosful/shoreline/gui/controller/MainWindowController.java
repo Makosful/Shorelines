@@ -130,6 +130,8 @@ public class MainWindowController implements Initializable
     private Boolean isChecked = false;
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
+    @FXML
+    private Button btnDeleteSelected;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
@@ -805,5 +807,11 @@ public class MainWindowController implements Initializable
     {
         PopUp.display();
         listViewSorted.getItems().add(PopUp.getInputText());
+    }
+
+    @FXML
+    private void handleDeleteSelectedItem(ActionEvent event)
+    {
+        listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
     }
 }
