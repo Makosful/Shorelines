@@ -1022,3 +1022,35 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 16 10:07:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:07:53 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:08:38 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:08:45 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+

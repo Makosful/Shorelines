@@ -218,7 +218,6 @@ public class MainWindowModel
     public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
        return bll.makeTask(map, path);
-    }
-    
+    }   
 
 }
