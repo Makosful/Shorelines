@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline.gui.model;
 
-import com.github.makosful.shoreline.be.User;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
@@ -58,31 +57,20 @@ public class LoginModel
         return message;
     }
 
-    public void openSignup()
-    {
-        cache.changeScene(Scenes.SignUp.getValue());
-    }
-
-    public void login(String uName, String pass)
+    public void login(String name, String pass)
     {
         try
         {
-            final User u = bll.login(uName, pass);
-
-            if (u == null)
-            {
-                // Error Message
-                message.setValue("Wrong username or password");
-            }
-            else
-            {
-                cache.setUser(u);
-                cache.changeScene(Scenes.Main.getValue());
-            }
+            bll.login(name, pass);
         }
         catch (BLLException ex)
         {
-            Logger.getLogger(LoginModel.class.getName()).log(Level.SEVERE, null, ex);
+            // Handle properly later
         }
+    }
+
+    public void openSignup()
+    {
+        cache.changeScene(Scenes.SignUp.getValue());
     }
 }
