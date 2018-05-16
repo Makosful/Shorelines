@@ -39,6 +39,7 @@ public class BLLManager implements IBLL
     public BLLManager()
     {
         dal = new DALManager();
+        setDalManager();
         log = new Log();
         tasks = new TaskManager();
         pass = new PasswordGenerator(12);
@@ -165,6 +166,11 @@ public class BLLManager implements IBLL
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
+    }
+    
+    public void setDalManager()
+    {
+     tasks.setDalManager(dal);
     }
 
     //<editor-fold defaultstate="collapsed" desc="Logs">

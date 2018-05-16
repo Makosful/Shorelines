@@ -16,12 +16,12 @@ import javafx.concurrent.Task;
 public class TaskManager
 {
 
-    private final IDAL dalManager;
+    private IDAL dalManager;
     private Task task;
 
     public TaskManager()
     {
-        dalManager = new DALManager();
+        
     }
 
     public Task makeTask(Map<String, String> map, String path) throws BLLException
@@ -50,5 +50,10 @@ public class TaskManager
             }
         };
         return task;
+    }
+    
+    public void setDalManager(IDAL dal)
+    {
+        dalManager = dal;
     }
 }
