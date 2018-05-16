@@ -76,4 +76,5 @@ public class LoginModel
     {
         cache.changeScene(Scenes.SignUp.getValue());
     }
+
 }

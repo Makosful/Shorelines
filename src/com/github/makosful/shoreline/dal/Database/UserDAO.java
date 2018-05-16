@@ -45,7 +45,7 @@ public class UserDAO
         }
     }
 
-    public User getUser(String uName, String pass) throws SQLException
+    public User getUserLogin(String uName, String pass) throws SQLException
     {
         try (Connection con = db.getConnection())
         {
@@ -69,6 +69,47 @@ public class UserDAO
                 );
             }
             return null;
+        }
+    }
+
+    public User getUserByMail(String mail) throws SQLException
+    {
+        try (Connection con = db.getConnection())
+        {
+            String sql = "SELECT * FROM Users WHERE Users.Email LIKE ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, mail);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+                return new User(rs.getString("FirstName"),
+                                rs.getString("LastName"),
+                                rs.getString("UserName"),
+                                rs.getString("Email"));
+            }
+            return null;
+        }
+    }
+
+    public boolean changePassWord(User user, String pass) throws SQLException
+    {
+        try (Connection con = db.getConnection())
+        {
+            String sql = "update Users "
+                         + "set Users.Password = ? "
+                         + "where Users.UserName like ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            int i = 1;
+            stmt.setString(i++, pass);
+            stmt.setString(i++, user.getUserName());
+
+            int res = stmt.executeUpdate();
+
+            return res > 0;
         }
     }
 }

@@ -48,4 +48,6 @@ public interface IBLL
     public boolean createUser(UserNew userNew) throws BLLException;
 
     public User login(String uName, String pass) throws BLLException;
+
+    public boolean getUserByMail(String text) throws BLLException;
 }

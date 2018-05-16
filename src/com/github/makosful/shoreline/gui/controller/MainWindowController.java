@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -151,6 +149,11 @@ public class MainWindowController implements Initializable
         addConfigListener();
     }
 
+    @FXML
+    private void handleChangePassword(ActionEvent event)
+    {
+    }
+
     private void shortcutMoveItemListView(KeyEvent event)
     {
         if (ListViewInFocus)
@@ -251,12 +254,12 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
         output++;
-            
-            Task task = model.makeTask(getMap(), "output" + output + ".json");
-            if (task != null)
-            {
-                listTask.add(task);
-            }
+
+        Task task = model.makeTask(getMap(), "output" + output + ".json");
+        if (task != null)
+        {
+            listTask.add(task);
+        }
 
     }
 
