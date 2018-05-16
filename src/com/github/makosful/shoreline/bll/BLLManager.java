@@ -34,7 +34,7 @@ public final class BLLManager implements IBLL
     private final IDAL dal;
     private final Log log;
     private final TaskManager tasks;
-    private final PasswordGenerator pass;
+    private final PasswordGenerator passGen;
 
     public BLLManager()
     {
@@ -42,7 +42,7 @@ public final class BLLManager implements IBLL
         tasks = new TaskManager();
         setDalManager();
         log = new Log();
-        pass = new PasswordGenerator(12);
+        passGen = new PasswordGenerator(12);
     }
 
     @Override
@@ -117,7 +117,7 @@ public final class BLLManager implements IBLL
     @Override
     public String generatePassword() throws BLLException
     {
-        return pass.nextString();
+        return passGen.nextString();
     }
 
     @Override
@@ -167,10 +167,10 @@ public final class BLLManager implements IBLL
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+
     public void setDalManager()
     {
-     tasks.setDalManager(dal);
+        tasks.setDalManager(dal);
     }
 
     //<editor-fold defaultstate="collapsed" desc="Logs">
@@ -235,6 +235,73 @@ public final class BLLManager implements IBLL
                | DALException ex)
         {
             throw new BLLException(pass, ex);
+        }
+    }
+
+    @Override
+    public boolean getUserByMail(String mail) throws BLLException
+    {
+        try
+        {
+            final User user = dal.getUserByMail(mail);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            final String pass = generatePassword();
+            final String hash = Hashing.hashPass(pass);
+            boolean changed = dal.changeUserPassword(user, hash);
+
+            if (!changed)
+            {
+                return false;
+            }
+
+            boolean sentEmail = dal.sendEmail(user, pass);
+
+            if (!sentEmail)
+            {
+                throw new DALException("New password was generated, but the mail couldn't be sent");
+            }
+            return true;
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean changePassword(User user, String pass) throws BLLException
+    {
+        try
+        {
+            return dal.changeUserPassword(user, Hashing.hashPass(pass));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean passwordMatch(User user, String pass) throws BLLException
+    {
+        try
+        {
+            return dal.passwordMatch(user, Hashing.hashPass(pass));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
     //</editor-fold>

@@ -21,6 +21,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javax.mail.MessagingException;
 
 /**
  * A facade for the Data Access Layer as a whole.
@@ -184,7 +185,7 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void saveLog(ConversionLog conversionLog) throws DALException
+    public void saveLog(ConversionLog log) throws DALException
     {
 
         //Get instance for calling the save log mehod,
@@ -193,8 +194,8 @@ public class DALManager implements IDAL
         LogContext logContextFile = new LogContext(new LogFileDAO());
 
         //save log in db and locally
-        logContextDB.saveLog(conversionLog);
-        logContextFile.saveLog(conversionLog);
+        logContextDB.saveLog(log);
+        logContextFile.saveLog(log);
 
     }
 
@@ -246,7 +247,69 @@ public class DALManager implements IDAL
     {
         try
         {
-            return user.getUser(uName, pass);
+            return user.getUserLogin(uName, pass);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public User getUserByMail(String mail) throws DALException
+    {
+        try
+        {
+            return user.getUserByMail(mail);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean changeUserPassword(User user, String pass) throws DALException
+    {
+        try
+        {
+            return this.user.changePassWord(user, pass);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean sendEmail(User user, String pass) throws DALException
+    {
+        try
+        {
+            String title = "New Password";
+            String message = "<p>We've generated a new password for you</p>\n"
+                             + "<p>Username: " + user.getUserName() + "</p>\n"
+                             + "<p>Password: " + pass + "</p>\n"
+                             + "<p>We recommend you change it after logging back in</p>";
+
+            final Email mail = new Email(user.getEmail(),
+                                         title,
+                                         message);
+
+            return mail.sendMail();
+        }
+        catch (MessagingException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean passwordMatch(User user, String pass) throws DALException
+    {
+        try
+        {
+            return this.user.passwordMatch(user, pass);
         }
         catch (SQLException ex)
         {

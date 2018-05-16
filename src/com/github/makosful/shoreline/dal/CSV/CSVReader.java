@@ -75,7 +75,6 @@ public class CSVReader implements IReader{
                 Map<String, String> map = new LinkedHashMap();
                 for (Entry<String, String> entry : keys.entrySet())
                 {
-                    System.out.println(csvRecord.get(headers.get(entry.getValue())));
                     map.put(entry.getKey(), csvRecord.get(headers.get(entry.getValue())));
                 }
                 list.add(map);

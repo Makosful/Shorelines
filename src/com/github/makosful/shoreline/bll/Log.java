@@ -29,14 +29,14 @@ public class Log
     
     /**
      * Methad tp pass down the conversionLog to the db to be stored
-     * @param conversionLog
+     * @param log
      * @throws BLLException 
      */
-    public void saveLog(ConversionLog conversionLog) throws BLLException
+    public void saveLog(ConversionLog log) throws BLLException
     {
         try
         {
-            dal.saveLog(conversionLog);
+            dal.saveLog(log);
         }
         catch (DALException ex)
         {
