@@ -28,7 +28,7 @@ import javafx.concurrent.Task;
  *
  * @author Axl
  */
-public class BLLManager implements IBLL
+public final class BLLManager implements IBLL
 {
 
     private final IDAL dal;
@@ -39,9 +39,9 @@ public class BLLManager implements IBLL
     public BLLManager()
     {
         dal = new DALManager();
+        tasks = new TaskManager();
         setDalManager();
         log = new Log();
-        tasks = new TaskManager();
         pass = new PasswordGenerator(12);
     }
 
