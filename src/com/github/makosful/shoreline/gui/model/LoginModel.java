@@ -1,6 +1,5 @@
 package com.github.makosful.shoreline.gui.model;
 
-import com.github.makosful.shoreline.be.User;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
@@ -62,13 +61,11 @@ public class LoginModel
     {
         try
         {
-            final User user = bll.login(name, pass);
-            cache.setUser(user);
-            cache.changeScene(Scenes.Main.getValue());
+            bll.login(name, pass);
         }
         catch (BLLException ex)
         {
-            // Handle the error here
+            // Handle properly later
         }
     }
 
