@@ -83,6 +83,7 @@ public class ChangePasswordController implements Initializable
             if (!match)
             {
                 lblError.setText("The old password is wrong");
+                return;
             }
 
             final boolean changed = bll.changePassword(cache.getUser(), txtNewPass.getText());
@@ -90,6 +91,7 @@ public class ChangePasswordController implements Initializable
             if (changed)
             {
                 lblError.setText("Password changed");
+                ((Stage) btnSave.getScene().getWindow()).close();
             }
             else
             {

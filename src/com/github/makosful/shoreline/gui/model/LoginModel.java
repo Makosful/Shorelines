@@ -68,6 +68,10 @@ public class LoginModel
                 cache.setUser(user);
                 cache.changeScene(Scenes.Main.getValue());
             }
+            else
+            {
+                message.set("Failed to login");
+            }
         }
         catch (BLLException ex)
         {

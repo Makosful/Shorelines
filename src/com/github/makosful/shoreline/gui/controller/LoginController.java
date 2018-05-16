@@ -65,6 +65,7 @@ public class LoginController implements Initializable
     @FXML
     private void logIn(ActionEvent event)
     {
+        //<editor-fold defaultstate="collapsed" desc="Remember me">
         try
         {
             if (checkBoxRememberMe.isSelected())
@@ -85,6 +86,7 @@ public class LoginController implements Initializable
                     "Something went wrong, credentials failed to save.");
             errorAlert.show();
         }
+        //</editor-fold>
 
         model.login(txtFieldUsername.getText(),
                     txtFieldPassword.getText());
