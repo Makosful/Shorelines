@@ -1,10 +1,7 @@
 package com.github.makosful.shoreline.bll;
 
-import com.github.makosful.shoreline.be.TaskString;
-import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.concurrent.Task;
@@ -21,21 +18,22 @@ public class TaskManager
 
     public TaskManager()
     {
-        
+
     }
 
     public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
-        task = new TaskString()
+        task = new Task()
         {
+
             @Override
             public String toString()
             {
                 return path;
             }
-            
+
             @Override
-            protected Object call() 
+            protected Object call()
             {
                 try
                 {
@@ -51,9 +49,10 @@ public class TaskManager
         };
         return task;
     }
-    
+
     public void setDalManager(IDAL dal)
     {
         dalManager = dal;
     }
+
 }

@@ -5,19 +5,23 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.be.TaskTest;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -38,8 +42,13 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private CheckListView<Task> runningListView;
     private ObservableList<Task> runningTasks;
-    
-    Task task;
+    private boolean pause = false;
+    private ExecutorService exService;
+    List<TaskTest> threads = new ArrayList();
+    List<Thread> threadsToPause = new ArrayList();
+    private TaskTest thread;
+    @FXML
+    private JFXButton convertbtn;
 
     /**
      * Initializes the controller class.
@@ -49,52 +58,72 @@ public class TaskManagerWindowController implements Initializable
     {
         runningTasks = FXCollections.observableArrayList();
         runningListView.setItems(runningTasks);
+
     }
 
     @FXML
     private void convertSelectedTasks(ActionEvent event) throws InterruptedException
     {
-        ExecutorService exService = Executors.newFixedThreadPool(4);
 
-        for (Task run : taskListView.getCheckModel().getCheckedItems())
+//        exService = Executors.newFixedThreadPool(4);
+        for (Task task : taskListView.getCheckModel().getCheckedItems())
         {
-            task = run;
-            exService.execute(run);
-            runningTasks.add(run);
-            clearTasks(run);
+            TaskTest thread = new TaskTest();
+            thread.setTask(task);
+
+            threads.add(thread);
+            thread.setDaemon(true);
+            thread.start();
         }
-        task.setOnFailed((even1t) ->
-        {
-          task.getException().printStackTrace();
-        });
-        exService.shutdown();
-        if (exService.isShutdown())
-        {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Convertion Info");
-            alert.setContentText("You successfully converted the files to JSON");
-            alert.setHeaderText("Info");
-            alert.show();
 
-            controller.setLog("No errors occured, conversion successful", "Conversion");
-            controller.saveLog();
-
-        }
+//        exService.shutdown();
+//        if (exService.isShutdown())
+//        {
+//            Alert alert = new Alert(AlertType.INFORMATION);
+//            alert.setTitle("Convertion Info");
+//            alert.setContentText("You successfully converted the files to JSON");
+//            alert.setHeaderText("Info");
+//            alert.show();
+//
+//            controller.setLog("No errors occured, conversion successful", "Conversion");
+//            controller.saveLog();
+//
+//        }
     }
 
     @FXML
     private void removeSelectedTasks(ActionEvent event)
     {
+
+        Thread th = new Thread(() ->
+        {
+
+            threads.get(0).resumeThread();
+
+        });
+        th.setDaemon(true);
+        th.start();
     }
 
     @FXML
     private void stopSelectedTasks(ActionEvent event)
     {
+        for (int i = 0; i < taskList.size(); i++)
+        {
+            taskListView.getCheckModel().checkAll();
+        }
     }
 
-    private void runningTaskListener()
+    private void taskDoneRemove(Task task)
     {
-
+        task.setOnSucceeded(new EventHandler()
+        {
+            @Override
+            public void handle(Event event)
+            {
+                runningTasks.remove(task);
+            }
+        });
     }
 
     public void getTaskList(List<Task> tasks)
@@ -118,9 +147,20 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private void pauseResumeSelectedTasks(ActionEvent event) throws InterruptedException
     {
-        for (int i = 0; i < runningListView.getCheckModel().getItemCount(); i++)
+        Thread th = new Thread(() ->
         {
-            runningListView.getCheckModel().getItem(i).wait();
-        }
+            try
+            {
+                threads.get(0).pause();
+            }
+            catch (InterruptedException ex)
+            {
+                Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        th.setDaemon(true);
+        th.start();
+
     }
+
 }
