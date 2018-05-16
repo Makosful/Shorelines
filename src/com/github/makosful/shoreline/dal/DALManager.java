@@ -303,5 +303,18 @@ public class DALManager implements IDAL
             throw new DALException(ex.getLocalizedMessage(), ex);
         }
     }
+
+    @Override
+    public boolean passwordMatch(User user, String pass) throws DALException
+    {
+        try
+        {
+            return this.user.passwordMatch(user, pass);
+        }
+        catch (SQLException ex)
+        {
+            throw new DALException(ex.getLocalizedMessage(), ex);
+        }
+    }
     //</editor-fold>
 }

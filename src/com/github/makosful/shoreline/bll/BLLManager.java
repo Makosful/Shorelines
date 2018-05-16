@@ -237,7 +237,6 @@ public final class BLLManager implements IBLL
             throw new BLLException(pass, ex);
         }
     }
-    //</editor-fold>
 
     @Override
     public boolean getUserByMail(String mail) throws BLLException
@@ -275,4 +274,35 @@ public final class BLLManager implements IBLL
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
+
+    @Override
+    public boolean changePassword(User user, String pass) throws BLLException
+    {
+        try
+        {
+            return dal.changeUserPassword(user, Hashing.hashPass(pass));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean passwordMatch(User user, String pass) throws BLLException
+    {
+        try
+        {
+            return dal.passwordMatch(user, Hashing.hashPass(pass));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    //</editor-fold>
 }

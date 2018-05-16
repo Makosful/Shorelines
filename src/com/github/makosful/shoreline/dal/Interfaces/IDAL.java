@@ -56,4 +56,6 @@ public interface IDAL
 
     public boolean sendEmail(User user, String pass) throws DALException;
 
+    public boolean passwordMatch(User user, String pass) throws DALException;
+
 }

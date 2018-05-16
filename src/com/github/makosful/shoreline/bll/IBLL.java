@@ -50,4 +50,8 @@ public interface IBLL
     public User login(String uName, String pass) throws BLLException;
 
     public boolean getUserByMail(String text) throws BLLException;
+
+    public boolean changePassword(User user, String text0) throws BLLException;
+
+    public boolean passwordMatch(User user, String text) throws BLLException;
 }

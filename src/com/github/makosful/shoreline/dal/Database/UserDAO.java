@@ -98,9 +98,9 @@ public class UserDAO
     {
         try (Connection con = db.getConnection())
         {
-            String sql = "update Users "
-                         + "set Users.Password = ? "
-                         + "where Users.UserName like ?;";
+            String sql = "UPDATE  Users "
+                         + "SET Users.Password = ? "
+                         + "WHERE Users.UserName LIKE ?;";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             int i = 1;
@@ -110,6 +110,47 @@ public class UserDAO
             int res = stmt.executeUpdate();
 
             return res > 0;
+        }
+    }
+
+    public User passwordMatch(User user) throws SQLException
+    {
+        try (Connection con = db.getConnection())
+        {
+            String sql = "select * from Users where Users.Username like ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setString(1, user.getUserName());
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next())
+            {
+                return new User(rs.getString("FirstName"),
+                                rs.getString("LastName"),
+                                rs.getString("UserName"),
+                                rs.getString("Email"));
+            }
+            return null;
+        }
+    }
+
+    public boolean passwordMatch(User user, String pass) throws SQLException
+    {
+        try (Connection con = db.getConnection())
+        {
+            String sql = "SELECT * FROM Users "
+                         + "WHERE Users.UserName like ? "
+                         + "AND Users.Password like ?;";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            int i = 1;
+            stmt.setString(i++, user.getUserName());
+            stmt.setString(i++, pass);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
         }
     }
 }

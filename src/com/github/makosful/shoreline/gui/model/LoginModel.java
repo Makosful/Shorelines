@@ -63,8 +63,11 @@ public class LoginModel
         try
         {
             final User user = bll.login(name, pass);
-            cache.setUser(user);
-            cache.changeScene(Scenes.Main.getValue());
+            if (user != null)
+            {
+                cache.setUser(user);
+                cache.changeScene(Scenes.Main.getValue());
+            }
         }
         catch (BLLException ex)
         {
