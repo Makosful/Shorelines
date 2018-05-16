@@ -4,6 +4,7 @@ import com.github.makosful.shoreline.be.TaskString;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.concurrent.Task;
@@ -23,7 +24,7 @@ public class TaskManager
         dalManager = new DALManager();
     }
 
-    public Task makeTask(List<Map> list, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
         task = new TaskString()
         {
@@ -34,18 +35,18 @@ public class TaskManager
             }
             
             @Override
-            protected Object call() throws Exception
+            protected Object call() 
             {
                 try
                 {
+                    List<Map> list = dalManager.fileGetValues(map);
                     dalManager.createFile(list, path);
-                    return task;
                 }
                 catch (DALException ex)
                 {
-                    
+                    ex.printStackTrace();
                 }
-                return null;
+                return task;
             }
         };
         return task;

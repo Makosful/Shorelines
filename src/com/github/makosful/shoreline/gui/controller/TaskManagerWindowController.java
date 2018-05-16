@@ -5,13 +5,11 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
-import com.jfoenix.controls.JFXListView;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -39,6 +37,9 @@ public class TaskManagerWindowController implements Initializable
     private MainWindowController controller;
     @FXML
     private CheckListView<Task> runningListView;
+    private ObservableList<Task> runningTasks;
+    
+    Task task;
 
     /**
      * Initializes the controller class.
@@ -46,20 +47,26 @@ public class TaskManagerWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        runningTasks = FXCollections.observableArrayList();
+        runningListView.setItems(runningTasks);
     }
 
     @FXML
-    private void convertSelectedTasks(ActionEvent event)
+    private void convertSelectedTasks(ActionEvent event) throws InterruptedException
     {
         ExecutorService exService = Executors.newFixedThreadPool(4);
-        
+
         for (Task run : taskListView.getCheckModel().getCheckedItems())
         {
-
+            task = run;
             exService.execute(run);
+            runningTasks.add(run);
             clearTasks(run);
         }
-
+        task.setOnFailed((even1t) ->
+        {
+          task.getException().printStackTrace();
+        });
         exService.shutdown();
         if (exService.isShutdown())
         {
@@ -85,9 +92,9 @@ public class TaskManagerWindowController implements Initializable
     {
     }
 
-    @FXML
-    private void pauseSelectedTasks(ActionEvent event)
+    private void runningTaskListener()
     {
+
     }
 
     public void getTaskList(List<Task> tasks)
@@ -101,10 +108,19 @@ public class TaskManagerWindowController implements Initializable
     {
         controller = con;
     }
-    
+
     public void clearTasks(Task task)
     {
         taskOtherController.remove(task);
         taskList.remove(task);
+    }
+
+    @FXML
+    private void pauseResumeSelectedTasks(ActionEvent event) throws InterruptedException
+    {
+        for (int i = 0; i < runningListView.getCheckModel().getItemCount(); i++)
+        {
+            runningListView.getCheckModel().getItem(i).wait();
+        }
     }
 }

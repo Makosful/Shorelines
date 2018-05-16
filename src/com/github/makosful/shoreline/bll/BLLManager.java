@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 
 /**
  * The facade for the Business Logic Layer. The sole purpose of this class is to
@@ -70,11 +71,11 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public Task makeTask(List<Map> list, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
         try
         {
-            return tasks.makeTask(list, path);
+            return tasks.makeTask(map, path);
         }
         catch (BLLException ex)
         {
