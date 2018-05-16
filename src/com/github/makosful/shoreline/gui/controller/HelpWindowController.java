@@ -27,6 +27,7 @@ public class HelpWindowController implements Initializable
     private HelpWindowModel model;
 
     private int imgIndex = 0;
+    private int imgMax;
     private String tutString;
 
     @FXML
@@ -41,6 +42,8 @@ public class HelpWindowController implements Initializable
     private Button btnNextPic;
     @FXML
     private AnchorPane imageViewPane;
+    @FXML
+    private Label lblimgDisplay;
 
     /**
      * Initializes the controller class.
@@ -58,6 +61,7 @@ public class HelpWindowController implements Initializable
     private void SetImages()
     {
         model.loadImages();
+        imgMax = model.getImages().size();
     }
 
     @FXML
@@ -65,7 +69,8 @@ public class HelpWindowController implements Initializable
     {
         if (model.getImages().size() > 0)
         {
-            imgIndex = (imgIndex - 1 + model.getImages().size()) % model.getImages().size();
+            lblimgDisplay.setText(imgIndex + 1 + "/" + imgMax);
+            imgIndex = (imgIndex - 1 + imgMax) % imgMax;
             displayImage();
         }
     }
@@ -75,6 +80,7 @@ public class HelpWindowController implements Initializable
     {
         if (!model.getImages().isEmpty())
         {
+            lblimgDisplay.setText(imgIndex + 1 + "/" + imgMax);
             imgIndex = (imgIndex + 1) % model.getImages().size();
             displayImage();
         }
@@ -85,6 +91,7 @@ public class HelpWindowController implements Initializable
         if (model.getImages() != null && !model.getImages().isEmpty())
         {
             imageView.setImage(model.getImages().get(imgIndex));
+            lblimgDisplay.setText(imgIndex + 1 + "/" + imgMax);
             imageView.fitWidthProperty().bind(imageViewPane.widthProperty());
             imageView.fitHeightProperty().bind(imageViewPane.heightProperty());
         }

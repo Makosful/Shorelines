@@ -8,14 +8,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
    <children>
       <BorderPane prefHeight="397.0" prefWidth="351.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
             <AnchorPane prefHeight="75.0" prefWidth="604.0">
                <children>
-                  <Label fx:id="lblInstructions" text="The documentation / instructions will be listed here." AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="lblInstructions" text="The documentation / instructions will be listed here." AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -41,13 +42,21 @@
             </Pane>
          </right>
          <center>
-            <AnchorPane fx:id="imageViewPane" minHeight="405.0" minWidth="526.0" prefHeight="405.0" prefWidth="526.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="imageViewPane" minHeight="250.0" minWidth="526.0" prefHeight="400.0" prefWidth="526.0" BorderPane.alignment="CENTER">
                <children>
                   <ImageView fx:id="imageView" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <viewport>
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
+                  <VBox layoutX="258.0" layoutY="392.0" AnchorPane.bottomAnchor="-20.0">
+                     <children>
+                        <Label fx:id="lblimgDisplay" textAlignment="CENTER">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></Label>
+                     </children>
+                  </VBox>
                </children>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

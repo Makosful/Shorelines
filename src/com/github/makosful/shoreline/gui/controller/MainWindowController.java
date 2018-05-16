@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.be.PopUp;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +20,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
@@ -32,6 +33,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
@@ -51,9 +53,8 @@ public class MainWindowController implements Initializable
     private String filePath;
     private int output = 0;
 
-    //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
-//<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+    //<editor-fold defaultstate="collapsed" desc="Split Pane Unused">
     @FXML
     private Color x211;
     @FXML
@@ -68,39 +69,41 @@ public class MainWindowController implements Initializable
     private Font x11;
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Labels">
+    //<editor-fold defaultstate="collapsed" desc="Output labels">
     @FXML
-    private Label lblSiteName;
+    private Label lbl01SiteName;
     @FXML
-    private Label lblAssetSerialNo;
+    private Label lbl02AssetSerialNo;
     @FXML
-    private Label lblExtWorkOrderID;
+    private Label lbl03OrderType;
     @FXML
-    private Label lblSystemStatus;
+    private Label lbl04ExtWorkOrderID;
     @FXML
-    private Label lblUserStatus;
+    private Label lbl05SystemStatus;
     @FXML
-    private Label lblCreatedOn;
+    private Label lbl06UserStatus;
     @FXML
-    private Label lblCreatedBy;
+    private Label lbl07CreatedOn;
     @FXML
-    private Label lblPriority;
+    private Label lbl08CreatedBy;
     @FXML
-    private Label lblStatus;
+    private Label lbl09NameDescription;
     @FXML
-    private Label lblEarliestStart;
+    private Label lbl10Priority;
     @FXML
-    private Label lblLatestStart;
+    private Label lbl11Status;
     @FXML
-    private Label lblLatestFinish;
+    private Label lbl12EarliestStart;
     @FXML
-    private Label lblEstimatedTime;
+    private Label lbl13LatestStart;
     @FXML
-    private Label lblNameDescription;
+    private Label lbl14LatestFinish;
     @FXML
-    private Label lblOrderType;
+    private Label lbl15EstimatedTime;
     //</editor-fold>
 
+    @FXML
+    private Button btnInsertCustom;
     @FXML
     private CheckListView<String> chklistSelectData;
     @FXML
@@ -390,9 +393,11 @@ public class MainWindowController implements Initializable
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-                System.out.println("Detected a change! \n");
+                setupOutputExampleListeners();
             }
         });
+
+        btnInsertCustom.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
 
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {
@@ -650,4 +655,155 @@ public class MainWindowController implements Initializable
         }
     }
 
+    private void setupOutputExampleListeners()
+    {
+        setOutputLabelText();
+    }
+
+    private void setOutputLabelText()
+    {
+        //1st item
+        if (!listViewSorted.getItems().get(0).isEmpty())
+        {
+            lbl01SiteName.setText(listViewSorted.getItems().get(0));
+        }
+        else
+        {
+            lbl01SiteName.setText("Undefined");
+        }
+        //2nd item
+        if (!listViewSorted.getItems().get(1).isEmpty())
+        {
+            lbl02AssetSerialNo.setText(listViewSorted.getItems().get(1));
+        }
+        else
+        {
+            lbl02AssetSerialNo.setText("Undefined");
+        }
+        //3rd item
+        if (!listViewSorted.getItems().get(2).isEmpty())
+        {
+            lbl03OrderType.setText(listViewSorted.getItems().get(2));
+        }
+        else
+        {
+            lbl03OrderType.setText("Undefined");
+        }
+        //4th item
+        if (!listViewSorted.getItems().get(3).isEmpty())
+        {
+            lbl04ExtWorkOrderID.setText(listViewSorted.getItems().get(3));
+        }
+        else
+        {
+            lbl04ExtWorkOrderID.setText("Undefined");
+        }
+        //5th item
+        if (!listViewSorted.getItems().get(4).isEmpty())
+        {
+            lbl05SystemStatus.setText(listViewSorted.getItems().get(4));
+        }
+        else
+        {
+            lbl05SystemStatus.setText("Undefined");
+        }
+        //6th item
+        if (!listViewSorted.getItems().get(5).isEmpty())
+        {
+            lbl06UserStatus.setText(listViewSorted.getItems().get(5));
+        }
+        else
+        {
+            lbl06UserStatus.setText("Undefined");
+        }
+        //7th item
+        if (!listViewSorted.getItems().get(6).isEmpty())
+        {
+            lbl07CreatedOn.setText(listViewSorted.getItems().get(6));
+        }
+        else
+        {
+            lbl07CreatedOn.setText("Undefined");
+        }
+        //8th item
+        if (!listViewSorted.getItems().get(7).isEmpty())
+        {
+            lbl08CreatedBy.setText(listViewSorted.getItems().get(7));
+        }
+        else
+        {
+            lbl08CreatedBy.setText("Undefined");
+        }
+        //9th item
+        if (!listViewSorted.getItems().get(8).isEmpty())
+        {
+            lbl09NameDescription.setText(listViewSorted.getItems().get(8));
+        }
+        else
+        {
+            lbl09NameDescription.setText("Undefined");
+        }
+        //10th item
+        if (!listViewSorted.getItems().get(9).isEmpty())
+        {
+            lbl10Priority.setText(listViewSorted.getItems().get(9));
+        }
+        else
+        {
+            lbl10Priority.setText("Undefined");
+        }
+        //11th item
+        if (!listViewSorted.getItems().get(10).isEmpty())
+        {
+            lbl11Status.setText(listViewSorted.getItems().get(10));
+        }
+        else
+        {
+            lbl11Status.setText("Undefined");
+        }
+        //12th item
+        if (!listViewSorted.getItems().get(11).isEmpty())
+        {
+            lbl12EarliestStart.setText(listViewSorted.getItems().get(11));
+        }
+        else
+        {
+            lbl12EarliestStart.setText("Undefined");
+        }
+        //13th item
+        if (!listViewSorted.getItems().get(12).isEmpty())
+        {
+            lbl13LatestStart.setText(listViewSorted.getItems().get(12));
+        }
+        else
+        {
+            lbl13LatestStart.setText("Undefined");
+
+        }
+        //14th item
+        if (!listViewSorted.getItems().get(13).isEmpty())
+        {
+            lbl14LatestFinish.setText(listViewSorted.getItems().get(13));
+        }
+        else
+        {
+            lbl14LatestFinish.setText("Undefined");
+        }
+        //15th item
+        if (!listViewSorted.getItems().get(14).isEmpty())
+        {
+            lbl15EstimatedTime.setText(listViewSorted.getItems().get(14));
+        }
+        else
+        {
+            lbl15EstimatedTime.setText("Undefined");
+        }
+    }
+
+    @FXML
+    private void handleInsertCustomItem(ActionEvent event)
+    {
+        PopUp.display();
+        listViewSorted.getItems().add(PopUp.getInputText());
+    }
 }
