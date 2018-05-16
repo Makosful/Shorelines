@@ -464,15 +464,14 @@ public class MainWindowController implements Initializable
      * @param event
      */
     @FXML
-    private void loadFile(ActionEvent event
-    )
+    private void loadFile(ActionEvent event)
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
-
+        
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
 
@@ -480,7 +479,7 @@ public class MainWindowController implements Initializable
         {
             chklistSelectData.setItems(model.getCategories());
             AddListeners();
-
+            listViewSorted.getItems().clear();
             setLog("No errors occured, filed loaded successfully", "Conversion");
             model.saveLog(log);
         }
