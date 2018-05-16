@@ -184,7 +184,7 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public void saveLog(ConversionLog conversionLog) throws DALException
+    public void saveLog(ConversionLog log) throws DALException
     {
 
         //Get instance for calling the save log mehod,
@@ -193,8 +193,8 @@ public class DALManager implements IDAL
         LogContext logContextFile = new LogContext(new LogFileDAO());
 
         //save log in db and locally
-        logContextDB.saveLog(conversionLog);
-        logContextFile.saveLog(conversionLog);
+        logContextDB.saveLog(log);
+        logContextFile.saveLog(log);
 
     }
 
