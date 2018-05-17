@@ -1222,3 +1222,27 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 16 13:19:06 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 13:19:19 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, The filetype 'jpg' is not valid
+File: bi_2_1080p.jpg
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 13:19:35 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, The filetype 'xml' is not valid
+File: xmltest.xml
+LogType:Error
+------------------------------------------------------
+
