@@ -12,7 +12,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -20,7 +24,8 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import org.controlsfx.control.CheckListView;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 
 /**
  * FXML Controller class
@@ -30,22 +35,29 @@ import org.controlsfx.control.CheckListView;
 public class TaskManagerWindowController implements Initializable
 {
 
+    // ListView
     @FXML
-    private CheckListView<Task> taskListView;
+    private ListView<Task> taskListView;
     // Observable taskList
     private volatile ObservableList<Task> taskList;
     // List Task from other controller;
     private List<Task> taskOtherController;
     private MainWindowController controller;
+    // ListView
     @FXML
-    private CheckListView<Task> runningListView;
+    private ListView<Task> runningListView;
+    // Observable running tasks.
     private volatile ObservableList<Task> runningTasks;
-    private Boolean pause;
+    private BooleanProperty pause;
     private Thread thread;
-    private Boolean runningTasksChecked;
-    private Boolean notRunningTasksChecked;
+    private Boolean allRunningTasksSelected;
+    private Boolean allTasksSelected;
     @FXML
     private JFXButton convertbtn;
+    @FXML
+    private JFXButton stopSelectedTasks;
+    @FXML
+    private JFXButton btnPauseResume;
 
     /**
      * Initializes the controller class.
@@ -53,24 +65,77 @@ public class TaskManagerWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        runningTasksChecked = false;
-        notRunningTasksChecked = false;
-        runningTasks = FXCollections.observableArrayList();
-        runningListView.setItems(runningTasks);
-        pause = false;
+        listInitialization();
+        booleanInitialization();
         threadInitialization();
+        listViewsListeners();
+    }
+
+    /**
+     * Listeners for the listview, once the listview is empty, it changes
+     * boolean
+     * to false regarding "selectall"
+     */
+    public void listViewsListeners()
+    {
+        taskListView.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Task>()
+        {
+            @Override
+            public void onChanged(Change<? extends Task> c)
+            {
+                if (taskList.isEmpty())
+                {
+                    allTasksSelected = false;
+                }
+            }
+        });
+
+        runningListView.getItems().addListener(new ListChangeListener<Task>()
+        {
+            @Override
+            public void onChanged(Change<? extends Task> c)
+            {
+                if (runningTasks.isEmpty())
+                {
+                    allRunningTasksSelected = false;
+                    pause.setValue(true);
+                }
+            }
+        });
 
     }
-    
-    
+
+    /**
+     * Adding observable list to running tasks and making both listviews
+     * able to select more than one element.
+     */
+    public void listInitialization()
+    {
+        taskListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        runningListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        runningTasks = FXCollections.observableArrayList();
+        runningListView.setItems(runningTasks);
+    }
+
+    /**
+     * Starting boolean values.
+     */
+    public void booleanInitialization()
+    {
+        allRunningTasksSelected = false;
+        allTasksSelected = false;
+        pause = new SimpleBooleanProperty(false);
+        pause.addListener((observable) ->
+        {
+            lockStopBtn();
+        });
+    }
 
     @FXML
     private void convertSelectedTasks(ActionEvent event) throws InterruptedException
     {
-        System.out.println(taskListView.getCheckModel().getItemCount() + "CONVERT");
-        runningTasks.addAll(taskListView.getCheckModel().getCheckedItems());
+        runningTasks.addAll(taskListView.getSelectionModel().getSelectedItems());
         clearSelectedTasksToConvert();
-        taskListView.getCheckModel().clearChecks();
 
         if (!thread.isAlive())
         {
@@ -100,22 +165,20 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private void removeSelectedTasks(ActionEvent event)
     {
-
+        clearSelectedTasksToConvert();
     }
 
     @FXML
     private void stopSelectedTasks(ActionEvent event)
     {
-        System.out.println(runningListView.getCheckModel().getItemCount() + "STP");
         List<Task> removedTasks = new ArrayList();
-        for (Task task : runningListView.getCheckModel().getCheckedItems())
+        for (Task task : runningListView.getSelectionModel().getSelectedItems())
         {
             taskList.add(task);
             taskOtherController.add(task);
             removedTasks.add(task);
         }
         runningTasks.removeAll(removedTasks);
-        runningListView.getCheckModel().clearChecks();
     }
 
     private void threadInitialization()
@@ -124,7 +187,7 @@ public class TaskManagerWindowController implements Initializable
         {
             while (true)
             {
-                while (!runningTasks.isEmpty() && !pause)
+                while (!runningTasks.isEmpty() && !pause.getValue())
                 {
                     try
                     {
@@ -136,12 +199,13 @@ public class TaskManagerWindowController implements Initializable
                     }
                     try
                     {
-                        if (runningTasks.get(0) != null)
+                        if (!runningTasks.isEmpty())
                         {
                             Task get = runningTasks.get(0);
                             get.run();
                             System.out.println("running");
                         }
+
                     }
                     catch (IndexOutOfBoundsException ex)
                     {
@@ -154,6 +218,11 @@ public class TaskManagerWindowController implements Initializable
         });
     }
 
+    /**
+     * Getting the added tasks from the mainwindow.
+     *
+     * @param tasks
+     */
     public void getTaskList(List<Task> tasks)
     {
         taskOtherController = tasks;
@@ -170,12 +239,21 @@ public class TaskManagerWindowController implements Initializable
         controller = con;
     }
 
+    /**
+     * Clearing tasks from both windows, the task handling and the main window.
+     */
     public void clearSelectedTasksToConvert()
     {
-        taskOtherController.removeAll(taskListView.getCheckModel().getCheckedItems());
-        taskList.removeAll(taskListView.getCheckModel().getCheckedItems());
+        taskOtherController.removeAll(taskListView.getSelectionModel().getSelectedItems());
+        taskList.removeAll(taskListView.getSelectionModel().getSelectedItems());
     }
 
+    /**
+     * Clearing tasks from the "running" listview as soon as the task has been
+     * succeeded.
+     *
+     * @param task
+     */
     private void taskDoneRemove(Task task)
     {
         if (task.getOnSucceeded() == null)
@@ -194,50 +272,72 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private void pauseResumeSelectedTasks(ActionEvent event) throws InterruptedException
     {
-        if (pause)
+        if (!runningTasks.isEmpty())
         {
-            pause = false;
-        }
-        else
-        {
-            pause = true;
+            if (pause.getValue())
+            {
+                pause.setValue(false);
+            }
+            else
+            {
+                pause.setValue(true);
+            }
         }
     }
 
     @FXML
     private void selectAll(ActionEvent event)
     {
-        if(!taskList.isEmpty())
+        if (!taskList.isEmpty())
         {
-        if (!notRunningTasksChecked)
-        {
-            
-            taskListView.getCheckModel().checkAll();
-            notRunningTasksChecked = true;
-        }
-        else
-        {
-            taskListView.getCheckModel().clearChecks();
-            notRunningTasksChecked = false;
-        }
+            if (!allTasksSelected)
+            {
+                taskListView.getSelectionModel().selectAll();
+
+                allTasksSelected = true;
+            }
+            else
+            {
+                taskListView.getSelectionModel().clearSelection();
+                allTasksSelected = false;
+            }
         }
     }
 
     @FXML
     private void selectAllRunning(ActionEvent event)
     {
-        if(!runningTasks.isEmpty())
+        if (!runningTasks.isEmpty())
         {
-        if (!runningTasksChecked)
+            if (!allRunningTasksSelected)
+            {
+                runningListView.getSelectionModel().selectAll();
+                allRunningTasksSelected = true;
+            }
+            else
+            {
+                runningListView.getSelectionModel().clearSelection();
+                allRunningTasksSelected = false;
+            }
+        }
+    }
+
+    /**
+     * Setting button visible if running task list is not empty, and pause
+     * is true
+     */
+    public void lockStopBtn()
+    {
+        if (pause.getValue() || runningTasks.isEmpty())
         {
-            runningListView.getCheckModel().checkAll();
-            runningTasksChecked = true;
+            stopSelectedTasks.setDisable(false);
+            btnPauseResume.setText("Resume");
+
         }
         else
         {
-            runningListView.getCheckModel().clearChecks();
-            runningTasksChecked = false;
-        }
+            stopSelectedTasks.setDisable(true);
+            btnPauseResume.setText("False");
         }
     }
 

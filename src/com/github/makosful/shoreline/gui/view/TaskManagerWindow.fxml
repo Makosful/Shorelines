@@ -3,28 +3,28 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import org.controlsfx.control.CheckListView?>
 
 <AnchorPane id="AnchorPane" prefHeight="468.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.TaskManagerWindowController">
    <children>
       <VBox layoutX="67.0" layoutY="35.0" prefHeight="367.0" prefWidth="257.0">
          <children>
-            <CheckListView fx:id="taskListView" />
+            <ListView fx:id="taskListView" prefHeight="393.0" prefWidth="257.0" />
          </children>
       </VBox>
       <VBox layoutX="433.0" layoutY="35.0" prefHeight="367.0" prefWidth="257.0">
          <children>
-            <CheckListView fx:id="runningListView" />
+            <ListView fx:id="runningListView" prefHeight="595.0" prefWidth="257.0" />
          </children>
       </VBox>
       <Label alignment="CENTER" layoutX="121.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Task List" />
       <Label alignment="CENTER" layoutX="496.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Running Tasks" />
       <JFXButton fx:id="convertbtn" layoutX="237.0" layoutY="418.0" onAction="#convertSelectedTasks" prefHeight="31.0" prefWidth="174.0" text="Convert Selected Tasks" />
       <JFXButton layoutX="43.0" layoutY="418.0" onAction="#removeSelectedTasks" text="Remove Selected Tasks" />
-      <JFXButton layoutX="627.0" layoutY="418.0" onAction="#stopSelectedTasks" text="Stop Selected Tasks" />
-      <JFXButton layoutX="420.0" layoutY="418.0" onAction="#pauseResumeSelectedTasks" text="Pause/Resume Converting" />
+      <JFXButton fx:id="stopSelectedTasks" layoutX="627.0" layoutY="418.0" onAction="#stopSelectedTasks" text="Stop Selected Tasks" />
+      <JFXButton fx:id="btnPauseResume" layoutX="420.0" layoutY="418.0" onAction="#pauseResumeSelectedTasks" text="Pause/Resume Converting" />
       <Button layoutX="14.0" layoutY="45.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="31.0" prefWidth="48.0" text="&gt;" />
       <Button layoutX="703.0" layoutY="35.0" mnemonicParsing="false" onAction="#selectAllRunning" text="&lt;" />
    </children>
