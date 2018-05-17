@@ -39,13 +39,14 @@ public class CSVReader implements IReader{
         {
             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
             record = csvParser.getRecords();
+            return true;
             
         }
         catch (IOException ex)
         {
             throw new ReaderException("File could not be read");
         }
-        return true;
+        
     }
    
     @Override
