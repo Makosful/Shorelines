@@ -6,6 +6,7 @@ import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.PopUp;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
+import com.jfoenix.controls.JFXToggleButton;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -33,7 +34,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
@@ -135,6 +135,8 @@ public class MainWindowController implements Initializable
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
+    @FXML
+    private JFXToggleButton btnToggleColorTheme;
 
     /**
      * Initializes the controller class.
@@ -395,7 +397,7 @@ public class MainWindowController implements Initializable
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-                setupOutputExampleListeners();
+                setupOuputExample();
             }
         });
 
@@ -658,7 +660,7 @@ public class MainWindowController implements Initializable
         }
     }
 
-    private void setupOutputExampleListeners()
+    private void setupOuputExample()
     {
         setOutputLabelText();
     }
@@ -666,7 +668,7 @@ public class MainWindowController implements Initializable
     private void setOutputLabelText()
     {
         //1st item
-        if (!listViewSorted.getItems().get(0).isEmpty())
+        if (!listViewSorted.getItems().get(0).isEmpty() || listViewSorted.getItems().get(0) != null)
         {
             lbl01SiteName.setText(listViewSorted.getItems().get(0));
         }
@@ -675,7 +677,7 @@ public class MainWindowController implements Initializable
             lbl01SiteName.setText("Undefined");
         }
         //2nd item
-        if (!listViewSorted.getItems().get(1).isEmpty())
+        if (!listViewSorted.getItems().get(1).isEmpty() || listViewSorted.getItems().get(1) != null)
         {
             lbl02AssetSerialNo.setText(listViewSorted.getItems().get(1));
         }
@@ -684,7 +686,7 @@ public class MainWindowController implements Initializable
             lbl02AssetSerialNo.setText("Undefined");
         }
         //3rd item
-        if (!listViewSorted.getItems().get(2).isEmpty())
+        if (!listViewSorted.getItems().get(2).isEmpty() || listViewSorted.getItems().get(2) != null)
         {
             lbl03OrderType.setText(listViewSorted.getItems().get(2));
         }
@@ -693,7 +695,7 @@ public class MainWindowController implements Initializable
             lbl03OrderType.setText("Undefined");
         }
         //4th item
-        if (!listViewSorted.getItems().get(3).isEmpty())
+        if (!listViewSorted.getItems().get(3).isEmpty() || listViewSorted.getItems().get(3) != null)
         {
             lbl04ExtWorkOrderID.setText(listViewSorted.getItems().get(3));
         }
@@ -702,7 +704,7 @@ public class MainWindowController implements Initializable
             lbl04ExtWorkOrderID.setText("Undefined");
         }
         //5th item
-        if (!listViewSorted.getItems().get(4).isEmpty())
+        if (!listViewSorted.getItems().get(4).isEmpty() || listViewSorted.getItems().get(4) != null)
         {
             lbl05SystemStatus.setText(listViewSorted.getItems().get(4));
         }
@@ -711,7 +713,7 @@ public class MainWindowController implements Initializable
             lbl05SystemStatus.setText("Undefined");
         }
         //6th item
-        if (!listViewSorted.getItems().get(5).isEmpty())
+        if (!listViewSorted.getItems().get(5).isEmpty() || listViewSorted.getItems().get(5) != null)
         {
             lbl06UserStatus.setText(listViewSorted.getItems().get(5));
         }
@@ -720,7 +722,7 @@ public class MainWindowController implements Initializable
             lbl06UserStatus.setText("Undefined");
         }
         //7th item
-        if (!listViewSorted.getItems().get(6).isEmpty())
+        if (!listViewSorted.getItems().get(6).isEmpty() || listViewSorted.getItems().get(6) != null)
         {
             lbl07CreatedOn.setText(listViewSorted.getItems().get(6));
         }
@@ -729,7 +731,7 @@ public class MainWindowController implements Initializable
             lbl07CreatedOn.setText("Undefined");
         }
         //8th item
-        if (!listViewSorted.getItems().get(7).isEmpty())
+        if (!listViewSorted.getItems().get(7).isEmpty() || listViewSorted.getItems().get(7) != null)
         {
             lbl08CreatedBy.setText(listViewSorted.getItems().get(7));
         }
@@ -738,7 +740,7 @@ public class MainWindowController implements Initializable
             lbl08CreatedBy.setText("Undefined");
         }
         //9th item
-        if (!listViewSorted.getItems().get(8).isEmpty())
+        if (!listViewSorted.getItems().get(8).isEmpty() || listViewSorted.getItems().get(8) != null)
         {
             lbl09NameDescription.setText(listViewSorted.getItems().get(8));
         }
@@ -747,7 +749,7 @@ public class MainWindowController implements Initializable
             lbl09NameDescription.setText("Undefined");
         }
         //10th item
-        if (!listViewSorted.getItems().get(9).isEmpty())
+        if (!listViewSorted.getItems().get(9).isEmpty() || listViewSorted.getItems().get(9) != null)
         {
             lbl10Priority.setText(listViewSorted.getItems().get(9));
         }
@@ -756,7 +758,7 @@ public class MainWindowController implements Initializable
             lbl10Priority.setText("Undefined");
         }
         //11th item
-        if (!listViewSorted.getItems().get(10).isEmpty())
+        if (!listViewSorted.getItems().get(10).isEmpty() || listViewSorted.getItems().get(10) != null)
         {
             lbl11Status.setText(listViewSorted.getItems().get(10));
         }
@@ -765,7 +767,7 @@ public class MainWindowController implements Initializable
             lbl11Status.setText("Undefined");
         }
         //12th item
-        if (!listViewSorted.getItems().get(11).isEmpty())
+        if (!listViewSorted.getItems().get(11).isEmpty() || listViewSorted.getItems().get(11) != null)
         {
             lbl12EarliestStart.setText(listViewSorted.getItems().get(11));
         }
@@ -774,7 +776,7 @@ public class MainWindowController implements Initializable
             lbl12EarliestStart.setText("Undefined");
         }
         //13th item
-        if (!listViewSorted.getItems().get(12).isEmpty())
+        if (!listViewSorted.getItems().get(12).isEmpty() || listViewSorted.getItems().get(12) != null)
         {
             lbl13LatestStart.setText(listViewSorted.getItems().get(12));
         }
@@ -784,7 +786,7 @@ public class MainWindowController implements Initializable
 
         }
         //14th item
-        if (!listViewSorted.getItems().get(13).isEmpty())
+        if (!listViewSorted.getItems().get(13).isEmpty() || listViewSorted.getItems().get(13) != null)
         {
             lbl14LatestFinish.setText(listViewSorted.getItems().get(13));
         }
@@ -793,7 +795,7 @@ public class MainWindowController implements Initializable
             lbl14LatestFinish.setText("Undefined");
         }
         //15th item
-        if (!listViewSorted.getItems().get(14).isEmpty())
+        if (!listViewSorted.getItems().get(14).isEmpty() || listViewSorted.getItems().get(14) != null)
         {
             lbl15EstimatedTime.setText(listViewSorted.getItems().get(14));
         }
@@ -814,5 +816,12 @@ public class MainWindowController implements Initializable
     private void handleDeleteSelectedItem(ActionEvent event)
     {
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
+        listViewSorted.refresh();
+//        setOutputLabelText();
+    }
+
+    @FXML
+    private void handleChangeColorTheme(ActionEvent event)
+    {
     }
 }
