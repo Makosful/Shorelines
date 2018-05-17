@@ -50,4 +50,12 @@ public interface IDAL
 
     public User getUser(String uName, String hashPass) throws DALException;
 
+    public User getUserByMail(String mail) throws DALException;
+
+    public boolean changeUserPassword(User user, String pass) throws DALException;
+
+    public boolean sendEmail(User user, String pass) throws DALException;
+
+    public boolean passwordMatch(User user, String pass) throws DALException;
+
 }

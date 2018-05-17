@@ -31,8 +31,11 @@ public class Main extends Application
         File file = new File("./res/logo.png");
         Image icon = new Image(file.toURI().toString());
         sm.getStage().getIcons().add(icon);
+        
+
 
     }
+    
 
     /**
      * @param args the command line arguments
@@ -52,6 +55,6 @@ public class Main extends Application
         sm.registerScene(2, "Signup",
                          getClass().getResource("gui/view/SignUpWindow.fxml"));
 
-        sm.setActiveScene(1);
+        sm.setActiveScene(0);
     }
 }

@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -149,6 +151,28 @@ public class MainWindowController implements Initializable
         addConfigListener();
     }
 
+    @FXML
+    private void handleChangePassword(ActionEvent event)
+    {
+        try
+        {
+            URL resource = Main.class.getResource("gui/view/ChangePassword.fxml");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(resource);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Change Password");
+            stage.setResizable(false);
+            stage.showAndWait();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void shortcutMoveItemListView(KeyEvent event)
     {
         if (ListViewInFocus)
@@ -249,12 +273,12 @@ public class MainWindowController implements Initializable
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
         output++;
-            
-            Task task = model.makeTask(getMap(), "output" + output + ".json");
-            if (task != null)
-            {
-                listTask.add(task);
-            }
+
+        Task task = model.makeTask(getMap(), "output" + output + ".json");
+        if (task != null)
+        {
+            listTask.add(task);
+        }
 
     }
 

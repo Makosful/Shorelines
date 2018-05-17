@@ -10,8 +10,8 @@ import java.util.Random;
 public class PasswordGenerator
 {
 
-    private static final String UPPER = "QWERTYUIOPÅASDFGHJKLÆØZXCVBNM";
-    private static final String LOWER = "qwertyuiopåasdfghjklæøzxcvbnm";
+    private static final String UPPER = "QWERTYUIOPASDFGHJKLZXCVBNM";
+    private static final String LOWER = "qwertyuiopasdfghjklzxcvbnm";
     private static final String DIGIT = "0123456789";
     private static final String ALPHA = UPPER + LOWER + DIGIT;
 
