@@ -39,3 +39,4 @@ nbdist/
 ### Filetypes with mockdata ###
 *.xlsx
 *.json
+*.csv
