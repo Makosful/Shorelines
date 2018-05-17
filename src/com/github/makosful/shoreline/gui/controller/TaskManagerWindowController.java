@@ -5,13 +5,11 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
-import com.github.makosful.shoreline.be.TaskTest;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -35,18 +33,17 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private CheckListView<Task> taskListView;
     // Observable taskList
-    private ObservableList<Task> taskList;
+    private volatile ObservableList<Task> taskList;
     // List Task from other controller;
     private List<Task> taskOtherController;
     private MainWindowController controller;
     @FXML
     private CheckListView<Task> runningListView;
-    private ObservableList<Task> runningTasks;
-    private boolean pause = false;
-    private ExecutorService exService;
-    List<TaskTest> threads = new ArrayList();
-    List<Thread> threadsToPause = new ArrayList();
-    private TaskTest thread;
+    private volatile ObservableList<Task> runningTasks;
+    private Boolean pause;
+    private Thread thread;
+    private Boolean runningTasksChecked;
+    private Boolean notRunningTasksChecked;
     @FXML
     private JFXButton convertbtn;
 
@@ -56,24 +53,33 @@ public class TaskManagerWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        runningTasksChecked = false;
+        notRunningTasksChecked = false;
         runningTasks = FXCollections.observableArrayList();
         runningListView.setItems(runningTasks);
+        pause = false;
+        threadInitialization();
 
     }
+    
+    
 
     @FXML
     private void convertSelectedTasks(ActionEvent event) throws InterruptedException
     {
+        System.out.println(taskListView.getCheckModel().getItemCount() + "CONVERT");
+        runningTasks.addAll(taskListView.getCheckModel().getCheckedItems());
+        clearSelectedTasksToConvert();
+        taskListView.getCheckModel().clearChecks();
 
-//        exService = Executors.newFixedThreadPool(4);
-        for (Task task : taskListView.getCheckModel().getCheckedItems())
+        if (!thread.isAlive())
         {
-            TaskTest thread = new TaskTest();
-            thread.setTask(task);
-
-            threads.add(thread);
             thread.setDaemon(true);
             thread.start();
+        }
+        else
+        {
+            System.out.println("it is not dead");
         }
 
 //        exService.shutdown();
@@ -95,40 +101,66 @@ public class TaskManagerWindowController implements Initializable
     private void removeSelectedTasks(ActionEvent event)
     {
 
-        Thread th = new Thread(() ->
-        {
-
-            threads.get(0).resumeThread();
-
-        });
-        th.setDaemon(true);
-        th.start();
     }
 
     @FXML
     private void stopSelectedTasks(ActionEvent event)
     {
-        for (int i = 0; i < taskList.size(); i++)
+        System.out.println(runningListView.getCheckModel().getItemCount() + "STP");
+        List<Task> removedTasks = new ArrayList();
+        for (Task task : runningListView.getCheckModel().getCheckedItems())
         {
-            taskListView.getCheckModel().checkAll();
+            taskList.add(task);
+            taskOtherController.add(task);
+            removedTasks.add(task);
         }
+        runningTasks.removeAll(removedTasks);
+        runningListView.getCheckModel().clearChecks();
     }
 
-    private void taskDoneRemove(Task task)
+    private void threadInitialization()
     {
-        task.setOnSucceeded(new EventHandler()
+        thread = new Thread(() ->
         {
-            @Override
-            public void handle(Event event)
+            while (true)
             {
-                runningTasks.remove(task);
+                while (!runningTasks.isEmpty() && !pause)
+                {
+                    try
+                    {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException ex)
+                    {
+                        Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    try
+                    {
+                        if (runningTasks.get(0) != null)
+                        {
+                            Task get = runningTasks.get(0);
+                            get.run();
+                            System.out.println("running");
+                        }
+                    }
+                    catch (IndexOutOfBoundsException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+
+                }
             }
+
         });
     }
 
     public void getTaskList(List<Task> tasks)
     {
         taskOtherController = tasks;
+        for (Task task : tasks)
+        {
+            taskDoneRemove(task);
+        }
         taskList = FXCollections.observableArrayList(tasks);
         taskListView.setItems(taskList);
     }
@@ -138,29 +170,75 @@ public class TaskManagerWindowController implements Initializable
         controller = con;
     }
 
-    public void clearTasks(Task task)
+    public void clearSelectedTasksToConvert()
     {
-        taskOtherController.remove(task);
-        taskList.remove(task);
+        taskOtherController.removeAll(taskListView.getCheckModel().getCheckedItems());
+        taskList.removeAll(taskListView.getCheckModel().getCheckedItems());
+    }
+
+    private void taskDoneRemove(Task task)
+    {
+        if (task.getOnSucceeded() == null)
+        {
+            task.setOnSucceeded(new EventHandler()
+            {
+                @Override
+                public void handle(Event event)
+                {
+                    runningTasks.remove(task);
+                }
+            });
+        }
     }
 
     @FXML
     private void pauseResumeSelectedTasks(ActionEvent event) throws InterruptedException
     {
-        Thread th = new Thread(() ->
+        if (pause)
         {
-            try
-            {
-                threads.get(0).pause();
-            }
-            catch (InterruptedException ex)
-            {
-                Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-        th.setDaemon(true);
-        th.start();
+            pause = false;
+        }
+        else
+        {
+            pause = true;
+        }
+    }
 
+    @FXML
+    private void selectAll(ActionEvent event)
+    {
+        if(!taskList.isEmpty())
+        {
+        if (!notRunningTasksChecked)
+        {
+            
+            taskListView.getCheckModel().checkAll();
+            notRunningTasksChecked = true;
+        }
+        else
+        {
+            taskListView.getCheckModel().clearChecks();
+            notRunningTasksChecked = false;
+        }
+        }
+    }
+
+    @FXML
+    private void selectAllRunning(ActionEvent event)
+    {
+        if(!runningTasks.isEmpty())
+        {
+        if (!runningTasksChecked)
+        {
+            runningListView.getCheckModel().checkAll();
+            runningTasksChecked = true;
+        }
+        else
+        {
+            runningListView.getCheckModel().clearChecks();
+            runningTasksChecked = false;
+        }
+        }
     }
 
 }

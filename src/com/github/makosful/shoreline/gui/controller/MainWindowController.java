@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -468,32 +469,43 @@ public class MainWindowController implements Initializable
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-        model.loadFile(file.getAbsolutePath());
-        chklistSelectData.setItems(model.getCategories());
+        Thread thread = new Thread(() ->
+        {
+            //Set file name to log, which will be saved later
+            log.setFileName(file.getName());
+            
+            if (model.loadFile(file.getAbsolutePath()))
+            {
+                Platform.runLater(() ->
+                {
+                    chklistSelectData.setItems(model.getCategories());
+                    AddListeners();
+                    listViewSorted.getItems().clear();
+                    setLog("No errors occured, filed loaded successfully", "Conversion");
+                    model.saveLog(log);
+                });
+                
+            }
+            else
+            {
+                Platform.runLater(() ->
+                {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Reading File Error");
+                    alert.setContentText(model.getErrorMessageProperty().getValue());
+                    alert.show();
+                });
+                
+                setLog("An error occured while loading file for conversion, "
+                           + model.getErrorMessageProperty().getValue(), "Error");
+                model.saveLog(log);
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
+
         AddListeners();
-        
-        //Set file name to log, which will be saved later
-        log.setFileName(file.getName());
 
-        if (model.loadFile(file.getAbsolutePath()))
-        {
-            chklistSelectData.setItems(model.getCategories());
-            AddListeners();
-            listViewSorted.getItems().clear();
-            setLog("No errors occured, filed loaded successfully", "Conversion");
-            model.saveLog(log);
-        }
-        else
-        {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Reading File Error");
-            alert.setContentText(model.getErrorMessageProperty().getValue());
-            alert.show();
-
-            setLog("An error occured while loading file for conversion, "
-                   + model.getErrorMessageProperty().getValue(), "Error");
-            model.saveLog(log);
-        }
     }
 
     /**
