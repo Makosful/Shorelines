@@ -95,10 +95,16 @@ public class TaskManagerWindowController implements Initializable
             @Override
             public void onChanged(Change<? extends Task> c)
             {
+                lockStopBtn();
                 if (runningTasks.isEmpty())
                 {
                     allRunningTasksSelected = false;
                     pause.setValue(true);
+                    btnPauseResume.setDisable(true);
+                }
+                else
+                {
+                    btnPauseResume.setDisable(false);
                 }
             }
         });
@@ -136,6 +142,7 @@ public class TaskManagerWindowController implements Initializable
     {
         runningTasks.addAll(taskListView.getSelectionModel().getSelectedItems());
         clearSelectedTasksToConvert();
+        pause.setValue(false);
 
         if (!thread.isAlive())
         {
@@ -328,16 +335,17 @@ public class TaskManagerWindowController implements Initializable
      */
     public void lockStopBtn()
     {
-        if (pause.getValue() || runningTasks.isEmpty())
+
+        if (!pause.getValue() || runningTasks.isEmpty())
         {
-            stopSelectedTasks.setDisable(false);
-            btnPauseResume.setText("Resume");
+            stopSelectedTasks.setDisable(true);
+            btnPauseResume.setText("Pause");
 
         }
         else
         {
-            stopSelectedTasks.setDisable(true);
-            btnPauseResume.setText("False");
+            stopSelectedTasks.setDisable(false);
+            btnPauseResume.setText("Resume");
         }
     }
 
