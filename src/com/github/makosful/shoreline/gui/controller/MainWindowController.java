@@ -35,6 +35,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -99,7 +100,7 @@ public class MainWindowController implements Initializable
     @FXML
     private Label lbl14LatestFinish;
     @FXML
-    private Label lbl15EstimatedTime;
+    private Label lbl15EstimatedTime;    
     //</editor-fold>
 
     @FXML
@@ -125,7 +126,7 @@ public class MainWindowController implements Initializable
     @FXML
     private MenuItem menuItemInstructions;
 //</editor-fold>
-
+    private Label[] labels;
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Boolean ListViewInFocus = false;
@@ -149,10 +150,18 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
+        
+        labels = new Label[]{lbl01SiteName, lbl02AssetSerialNo,
+                                            lbl03OrderType, lbl04ExtWorkOrderID,
+                                            lbl05SystemStatus, lbl06UserStatus,
+                                            lbl07CreatedOn, lbl08CreatedBy,
+                                            lbl09NameDescription};
 
         AddListeners();
         addConfigs();
         addConfigListener();
+        
+        
     }
 
     private void shortcutMoveItemListView(KeyEvent event)
@@ -395,9 +404,23 @@ public class MainWindowController implements Initializable
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-                setupOutputExampleListeners();
+                //setupOutputExampleListeners();
+
+                 
+                 
+        
+                for(int i = 0; i < listViewSorted.getItems().size(); i++)
+                {
+                    
+                    labels[i].setText(listViewSorted.getItems().get(i));
+
+                
+                }
             }
         });
+        
+        
+
 
         btnInsertCustom.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
         btnDeleteSelected.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
@@ -440,7 +463,6 @@ public class MainWindowController implements Initializable
                     if (!model.getSelectedList().contains(s))
                     {
                         model.getSelectedList().add(s);
-                        System.out.println(s);
                     }
                 }
                 model.getSelectedList().removeAll(c.getRemoved());
@@ -666,8 +688,8 @@ public class MainWindowController implements Initializable
     private void setOutputLabelText()
     {
         //1st item
-        if (!listViewSorted.getItems().get(0).isEmpty())
-        {
+        if (listViewSorted.getItems().get(0).length() > 0)
+        {       
             lbl01SiteName.setText(listViewSorted.getItems().get(0));
         }
         else
@@ -813,6 +835,8 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleDeleteSelectedItem(ActionEvent event)
     {
+        labels[listViewSorted.getSelectionModel().getSelectedIndex()].setText("");
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
+        System.out.println(listViewSorted.getItems().get(0).length());
     }
 }
