@@ -229,7 +229,7 @@ public class ExcelReader implements IReader
      * @param cell
      * @return 
      */
-    public String getValueAsString(Cell cell)
+    private String getValueAsString(Cell cell)
     {
         String cellValue;
         if (cell.getCellTypeEnum() == CellType.NUMERIC)
@@ -242,4 +242,5 @@ public class ExcelReader implements IReader
         }
         return cellValue;
     }
+
 }

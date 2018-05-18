@@ -51,7 +51,6 @@ public class MainWindowController implements Initializable
     private ConversionLog log;
     private List<Task> listTask;
     private String filePath;
-    private int output = 0;
 
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
@@ -273,9 +272,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
-        output++;
-
-        Task task = model.makeTask(getMap(), "output" + output + ".json");
+        Task task = model.makeTask(getMap(), filePath);
         if (task != null)
         {
             listTask.add(task);
@@ -469,6 +466,8 @@ public class MainWindowController implements Initializable
     {
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+        filePath = file.getName().split("\\.")[0];
+
         Thread thread = new Thread(() ->
         {
             //Set file name to log, which will be saved later
@@ -503,8 +502,6 @@ public class MainWindowController implements Initializable
         });
         thread.setDaemon(true);
         thread.start();
-
-        AddListeners();
 
     }
 

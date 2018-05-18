@@ -94,6 +94,8 @@ public class JsonWriter
     {
         try
         {
+            path = path + ".json";
+
             JsonWriter jWriter = new JsonWriter();
             jWriter.setJson(list);
             jWriter.setOutput(path);
