@@ -29,13 +29,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.controlsfx.control.CheckListView;
 
@@ -55,7 +55,7 @@ public class MainWindowController implements Initializable
     private int output = 0;
 
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
-    //<editor-fold defaultstate="collapsed" desc="Split Pane Unused">
+    //<editor-fold defaultstate="collapsed" desc="Split Pane - UNUSED">
     @FXML
     private Color x211;
     @FXML
@@ -100,15 +100,30 @@ public class MainWindowController implements Initializable
     @FXML
     private Label lbl14LatestFinish;
     @FXML
-    private Label lbl15EstimatedTime;    
+    private Label lbl15EstimatedTime;
     //</editor-fold>
 
-    @FXML
-    private Button btnInsertCustom;
     @FXML
     private CheckListView<String> chklistSelectData;
     @FXML
     private ListView<String> listViewSorted;
+    @FXML
+    private TextField txtFieldConfig;
+    @FXML
+    private MenuItem menuItemInstructions;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private MenuBar menuBar;
+    @FXML
+    private Label lblSelectRows;
+    @FXML
+    private Label lblSorting;
+    @FXML
+    private Label lblOutputExample;
+
+    @FXML
+    private Button btnInsertCustom;
     @FXML
     private Button btnMoveUp;
     @FXML
@@ -118,26 +133,24 @@ public class MainWindowController implements Initializable
     @FXML
     private Button btnChecklistCheck;
     @FXML
+    private Button btnDeleteSelected;
+    @FXML
     private ColumnConstraints gridOutputColumn;
     @FXML
     private ComboBox<Config> comboBoxConfig;
     @FXML
-    private TextField txtFieldConfig;
-    @FXML
-    private MenuItem menuItemInstructions;
+    private JFXToggleButton btnToggleColorTheme;
 //</editor-fold>
+
     private Label[] labels;
     private Boolean movable = false;
     private Boolean isChecked = false;
+    private Boolean darkTheme = true;
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
-    @FXML
-    private Button btnDeleteSelected;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
-    @FXML
-    private JFXToggleButton btnToggleColorTheme;
 
     /**
      * Initializes the controller class.
@@ -152,18 +165,20 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
-        
-        labels = new Label[]{lbl01SiteName, lbl02AssetSerialNo,
-                                            lbl03OrderType, lbl04ExtWorkOrderID,
-                                            lbl05SystemStatus, lbl06UserStatus,
-                                            lbl07CreatedOn, lbl08CreatedBy,
-                                            lbl09NameDescription};
+
+        labels = new Label[]
+        {
+            lbl01SiteName, lbl02AssetSerialNo,
+            lbl03OrderType, lbl04ExtWorkOrderID,
+            lbl05SystemStatus, lbl06UserStatus,
+            lbl07CreatedOn, lbl08CreatedBy,
+            lbl09NameDescription
+        };
 
         AddListeners();
         addConfigs();
         addConfigListener();
-        
-        
+        checkforColorTheme();
     }
 
     private void shortcutMoveItemListView(KeyEvent event)
@@ -406,24 +421,15 @@ public class MainWindowController implements Initializable
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-         
-
-                 
-                 
-        
-                for(int i = 0; i < listViewSorted.getItems().size(); i++)
+                for (int i = 0; i < listViewSorted.getItems().size(); i++)
                 {
-                    
+
                     labels[i].setText(listViewSorted.getItems().get(i));
 
-                
                 }
                 //setupOuputExample();
             }
         });
-        
-        
-
 
         btnInsertCustom.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
         btnDeleteSelected.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
@@ -530,6 +536,7 @@ public class MainWindowController implements Initializable
     private void loadFile(ActionEvent event
     )
     {
+        chklistSelectData.getCheckModel().clearChecks();
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
 
@@ -692,7 +699,7 @@ public class MainWindowController implements Initializable
     {
         //1st item
         if (listViewSorted.getItems().get(0).length() > 0)
-        {       
+        {
 
             lbl01SiteName.setText(listViewSorted.getItems().get(0));
         }
@@ -841,16 +848,55 @@ public class MainWindowController implements Initializable
     {
         labels[listViewSorted.getSelectionModel().getSelectedIndex()].setText("");
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
-<<<<<<< HEAD
-        System.out.println(listViewSorted.getItems().get(0).length());
-=======
         listViewSorted.refresh();
-//        setOutputLabelText();
     }
 
     @FXML
     private void handleChangeColorTheme(ActionEvent event)
     {
->>>>>>> 8cb9c492571cbb19ba7d2c980fc4328148ce1d44
+        checkforColorTheme();
+    }
+
+    private void checkforColorTheme()
+    {
+        if (darkTheme)
+        {
+            btnToggleColorTheme.setText("Dark theme");
+            btnToggleColorTheme.selectedProperty().set(true);
+            SetContentToDarkTheme();
+            darkTheme = false;
+        }
+        else
+        {
+            btnToggleColorTheme.setText("Light theme");
+            btnToggleColorTheme.selectedProperty().set(false);
+            SetContentToLightTheme();
+            darkTheme = true;
+        }
+    }
+
+    private void SetContentToLightTheme()
+    {
+        borderPane.getStyleClass().clear();
+        borderPane.getStyleClass().add("root-light");
+        menuBar.getStyleClass().clear();
+        menuBar.getStyleClass().add("menu-bar-light");
+        btnInsertCustom.getStyleClass().clear();
+        btnInsertCustom.getStyleClass().add("btn-hover-light-reverse");
+        btnDeleteSelected.getStyleClass().clear();
+        btnDeleteSelected.getStyleClass().add("btn-hover-light-reverse");
+
+    }
+
+    private void SetContentToDarkTheme()
+    {
+        borderPane.getStyleClass().clear();
+        borderPane.getStyleClass().add("root-dark");
+        menuBar.getStyleClass().clear();
+        menuBar.getStyleClass().add("menu-bar-dark");
+        btnInsertCustom.getStyleClass().clear();
+        btnInsertCustom.getStyleClass().add("btn-hover-dark-reverse");
+        btnDeleteSelected.getStyleClass().clear();
+        btnDeleteSelected.getStyleClass().add("btn-hover-dark-reverse");
     }
 }

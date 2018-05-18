@@ -1,45 +1,49 @@
 /*
-    DARK BLUE: #0C6076
-    MEDIUM BLUE: #548F9F
-    LIGHT BLUE: #0C8AB8
-    
-    DARK GRAY: #1D1D1D
-    MEDIUM GRAY: #616161
-    LIGHT GRAY: #A0A0A0
+    DARK BLUE:   #0C6076    DARK GRAY:   #1D1D1D
+    MEDIUM BLUE: #548F9F    MEDIUM GRAY: #616161
+    LIGHT BLUE:  #0C8AB8    LIGHT GRAY:  #A0A0A0
 */
 
-.root {
+
+.root-dark {
     -fx-background-color: #616161; 
 }
 
-.menu-bar {
+.root-light {
+    -fx-background-color: #A0A0A0;
+}
+
+.menu-bar-dark{
     -fx-background-color: #1D1D1D;
 }
 
-.menu-item .label {
+.menu-bar-light {
+    -fx-background-color: #616161;
+}
+
+.menu-bar-dark .menu-item .label {
     -fx-text-fill: white;
 }
 
-.menu-item:focused {
-    -fx-background-color: #0C8AB8;
-}
-
-.menu-item:focused .label {
+.menu-bar-dark .menu-item:focused .label {
     -fx-text-fill: #1D1D1D;
 }
 
 .context-menu {
-    -fx-background-color: #1D1D1D;
+    -fx-background-color: #0C6076;
     -fx-background-radius: 0 15 15 15, 0 15 15 15, 0 15 15 15;
     -fx-padding: 0.34em 0.083em 0.67em 0.083em;
 }
 
-.label {
-    -fx-font-size: 15px; 
+.label-dark {
     -fx-text-fill: white;
 }
 
-#btn-hover {
+.label-light {
+    -fx-text-fill: black;
+}
+
+.btn-hover-dark {
     -fx-border-radius: 15 15 0 0;
     -fx-background-radius: 15 15 0 0; 
     -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
@@ -47,16 +51,16 @@
     -fx-background-color: transparent;
     -fx-text-fill: #0C8AB8;
 }
-#btn-hover:hover {
+.btn-hover-dark:hover {
     -fx-background-color: #548F9F;
     -fx-text-fill: black;
 }
-#btn-hover:pressed {
+.btn-hover-dark:pressed {
     -fx-background-color: #0C6076;
     -fx-text-fill: black;
 }
 
-#btn-hover-reverse {
+.btn-hover-dark-reverse {
     -fx-border-radius: 0 0 15 15;
     -fx-background-radius: 0 0 15 15; 
     -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
@@ -64,13 +68,47 @@
     -fx-background-color: transparent;
     -fx-text-fill: #0C8AB8;
 }
-#btn-hover-reverse:hover {
+.btn-hover-dark-reverse:hover {
     -fx-background-color: #548F9F;
     -fx-text-fill: black;
 }
-#btn-hover-reverse:pressed {
+.btn-hover-dark-reverse:pressed {
     -fx-background-color: #0C6076;
     -fx-text-fill: black;
+}
+
+.btn-hover-light {
+    -fx-border-radius: 15 15 0 0;
+    -fx-background-radius: 15 15 0 0; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 1 1 0 1;
+    -fx-background-color: transparent;
+    -fx-text-fill: #0C8AB8;
+}
+.btn-hover-light:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: white;
+}
+.btn-hover-light:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: white;
+}
+
+.btn-hover-light-reverse {
+    -fx-border-radius: 0 0 15 15;
+    -fx-background-radius: 0 0 15 15; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 0 1 1 1;
+    -fx-background-color: transparent;
+    -fx-text-fill: #0C8AB8;
+}
+.btn-hover-light-reverse:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: white;
+}
+.btn-hover-light-reverse:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: white;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
