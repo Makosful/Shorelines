@@ -53,8 +53,6 @@ public class TaskManagerWindowController implements Initializable
     private Boolean allRunningTasksSelected;
     private Boolean allTasksSelected;
     @FXML
-    private JFXButton convertbtn;
-    @FXML
     private JFXButton stopSelectedTasks;
     @FXML
     private JFXButton btnPauseResume;
@@ -96,15 +94,10 @@ public class TaskManagerWindowController implements Initializable
             public void onChanged(Change<? extends Task> c)
             {
                 lockStopBtn();
+                pauseButtonAndPause();
                 if (runningTasks.isEmpty())
                 {
                     allRunningTasksSelected = false;
-                    pause.setValue(true);
-                    btnPauseResume.setDisable(true);
-                }
-                else
-                {
-                    btnPauseResume.setDisable(false);
                 }
             }
         });
@@ -140,7 +133,8 @@ public class TaskManagerWindowController implements Initializable
     @FXML
     private void convertSelectedTasks(ActionEvent event) throws InterruptedException
     {
-        runningTasks.addAll(taskListView.getSelectionModel().getSelectedItems());
+        // Rækkefølgen er vigtig.
+        runningTasks.addAll(getSelectedTasks());
         clearSelectedTasksToConvert();
         pause.setValue(false);
 
@@ -174,15 +168,17 @@ public class TaskManagerWindowController implements Initializable
     {
         clearSelectedTasksToConvert();
     }
-
+    /**
+     * Handling the tasks the user stops.
+     * @param event 
+     */
     @FXML
     private void stopSelectedTasks(ActionEvent event)
     {
         List<Task> removedTasks = new ArrayList();
-        for (Task task : runningListView.getSelectionModel().getSelectedItems())
+        for (Task task : getSelectedRunningTasks())
         {
-            taskList.add(task);
-            taskOtherController.add(task);
+            addingStoppedTasks(task);
             removedTasks.add(task);
         }
         runningTasks.removeAll(removedTasks);
@@ -226,21 +222,27 @@ public class TaskManagerWindowController implements Initializable
     }
 
     /**
-     * Getting the added tasks from the mainwindow.
+     * Getting the user added tasks from the mainwindow.
+     * And making our listview hold on an observablelist.
      *
      * @param tasks
      */
     public void getTaskList(List<Task> tasks)
     {
-        taskOtherController = tasks;
         for (Task task : tasks)
         {
             taskDoneRemove(task);
         }
+        taskOtherController = tasks;
         taskList = FXCollections.observableArrayList(tasks);
         taskListView.setItems(taskList);
     }
 
+    /**
+     * Getting the main controller, for methods like savelog etc.
+     *
+     * @param con
+     */
     public void getMainController(MainWindowController con)
     {
         controller = con;
@@ -251,8 +253,21 @@ public class TaskManagerWindowController implements Initializable
      */
     public void clearSelectedTasksToConvert()
     {
-        taskOtherController.removeAll(taskListView.getSelectionModel().getSelectedItems());
-        taskList.removeAll(taskListView.getSelectionModel().getSelectedItems());
+        taskOtherController.removeAll(getSelectedTasks());
+        taskList.removeAll(getSelectedTasks());
+    }
+
+    /**
+     * Once user stops tasks, the tasks are added to the mainwindow (So that if
+     * the user closes this window, he will see the tasks again, once he opens
+     * it again) And ofc. added to the primary list for this window.
+     *
+     * @param task
+     */
+    public void addingStoppedTasks(Task task)
+    {
+        taskList.add(task);
+        taskOtherController.add(task);
     }
 
     /**
@@ -330,8 +345,9 @@ public class TaskManagerWindowController implements Initializable
     }
 
     /**
-     * Setting button visible if running task list is not empty, and pause
-     * is true
+     * Setting stopButton not disabled if running task list is not empty, and
+     * pause
+     * is true. Else they get disabled.
      */
     public void lockStopBtn()
     {
@@ -347,6 +363,35 @@ public class TaskManagerWindowController implements Initializable
             stopSelectedTasks.setDisable(false);
             btnPauseResume.setText("Resume");
         }
+    }
+
+    public void pauseButtonAndPause()
+    {
+        if (runningTasks.isEmpty())
+        {
+            pause.setValue(true);
+            btnPauseResume.setDisable(true);
+        }
+        else
+        {
+            btnPauseResume.setDisable(false);
+        }
+    }
+    /**
+     * Getting running tasks, from the listview.
+     * @return 
+     */
+    public List<Task> getSelectedRunningTasks()
+    {
+        return runningListView.getSelectionModel().getSelectedItems();
+    }
+    /**
+     * Getting the tasks that are not running, from their listview.
+     * @return 
+     */
+    public List<Task> getSelectedTasks()
+    {
+        return taskListView.getSelectionModel().getSelectedItems();
     }
 
 }
