@@ -367,10 +367,20 @@ public class MainWindowController implements Initializable
     {
         listViewSorted.getItems().addListener(new ListChangeListener()
         {
+            
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-                System.out.println("Detected a change! \n");
+                
+                for(Label label : labels)
+                {
+                    label.setText("");
+                }
+            
+                for (int i = 0; i < listViewSorted.getItems().size(); i++)
+                {
+                    labels[i].setText(listViewSorted.getItems().get(i));
+                }
             }
         });
 
