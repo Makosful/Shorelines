@@ -172,7 +172,10 @@ public class MainWindowController implements Initializable
             lbl03OrderType, lbl04ExtWorkOrderID,
             lbl05SystemStatus, lbl06UserStatus,
             lbl07CreatedOn, lbl08CreatedBy,
-            lbl09NameDescription
+            lbl09NameDescription, lbl10Priority,
+            lbl11Status, lbl12EarliestStart,
+            lbl13LatestStart, lbl14LatestFinish,
+            lbl15EstimatedTime
         };
 
         AddListeners();
