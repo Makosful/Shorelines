@@ -422,18 +422,15 @@ public class MainWindowController implements Initializable
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-            
-                for (int i = 0; i < labels.length; i++)
+                
+                for(Label label : labels)
                 {
-                    
-                    labels[i].setText("");
-
+                    label.setText("");
                 }
+            
                 for (int i = 0; i < listViewSorted.getItems().size(); i++)
                 {
-                    
                     labels[i].setText(listViewSorted.getItems().get(i));
-
                 }
             }
         });
