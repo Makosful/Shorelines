@@ -129,6 +129,7 @@ public class MainWindowController implements Initializable
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
 
+
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
 
@@ -148,14 +149,14 @@ public class MainWindowController implements Initializable
 
         labels = new Label[]
         {
-            lbl01SiteName, lbl02AssetSerialNo,
-            lbl03OrderType, lbl04ExtWorkOrderID,
-            lbl05SystemStatus, lbl06UserStatus,
-            lbl07CreatedOn, lbl08CreatedBy,
-            lbl09NameDescription, lbl10Priority,
-            lbl11Status, lbl12EarliestStart,
-            lbl13LatestStart, lbl14LatestFinish,
-            lbl15EstimatedTime
+            lblSiteName, lblAssetSerialNo,
+            lblOrderType, lblExtWorkOrderID,
+            lblSystemStatus, lblUserStatus,
+            lblCreatedOn, lblCreatedBy,
+            lblNameDescription, lblPriority,
+            lblStatus, lblEarliestStart,
+            lblLatestStart, lblLatestFinish,
+            lblEstimatedTime
         };
         
         AddListeners();
@@ -429,6 +430,7 @@ public class MainWindowController implements Initializable
             }
         });
     }
+
 
     @FXML
     private void handleChecklistItemsStatus(ActionEvent event)

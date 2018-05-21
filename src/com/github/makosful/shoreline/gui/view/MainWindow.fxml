@@ -161,20 +161,6 @@
                                     <Label fx:id="lblNameDescription" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                                     <Label text="Order Type" GridPane.rowIndex="2" />
                                     <Label fx:id="lblOrderType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="lbl01SiteName" prefHeight="18.0" prefWidth="30.0" GridPane.columnIndex="1" />
-                        <Label fx:id="lbl02AssetSerialNo" prefHeight="18.0" prefWidth="32.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="lbl03OrderType" prefHeight="18.0" prefWidth="37.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="lbl04ExtWorkOrderID" prefHeight="18.0" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="lbl05SystemStatus" prefHeight="18.0" prefWidth="30.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="lbl06UserStatus" prefHeight="18.0" prefWidth="43.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="lbl07CreatedOn" prefHeight="18.0" prefWidth="39.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="lbl08CreatedBy" prefHeight="18.0" prefWidth="34.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label fx:id="lbl09NameDescription" prefHeight="18.0" prefWidth="44.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label prefHeight="18.0" prefWidth="38.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label prefHeight="18.0" prefWidth="42.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <Label prefHeight="18.0" prefWidth="37.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <Label prefHeight="18.0" prefWidth="34.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                        <Label prefHeight="18.0" prefWidth="38.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                                 </children>
                             </GridPane>
                         </children>
