@@ -418,16 +418,23 @@ public class MainWindowController implements Initializable
     {
         listViewSorted.getItems().addListener(new ListChangeListener()
         {
+            
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
+            
+                for (int i = 0; i < labels.length; i++)
+                {
+                    
+                    labels[i].setText("");
+
+                }
                 for (int i = 0; i < listViewSorted.getItems().size(); i++)
                 {
-
+                    
                     labels[i].setText(listViewSorted.getItems().get(i));
 
                 }
-                //setupOuputExample();
             }
         });
 
@@ -846,9 +853,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleDeleteSelectedItem(ActionEvent event)
     {
-        labels[listViewSorted.getSelectionModel().getSelectedIndex()].setText("");
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
-        listViewSorted.refresh();
     }
 
     @FXML
