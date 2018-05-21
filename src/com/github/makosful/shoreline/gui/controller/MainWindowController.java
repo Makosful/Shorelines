@@ -51,7 +51,7 @@ public class MainWindowController implements Initializable
     private ConversionLog log;
     private List<Task> listTask;
     private String filePath;
-
+    private Label[] labels;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
 //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
@@ -146,6 +146,17 @@ public class MainWindowController implements Initializable
         listTask = new ArrayList();
         log = new ConversionLog();
 
+        /**
+        labels = new Label[]
+        {
+            lbl01SiteName, lbl02AssetSerialNo,
+            lbl03OrderType, lbl04ExtWorkOrderID,
+            lbl05SystemStatus, lbl06UserStatus,
+            lbl07CreatedOn, lbl08CreatedBy,
+            lbl09NameDescription
+        };
+        **/
+        
         AddListeners();
         addConfigs();
         addConfigListener();
