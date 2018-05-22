@@ -385,6 +385,7 @@ public class MainWindowController implements Initializable
      */
     private void AddListeners()
     {
+        //For the output example 
         listViewSorted.getItems().addListener(new ListChangeListener()
         {
 
