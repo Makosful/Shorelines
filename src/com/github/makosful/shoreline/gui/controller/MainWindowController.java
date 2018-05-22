@@ -3,6 +3,7 @@ package com.github.makosful.shoreline.gui.controller;
 import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.be.PopUp;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+import javafx.beans.binding.Bindings;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -23,7 +25,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
@@ -56,8 +57,9 @@ public class MainWindowController implements Initializable
     private String fileName;
     private Label[] labels;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
-//<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+    //<editor-fold defaultstate="collapsed" desc="Split Pane Unused">
     @FXML
     private Color x211;
     @FXML
@@ -72,39 +74,41 @@ public class MainWindowController implements Initializable
     private Font x11;
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Labels">
+    //<editor-fold defaultstate="collapsed" desc="Output labels">
     @FXML
-    private Label lblSiteName;
+    private Label lbl01SiteName;
     @FXML
-    private Label lblAssetSerialNo;
+    private Label lbl02AssetSerialNo;
     @FXML
-    private Label lblExtWorkOrderID;
+    private Label lbl03OrderType;
     @FXML
-    private Label lblSystemStatus;
+    private Label lbl04ExtWorkOrderID;
     @FXML
-    private Label lblUserStatus;
+    private Label lbl05SystemStatus;
     @FXML
-    private Label lblCreatedOn;
+    private Label lbl06UserStatus;
     @FXML
-    private Label lblCreatedBy;
+    private Label lbl07CreatedOn;
     @FXML
-    private Label lblPriority;
+    private Label lbl08CreatedBy;
     @FXML
-    private Label lblStatus;
+    private Label lbl09NameDescription;
     @FXML
-    private Label lblEarliestStart;
+    private Label lbl10Priority;
     @FXML
-    private Label lblLatestStart;
+    private Label lbl11Status;
     @FXML
-    private Label lblLatestFinish;
+    private Label lbl12EarliestStart;
     @FXML
-    private Label lblEstimatedTime;
+    private Label lbl13LatestStart;
     @FXML
-    private Label lblNameDescription;
+    private Label lbl14LatestFinish;
     @FXML
-    private Label lblOrderType;
+    private Label lbl15EstimatedTime;
     //</editor-fold>
 
+    @FXML
+    private Button btnInsertCustom;
     @FXML
     private CheckListView<String> chklistSelectData;
     @FXML
@@ -125,13 +129,16 @@ public class MainWindowController implements Initializable
     private TextField txtFieldConfig;
     @FXML
     private MenuItem menuItemInstructions;
+    @FXML
+    private Button btnDeleteSelected;
+    @FXML
+    private MenuItem fileLoader;
 //</editor-fold>
 
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
-
     private ExecutorService exService;
     private String filePath;
 
@@ -153,36 +160,39 @@ public class MainWindowController implements Initializable
         log = new ConversionLog();
         executorServiceInitialization();
 
+        exService = Executors.newFixedThreadPool(1);
 
         labels = new Label[]
         {
-            lblSiteName, lblAssetSerialNo,
-            lblOrderType, lblExtWorkOrderID,
-            lblSystemStatus, lblUserStatus,
-            lblCreatedOn, lblCreatedBy,
-            lblNameDescription, lblPriority,
-            lblStatus, lblEarliestStart,
-            lblLatestStart, lblLatestFinish,
-            lblEstimatedTime
+            lbl01SiteName, lbl02AssetSerialNo,
+            lbl03OrderType, lbl04ExtWorkOrderID,
+            lbl05SystemStatus, lbl06UserStatus,
+            lbl07CreatedOn, lbl08CreatedBy,
+            lbl09NameDescription, lbl10Priority,
+            lbl11Status, lbl12EarliestStart,
+            lbl13LatestStart, lbl14LatestFinish,
+            lbl15EstimatedTime
         };
 
         AddListeners();
         addConfigs();
         addConfigListener();
     }
+
     public void executorServiceInitialization()
     {
-       exService = Executors.newFixedThreadPool(1, new ThreadFactory()
-        {
-            @Override
-            public Thread newThread(Runnable r)
-            {
-              Thread thread = Executors.defaultThreadFactory().newThread(r);
-              thread.setDaemon(true);
-              return thread;
-            }
-        });
+        exService = Executors.newFixedThreadPool(1, new ThreadFactory()
+                                         {
+                                             @Override
+                                             public Thread newThread(Runnable r)
+                                             {
+                                                 Thread thread = Executors.defaultThreadFactory().newThread(r);
+                                                 thread.setDaemon(true);
+                                                 return thread;
+                                             }
+                                         });
     }
+
     @FXML
     private void handleChangePassword(ActionEvent event)
     {
@@ -198,10 +208,12 @@ public class MainWindowController implements Initializable
             stage.setTitle("Change Password");
             stage.setResizable(false);
             stage.showAndWait();
+
         }
         catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainWindowController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -219,6 +231,10 @@ public class MainWindowController implements Initializable
                 moveItemDownListViewNoFocus();
                 event.consume();
             }
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -252,7 +268,7 @@ public class MainWindowController implements Initializable
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
             int prevIndex = currentIndex - 1;
 
-            // Swaps the two indecies
+            // Swaps the two indexes
             Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
             listViewSorted.getSelectionModel().clearAndSelect(prevIndex);
             listViewSorted.scrollTo(prevIndex);
@@ -309,7 +325,6 @@ public class MainWindowController implements Initializable
         {
             listTask.add(task);
         }
-
     }
 
     /**
@@ -388,26 +403,34 @@ public class MainWindowController implements Initializable
         //For the output example 
         listViewSorted.getItems().addListener(new ListChangeListener()
         {
-
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-
-                for (Label label : labels)
+                try
                 {
-                    label.setText("");
-                }
-
-                for (int i = 0; i < listViewSorted.getItems().size(); i++)
-                {
-                    if(!(i > labels.length-1))
+                    for (int i = 0; i < listViewSorted.getItems().size(); i++)
                     {
-                        labels[i].setText(listViewSorted.getItems().get(i));
+                        if (!(i > labels.length - 1))
+                        {
+                            for (Label label : labels)
+                            {
+                                label.setText("");
+                            }
+                        }
                     }
                 }
 
+                catch (IndexOutOfBoundsException ex)
+                {
+                    System.out.println("Too many columns were added");
+                }
             }
         });
+
+        btnInsertCustom.disableProperty()
+                .bind(Bindings.isEmpty(listViewSorted.getItems()));
+        btnDeleteSelected.disableProperty()
+                .bind(Bindings.isEmpty(listViewSorted.getItems()));
 
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {
@@ -447,7 +470,6 @@ public class MainWindowController implements Initializable
                     if (!model.getSelectedList().contains(s))
                     {
                         model.getSelectedList().add(s);
-                        System.out.println(s);
                     }
                 }
                 model.getSelectedList().removeAll(c.getRemoved());
@@ -488,7 +510,7 @@ public class MainWindowController implements Initializable
         };
 
         List<String> listOfStrings = listViewSorted.getItems();
-        
+
         for (int i = 0; i < listOfStrings.size(); i++)
         {
             String col = listOfStrings.get(i);
@@ -499,7 +521,6 @@ public class MainWindowController implements Initializable
                 break;
             }
         }
-
         return cellOrder;
     }
 
@@ -512,43 +533,47 @@ public class MainWindowController implements Initializable
     {
         model.setFileNull();
         FileChooser fc = new FileChooser();
+        fc.setTitle("Shoreline | Select file to import");
+        FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files", "*.xlsx", "*.xls");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Comma Seperated Values", "*.csv");
+        fc.getExtensionFilters().addAll(excelFilter, csvFilter);
+
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+
         fileName = file.getName().split("\\.")[0];
         filePath = file.getAbsolutePath();
-        
-        exService.execute(() ->
+
+//        exService.execute(()->
+        model.loadFile(file.getAbsolutePath());
+        chklistSelectData.setItems(model.getCategories());
+        AddListeners();
+
+        //Set file name to log, which will be saved later
+        log.setFileName(file.getName());
+
+        model.loadFile(file.getAbsolutePath());
+        if (!model.isFileNull())
         {
-            //Set file name to log, which will be saved later
-            log.setFileName(file.getName());
-
-            model.loadFile(file.getAbsolutePath());
-            if (!model.isFileNull())
+            Platform.runLater(() ->
             {
-                Platform.runLater(() ->
-                {
-                    chklistSelectData.setItems(model.getCategories());
-                    AddListeners();
-                    listViewSorted.getItems().clear();
-                    setLog("No errors occured, filed loaded successfully", "Conversion");
-                    model.saveLog(log);
-                });
-            }
-            else
-            {
-                Platform.runLater(() ->
-                {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Reading File Error");
-                    alert.setContentText(model.getErrorMessageProperty().getValue());
-                    alert.show();
-                });
-
-                setLog("An error occured while loading file for conversion, "
-                       + model.getErrorMessageProperty().getValue(), "Error");
+                chklistSelectData.setItems(model.getCategories());
+                AddListeners();
+                listViewSorted.getItems().clear();
+                setLog("No errors occured, filed loaded successfully", "Conversion");
                 model.saveLog(log);
-            }
-        });
+            });
+        }
+        else
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Reading File Error");
+            alert.setContentText(model.getErrorMessageProperty().getValue());
+            alert.show();
 
+            setLog("An error occured while loading file for conversion, "
+                   + model.getErrorMessageProperty().getValue(), "Error");
+            model.saveLog(log);
+        }
     }
 
     /**
@@ -577,9 +602,7 @@ public class MainWindowController implements Initializable
             @Override
             public Config fromString(String configName)
             {
-                return comboBoxConfig.getItems().stream().filter(config
-                        -> config.getName().equals(configName)).
-                        findFirst().orElse(null);
+                return comboBoxConfig.getItems().stream().filter(config -> config.getName().equals(configName)).findFirst().orElse(null);
             }
         });
     }
@@ -614,8 +637,7 @@ public class MainWindowController implements Initializable
         {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Config Error");
-            alert.setContentText("Failed to select amount of columns /n, "
-                                 + " are you sure you've selected the correct config? ");
+            alert.setContentText("Failed to select amount of columns /n, " + " are you sure you've selected the correct config? ");
         }
     }
 
@@ -657,11 +679,11 @@ public class MainWindowController implements Initializable
         try
         {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
+            Parent root = FXMLLoader.load(Main.class
+                    .getResource("gui/view/HelpWindow.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Shoreline | Instructions");
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         }
         catch (IOException ex)
@@ -674,12 +696,174 @@ public class MainWindowController implements Initializable
         }
     }
 
+    private void setupOuputExample()
+    {
+        setOutputLabelText();
+    }
+
+    private void setOutputLabelText()
+    {
+        //1st item
+        if (listViewSorted.getItems().get(0).length() > 0)
+        {
+
+            lbl01SiteName.setText(listViewSorted.getItems().get(0));
+        }
+        else
+        {
+            lbl01SiteName.setText("Undefined");
+        }
+        //2nd item
+        if (!listViewSorted.getItems().get(1).isEmpty() || listViewSorted.getItems().get(1) != null)
+        {
+            lbl02AssetSerialNo.setText(listViewSorted.getItems().get(1));
+        }
+        else
+        {
+            lbl02AssetSerialNo.setText("Undefined");
+        }
+        //3rd item
+        if (!listViewSorted.getItems().get(2).isEmpty() || listViewSorted.getItems().get(2) != null)
+        {
+            lbl03OrderType.setText(listViewSorted.getItems().get(2));
+        }
+        else
+        {
+            lbl03OrderType.setText("Undefined");
+        }
+        //4th item
+        if (!listViewSorted.getItems().get(3).isEmpty() || listViewSorted.getItems().get(3) != null)
+        {
+            lbl04ExtWorkOrderID.setText(listViewSorted.getItems().get(3));
+        }
+        else
+        {
+            lbl04ExtWorkOrderID.setText("Undefined");
+        }
+        //5th item
+        if (!listViewSorted.getItems().get(4).isEmpty() || listViewSorted.getItems().get(4) != null)
+        {
+            lbl05SystemStatus.setText(listViewSorted.getItems().get(4));
+        }
+        else
+        {
+            lbl05SystemStatus.setText("Undefined");
+        }
+        //6th item
+        if (!listViewSorted.getItems().get(5).isEmpty() || listViewSorted.getItems().get(5) != null)
+        {
+            lbl06UserStatus.setText(listViewSorted.getItems().get(5));
+        }
+        else
+        {
+            lbl06UserStatus.setText("Undefined");
+        }
+        //7th item
+        if (!listViewSorted.getItems().get(6).isEmpty() || listViewSorted.getItems().get(6) != null)
+        {
+            lbl07CreatedOn.setText(listViewSorted.getItems().get(6));
+        }
+        else
+        {
+            lbl07CreatedOn.setText("Undefined");
+        }
+        //8th item
+        if (!listViewSorted.getItems().get(7).isEmpty() || listViewSorted.getItems().get(7) != null)
+        {
+            lbl08CreatedBy.setText(listViewSorted.getItems().get(7));
+        }
+        else
+        {
+            lbl08CreatedBy.setText("Undefined");
+        }
+        //9th item
+        if (!listViewSorted.getItems().get(8).isEmpty() || listViewSorted.getItems().get(8) != null)
+        {
+            lbl09NameDescription.setText(listViewSorted.getItems().get(8));
+        }
+        else
+        {
+            lbl09NameDescription.setText("Undefined");
+        }
+        //10th item
+        if (!listViewSorted.getItems().get(9).isEmpty() || listViewSorted.getItems().get(9) != null)
+        {
+            lbl10Priority.setText(listViewSorted.getItems().get(9));
+        }
+        else
+        {
+            lbl10Priority.setText("Undefined");
+        }
+        //11th item
+        if (!listViewSorted.getItems().get(10).isEmpty() || listViewSorted.getItems().get(10) != null)
+        {
+            lbl11Status.setText(listViewSorted.getItems().get(10));
+        }
+        else
+        {
+            lbl11Status.setText("Undefined");
+        }
+        //12th item
+        if (!listViewSorted.getItems().get(11).isEmpty() || listViewSorted.getItems().get(11) != null)
+        {
+            lbl12EarliestStart.setText(listViewSorted.getItems().get(11));
+        }
+        else
+        {
+            lbl12EarliestStart.setText("Undefined");
+        }
+        //13th item
+        if (!listViewSorted.getItems().get(12).isEmpty() || listViewSorted.getItems().get(12) != null)
+        {
+            lbl13LatestStart.setText(listViewSorted.getItems().get(12));
+        }
+        else
+        {
+            lbl13LatestStart.setText("Undefined");
+
+        }
+        //14th item
+        if (!listViewSorted.getItems().get(13).isEmpty() || listViewSorted.getItems().get(13) != null)
+        {
+            lbl14LatestFinish.setText(listViewSorted.getItems().get(13));
+        }
+        else
+        {
+            lbl14LatestFinish.setText("Undefined");
+        }
+        //15th item
+        if (!listViewSorted.getItems().get(14).isEmpty() || listViewSorted.getItems().get(14) != null)
+        {
+            lbl15EstimatedTime.setText(listViewSorted.getItems().get(14));
+        }
+        else
+        {
+            lbl15EstimatedTime.setText("Undefined");
+        }
+    }
+
+    @FXML
+    private void handleInsertCustomItem(ActionEvent event)
+    {
+        PopUp.display();
+        listViewSorted.getItems().add(PopUp.getInputText());
+    }
+
+    @FXML
+    private void handleDeleteSelectedItem(ActionEvent event)
+    {
+        listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
+        System.out.println(listViewSorted.getItems().get(0).length());
+        listViewSorted.refresh();
+    }
+
     @FXML
     private void taskWindow(ActionEvent event)
     {
         try
         {
-            FXMLLoader fxLoader = new FXMLLoader(Main.class.getResource("gui/view/TaskManagerWindow.fxml"));
+            FXMLLoader fxLoader = new FXMLLoader(Main.class
+                    .getResource("gui/view/TaskManagerWindow.fxml"));
             Parent root = fxLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Task Handling");
@@ -687,7 +871,6 @@ public class MainWindowController implements Initializable
             controller.getTaskList(listTask);
             controller.getMainController(this);
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.setScene(new Scene(root));
             stage.show();
         }
@@ -698,7 +881,6 @@ public class MainWindowController implements Initializable
             alert.setContentText(ex.getMessage());
             alert.show();
         }
-
     }
 
     // Saves log.
@@ -713,5 +895,4 @@ public class MainWindowController implements Initializable
     {
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
     }
-
 }

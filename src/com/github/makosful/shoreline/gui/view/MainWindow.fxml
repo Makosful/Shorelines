@@ -22,202 +22,212 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<BorderPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<BorderPane stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Open…" />
-                        <Menu mnemonicParsing="false" text="Open Recent" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
-                        <MenuItem mnemonicParsing="false" text="Revert" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Preferences…" />
+                        <MenuItem fx:id="fileLoader" mnemonicParsing="false" onAction="#loadFile" text="Select file" />
+                        <Menu mnemonicParsing="false" text="Select recent..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Quit" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Log">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Undo" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Cut" />
-                        <MenuItem mnemonicParsing="false" text="Copy" />
-                        <MenuItem mnemonicParsing="false" text="Paste" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Select All" />
-                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenLog" text="View log" />
                     </items>
                 </Menu>
-            <Menu mnemonicParsing="false" text="View">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleOpenLog" text="Log" />
-              </items>
-            </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                  <MenuItem fx:id="menuItemInstructions" mnemonicParsing="false" onAction="#handleShowInstructionsWindow" text="Instructions | Tutorial" />
+                        <MenuItem fx:id="menuItemInstructions" mnemonicParsing="false" onAction="#handleShowInstructionsWindow" text="Instructions | Tutorial" />
                     </items>
                 </Menu>
-            <Menu mnemonicParsing="false" text="Account">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleChangePassword" text="Change Password" />
-               </items>
-            </Menu>
+                <Menu mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleChangePassword" text="Change Password" />
+                    </items>
+                </Menu>
             </menus>
         </MenuBar>
     </top>
     <bottom>
-      <VBox spacing="10.0">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-         <children>
-                <ButtonBar buttonMinWidth="150.0" buttonOrder="L+A+U+R">
+        <VBox>
+            <children>
+                <ButtonBar buttonMinWidth="150.0" buttonOrder="L_H+EN_YR">
                     <buttons>
-                        <Button fx:id="btnChecklistCheck" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" ButtonBar.buttonData="LEFT" />
-                        <ComboBox fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="LEFT" />
-                        <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add Task" ButtonBar.buttonData="APPLY" />
-                        <TextField fx:id="txtFieldConfig" ButtonBar.buttonData="RIGHT" />
-                        <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="RIGHT" />
-                  <Button mnemonicParsing="false" onAction="#taskWindow" text="Handle Tasks" />
+                        <Button id="btn-hover" fx:id="btnChecklistCheck" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" ButtonBar.buttonData="LEFT" />
+                        <ComboBox id="btn-hover" fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="HELP" />
+                        <TextField fx:id="txtFieldConfig" promptText="Name the config..." ButtonBar.buttonData="HELP_2" />
+                        <Button id="btn-hover" mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="NO" />
+                        <Button id="btn-hover" fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add task" ButtonBar.buttonData="YES" />
+                        <Button id="btn-hover" mnemonicParsing="false" onAction="#taskWindow" text="Open task window" ButtonBar.buttonData="RIGHT" />
                     </buttons>
+                    <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </VBox.margin>
                 </ButtonBar>
-         </children>
-      </VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </VBox>
     </bottom>
-   <right>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="554.0" prefWidth="490.0" BorderPane.alignment="CENTER">
-                <children>
-                    <VBox alignment="CENTER" disable="true" layoutX="4.0" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <children>
-                            <Label alignment="CENTER" style="&#10;" text="Output Example (JSON)" textAlignment="CENTER" wrapText="false">
-                                <font>
-                                    <Font size="18.0" fx:id="x11" />
-                                </font>
-                                <textFill>
-                                    <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
-                                </textFill>
-                            </Label>
-                            <GridPane prefHeight="475.0" prefWidth="300.0">
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="150.0" />
-                                    <ColumnConstraints fx:id="gridOutputColumn" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                <children>
-                                    <Label text="Site Name" />
-                                    <Label text="Asset Serial Number" GridPane.rowIndex="1" />
-                                    <Label text="Ext. Work Order ID" GridPane.rowIndex="3" />
-                                    <Label text="System Status" GridPane.rowIndex="4" />
-                                    <Label text="User Status" GridPane.rowIndex="5" />
-                                    <Label text="Created On" GridPane.rowIndex="6" />
-                                    <Label text="Created By" GridPane.rowIndex="7" />
-                                    <Label text="Priority" GridPane.rowIndex="9" />
-                                    <Label text="Status" GridPane.rowIndex="10" />
-                                    <Label text="Earliest Start Date" GridPane.rowIndex="11" />
-                                    <Label text="Latest Start Date" GridPane.rowIndex="12" />
-                                    <Label text="Latest Finish Date" GridPane.rowIndex="13" />
-                                    <Label text="Estimated Time" GridPane.rowIndex="14" />
-                                    <Label fx:id="lblSiteName" GridPane.columnIndex="1" />
-                                    <Label fx:id="lblAssetSerialNo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label fx:id="lblExtWorkOrderID" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label fx:id="lblSystemStatus" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label fx:id="lblUserStatus" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Label fx:id="lblCreatedOn" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                    <Label fx:id="lblCreatedBy" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <Label fx:id="lblPriority" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                    <Label fx:id="lblStatus" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                                    <Label fx:id="lblEarliestStart" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                                    <Label fx:id="lblLatestStart" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                                    <Label fx:id="lblLatestFinish" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                    <Label fx:id="lblEstimatedTime" prefWidth="35.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                                    <Label text="Name (Description)" GridPane.rowIndex="8" />
-                                    <Label fx:id="lblNameDescription" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <Label text="Order Type" GridPane.rowIndex="2" />
-                                    <Label fx:id="lblOrderType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                </children>
-                            </GridPane>
-                        </children>
-                    </VBox>
-                </children>
-                <padding>
-                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                </padding>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
-            </AnchorPane>
-   </right>
-   <left>
+    <right>
+        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER" layoutX="15.0" layoutY="10.0" AnchorPane.topAnchor="30.0">
+                    <children>
+                        <Label alignment="CENTER" style="&#10;" text="Output Example (JSON)" textAlignment="CENTER" wrapText="false">
+                            <font>
+                                <Font size="18.0" fx:id="x11" />
+                            </font>
+                            <textFill>
+                                <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
+                            </textFill>
+                        </Label>
+                        <GridPane prefHeight="475.0" prefWidth="300.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="150.0" />
+                                <ColumnConstraints fx:id="gridOutputColumn" hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label text="Site Name" />
+                                <Label text="Asset Serial Number" GridPane.rowIndex="1" />
+                                <Label text="Ext. Work Order ID" GridPane.rowIndex="3" />
+                                <Label text="System Status" GridPane.rowIndex="4" />
+                                <Label text="User Status" GridPane.rowIndex="5" />
+                                <Label text="Created On" GridPane.rowIndex="6" />
+                                <Label text="Created By" GridPane.rowIndex="7" />
+                                <Label text="Priority" GridPane.rowIndex="9" />
+                                <Label text="Status" GridPane.rowIndex="10" />
+                                <Label text="Earliest Start Date" GridPane.rowIndex="11" />
+                                <Label text="Latest Start Date" GridPane.rowIndex="12" />
+                                <Label text="Latest Finish Date" GridPane.rowIndex="13" />
+                                <Label text="Estimated Time" GridPane.rowIndex="14" />
+                                <Label fx:id="lbl01SiteName" GridPane.columnIndex="1" />
+                                <Label fx:id="lbl02AssetSerialNo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label fx:id="lbl03OrderType" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                <Label fx:id="lbl04ExtWorkOrderID" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                <Label fx:id="lbl05SystemStatus" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                <Label fx:id="lbl06UserStatus" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <Label fx:id="lbl07CreatedOn" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                <Label fx:id="lbl08CreatedBy" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                <Label fx:id="lbl09NameDescription" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                <Label fx:id="lbl10Priority" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                <Label fx:id="lbl11Status" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                <Label fx:id="lbl12EarliestStart" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                <Label fx:id="lbl13LatestStart" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                <Label fx:id="lbl14LatestFinish" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                <Label fx:id="lbl15EstimatedTime" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                <Label text="Name (Description)" GridPane.rowIndex="8" />
+                                <Label text="Order Type" GridPane.rowIndex="2" />
+                            </children>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+        </AnchorPane>
+    </right>
+    <left>
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
-            <HBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
+                <HBox layoutY="35.0" spacing="5.0">
+                    <children>
+                        <VBox>
                             <children>
-                                <Label alignment="CENTER" layoutX="14.0" layoutY="4.0" style="&#10;" text="Select rows" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                    <font>
-                                        <Font size="18.0" fx:id="x111" />
-                                    </font>
-                                    <textFill>
-                                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
-                                    </textFill>
-                                </Label>
-                                <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="491.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                            <children>
-                                <Label alignment="CENTER" layoutX="4.0" layoutY="4.0" style="&#10;" text="Sorting" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                    <font>
-                                        <Font size="18.0" fx:id="x1" />
-                                    </font>
-                                    <textFill>
-                                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
-                                    </textFill>
-                                </Label>
-                                <ListView fx:id="listViewSorted" layoutX="-1.0" layoutY="36.0" prefHeight="484.0" prefWidth="235.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
-                                <VBox layoutX="180.0" layoutY="237.0" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
+                                <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
                                     <children>
-                                        <Button fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲" />
-                                        <Button fx:id="btnMoveDown" mnemonicParsing="false" onAction="#handleMoveItemDown" text="▼" />
+                                        <Label alignment="CENTER" layoutX="14.0" layoutY="4.0" style="&#10;" text="Select rows" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                            <font>
+                                                <Font size="18.0" fx:id="x111" />
+                                            </font>
+                                            <textFill>
+                                                <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
+                                            </textFill>
+                                        </Label>
+                                        <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="500.0" prefWidth="234.0" style="-fx-background-color: #A0A0A0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
                                     </children>
-                                </VBox>
-                        <Button layoutX="-1.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleRemoveItem" prefHeight="30.0" prefWidth="235.0" text="Remove selected item" />
+                                </AnchorPane>
                             </children>
-                        </AnchorPane>
-               </children>
-            </HBox>
+                        </VBox>
+                        <VBox>
+                            <children>
+                                <AnchorPane>
+                                    <children>
+                                        <Label alignment="CENTER" layoutX="4.0" layoutY="4.0" style="&#10;" text="Sorting" textAlignment="CENTER" wrapText="false" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                            <font>
+                                                <Font size="18.0" fx:id="x1" />
+                                            </font>
+                                            <textFill>
+                                                <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
+                                            </textFill>
+                                        </Label>
+                                        <ListView fx:id="listViewSorted" layoutX="-1.0" layoutY="36.0" prefHeight="500.0" prefWidth="278.0" style="-fx-background-color: #A0A0A0;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
+                                        <VBox layoutX="180.0" layoutY="237.0" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
+                                            <children>
+                                                <Button id="btn-hover" fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲">
+                                                    <VBox.margin>
+                                                        <Insets />
+                                                    </VBox.margin>
+                                                </Button>
+                                                <Button id="btn-hover-reverse" fx:id="btnMoveDown" mnemonicParsing="false" onAction="#handleMoveItemDown" text="▼" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                                <HBox>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                    <children>
+                                        <Button id="btn-hover-reverse" fx:id="btnInsertCustom" mnemonicParsing="false" onAction="#handleInsertCustomItem" text="Insert custom">
+                                            <HBox.margin>
+                                                <Insets left="1.0" right="20.0" top="-5.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                        <Button id="btn-hover-reverse" fx:id="btnDeleteSelected" mnemonicParsing="false" onAction="#handleDeleteSelectedItem" text="Delete selected">
+                                            <HBox.margin>
+                                                <Insets left="25.0" top="-5.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
             </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
         </AnchorPane>
-   </left>
+    </left>
 </BorderPane>
