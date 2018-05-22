@@ -168,9 +168,11 @@ public class TaskManagerWindowController implements Initializable
     {
         clearSelectedTasksToConvert();
     }
+
     /**
      * Handling the tasks the user stops.
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void stopSelectedTasks(ActionEvent event)
@@ -204,9 +206,12 @@ public class TaskManagerWindowController implements Initializable
                     {
                         if (!runningTasks.isEmpty())
                         {
+
                             Task get = runningTasks.get(0);
-                            get.run();
-                            System.out.println("running");
+                            if (!get.isRunning())
+                            {
+                                get.run();
+                            }
                         }
 
                     }
@@ -377,17 +382,21 @@ public class TaskManagerWindowController implements Initializable
             btnPauseResume.setDisable(false);
         }
     }
+
     /**
      * Getting running tasks, from the listview.
-     * @return 
+     *
+     * @return
      */
     public List<Task> getSelectedRunningTasks()
     {
         return runningListView.getSelectionModel().getSelectedItems();
     }
+
     /**
      * Getting the tasks that are not running, from their listview.
-     * @return 
+     *
+     * @return
      */
     public List<Task> getSelectedTasks()
     {
