@@ -7,6 +7,8 @@ import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -18,46 +20,26 @@ public class LoginModel
     private final Cache cache;
     private final IBLL bll;
 
+    private final StringProperty message;
+
     public LoginModel()
     {
         cache = Cache.getInstance();
         bll = new BLLManager();
+
+        message = new SimpleStringProperty();
     }
 
-    public boolean attemptLogin(String userName, String password)
-    {
-        boolean valid = true;
-        if (valid) // Replace with a proper test
-        {
-            // Create a new user based on the login
-            User user = new User();
-
-            // Give that user to Cache
-            cache.setUser(user);
-
-            // Change the screen to the main window
-            cache.changeScene(Scenes.Main.getValue());
-
-            // Return true for successful login
-            return true;
-        }
-        else
-        {
-            // Return false for failed login
-            return false;
-        }
-    }
-    
     public void savePassword(String userName, String password) throws BLLException
     {
         bll.savePassword(userName, password);
     }
-    
+
     public String[] getPassword() throws BLLException
     {
         return bll.getPassword();
     }
-    
+
     public String getNewPassword()
     {
         try
@@ -70,4 +52,36 @@ public class LoginModel
             return new String(); // Empty string
         }
     }
+
+    public StringProperty getMessageProperty()
+    {
+        return message;
+    }
+
+    public void login(String name, String pass)
+    {
+        try
+        {
+            final User user = bll.login(name, pass);
+            if (user != null)
+            {
+                cache.setUser(user);
+                cache.changeScene(Scenes.Main.getValue());
+            }
+            else
+            {
+                message.set("Failed to login");
+            }
+        }
+        catch (BLLException ex)
+        {
+            // Handle properly later
+        }
+    }
+
+    public void openSignup()
+    {
+        cache.changeScene(Scenes.SignUp.getValue());
+    }
+
 }

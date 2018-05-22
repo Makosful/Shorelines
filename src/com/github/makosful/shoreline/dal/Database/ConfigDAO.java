@@ -5,9 +5,7 @@
  */
 package com.github.makosful.shoreline.dal.Database;
 
-import com.github.makosful.shoreline.be.ColumnObject;
 import com.github.makosful.shoreline.be.Config;
-import com.github.makosful.shoreline.dal.Database.DataBaseConnector;
 import java.sql.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

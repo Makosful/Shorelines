@@ -2,7 +2,8 @@ package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
-import java.util.HashMap;
+import com.github.makosful.shoreline.be.User;
+import com.github.makosful.shoreline.be.UserNew;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -28,7 +29,7 @@ public interface IBLL
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 
-    public Runnable makeTask(List<Map> fileDataList, String path) throws BLLException;
+    public Task makeTask(Map<String, String> map, String path) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
 
@@ -39,8 +40,18 @@ public interface IBLL
     public String generatePassword() throws BLLException;
 
     public void saveLog(ConversionLog log) throws BLLException;
-    
+
     public ObservableList<ConversionLog> getAllLogs() throws BLLException;
 
     public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws BLLException;
+
+    public boolean createUser(UserNew userNew) throws BLLException;
+
+    public User login(String uName, String pass) throws BLLException;
+
+    public boolean getUserByMail(String text) throws BLLException;
+
+    public boolean changePassword(User user, String text0) throws BLLException;
+
+    public boolean passwordMatch(User user, String text) throws BLLException;
 }

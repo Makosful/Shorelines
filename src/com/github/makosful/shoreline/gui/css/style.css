@@ -1,0 +1,5 @@
+/* Signup Screen */
+.signup .text-field {
+    -fx-border-width: 2px;
+    -fx-border-color: transparent;
+}

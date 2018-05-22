@@ -1,6 +1,7 @@
 package com.github.makosful.shoreline.gui.model;
 
 import com.github.makosful.shoreline.be.User;
+import com.github.makosful.stage.entities.Docking;
 import com.github.makosful.stage.utils.StageManager;
 
 /**
@@ -56,6 +57,7 @@ public class Cache
     public void changeScene(int sceneId)
     {
         this.stageManager.setActiveScene(sceneId);
+        this.stageManager.getPlacementUtil().alignStage(this.stageManager.getStage(), Docking.CENTER);
     }
 
     public Object getSceneController()
@@ -66,7 +68,8 @@ public class Cache
     public enum Scenes
     {
         Main(0),
-        Login(1);
+        Login(1),
+        SignUp(2);
 
         private final int id;
 

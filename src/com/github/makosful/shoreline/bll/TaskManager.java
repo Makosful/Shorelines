@@ -1,14 +1,10 @@
 package com.github.makosful.shoreline.bll;
 
-import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
-import com.github.makosful.shoreline.dal.Json.JsonWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.concurrent.Task;
 
 /**
  *
@@ -18,30 +14,45 @@ public class TaskManager
 {
 
     private IDAL dalManager;
-    private Runnable task;
+    private Task task;
 
     public TaskManager()
     {
-        dalManager = new DALManager();
+
     }
 
-    public Runnable makeTask(List<Map> list, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
-         task = new Runnable()
+        task = new Task()
         {
+
             @Override
-            public void run()
+            public String toString()
+            {
+                return path;
+            }
+
+            @Override
+            protected Object call()
             {
                 try
                 {
+                    List<Map> list = dalManager.fileGetValues(map);
                     dalManager.createFile(list, path);
                 }
                 catch (DALException ex)
                 {
-                    
+                    ex.printStackTrace();
                 }
+                return task;
             }
         };
         return task;
     }
+
+    public void setDalManager(IDAL dal)
+    {
+        dalManager = dal;
+    }
+
 }

@@ -6,7 +6,6 @@ import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
-import com.github.makosful.shoreline.gui.controller.MainWindowController;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.io.IOException;
 import java.util.List;
@@ -188,7 +187,7 @@ public class MainWindowModel
         }
         catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
     
@@ -216,10 +215,9 @@ public class MainWindowModel
         cache.changeScene(Scenes.Login.getValue()); // ID 1
     }
 
-    public Runnable makeTask(List<Map> list, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
-       return bll.makeTask(list, path);
-    }
-    
+       return bll.makeTask(map, path);
+    }   
 
 }

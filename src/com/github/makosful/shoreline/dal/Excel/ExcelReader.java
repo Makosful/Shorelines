@@ -122,7 +122,7 @@ public class ExcelReader implements IReader
         //<editor-fold defaultstate="collapsed" desc="For Loop">
         row = sheet.getRow(0);
         if (row != null)
-        {
+        {   
             for (int c = 0; c < cols; c++)
             {
                 cell = row.getCell((short) c);
@@ -138,8 +138,10 @@ public class ExcelReader implements IReader
     }
     
     @Override
-    public List<Map> getValues(Map<String, String> keys) throws ReaderException
+    public List<Map> getValues(Map<String, String> keys) 
     {
+        try
+        {
         //<editor-fold defaultstate="collapsed" desc="State Handling">
         if (sheet == null)
         {
@@ -214,13 +216,20 @@ public class ExcelReader implements IReader
         //</editor-fold>
 
         return list;
+        }
+        catch(ReaderException ex)
+        {
+            ex.printStackTrace();
+            
+        }
+        return null;
     }
     /**
      * Gets the value out of the cell as a string.
      * @param cell
      * @return 
      */
-    public String getValueAsString(Cell cell)
+    private String getValueAsString(Cell cell)
     {
         String cellValue;
         if (cell.getCellTypeEnum() == CellType.NUMERIC)
@@ -233,4 +242,5 @@ public class ExcelReader implements IReader
         }
         return cellValue;
     }
+
 }

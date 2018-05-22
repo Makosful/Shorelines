@@ -1,14 +1,22 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.LoginModel;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -18,10 +26,9 @@ import javafx.scene.control.*;
 public class LoginController implements Initializable
 {
 
-    private Alert errorAlert;
-
     private LoginModel model;
 
+    //<editor-fold defaultstate="collapsed" desc="FXML Variables">
     @FXML
     private TextField txtFieldUsername;
     @FXML
@@ -32,6 +39,13 @@ public class LoginController implements Initializable
     private Button btnLogin;
     @FXML
     private Button btnForgotPassword;
+    @FXML
+    private Button btnSignUp;
+    @FXML
+    private Label lblMessage;
+    //</editor-fold>
+
+    private Alert errorAlert;
 
     /**
      * Initializes the controller class.
@@ -44,30 +58,38 @@ public class LoginController implements Initializable
     {
         model = new LoginModel();
         setCredentials();
+
+        lblMessage.textProperty().bind(model.getMessageProperty());
     }
 
     @FXML
     private void logIn(ActionEvent event)
     {
+        //<editor-fold defaultstate="collapsed" desc="Remember me">
         try
         {
             if (checkBoxRememberMe.isSelected())
             {
-                model.savePassword(txtFieldUsername.getText(), txtFieldPassword.getText());
+                model.savePassword(txtFieldUsername.getText(),
+                                   txtFieldPassword.getText());
             }
             else
             {
                 model.savePassword("", "");
             }
-
         }
         catch (BLLException ex)
         {
             errorAlert = new Alert(AlertType.ERROR);
             errorAlert.setTitle("Error");
-            errorAlert.setContentText("Something went wrong, credentials failed to save.");
+            errorAlert.setContentText(
+                    "Something went wrong, credentials failed to save.");
             errorAlert.show();
         }
+        //</editor-fold>
+
+        model.login(txtFieldUsername.getText(),
+                    txtFieldPassword.getText());
     }
 
     public void setCredentials()
@@ -81,6 +103,34 @@ public class LoginController implements Initializable
         catch (BLLException ex)
         {
 
+        }
+    }
+
+    @FXML
+    private void handleSignUp(ActionEvent event)
+    {
+        model.openSignup();
+    }
+
+    @FXML
+    private void handleForgotPassword(ActionEvent event)
+    {
+        try
+        {
+            URL resource = Main.class.getResource("gui/view/ForgotPassword.fxml");
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(resource);
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

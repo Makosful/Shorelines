@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.github.makosful.shoreline.dal.Database;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
@@ -15,7 +10,8 @@ import java.sql.Connection;
  */
 public class DataBaseConnector
 {
-     private final SQLServerDataSource dataSource;
+
+    private final SQLServerDataSource dataSource;
 
     /**
      * Constructor
@@ -23,7 +19,7 @@ public class DataBaseConnector
      */
     public DataBaseConnector()
     {
-        
+
         dataSource = new SQLServerDataSource();
 
         dataSource.setServerName("EASV-DB2");
@@ -44,5 +40,5 @@ public class DataBaseConnector
     public Connection getConnection() throws SQLServerException
     {
         return dataSource.getConnection();
-    }   
+    }
 }

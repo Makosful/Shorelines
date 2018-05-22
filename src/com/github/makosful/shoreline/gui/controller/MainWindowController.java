@@ -15,8 +15,12 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javafx.beans.binding.Bindings;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -52,10 +56,12 @@ public class MainWindowController implements Initializable
     private MainWindowModel model;
     private Map<String, String> cellOrder;
     private ConversionLog log;
-    private List<Runnable> listTask;
+    private List<Task> listTask;
     private String filePath;
     private int output = 0;
 
+    private Label[] labels;
+    //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
     //<editor-fold defaultstate="collapsed" desc="Split Pane Unused">
     @FXML
@@ -128,7 +134,6 @@ public class MainWindowController implements Initializable
     @FXML
     private MenuItem menuItemInstructions;
 //</editor-fold>
-    private Label[] labels;
     private Boolean movable = false;
     private Boolean isChecked = false;
     private Boolean ListViewInFocus = false;
@@ -137,6 +142,8 @@ public class MainWindowController implements Initializable
     private Button btnDeleteSelected;
     @FXML
     private MenuItem fileLoader;
+
+    private ExecutorService exService;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
@@ -154,6 +161,7 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
+
         labels = new Label[]
 
         {
@@ -167,19 +175,35 @@ public class MainWindowController implements Initializable
             lbl15EstimatedTime
         };
 
-        labels = new Label[]
-        {
-            lbl01SiteName, lbl02AssetSerialNo,
-            lbl03OrderType, lbl04ExtWorkOrderID,
-            lbl05SystemStatus, lbl06UserStatus,
-            lbl07CreatedOn, lbl08CreatedBy,
-            lbl09NameDescription
-        };
-
+        exService = Executors.newFixedThreadPool(1);
         AddListeners();
         addConfigs();
         addConfigListener();
+    }
 
+    @FXML
+    private void handleChangePassword(ActionEvent event)
+    {
+        try
+        {
+            URL resource = Main.class
+                    .getResource("gui/view/ChangePassword.fxml");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(resource);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Change Password");
+            stage.setResizable(false);
+            stage.showAndWait();
+
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(MainWindowController.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void shortcutMoveItemListView(KeyEvent event)
@@ -281,35 +305,10 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
-        output++;
-
-        List<Map> mapTask = model.getValues(getMap());
-
-        if (mapTask != null)
+        Task task = model.makeTask(getMap(), filePath);
+        if (task != null)
         {
-            Runnable task = model.makeTask(mapTask, "output" + output + ".json");
-            if (task != null)
-            {
-                listTask.add(task);
-            }
-            else
-            {
-                showAlert("Convertion Error", "An error occured while converting the file, "
-                                              + model.getErrorMessageProperty().getValue(), "Convertion Error");
-
-                setLog("An error occured while converting the file, "
-                       + model.getErrorMessageProperty().getValue(), "Error");
-                model.saveLog(log);
-            }
-        }
-        else
-        {
-            showAlert("Convertion Error", "An error occured while converting the file, "
-                                          + model.getErrorMessageProperty().getValue(), "Conversion Error");
-
-            setLog("An error occured while converting the file, "
-                   + model.getErrorMessageProperty().getValue(), "Error");
-            model.saveLog(log);
+            listTask.add(task);
         }
 
     }
@@ -330,43 +329,13 @@ public class MainWindowController implements Initializable
         alert.show();
     }
 
-    @FXML
-    private void executeTaskBatch(ActionEvent event)
-    {
-        ExecutorService exService = Executors.newFixedThreadPool(4);
-
-        for (Runnable run : listTask)
-        {
-
-            exService.execute(run);
-        }
-
-        exService.shutdown();
-        if (exService.isShutdown())
-        {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Convertion Info");
-            alert.setContentText("You successfully converted the files to JSON");
-            alert.setHeaderText("Info");
-            alert.show();
-
-            log.setMessage("Message");
-            log.setLogType("Conversion, no errors occured");
-            log.setDate(new Date());
-
-            setLog("No errors occured, conversion successful", "Conversion");
-            model.saveLog(log);
-        }
-
-    }
-
     /**
      * Set the custom text for the log
      *
      * @param message
      * @param logType
      */
-    private void setLog(String message, String logType)
+    public void setLog(String message, String logType)
     {
         log.setMessage(message);
         log.setLogType(logType);
@@ -419,18 +388,24 @@ public class MainWindowController implements Initializable
     {
         listViewSorted.getItems().addListener(new ListChangeListener()
         {
-
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-                for (Label label : labels)
+                try
                 {
-                    label.setText("");
-                }
+                    for (Label label : labels)
+                    {
+                        label.setText("");
+                    }
 
-                for (int i = 0; i < listViewSorted.getItems().size(); i++)
+                    for (int i = 0; i < listViewSorted.getItems().size(); i++)
+                    {
+                        labels[i].setText(listViewSorted.getItems().get(i));
+                    }
+                }
+                catch (IndexOutOfBoundsException ex)
                 {
-                    labels[i].setText(listViewSorted.getItems().get(i));
+                    System.out.println("Too many columns were added");
                 }
             }
         });
@@ -533,13 +508,11 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Loading File - Static file.
      *
      * @param event
      */
     @FXML
-    private void loadFile(ActionEvent event
-    )
+    private void loadFile(ActionEvent event)
     {
         FileChooser fc = new FileChooser();
         FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files", "*.xlsx", "*.xls");
@@ -689,7 +662,8 @@ public class MainWindowController implements Initializable
         try
         {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
+            Parent root = FXMLLoader.load(Main.class
+                    .getResource("gui/view/HelpWindow.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Shoreline | Instructions");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -867,6 +841,40 @@ public class MainWindowController implements Initializable
 
         listViewSorted.refresh();
 //        setOutputLabelText();
+    }
+
+    @FXML
+    private void taskWindow(ActionEvent event
+    )
+    {
+        try
+        {
+            FXMLLoader fxLoader = new FXMLLoader(Main.class
+                    .getResource("gui/view/TaskManagerWindow.fxml"));
+            Parent root = fxLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Task Handling");
+            TaskManagerWindowController controller = fxLoader.getController();
+            controller.getTaskList(listTask);
+            controller.getMainController(this);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (IOException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Failed to open the window");
+            alert.setContentText(ex.getMessage());
+            alert.show();
+        }
+
+    }
+    // Saves log.
+
+    public void saveLog()
+    {
+        model.saveLog(log);
     }
 
 }

@@ -2,13 +2,15 @@ package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
+import com.github.makosful.shoreline.be.User;
+import com.github.makosful.shoreline.be.UserNew;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 
@@ -26,20 +28,21 @@ import javafx.concurrent.Task;
  *
  * @author Axl
  */
-public class BLLManager implements IBLL
+public final class BLLManager implements IBLL
 {
 
     private final IDAL dal;
     private final Log log;
     private final TaskManager tasks;
-    private final PasswordGenerator pass;
+    private final PasswordGenerator passGen;
 
     public BLLManager()
     {
         dal = new DALManager();
-        log = new Log();
         tasks = new TaskManager();
-        pass = new PasswordGenerator(12);
+        setDalManager();
+        log = new Log();
+        passGen = new PasswordGenerator(12);
     }
 
     @Override
@@ -69,18 +72,18 @@ public class BLLManager implements IBLL
     }
 
     @Override
-    public Runnable makeTask(List<Map> list, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
-        try 
+        try
         {
-            return tasks.makeTask(list, path);
+            return tasks.makeTask(map, path);
         }
         catch (BLLException ex)
         {
-           throw new BLLException(ex.getMessage());
+            throw new BLLException(ex.getMessage());
         }
     }
-    
+
     //<editor-fold defaultstate="collapsed" desc="Configuration">
     @Override
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException
@@ -110,11 +113,11 @@ public class BLLManager implements IBLL
 
     }
     //</editor-fold>
-    
+
     @Override
     public String generatePassword() throws BLLException
     {
-        return pass.nextString();
+        return passGen.nextString();
     }
 
     @Override
@@ -130,7 +133,7 @@ public class BLLManager implements IBLL
         }
         try
         {
-            
+
             return dal.fileLoad(path);
         }
         catch (DALException ex)
@@ -164,7 +167,12 @@ public class BLLManager implements IBLL
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }
     }
-    
+
+    public void setDalManager()
+    {
+        tasks.setDalManager(dal);
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Logs">
     @Override
     public void saveLog(ConversionLog conversionLog) throws BLLException
@@ -186,6 +194,112 @@ public class BLLManager implements IBLL
             return dal.searchLogs(searchText, checked);
         }
         catch (DALException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="User Handling">
+    @Override
+    public boolean createUser(UserNew u) throws BLLException
+    {
+        try
+        {
+            String hash = Hashing.hashPass(u.getPassword());
+
+            return dal.createUser(new UserNew(u.getFirstName(),
+                                              u.getLastName(),
+                                              u.getUserName(),
+                                              u.getEmail(),
+                                              hash));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public User login(String uName, String pass) throws BLLException
+    {
+        try
+        {
+            String hashPass = Hashing.hashPass(pass);
+            return dal.getUser(uName, hashPass);
+        }
+        catch (NoSuchAlgorithmException
+               | UnsupportedEncodingException
+               | DALException ex)
+        {
+            throw new BLLException(pass, ex);
+        }
+    }
+
+    @Override
+    public boolean getUserByMail(String mail) throws BLLException
+    {
+        try
+        {
+            final User user = dal.getUserByMail(mail);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            final String pass = generatePassword();
+            final String hash = Hashing.hashPass(pass);
+            boolean changed = dal.changeUserPassword(user, hash);
+
+            if (!changed)
+            {
+                return false;
+            }
+
+            boolean sentEmail = dal.sendEmail(user, pass);
+
+            if (!sentEmail)
+            {
+                throw new DALException("New password was generated, but the mail couldn't be sent");
+            }
+            return true;
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean changePassword(User user, String pass) throws BLLException
+    {
+        try
+        {
+            return dal.changeUserPassword(user, Hashing.hashPass(pass));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
+        {
+            throw new BLLException(ex.getLocalizedMessage(), ex);
+        }
+    }
+
+    @Override
+    public boolean passwordMatch(User user, String pass) throws BLLException
+    {
+        try
+        {
+            return dal.passwordMatch(user, Hashing.hashPass(pass));
+        }
+        catch (DALException
+               | NoSuchAlgorithmException
+               | UnsupportedEncodingException ex)
         {
             throw new BLLException(ex.getLocalizedMessage(), ex);
         }

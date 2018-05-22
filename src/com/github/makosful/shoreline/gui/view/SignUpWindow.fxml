@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="signup" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.SignUpWindowController">
+    <children>
+        <VBox spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox fx:id="boxNameFull" spacing="10.0">
+                    <children>
+                        <VBox fx:id="boxNameFirst">
+                            <children>
+                                <Label fx:id="lblNameFirst" text="First Name" />
+                                <TextField fx:id="txtNameFirst" promptText="First Name" />
+                            </children>
+                        </VBox>
+                        <VBox fx:id="boxNameLast">
+                            <children>
+                                <Label fx:id="lblNameLast" text="Last Name" />
+                                <TextField fx:id="txtNameLast" promptText="Last Name" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+                <VBox fx:id="boxNameUser">
+                    <children>
+                        <Label fx:id="lblNameUser" text="Username" />
+                        <TextField fx:id="txtNameUser" promptText="Username for login" />
+                    </children>
+                </VBox>
+                <VBox fx:id="boxEmail">
+                    <children>
+                        <Label fx:id="lblEmail" text="Email" />
+                        <TextField fx:id="txtEmail" promptText="Email for password recovery" />
+                    </children>
+                </VBox>
+                <VBox fx:id="boxPasswords" spacing="10.0">
+                    <children>
+                        <VBox fx:id="boxPass">
+                            <children>
+                                <Label fx:id="lblPass" text="Password" />
+                                <PasswordField fx:id="txtPass" promptText="Password" />
+                            </children>
+                        </VBox>
+                        <VBox fx:id="boxPassConf">
+                            <children>
+                                <Label fx:id="lblPassConf" text="Confirm Password" />
+                                <PasswordField fx:id="txtPassConf" promptText="Confirm Password" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+                <ButtonBar buttonOrder="A+U+C" prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                        <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#handleCreate" text="Create" ButtonBar.buttonData="APPLY" />
+                        <Button fx:id="btnCancel" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancle" ButtonBar.buttonData="CANCEL_CLOSE" />
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </VBox>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</AnchorPane>
