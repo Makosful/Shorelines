@@ -10,8 +10,6 @@ import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +38,8 @@ public class MainWindowModel
     ObservableList<Config> configs;
     ObservableList<String> available;
     ObservableList<String> selected;
+
+    private String filepath;
 
     public MainWindowModel()
     {
@@ -71,21 +71,25 @@ public class MainWindowModel
     }
 
     //<editor-fold defaultstate="collapsed" desc="Basic File Handling">
-    public boolean loadFile(String path)
+    public void loadFile(String path)
     {
-        try
-        {
-            return bll.loadFile(path);
-        }
-        catch (BLLException ex)
-        {
-            errorMessage.setValue(ex.getLocalizedMessage());
-            return false;
-        }
+        this.filepath = path;
+    }
+
+    public void setFileNull()
+    {
+        this.filepath = null;
+    }
+
+    public boolean isFileNull()
+    {
+        return filepath == null;
     }
 
     /**
      * Gets the
+     *
+     * @param path
      *
      * @return
      */
@@ -93,7 +97,7 @@ public class MainWindowModel
     {
         try
         {
-            return FXCollections.observableArrayList(bll.getHeaders());
+            return FXCollections.observableArrayList(bll.getHeaders(filepath));
         }
         catch (BLLException ex)
         {
@@ -106,7 +110,7 @@ public class MainWindowModel
     {
         try
         {
-            return bll.getValues(map);
+            return bll.getValues(map, filepath);
         }
         catch (BLLException ex)
         {
@@ -135,6 +139,7 @@ public class MainWindowModel
      *
      * @param configName
      * @param items
+     *
      * @return boolean which tells if the saving of config was successful
      */
     public boolean saveConfig(String configName, ObservableList<String> items)
@@ -190,10 +195,11 @@ public class MainWindowModel
 
         }
     }
-    
+
     /**
      * Method to pass the log down to data access objects for storing the log
-     * @param log 
+     *
+     * @param log
      */
     public void saveLog(ConversionLog log)
     {
@@ -206,9 +212,8 @@ public class MainWindowModel
             errorMessage.setValue(ex.getLocalizedMessage());
         }
     }
-    
-    //</editor-fold>
 
+    //</editor-fold>
     public void logout()
     {
         cache.clearUser();
@@ -217,7 +222,6 @@ public class MainWindowModel
 
     public Task makeTask(Map<String, String> map, String path) throws BLLException
     {
-       return bll.makeTask(map, path);
-    }   
-
+        return bll.makeTask(map, path);
+    }
 }

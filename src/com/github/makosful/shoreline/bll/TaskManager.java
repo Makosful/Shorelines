@@ -37,7 +37,7 @@ public class TaskManager
             {
                 try
                 {
-                    List<Map> list = dalManager.fileGetValues(map);
+                    List<Map> list = dalManager.fileGetValues(map, path);
                     dalManager.createFile(list, path);
                 }
                 catch (DALException ex)

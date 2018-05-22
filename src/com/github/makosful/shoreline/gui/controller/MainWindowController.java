@@ -490,6 +490,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
+        model.setFileNull();
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
         filePath = file.getName().split("\\.")[0];
@@ -499,7 +500,8 @@ public class MainWindowController implements Initializable
             //Set file name to log, which will be saved later
             log.setFileName(file.getName());
 
-            if (model.loadFile(file.getAbsolutePath()))
+            model.loadFile(file.getAbsolutePath());
+            if (!model.isFileNull())
             {
                 Platform.runLater(() ->
                 {
@@ -509,7 +511,6 @@ public class MainWindowController implements Initializable
                     setLog("No errors occured, filed loaded successfully", "Conversion");
                     model.saveLog(log);
                 });
-
             }
             else
             {

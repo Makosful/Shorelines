@@ -21,11 +21,9 @@ public interface IDAL
 {
 
     //<editor-fold defaultstate="collapsed" desc="File handling">
-    public boolean fileLoad(String path) throws DALException;
+    public List<String> fileGetHeader(String path) throws DALException;
 
-    public List<String> fileGetHeader() throws DALException;
-
-    public List<Map> fileGetValues(Map<String, String> keys) throws DALException;
+    public List<Map> fileGetValues(Map<String, String> keys, String path) throws DALException;
 
     public void setReader(String path) throws DALException;
     //</editor-fold>

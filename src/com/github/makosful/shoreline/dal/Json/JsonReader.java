@@ -18,10 +18,8 @@ import java.util.Map;
 public class JsonReader implements IReader
 {
 
-    private JsonElement element;
-
-    @Override
-    public boolean loadFile(String file) throws ReaderException
+    //@Override
+    private JsonElement loadFile(String file) throws ReaderException
     {
         try (BufferedReader br = new BufferedReader(new FileReader(file)))
         {
@@ -38,9 +36,7 @@ public class JsonReader implements IReader
             Gson gson = new Gson();
             GsonBuilder builder = gson.newBuilder();
             Object obj = builder.create().fromJson(sb.toString(), Object.class);
-            element = gson.toJsonTree(obj);
-
-            return true;
+            return gson.toJsonTree(obj);
         }
         catch (IOException ex)
         {
@@ -49,20 +45,17 @@ public class JsonReader implements IReader
     }
 
     @Override
-    public List<String> getHeaders() throws ReaderException
+    public List<String> getHeaders(String path) throws ReaderException
     {
-        if (element == null)
-        {
-            String s = "Call loadJson on this object before using this method";
-            throw new ReaderException(s);
-        }
-        else if (!element.isJsonArray())
+        JsonElement element = loadFile(path);
+
+        if (!element.isJsonArray())
         {
             List<String> list = new ArrayList();
-            for (String string : element.getAsJsonObject().keySet())
+            element.getAsJsonObject().keySet().forEach((string) ->
             {
                 list.add(string);
-            }
+            });
             return list;
         }
         else if (element.isJsonArray())
@@ -71,10 +64,10 @@ public class JsonReader implements IReader
             JsonArray jArray = element.getAsJsonArray();
             JsonObject jObject = jArray.get(0).getAsJsonObject();
 
-            for (String string : jObject.keySet())
+            jObject.keySet().forEach((string) ->
             {
                 list.add(string);
-            }
+            });
             return list;
         }
         else
@@ -85,8 +78,10 @@ public class JsonReader implements IReader
     }
 
     @Override
-    public List<Map> getValues(Map<String, String> keys) throws ReaderException
+    public List<Map> getValues(Map<String, String> keys, String path) throws ReaderException
     {
+        JsonElement element = loadFile(path);
+
         if (element == null)
         {
             String s = "Call loadJson on this object before using this method";
