@@ -8,6 +8,7 @@ import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
 import com.jfoenix.controls.JFXToggleButton;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -35,8 +36,9 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -133,11 +135,11 @@ public class MainWindowController implements Initializable
     private Integer currentIndex;
     @FXML
     private Button btnDeleteSelected;
+    @FXML
+    private MenuItem fileLoader;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
-    @FXML
-    private JFXToggleButton btnToggleColorTheme;
 
     /**
      * Initializes the controller class.
@@ -540,33 +542,44 @@ public class MainWindowController implements Initializable
     )
     {
         FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files", "*.xlsx", "*.xls");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Comma Seperated Values", "*.csv");
+        fc.getExtensionFilters().addAll(excelFilter, csvFilter);
+
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
 
-        model.loadFile(file.getAbsolutePath());
-        chklistSelectData.setItems(model.getCategories());
-        AddListeners();
-
-        //Set file name to log, which will be saved later
-        log.setFileName(file.getName());
-
-        if (model.loadFile(file.getAbsolutePath()))
+        if (file == null)
         {
-            chklistSelectData.setItems(model.getCategories());
-            AddListeners();
-
-            setLog("No errors occured, filed loaded successfully", "Conversion");
-            model.saveLog(log);
+            return;
         }
         else
         {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Reading File Error");
-            alert.setContentText(model.getErrorMessageProperty().getValue());
-            alert.show();
+            model.loadFile(file.getAbsolutePath());
+            chklistSelectData.setItems(model.getCategories());
+            AddListeners();
 
-            setLog("An error occured while loading file for conversion, "
-                   + model.getErrorMessageProperty().getValue(), "Error");
-            model.saveLog(log);
+            //Set file name to log, which will be saved later
+            log.setFileName(file.getName());
+
+            if (model.loadFile(file.getAbsolutePath()))
+            {
+                chklistSelectData.setItems(model.getCategories());
+                AddListeners();
+
+                setLog("No errors occured, filed loaded successfully", "Conversion");
+                model.saveLog(log);
+            }
+            else
+            {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Reading File Error");
+                alert.setContentText(model.getErrorMessageProperty().getValue());
+                alert.show();
+
+                setLog("An error occured while loading file for conversion, "
+                       + model.getErrorMessageProperty().getValue(), "Error");
+                model.saveLog(log);
+            }
         }
     }
 

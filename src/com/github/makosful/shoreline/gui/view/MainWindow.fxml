@@ -28,7 +28,7 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Select file" />
+                        <MenuItem fx:id="fileLoader" mnemonicParsing="false" onAction="#loadFile" text="Select file" />
                         <Menu mnemonicParsing="false" text="Select recent..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
