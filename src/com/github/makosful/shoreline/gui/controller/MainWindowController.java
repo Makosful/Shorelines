@@ -707,9 +707,11 @@ public class MainWindowController implements Initializable
         model.saveLog(log);
     }
 
+    //remove the selected item from listViewSorted
     @FXML
     private void handleRemoveItem(ActionEvent event)
     {
+        listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
     }
 
 }
