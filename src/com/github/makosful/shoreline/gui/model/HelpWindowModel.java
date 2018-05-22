@@ -27,7 +27,7 @@ public class HelpWindowModel
     {
         for (int i = 1; i < 6; i++)
         {
-            File file = new File("./res/instructions" + i + ".png");
+            File file = new File("./res/tutorial" + i + ".png");
             Image img = new Image(file.toURI().toString());
             images.add(img);
         }
