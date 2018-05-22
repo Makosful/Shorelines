@@ -78,8 +78,8 @@
 }
 
 .list-cell:odd {
-    -fx-background-color: #616161;
-    -fx-text-fill: white;
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: black;
 }
 
 .list-cell:even {

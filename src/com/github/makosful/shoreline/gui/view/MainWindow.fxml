@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<BorderPane stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<BorderPane stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -58,14 +58,14 @@
     <bottom>
         <VBox>
             <children>
-                <ButtonBar buttonMinWidth="150.0">
+                <ButtonBar buttonMinWidth="150.0" buttonOrder="L_H+EN_YR">
                     <buttons>
                         <Button id="btn-hover" fx:id="btnChecklistCheck" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" ButtonBar.buttonData="LEFT" />
-                        <ComboBox id="btn-hover" fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="LEFT" />
-                        <TextField fx:id="txtFieldConfig" promptText="Name of config..." ButtonBar.buttonData="RIGHT" />
-                        <Button id="btn-hover" mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="RIGHT" />
-                        <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add task" ButtonBar.buttonData="APPLY" />
-                        <Button mnemonicParsing="false" onAction="#taskWindow" text="Open task window" />
+                        <ComboBox id="btn-hover" fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="HELP" />
+                        <TextField fx:id="txtFieldConfig" promptText="Name the config..." ButtonBar.buttonData="HELP_2" />
+                        <Button id="btn-hover" mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="NO" />
+                        <Button id="btn-hover" fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add task" ButtonBar.buttonData="YES" />
+                        <Button id="btn-hover" mnemonicParsing="false" onAction="#taskWindow" text="Open task window" ButtonBar.buttonData="RIGHT" />
                     </buttons>
                     <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -173,7 +173,7 @@
                                                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
                                             </textFill>
                                         </Label>
-                                        <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="500.0" prefWidth="234.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
+                                        <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="500.0" prefWidth="234.0" style="-fx-background-color: #A0A0A0;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -190,7 +190,7 @@
                                                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
                                             </textFill>
                                         </Label>
-                                        <ListView fx:id="listViewSorted" layoutX="-1.0" layoutY="36.0" prefHeight="500.0" prefWidth="278.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
+                                        <ListView fx:id="listViewSorted" layoutX="-1.0" layoutY="36.0" prefHeight="500.0" prefWidth="278.0" style="-fx-background-color: #A0A0A0;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
                                         <VBox layoutX="180.0" layoutY="237.0" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
                                             <children>
                                                 <Button id="btn-hover" fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲">

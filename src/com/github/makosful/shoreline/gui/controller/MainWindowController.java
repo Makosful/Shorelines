@@ -6,9 +6,7 @@ import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.PopUp;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.gui.model.MainWindowModel;
-import com.jfoenix.controls.JFXToggleButton;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -17,7 +15,6 @@ import java.util.concurrent.Executors;
 import javafx.beans.binding.Bindings;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -41,8 +38,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import static org.apache.poi.hssf.usermodel.HeaderFooter.file;
 import org.controlsfx.control.CheckListView;
 
 /**
@@ -58,8 +53,6 @@ public class MainWindowController implements Initializable
     private ConversionLog log;
     private List<Task> listTask;
     private String filePath;
-    private int output = 0;
-
     private Label[] labels;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
@@ -162,8 +155,9 @@ public class MainWindowController implements Initializable
         listTask = new ArrayList();
         log = new ConversionLog();
 
-        labels = new Label[]
+        exService = Executors.newFixedThreadPool(1);
 
+        labels = new Label[]
         {
             lbl01SiteName, lbl02AssetSerialNo,
             lbl03OrderType, lbl04ExtWorkOrderID,
@@ -175,7 +169,6 @@ public class MainWindowController implements Initializable
             lbl15EstimatedTime
         };
 
-        exService = Executors.newFixedThreadPool(1);
         AddListeners();
         addConfigs();
         addConfigListener();
@@ -840,12 +833,10 @@ public class MainWindowController implements Initializable
         System.out.println(listViewSorted.getItems().get(0).length());
 
         listViewSorted.refresh();
-//        setOutputLabelText();
     }
 
     @FXML
-    private void taskWindow(ActionEvent event
-    )
+    private void taskWindow(ActionEvent event)
     {
         try
         {
@@ -870,8 +861,8 @@ public class MainWindowController implements Initializable
         }
 
     }
-    // Saves log.
 
+    // Saves log.
     public void saveLog()
     {
         model.saveLog(log);
