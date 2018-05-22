@@ -62,6 +62,7 @@ public class UserDAO
             if (rs.next())
             {
                 return new User(
+                        rs.getInt("id"),
                         rs.getString("FirstName"),
                         rs.getString("LastName"),
                         rs.getString("UserName"),
@@ -85,10 +86,13 @@ public class UserDAO
 
             if (rs.next())
             {
-                return new User(rs.getString("FirstName"),
+                return new User(
+                                rs.getInt("id"),
+                                rs.getString("FirstName"),
                                 rs.getString("LastName"),
                                 rs.getString("UserName"),
-                                rs.getString("Email"));
+                                rs.getString("Email")
+                );
             }
             return null;
         }
@@ -126,10 +130,13 @@ public class UserDAO
 
             if (rs.next())
             {
-                return new User(rs.getString("FirstName"),
+                return new User(
+                                 rs.getInt("id"),
+                                rs.getString("FirstName"),
                                 rs.getString("LastName"),
                                 rs.getString("UserName"),
-                                rs.getString("Email"));
+                                rs.getString("Email")
+                );
             }
             return null;
         }

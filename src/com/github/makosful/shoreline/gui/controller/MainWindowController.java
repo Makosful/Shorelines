@@ -488,7 +488,7 @@ public class MainWindowController implements Initializable
         };
 
         List<String> listOfStrings = listViewSorted.getItems();
-
+        
         for (int i = 0; i < listOfStrings.size(); i++)
         {
             String col = listOfStrings.get(i);

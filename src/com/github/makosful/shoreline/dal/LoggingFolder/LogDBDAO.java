@@ -117,7 +117,7 @@ public class LogDBDAO implements ILog
             {
                 ConversionLog conversionLogger = new ConversionLog();
 
-                conversionLogger.setUserId(0);
+                conversionLogger.setUserId(rs.getInt("UserId"));
                 conversionLogger.setMessage(rs.getString("Message"));
                 conversionLogger.setFileName(rs.getString("FileName"));
                 conversionLogger.setLogType(rs.getString("LogType"));
@@ -134,7 +134,9 @@ public class LogDBDAO implements ILog
     }
     
     /**
-     * 
+     * Gets the sql query string depending on the search qriteria, 
+     * and sets the preparedstatement parameters correctly, 
+     * so it prepares the search depending on filters and calls the seach method
      * @param searchText
      * @param checked
      * @return

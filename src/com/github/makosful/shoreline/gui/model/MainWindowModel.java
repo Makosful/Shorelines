@@ -205,6 +205,9 @@ public class MainWindowModel
     {
         try
         {
+            if(cache.getUser() != null){
+                log.setUserId(cache.getUser().getUserId());
+            }
             bll.saveLog(log);
         }
         catch (BLLException ex)

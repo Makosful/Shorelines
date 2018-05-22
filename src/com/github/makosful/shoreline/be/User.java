@@ -7,13 +7,13 @@ package com.github.makosful.shoreline.be;
  */
 public class User
 {
-
+    private int userId;
     private String firstName;
     private String lastName;
     private String userName;
     private String email;
 
-    public User(String firstName, String lastName, String userName, String email)
+    public User(int userId, String firstName, String lastName, String userName, String email)
     {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,6 +21,17 @@ public class User
         this.email = email;
     }
 
+    
+    public int getUserId()
+    {
+        return userId;
+    }
+
+    public void setUserId(int userId)
+    {
+        this.userId = userId;
+    }
+    
     public String getFirstName()
     {
         return firstName;
