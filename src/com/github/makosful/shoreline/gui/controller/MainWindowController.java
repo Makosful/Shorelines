@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -129,6 +131,7 @@ public class MainWindowController implements Initializable
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
 
+    private ExecutorService exService;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
@@ -146,6 +149,7 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
+        exService = Executors.newFixedThreadPool(1);
 
         labels = new Label[]
         {
@@ -158,7 +162,7 @@ public class MainWindowController implements Initializable
             lblLatestStart, lblLatestFinish,
             lblEstimatedTime
         };
-        
+
         AddListeners();
         addConfigs();
         addConfigListener();
@@ -368,16 +372,16 @@ public class MainWindowController implements Initializable
     {
         listViewSorted.getItems().addListener(new ListChangeListener()
         {
-            
+
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-                
-                for(Label label : labels)
+
+                for (Label label : labels)
                 {
                     label.setText("");
                 }
-            
+
                 for (int i = 0; i < listViewSorted.getItems().size(); i++)
                 {
                     labels[i].setText(listViewSorted.getItems().get(i));
@@ -431,7 +435,6 @@ public class MainWindowController implements Initializable
         });
     }
 
-
     @FXML
     private void handleChecklistItemsStatus(ActionEvent event)
     {
@@ -481,7 +484,6 @@ public class MainWindowController implements Initializable
     }
 
     /**
-     * Loading File - Static file.
      *
      * @param event
      */
@@ -492,11 +494,11 @@ public class MainWindowController implements Initializable
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
         filePath = file.getName().split("\\.")[0];
 
-        Thread thread = new Thread(() ->
+        exService.execute(() ->
         {
             //Set file name to log, which will be saved later
             log.setFileName(file.getName());
-            
+
             if (model.loadFile(file.getAbsolutePath()))
             {
                 Platform.runLater(() ->
@@ -507,7 +509,7 @@ public class MainWindowController implements Initializable
                     setLog("No errors occured, filed loaded successfully", "Conversion");
                     model.saveLog(log);
                 });
-                
+
             }
             else
             {
@@ -518,14 +520,12 @@ public class MainWindowController implements Initializable
                     alert.setContentText(model.getErrorMessageProperty().getValue());
                     alert.show();
                 });
-                
+
                 setLog("An error occured while loading file for conversion, "
-                           + model.getErrorMessageProperty().getValue(), "Error");
+                       + model.getErrorMessageProperty().getValue(), "Error");
                 model.saveLog(log);
             }
         });
-        thread.setDaemon(true);
-        thread.start();
 
     }
 
