@@ -79,6 +79,7 @@ public class DALManager implements IDAL
     {
         try
         {
+            setReader(path);
             return reader.getHeaders(path);
         }
         catch (ReaderException ex)
@@ -208,11 +209,11 @@ public class DALManager implements IDAL
     //</editor-fold>
 
     @Override
-    public void createFile(List<Map> list, String path) throws DALException
+    public void createFile(List<Map> list, String fileName) throws DALException
     {
         try
         {
-            jWriter.createFile(list, path);
+            jWriter.createFile(list, fileName);
         }
         catch (IOException ex)
         {

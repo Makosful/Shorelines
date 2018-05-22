@@ -90,15 +90,15 @@ public class JsonWriter
         out.write(string.toString());
     }
 
-    public void createFile(List<Map> list, String path) throws IOException 
+    public void createFile(List<Map> list, String fileName) throws IOException 
     {
         try
         {
-            path = path + ".json";
+            fileName = fileName + ".json";
 
             JsonWriter jWriter = new JsonWriter();
             jWriter.setJson(list);
-            jWriter.setOutput(path);
+            jWriter.setOutput(fileName);
             jWriter.write();
         }
         catch (IOException ex)

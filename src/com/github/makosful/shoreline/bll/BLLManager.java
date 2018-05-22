@@ -72,11 +72,11 @@ public final class BLLManager implements IBLL
     }
 
     @Override
-    public Task makeTask(Map<String, String> map, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException
     {
         try
         {
-            return tasks.makeTask(map, path);
+            return tasks.makeTask(map, filePath, fileName);
         }
         catch (BLLException ex)
         {

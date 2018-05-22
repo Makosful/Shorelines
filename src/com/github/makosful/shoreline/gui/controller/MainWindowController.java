@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -52,7 +53,7 @@ public class MainWindowController implements Initializable
     private Map<String, String> cellOrder;
     private ConversionLog log;
     private List<Task> listTask;
-    private String filePath;
+    private String fileName;
     private Label[] labels;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
@@ -132,6 +133,7 @@ public class MainWindowController implements Initializable
     private Integer currentIndex;
 
     private ExecutorService exService;
+    private String filePath;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
@@ -149,7 +151,8 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
-        exService = Executors.newFixedThreadPool(1);
+        executorServiceInitialization();
+
 
         labels = new Label[]
         {
@@ -167,7 +170,19 @@ public class MainWindowController implements Initializable
         addConfigs();
         addConfigListener();
     }
-
+    public void executorServiceInitialization()
+    {
+       exService = Executors.newFixedThreadPool(1, new ThreadFactory()
+        {
+            @Override
+            public Thread newThread(Runnable r)
+            {
+              Thread thread = Executors.defaultThreadFactory().newThread(r);
+              thread.setDaemon(true);
+              return thread;
+            }
+        });
+    }
     @FXML
     private void handleChangePassword(ActionEvent event)
     {
@@ -289,7 +304,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
-        Task task = model.makeTask(getMap(), filePath);
+        Task task = model.makeTask(getMap(), filePath, fileName);
         if (task != null)
         {
             listTask.add(task);
@@ -499,8 +514,9 @@ public class MainWindowController implements Initializable
         model.setFileNull();
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-        filePath = file.getName().split("\\.")[0];
-
+        fileName = file.getName().split("\\.")[0];
+        filePath = file.getAbsolutePath();
+        
         exService.execute(() ->
         {
             //Set file name to log, which will be saved later

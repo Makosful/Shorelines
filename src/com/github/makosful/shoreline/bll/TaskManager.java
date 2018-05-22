@@ -2,6 +2,7 @@ package com.github.makosful.shoreline.bll;
 
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.concurrent.Task;
@@ -21,15 +22,18 @@ public class TaskManager
 
     }
 
-    public Task makeTask(Map<String, String> map, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException
     {
+        String fPath = filePath;
+        String fName = fileName;
+        Map fMap = new LinkedHashMap<>(map);
         task = new Task()
         {
 
             @Override
             public String toString()
             {
-                return path;
+                return fileName;
             }
 
             @Override
@@ -37,8 +41,9 @@ public class TaskManager
             {
                 try
                 {
-                    List<Map> list = dalManager.fileGetValues(map, path);
-                    dalManager.createFile(list, path);
+                    List<Map> list = dalManager.fileGetValues(fMap, fPath);
+                    dalManager.createFile(list, fName);
+                    System.out.println(" i do not runna");
                 }
                 catch (DALException ex)
                 {

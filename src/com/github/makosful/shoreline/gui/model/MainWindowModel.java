@@ -220,8 +220,8 @@ public class MainWindowModel
         cache.changeScene(Scenes.Login.getValue()); // ID 1
     }
 
-    public Task makeTask(Map<String, String> map, String path) throws BLLException
+    public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException
     {
-        return bll.makeTask(map, path);
+        return bll.makeTask(map, filePath, fileName);
     }
 }

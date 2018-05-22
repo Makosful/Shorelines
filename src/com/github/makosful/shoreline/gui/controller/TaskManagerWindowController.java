@@ -162,6 +162,7 @@ public class TaskManagerWindowController implements Initializable
 //
 //        }
     }
+    int i = 0;
 
     @FXML
     private void removeSelectedTasks(ActionEvent event)
@@ -208,10 +209,7 @@ public class TaskManagerWindowController implements Initializable
                         {
 
                             Task get = runningTasks.get(0);
-                            if (!get.isRunning())
-                            {
-                                get.run();
-                            }
+                            get.run();
                         }
 
                     }
