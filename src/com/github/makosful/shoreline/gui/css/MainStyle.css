@@ -44,7 +44,7 @@
     -fx-background-radius: 15 15 0 0; 
     -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
     -fx-border-width: 1 1 0 1;
-    -fx-background-color: transparent;
+    -fx-background-color: #616161;
     -fx-text-fill: #0C8AB8;
 }
 #btn-hover:hover {
@@ -61,7 +61,7 @@
     -fx-background-radius: 0 0 15 15; 
     -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
     -fx-border-width: 0 1 1 1;
-    -fx-background-color: transparent;
+    -fx-background-color: #616161;
     -fx-text-fill: #0C8AB8;
 }
 #btn-hover-reverse:hover {
@@ -88,6 +88,6 @@
 }
 
 .list-cell:filled:hover {
-    -fx-background-color: #A0A0A0;
+    -fx-background-color: #548F9F;
     -fx-text-fill: white;
 }
