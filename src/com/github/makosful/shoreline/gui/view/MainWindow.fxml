@@ -96,7 +96,7 @@
       </VBox>
     </bottom>
    <right>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" BorderPane.alignment="CENTER">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="554.0" prefWidth="490.0" BorderPane.alignment="CENTER">
                 <children>
                     <VBox alignment="CENTER" disable="true" layoutX="4.0" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
