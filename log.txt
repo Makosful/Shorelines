@@ -910,6 +910,7 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+<<<<<<< HEAD
 ------------------------------------------------------
 Log Date: Fri May 18 12:59:31 CEST 2018
 User id: 0
@@ -1022,3 +1023,5 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+=======
+>>>>>>> parent of c82bf4b... Broken css shit.. holy fuck
