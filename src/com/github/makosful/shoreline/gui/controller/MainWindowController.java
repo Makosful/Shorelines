@@ -214,6 +214,10 @@ public class MainWindowController implements Initializable
                 event.consume();
             }
         }
+        else
+        {
+            return;
+        }
     }
 
     /**
@@ -246,7 +250,7 @@ public class MainWindowController implements Initializable
             currentIndex = listViewSorted.getSelectionModel().getSelectedIndex();
             int prevIndex = currentIndex - 1;
 
-            // Swaps the two indecies
+            // Swaps the two indexes
             Collections.swap(model.getSelectedList(), currentIndex, prevIndex);
             listViewSorted.getSelectionModel().clearAndSelect(prevIndex);
             listViewSorted.scrollTo(prevIndex);
