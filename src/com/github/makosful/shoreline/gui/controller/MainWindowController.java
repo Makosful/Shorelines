@@ -376,15 +376,21 @@ public class MainWindowController implements Initializable
             @Override
             public void onChanged(ListChangeListener.Change change)
             {
-
-                for (Label label : labels)
+                try
                 {
-                    label.setText("");
+                    for (Label label : labels)
+                    {
+                        label.setText("");
+                    }
+
+                    for (int i = 0; i < listViewSorted.getItems().size(); i++)
+                    {
+                        labels[i].setText(listViewSorted.getItems().get(i));
+                    }
                 }
-
-                for (int i = 0; i < listViewSorted.getItems().size(); i++)
+                catch (IndexOutOfBoundsException ex)
                 {
-                    labels[i].setText(listViewSorted.getItems().get(i));
+                    System.out.println("Too many columns were added that is why");
                 }
             }
         });
