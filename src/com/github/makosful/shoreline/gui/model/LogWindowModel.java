@@ -17,14 +17,12 @@ import javafx.collections.ObservableList;
 public class LogWindowModel
 {
 
-    private final Cache cache;
     private final IBLL bll;
     private String errorMessage;
     private ObservableList<ConversionLog> fullList;
 
     public LogWindowModel()
     {
-        cache = Cache.getInstance();
         bll = new BLLManager();
 
         fullList = FXCollections.observableArrayList();

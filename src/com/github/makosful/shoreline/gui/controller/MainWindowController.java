@@ -707,4 +707,9 @@ public class MainWindowController implements Initializable
         model.saveLog(log);
     }
 
+    @FXML
+    private void handleRemoveItem(ActionEvent event)
+    {
+    }
+
 }
