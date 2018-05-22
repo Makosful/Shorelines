@@ -121,20 +121,11 @@ public final class BLLManager implements IBLL
     }
 
     @Override
-    public boolean loadFile(String path) throws BLLException
+    public List<String> getHeaders(String path) throws BLLException
     {
         try
         {
-            dal.setReader(path);
-        }
-        catch (DALException ex)
-        {
-            throw new BLLException(ex.getLocalizedMessage(), ex);
-        }
-        try
-        {
-
-            return dal.fileLoad(path);
+            return dal.fileGetHeader(path);
         }
         catch (DALException ex)
         {
@@ -143,24 +134,11 @@ public final class BLLManager implements IBLL
     }
 
     @Override
-    public List<String> getHeaders() throws BLLException
+    public List<Map> getValues(Map<String, String> map, String path) throws BLLException
     {
         try
         {
-            return dal.fileGetHeader();
-        }
-        catch (DALException ex)
-        {
-            throw new BLLException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
-    @Override
-    public List<Map> getValues(Map<String, String> map) throws BLLException
-    {
-        try
-        {
-            return dal.fileGetValues(map);
+            return dal.fileGetValues(map, path);
         }
         catch (DALException ex)
         {

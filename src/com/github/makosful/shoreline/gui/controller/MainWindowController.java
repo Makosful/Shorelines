@@ -466,16 +466,17 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
+        model.clearFile();
         FileChooser fc = new FileChooser();
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
         model.loadFile(file.getAbsolutePath());
         chklistSelectData.setItems(model.getCategories());
         AddListeners();
-        
+
         //Set file name to log, which will be saved later
         log.setFileName(file.getName());
 
-        if (model.loadFile(file.getAbsolutePath()))
+        if (model.isFileEmpty())
         {
             chklistSelectData.setItems(model.getCategories());
             AddListeners();
