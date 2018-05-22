@@ -47,7 +47,7 @@ import org.controlsfx.control.CheckListView;
  */
 public class MainWindowController implements Initializable
 {
-
+    
     private MainWindowModel model;
     private Map<String, String> cellOrder;
     private ConversionLog log;
@@ -138,7 +138,7 @@ public class MainWindowController implements Initializable
     private Boolean ListViewInFocus = false;
     private Integer currentIndex;
     private ExecutorService exService;
-
+    
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
 
@@ -155,9 +155,9 @@ public class MainWindowController implements Initializable
         cellOrder = new HashMap();
         listTask = new ArrayList();
         log = new ConversionLog();
-
+        
         exService = Executors.newFixedThreadPool(1);
-
+        
         labels = new Label[]
         {
             lbl01SiteName, lbl02AssetSerialNo,
@@ -169,12 +169,12 @@ public class MainWindowController implements Initializable
             lbl13LatestStart, lbl14LatestFinish,
             lbl15EstimatedTime
         };
-
+        
         AddListeners();
         addConfigs();
         addConfigListener();
     }
-
+    
     @FXML
     private void handleChangePassword(ActionEvent event)
     {
@@ -190,7 +190,7 @@ public class MainWindowController implements Initializable
             stage.setTitle("Change Password");
             stage.setResizable(false);
             stage.showAndWait();
-
+            
         }
         catch (IOException ex)
         {
@@ -198,7 +198,7 @@ public class MainWindowController implements Initializable
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void shortcutMoveItemListView(KeyEvent event)
     {
         if (ListViewInFocus)
@@ -226,7 +226,7 @@ public class MainWindowController implements Initializable
     {
         moveItemUpListView();
     }
-
+    
     private void moveItemUpListView()
     {
         // Checks if the selected index has been marked as moveable
@@ -236,7 +236,7 @@ public class MainWindowController implements Initializable
             listViewSorted.requestFocus();
         }
     }
-
+    
     private void moveItemUpListViewNoFocus()
     {
         // Checks if the selected index has been marked as moveable
@@ -263,7 +263,7 @@ public class MainWindowController implements Initializable
     {
         moveItemDownListView();
     }
-
+    
     private void moveItemDownListView()
     {
         // Checks of the current item is marked as moveable
@@ -273,7 +273,7 @@ public class MainWindowController implements Initializable
             listViewSorted.requestFocus();
         }
     }
-
+    
     private void moveItemDownListViewNoFocus()
     {
         // Checks of the current item is marked as moveable
@@ -362,7 +362,7 @@ public class MainWindowController implements Initializable
         {
             btnMoveUp.setDisable(false);
         }
-
+        
         if (listViewSorted.getSelectionModel().getSelectedIndex() == listViewSorted.getItems().size() - 1)
         {
             btnMoveDown.setDisable(true);
@@ -389,7 +389,7 @@ public class MainWindowController implements Initializable
                     {
                         label.setText("");
                     }
-
+                    
                     for (int i = 0; i < listViewSorted.getItems().size(); i++)
                     {
                         labels[i].setText(listViewSorted.getItems().get(i));
@@ -401,10 +401,10 @@ public class MainWindowController implements Initializable
                 }
             }
         });
-
+        
         btnInsertCustom.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
         btnDeleteSelected.disableProperty().bind(Bindings.isEmpty(listViewSorted.getItems()));
-
+        
         listViewSorted.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>()
                               {
                                   @Override
@@ -413,15 +413,15 @@ public class MainWindowController implements Initializable
                                       shortcutMoveItemListView(event);
                                   }
                               });
-
+        
         listViewSorted.setItems(model.getSelectedList());
-
+        
         listViewSorted.getSelectionModel().selectedIndexProperty().addListener((observable) ->
         {
             checkIfValidToRelocate();
             disableBtnOnIndex();
         });
-
+        
         listViewSorted.focusedProperty().addListener((observable, oldValue, newValue) ->
         {
             if (newValue)
@@ -433,7 +433,7 @@ public class MainWindowController implements Initializable
                 ListViewInFocus = false;
             }
         });
-
+        
         chklistSelectData.getCheckModel().getCheckedItems().addListener((ListChangeListener.Change<? extends String> c) ->
         {
             if (c.next())
@@ -449,9 +449,9 @@ public class MainWindowController implements Initializable
             }
         });
     }
-
+    
     @FXML
-
+    
     private void handleChecklistItemsStatus(ActionEvent event)
     {
         if (isChecked)
@@ -482,14 +482,14 @@ public class MainWindowController implements Initializable
             "userStatus", "createdOn", "createdBy", "nameDescription",
             "priority", "status", "esDate", "lsDate", "lfDate", "esTime"
         };
-
+        
         List<String> listOfStrings = listViewSorted.getItems();
-
+        
         for (int i = 0; i < listOfStrings.size(); i++)
         {
             String col = listOfStrings.get(i);
             cellOrder.put(hashmapStrings[i], col);
-
+            
             if (i == 14)
             {
                 break;
@@ -506,12 +506,13 @@ public class MainWindowController implements Initializable
     private void loadFile(ActionEvent event)
     {
         FileChooser fc = new FileChooser();
+        fc.setTitle("Shoreline | Select file to import");
         FileChooser.ExtensionFilter excelFilter = new FileChooser.ExtensionFilter("Excel files", "*.xlsx", "*.xls");
         FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("Comma Seperated Values", "*.csv");
         fc.getExtensionFilters().addAll(excelFilter, csvFilter);
-
+        
         File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-
+        
         if (file == null)
         {
             return;
@@ -524,12 +525,12 @@ public class MainWindowController implements Initializable
 
             //Set file name to log, which will be saved later
             log.setFileName(file.getName());
-
+            
             if (model.loadFile(file.getAbsolutePath()))
             {
                 chklistSelectData.setItems(model.getCategories());
                 AddListeners();
-
+                
                 setLog("No errors occured, filed loaded successfully", "Conversion");
                 model.saveLog(log);
             }
@@ -539,7 +540,7 @@ public class MainWindowController implements Initializable
                 alert.setTitle("Reading File Error");
                 alert.setContentText(model.getErrorMessageProperty().getValue());
                 alert.show();
-
+                
                 setLog("An error occured while loading file for conversion, "
                        + model.getErrorMessageProperty().getValue(), "Error");
                 model.saveLog(log);
@@ -569,7 +570,7 @@ public class MainWindowController implements Initializable
             {
                 return config.getName();
             }
-
+            
             @Override
             public Config fromString(String configName)
             {
@@ -611,7 +612,7 @@ public class MainWindowController implements Initializable
             alert.setContentText("Failed to select amount of columns /n, " + " are you sure you've selected the correct config? ");
         }
     }
-
+    
     @FXML
     private void handleBtnSaveConfig(ActionEvent event)
     {
@@ -620,7 +621,7 @@ public class MainWindowController implements Initializable
             comboBoxConfig.getItems().clear();
             addConfigs();
             comboBoxConfig.getSelectionModel().select(comboBoxConfig.getItems().size() - 1);
-
+            
             setLog("No errors occured, saved configuration successfully", "Configuration");
             model.saveLog(log);
         }
@@ -631,19 +632,19 @@ public class MainWindowController implements Initializable
             model.saveLog(log);
         }
     }
-
+    
     @FXML
     private void handleLogout(ActionEvent event)
     {
         model.logout();
     }
-
+    
     @FXML
     private void handleOpenLog(ActionEvent event)
     {
         model.openLogWindow();
     }
-
+    
     @FXML
     private void handleShowInstructionsWindow(ActionEvent event)
     {
@@ -665,18 +666,18 @@ public class MainWindowController implements Initializable
             alert.show();
         }
     }
-
+    
     private void setupOuputExample()
     {
         setOutputLabelText();
     }
-
+    
     private void setOutputLabelText()
     {
         //1st item
         if (listViewSorted.getItems().get(0).length() > 0)
         {
-
+            
             lbl01SiteName.setText(listViewSorted.getItems().get(0));
         }
         else
@@ -790,7 +791,7 @@ public class MainWindowController implements Initializable
         else
         {
             lbl13LatestStart.setText("Undefined");
-
+            
         }
         //14th item
         if (!listViewSorted.getItems().get(13).isEmpty() || listViewSorted.getItems().get(13) != null)
@@ -811,14 +812,14 @@ public class MainWindowController implements Initializable
             lbl15EstimatedTime.setText("Undefined");
         }
     }
-
+    
     @FXML
     private void handleInsertCustomItem(ActionEvent event)
     {
         PopUp.display();
         listViewSorted.getItems().add(PopUp.getInputText());
     }
-
+    
     @FXML
     private void handleDeleteSelectedItem(ActionEvent event)
     {
@@ -826,7 +827,7 @@ public class MainWindowController implements Initializable
         System.out.println(listViewSorted.getItems().get(0).length());
         listViewSorted.refresh();
     }
-
+    
     @FXML
     private void taskWindow(ActionEvent event)
     {
@@ -851,7 +852,7 @@ public class MainWindowController implements Initializable
             alert.setContentText(ex.getMessage());
             alert.show();
         }
-
+        
     }
 
     // Saves log.
