@@ -55,6 +55,7 @@ public class MainWindowController implements Initializable
     private String filePath;
     private Label[] labels;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
     //<editor-fold defaultstate="collapsed" desc="Split Pane Unused">
     @FXML
@@ -126,16 +127,16 @@ public class MainWindowController implements Initializable
     private TextField txtFieldConfig;
     @FXML
     private MenuItem menuItemInstructions;
-//</editor-fold>
-    private Boolean movable = false;
-    private Boolean isChecked = false;
-    private Boolean ListViewInFocus = false;
-    private Integer currentIndex;
     @FXML
     private Button btnDeleteSelected;
     @FXML
     private MenuItem fileLoader;
+//</editor-fold>
 
+    private Boolean movable = false;
+    private Boolean isChecked = false;
+    private Boolean ListViewInFocus = false;
+    private Integer currentIndex;
     private ExecutorService exService;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
@@ -179,8 +180,7 @@ public class MainWindowController implements Initializable
     {
         try
         {
-            URL resource = Main.class
-                    .getResource("gui/view/ChangePassword.fxml");
+            URL resource = Main.class.getResource("gui/view/ChangePassword.fxml");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(resource);
             Parent root = loader.load();
@@ -303,7 +303,6 @@ public class MainWindowController implements Initializable
         {
             listTask.add(task);
         }
-
     }
 
     /**
@@ -496,7 +495,6 @@ public class MainWindowController implements Initializable
                 break;
             }
         }
-
         return cellOrder;
     }
 
@@ -575,9 +573,7 @@ public class MainWindowController implements Initializable
             @Override
             public Config fromString(String configName)
             {
-                return comboBoxConfig.getItems().stream().filter(config
-                        -> config.getName().equals(configName)).
-                        findFirst().orElse(null);
+                return comboBoxConfig.getItems().stream().filter(config -> config.getName().equals(configName)).findFirst().orElse(null);
             }
         });
     }
@@ -612,8 +608,7 @@ public class MainWindowController implements Initializable
         {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Config Error");
-            alert.setContentText("Failed to select amount of columns /n, "
-                                 + " are you sure you've selected the correct config? ");
+            alert.setContentText("Failed to select amount of columns /n, " + " are you sure you've selected the correct config? ");
         }
     }
 
@@ -655,8 +650,7 @@ public class MainWindowController implements Initializable
         try
         {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Main.class
-                    .getResource("gui/view/HelpWindow.fxml"));
+            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Shoreline | Instructions");
             stage.initModality(Modality.WINDOW_MODAL);
@@ -829,9 +823,7 @@ public class MainWindowController implements Initializable
     private void handleDeleteSelectedItem(ActionEvent event)
     {
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
-
         System.out.println(listViewSorted.getItems().get(0).length());
-
         listViewSorted.refresh();
     }
 
@@ -867,5 +859,4 @@ public class MainWindowController implements Initializable
     {
         model.saveLog(log);
     }
-
 }
