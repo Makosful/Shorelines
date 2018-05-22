@@ -21,11 +21,9 @@ import javafx.concurrent.Task;
 public interface IBLL
 {
 
-    public boolean loadFile(String path) throws BLLException;
+    public List<String> getHeaders(String path) throws BLLException;
 
-    public List<String> getHeaders() throws BLLException;
-
-    public List<Map> getValues(Map<String, String> keys) throws BLLException;
+    public List<Map> getValues(Map<String, String> keys, String path) throws BLLException;
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 

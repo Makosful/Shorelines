@@ -32,10 +32,11 @@ public interface IReader
      * @throws ReaderException If the reader fails for any reason, this
      *                         exception will be thrown.
      */
-    public boolean loadFile(String path) throws ReaderException;
-
+    //public boolean loadFile(String path) throws ReaderException;
     /**
      * This method will get the category types from the loaded file
+     *
+     * @param path
      *
      * @return Returns a List of all the categories from the file, as Strings
      *
@@ -45,13 +46,14 @@ public interface IReader
      * @throws ReaderException If the categories fail to be retrived for any
      *                         reason, this exception will be thrown
      */
-    public List<String> getHeaders() throws ReaderException;
+    public List<String> getHeaders(String path) throws ReaderException;
 
     /**
      * Retrive the values from the loaded file
      *
      * @param keys A map with the static output JSON key as the key value, and
      *             the category to pair with that key as the value
+     * @param path
      *
      * @return Returns a list of Maps mapped for the JSON output
      *
@@ -63,6 +65,6 @@ public interface IReader
      * @throws ReaderException If anything goes wrong, this method will be
      *                         thrown
      */
-    public List<Map> getValues(Map<String, String> keys) throws ReaderException;
+    public List<Map> getValues(Map<String, String> keys, String path) throws ReaderException;
 
 }

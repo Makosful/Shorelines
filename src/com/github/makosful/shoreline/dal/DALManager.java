@@ -36,12 +36,17 @@ import javax.mail.MessagingException;
 public class DALManager implements IDAL
 {
 
-    private ReaderFactory readerFactory;
+    // Reader
+    private final ReaderFactory readerFactory;
     private IReader reader;
-    private StoreLogIn storeLogIn;
-    private ConfigDAO cDAO;
-    private LogDBDAO lDAO;
-    private JsonWriter jWriter;
+
+    // Writers
+    private final StoreLogIn storeLogIn;
+    private final JsonWriter jWriter;
+
+    // DAO
+    private final ConfigDAO cDAO;
+    private final LogDBDAO lDAO;
     private final UserDAO user;
 
     public DALManager()
@@ -55,19 +60,6 @@ public class DALManager implements IDAL
     }
 
     //<editor-fold defaultstate="collapsed" desc="Core File In">
-    @Override
-    public boolean fileLoad(String path) throws DALException
-    {
-        try
-        {
-            return reader.loadFile(path);
-        }
-        catch (ReaderException ex)
-        {
-            throw new DALException(ex.getLocalizedMessage(), ex);
-        }
-    }
-
     @Override
     public void setReader(String path) throws DALException
     {
@@ -83,11 +75,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public List<String> fileGetHeader() throws DALException
+    public List<String> fileGetHeader(String path) throws DALException
     {
         try
         {
-            return reader.getHeaders();
+            return reader.getHeaders(path);
         }
         catch (ReaderException ex)
         {
@@ -96,11 +88,11 @@ public class DALManager implements IDAL
     }
 
     @Override
-    public List<Map> fileGetValues(Map<String, String> map) throws DALException
+    public List<Map> fileGetValues(Map<String, String> map, String path) throws DALException
     {
         try
         {
-            return reader.getValues(map);
+            return reader.getValues(map, path);
         }
         catch (ReaderException ex)
         {
