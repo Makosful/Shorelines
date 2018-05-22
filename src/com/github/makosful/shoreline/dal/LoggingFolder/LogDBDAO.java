@@ -55,28 +55,23 @@ public class LogDBDAO implements ILog
 
     /**
      * Getting all logs from DB.
-     *
-     * @param userId
-     *
-     * @return
-     *
+     * @return ObservableList<ConversionLog> logs
      * @throws SQLException
      */
-    public ObservableList<ConversionLog> getLogs(int userId) throws SQLException
+    public ObservableList<ConversionLog> getLogs() throws SQLException
     {
         ObservableList<ConversionLog> logs = FXCollections.observableArrayList();
 
         try (Connection con = dbConnector.getConnection())
         {
-            String sql = "SELECT * FROM Logs WHERE UserId = ?";
+            String sql = "SELECT * FROM Logs";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             while (rs.next())
             {
                 ConversionLog conversionLogger = new ConversionLog();
 
-                conversionLogger.setUserId(userId);
+                conversionLogger.setUserId(rs.getInt("UserId"));
                 conversionLogger.setMessage(rs.getString("Message"));
                 conversionLogger.setFileName(rs.getString("FileName"));
                 conversionLogger.setLogType(rs.getString("LogType"));
@@ -88,6 +83,7 @@ public class LogDBDAO implements ILog
         }
         catch (SQLException ex)
         {
+            System.out.println(ex.getMessage());
             throw new SQLException(ex.getMessage());
         }
 

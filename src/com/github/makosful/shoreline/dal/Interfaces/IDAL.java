@@ -38,7 +38,7 @@ public interface IDAL
 
     public ObservableList<Config> getAllConfigs() throws DALException;
 
-    public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException;
+    public ObservableList<ConversionLog> getAllLogs() throws DALException;
 
     public void saveLog(ConversionLog conversionLog) throws DALException;
 

@@ -165,11 +165,11 @@ public class DALManager implements IDAL
 
     //<editor-fold defaultstate="collapsed" desc="Logs">
     @Override
-    public ObservableList<ConversionLog> getAllLogs(int userId) throws DALException
+    public ObservableList<ConversionLog> getAllLogs() throws DALException
     {
         try
         {
-            return lDAO.getLogs(userId);
+            return lDAO.getLogs();
         }
         catch (SQLException ex)
         {

@@ -161,7 +161,7 @@ public final class BLLManager implements IBLL
     @Override
     public ObservableList<ConversionLog> getAllLogs() throws BLLException
     {
-        return log.getAllLogs(0);
+        return log.getAllLogs();
     }
 
     @Override

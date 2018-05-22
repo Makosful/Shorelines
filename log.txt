@@ -2294,3 +2294,19 @@ File: MOCK_DATA.csv
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Tue May 22 14:37:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 14:46:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+

@@ -52,11 +52,11 @@ public class Log
      * @return
      * @throws BLLException 
      */
-    public ObservableList<ConversionLog> getAllLogs(int userId) throws BLLException
+    public ObservableList<ConversionLog> getAllLogs() throws BLLException
     {
         try
         {
-            return dal.getAllLogs(userId);
+            return dal.getAllLogs();
         }
         catch (DALException ex)
         {
