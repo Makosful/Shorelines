@@ -8,18 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
    <children>
       <BorderPane prefHeight="397.0" prefWidth="351.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
             <AnchorPane prefHeight="75.0" prefWidth="604.0">
                <children>
-                  <Label fx:id="lblInstructions" text="The documentation / instructions will be listed here." textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
-                     <padding>
-                        <Insets left="5.0" right="5.0" />
-                     </padding></Label>
+                  <Label fx:id="lblInstructions" text="The documentation / instructions will be listed here." AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -34,9 +30,9 @@
             </Pane>
          </left>
          <right>
-            <Pane maxWidth="32.0" prefHeight="415.0" prefWidth="32.0" BorderPane.alignment="CENTER">
+            <Pane maxWidth="32.0" prefHeight="421.0" prefWidth="32.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnNextPic" layoutX="7.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleNextPicture" text="▶">
+                  <Button fx:id="btnNextPic" layoutX="3.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleNextPicture" text="▶">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -45,25 +41,14 @@
             </Pane>
          </right>
          <center>
-            <AnchorPane fx:id="imageViewPane" minHeight="405.0" minWidth="541.0" prefHeight="405.0" prefWidth="541.0" BorderPane.alignment="CENTER">
+            <AnchorPane BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imageView" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ImageView fx:id="imageView" fitHeight="425.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
                      <viewport>
-                        <Rectangle2D />
+                        <Rectangle2D height="425.0" width="540.0" />
                      </viewport>
                   </ImageView>
-                  <VBox layoutX="258.0" layoutY="392.0" AnchorPane.bottomAnchor="-25.0">
-                     <children>
-                        <Label fx:id="lblimgDisplay" textAlignment="CENTER">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding></Label>
-                     </children>
-                  </VBox>
                </children>
-               <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </BorderPane.margin>
             </AnchorPane>
          </center>
       </BorderPane>
