@@ -208,8 +208,8 @@ public class TaskManagerWindowController implements Initializable
                         if (!runningTasks.isEmpty())
                         {
 
-                            Task get = runningTasks.get(0);
-                            get.run();
+                            Task task = runningTasks.get(0);
+                            task.run();
                         }
 
                     }
