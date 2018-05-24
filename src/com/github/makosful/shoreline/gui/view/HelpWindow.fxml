@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="615.0" stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
    <children>
       <BorderPane prefHeight="397.0" prefWidth="351.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
@@ -29,14 +29,14 @@
          <left>
             <Pane maxWidth="32.0" prefHeight="421.0" prefWidth="32.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnPrevPic" layoutX="2.0" layoutY="195.0" mnemonicParsing="false" onAction="#handlePreviousPicture" text="◀" />
+                  <Button id="btn-hover-left" fx:id="btnPrevPic" layoutX="2.0" layoutY="195.0" mnemonicParsing="false" onAction="#handlePreviousPicture" text="◀" />
                </children>
             </Pane>
          </left>
          <right>
             <Pane maxWidth="32.0" prefHeight="415.0" prefWidth="32.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnNextPic" layoutX="7.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleNextPicture" text="▶">
+                  <Button id="btn-hover-right" fx:id="btnNextPic" layoutX="7.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleNextPicture" text="▶">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

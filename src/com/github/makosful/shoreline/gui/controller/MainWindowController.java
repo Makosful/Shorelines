@@ -862,8 +862,7 @@ public class MainWindowController implements Initializable
     {
         try
         {
-            FXMLLoader fxLoader = new FXMLLoader(Main.class
-                    .getResource("gui/view/TaskManagerWindow.fxml"));
+            FXMLLoader fxLoader = new FXMLLoader(Main.class.getResource("gui/view/TaskManagerWindow.fxml"));
             Parent root = fxLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Task Handling");

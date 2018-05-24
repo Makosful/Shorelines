@@ -73,6 +73,40 @@
     -fx-text-fill: black;
 }
 
+#btn-hover-left {
+    -fx-border-radius: 15 0 0 15;
+    -fx-background-radius: 15 0 0 15; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 1 0 1 1;
+    -fx-background-color: #616161;
+    -fx-text-fill: #0C8AB8;
+}
+#btn-hover-left:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: black;
+}
+#btn-hover-left:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: black;
+}
+
+#btn-hover-right {
+    -fx-border-radius: 0 15 15 0;
+    -fx-background-radius: 0 15 15 0; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 1 1 1 0;
+    -fx-background-color: #616161;
+    -fx-text-fill: #0C8AB8;
+}
+#btn-hover-right:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: black;
+}
+#btn-hover-right:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: black;
+}
+
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: transparent;
 }
