@@ -102,7 +102,9 @@ public class LoginController implements Initializable
         }
         catch (BLLException ex)
         {
-
+            System.out.println("This is not supposed to give an alert"
+                    + "it is optional - based on whether user has"
+                    + "saved account or not");
         }
     }
 
