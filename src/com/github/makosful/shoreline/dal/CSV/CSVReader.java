@@ -47,11 +47,52 @@ public class CSVReader implements IReader
         int i = 0;
         for (String cell : record.get(0))
         {
+            cell = RenameDuplicateHeaderNames(record.get(0), cell, i);
+            
             list.add(cell);
             headers.put(cell, i++);
         }
 
         return list;
+    }
+
+    /**
+     * To avoid duplicate header names, it renames them by adding a number representing
+     * the times the duplicate name has appeared previously 
+     * @param record
+     * @param cell
+     * @param i
+     * @return 
+     */
+    private String RenameDuplicateHeaderNames(CSVRecord record, String cell, int i)
+    {
+        int q = 0;
+        int numberOfIdenticalCellsBefore = 0;
+        boolean identicalCellsAfterAndNoneBefore = false;
+        for (String cellCheck : record)
+        {
+            if(cell.equals(cellCheck))
+            {
+                if(q < i)
+                {
+                    numberOfIdenticalCellsBefore++;
+                }
+                else if(q > i && numberOfIdenticalCellsBefore == 0)
+                {
+                    identicalCellsAfterAndNoneBefore = true;
+                }
+            }
+            q++;
+        }
+        if(numberOfIdenticalCellsBefore > 0)
+        {
+            cell = cell+(numberOfIdenticalCellsBefore+1);
+        }
+        else if(identicalCellsAfterAndNoneBefore)
+        {
+            cell = cell+1;
+        }
+        return cell;
     }
 
     @Override

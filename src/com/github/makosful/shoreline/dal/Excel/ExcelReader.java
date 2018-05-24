@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
+import org.apache.commons.csv.CSVRecord;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
@@ -98,7 +99,8 @@ public class ExcelReader implements IReader
                 cell = row.getCell((short) c);
                 if (cell != null)
                 {
-                    list.add(cell.getStringCellValue());
+                    String cellValue = RenameDuplicateHeaderNames(row, cell.getStringCellValue(), c);
+                    list.add(cellValue);
                 }
             }
         }
@@ -159,8 +161,9 @@ public class ExcelReader implements IReader
                     cell = row.getCell((short) c);
                     if (cell != null)
                     {
+                        String cellValue = RenameDuplicateHeaderNames(row, cell.getStringCellValue(), c);
                         headers.put(
-                                cell.getStringCellValue(),
+                                cellValue,
                                 cell.getAddress().getColumn()
                         );
                     }
@@ -215,6 +218,46 @@ public class ExcelReader implements IReader
             return cell.getStringCellValue();
         }
         return cellValue;
+    }
+    
+    /**
+     * To avoid duplicate header names, it renames them by adding a number representing
+     * the times the duplicate name has appeared previously 
+     * @param record
+     * @param cell
+     * @param i
+     * @return 
+     */
+    private String RenameDuplicateHeaderNames(Row row, String cell, int i)
+    {
+        int q = 0;
+        int numberOfIdenticalCellsBefore = 0;
+        boolean identicalCellsAfterAndNoneBefore = false;
+       
+        for (Cell cellCheck : row)
+        {
+            if(cell.equals(cellCheck.getStringCellValue()))
+            {
+                if(q < i)
+                {
+                    numberOfIdenticalCellsBefore++;
+                }
+                else if(q > i && numberOfIdenticalCellsBefore == 0)
+                {
+                    identicalCellsAfterAndNoneBefore = true;
+                }
+            }
+            q++;
+        }
+        if(numberOfIdenticalCellsBefore > 0)
+        {
+            cell = cell+(numberOfIdenticalCellsBefore+1);
+        }
+        else if(identicalCellsAfterAndNoneBefore)
+        {
+            cell = cell+1;
+        }
+        return cell;
     }
 
 }
