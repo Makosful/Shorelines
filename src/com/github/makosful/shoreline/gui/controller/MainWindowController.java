@@ -543,37 +543,40 @@ public class MainWindowController implements Initializable
         fileName = file.getName().split("\\.")[0];
         filePath = file.getAbsolutePath();
 
-//        exService.execute(()->
-        model.loadFile(file.getAbsolutePath());
-        chklistSelectData.setItems(model.getCategories());
-        AddListeners();
-
-        //Set file name to log, which will be saved later
-        log.setFileName(file.getName());
-
-        model.loadFile(file.getAbsolutePath());
-        if (!model.isFileNull())
+        exService.execute(() ->
         {
-            Platform.runLater(() ->
+            model.loadFile(file.getAbsolutePath());
+            chklistSelectData.setItems(model.getCategories());
+            AddListeners();
+
+            //Set file name to log, which will be saved later
+            log.setFileName(file.getName());
+
+            model.loadFile(file.getAbsolutePath());
+            if (!model.isFileNull())
             {
-                chklistSelectData.setItems(model.getCategories());
-                AddListeners();
-                listViewSorted.getItems().clear();
-                setLog("No errors occured, filed loaded successfully", "Conversion");
-                model.saveLog(log);
-            });
-        }
-        else
-        {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Reading File Error");
-            alert.setContentText(model.getErrorMessageProperty().getValue());
-            alert.show();
+                Platform.runLater(() ->
+                {
+                    chklistSelectData.setItems(model.getCategories());
+                    AddListeners();
+                    listViewSorted.getItems().clear();
+                    setLog("No errors occured, filed loaded successfully", "Conversion");
+                    model.saveLog(log);
+                });
+            }
+            else
+            {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Reading File Error");
+                alert.setContentText(model.getErrorMessageProperty().getValue());
+                alert.show();
 
-            setLog("An error occured while loading file for conversion, "
-                   + model.getErrorMessageProperty().getValue(), "Error");
-            model.saveLog(log);
-        }
+                setLog("An error occured while loading file for conversion, "
+                       + model.getErrorMessageProperty().getValue(), "Error");
+                model.saveLog(log);
+            }
+        });
+
     }
 
     /**
