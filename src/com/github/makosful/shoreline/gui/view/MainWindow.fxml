@@ -32,12 +32,12 @@
                <children>
                   <HBox spacing="10.0">
                      <children>
-                              <ComboBox fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" />
-                              <TextField fx:id="txtFieldConfig" promptText="Name of config.." />
+                              <ComboBox fx:id="comboBoxConfig" promptText="Select a configuration" />
+                              <TextField fx:id="txtFieldConfig" prefHeight="31.0" prefWidth="164.0" promptText="Name of config.." />
                               <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" />
                      </children>
                      <HBox.margin>
-                        <Insets right="65.0" />
+                        <Insets right="40.0" />
                      </HBox.margin>
                   </HBox>
                   <HBox spacing="10.0">
