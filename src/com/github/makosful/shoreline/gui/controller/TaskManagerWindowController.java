@@ -10,8 +10,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -26,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Modality;
@@ -56,9 +55,9 @@ public class TaskManagerWindowController implements Initializable
     private Boolean allRunningTasksSelected;
     private Boolean allTasksSelected;
     @FXML
-    private JFXButton stopSelectedTasks;
+    private Button stopSelectedTasks;
     @FXML
-    private JFXButton btnPauseResume;
+    private Button btnPauseResume;
 
     /**
      * Initializes the controller class.
@@ -224,7 +223,7 @@ public class TaskManagerWindowController implements Initializable
         }
         catch (InterruptedException ex)
         {
-            Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            makeErrorAlert("Thread Error", "An error has occured", "Close window and open again.");
         }
     }
 
