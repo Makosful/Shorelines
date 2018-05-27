@@ -496,6 +496,8 @@ public class MainWindowController implements Initializable
             String col = listOfStrings.get(i);
             cellOrder.put(hashmapStrings[i], col);
 
+             // No more than 15 columns, allowed. 
+             // Incase user selects more than 15.
             if (i == 14)
             {
                 break;
