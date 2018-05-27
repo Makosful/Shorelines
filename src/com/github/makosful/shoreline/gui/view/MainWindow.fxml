@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
@@ -30,31 +30,11 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="New" />
                         <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Open…" />
-                        <Menu mnemonicParsing="false" text="Open Recent" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
-                        <MenuItem mnemonicParsing="false" text="Revert" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Preferences…" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                         <MenuItem mnemonicParsing="false" text="Quit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Undo" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Cut" />
-                        <MenuItem mnemonicParsing="false" text="Copy" />
-                        <MenuItem mnemonicParsing="false" text="Paste" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Select All" />
-                        <MenuItem mnemonicParsing="false" text="Unselect All" />
                     </items>
                 </Menu>
             <Menu mnemonicParsing="false" text="View">
@@ -189,7 +169,7 @@
                                         <Color blue="0.624" green="0.624" red="0.624" fx:id="x211" />
                                     </textFill>
                                 </Label>
-                                <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="491.0" prefWidth="222.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
+                                <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="485.0" prefWidth="235.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane>
@@ -202,14 +182,30 @@
                                         <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
                                     </textFill>
                                 </Label>
-                                <ListView fx:id="listViewSorted" layoutX="-1.0" layoutY="36.0" prefHeight="484.0" prefWidth="235.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
+                                <ListView fx:id="listViewSorted" layoutY="36.0" prefHeight="485.0" prefWidth="235.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="36.0" />
                                 <VBox layoutX="180.0" layoutY="237.0" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="240.0">
                                     <children>
-                                        <Button fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲" />
+                                        <Button fx:id="btnMoveUp" mnemonicParsing="false" onAction="#handleMoveItemUp" text="▲">
+                                 <VBox.margin>
+                                    <Insets bottom="2.0" />
+                                 </VBox.margin></Button>
                                         <Button fx:id="btnMoveDown" mnemonicParsing="false" onAction="#handleMoveItemDown" text="▼" />
                                     </children>
                                 </VBox>
-                        <Button layoutX="-1.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleRemoveItem" prefHeight="30.0" prefWidth="235.0" text="Remove selected item" />
+                        <HBox layoutX="-1.0" layoutY="523.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#handleInsertCustom" text="Insert Custom">
+                                 <HBox.margin>
+                                    <Insets right="40.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#handleRemoveItem" text="Remove selected">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                             </children>
                         </AnchorPane>
                </children>
