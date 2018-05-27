@@ -1,5 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.be.PopUp;
 import com.github.makosful.shoreline.Main;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
@@ -718,7 +719,8 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleInsertCustom(ActionEvent event)
     {
-
+        PopUp.display();
+        listViewSorted.getItems().add(PopUp.getInputText());
     }
 
 }
