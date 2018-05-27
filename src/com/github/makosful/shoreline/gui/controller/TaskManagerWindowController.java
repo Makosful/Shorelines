@@ -67,7 +67,13 @@ public class TaskManagerWindowController implements Initializable
         booleanInitialization();
         threadInitialization();
         listViewsListeners();
+        btnDisableStart();
+    }
+
+    public void btnDisableStart()
+    {
         btnPauseResume.setDisable(true);
+        stopSelectedTasks.setDisable(true);
     }
 
     /**
@@ -196,33 +202,47 @@ public class TaskManagerWindowController implements Initializable
             {
                 while (!runningTasks.isEmpty() && !pause.getValue())
                 {
-                    try
-                    {
-                        Thread.sleep(1000);
-                    }
-                    catch (InterruptedException ex)
-                    {
-                        Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    try
-                    {
-                        if (!runningTasks.isEmpty())
-                        {
-
-                            Task task = runningTasks.get(0);
-                            task.run();
-                        }
-
-                    }
-                    catch (IndexOutOfBoundsException ex)
-                    {
-                        ex.printStackTrace();
-                    }
+                    threadSleep();
+                    runTaskInRow();
 
                 }
             }
 
         });
+    }
+    /**
+     * Making the thread sleep for 1 sec.
+     */
+    public void threadSleep()
+    {
+        try
+        {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException ex)
+        {
+            Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    /**
+     * Running the tasks in correct row.
+     */
+    public void runTaskInRow()
+    {
+        try
+        {
+            if (!runningTasks.isEmpty())
+            {
+
+                Task task = runningTasks.get(0);
+                task.run();
+            }
+
+        }
+        catch (IndexOutOfBoundsException ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     /**
