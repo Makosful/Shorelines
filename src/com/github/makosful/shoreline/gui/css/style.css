@@ -3,3 +3,49 @@
     -fx-border-width: 2px;
     -fx-border-color: transparent;
 }
+
+.root
+{
+    -fx-background-color: gray;
+}
+
+.label
+{
+    -fx-text-fill: #ffffff;
+}
+
+.list-view
+{
+    -fx-background-color: lightgray;
+}
+
+.button
+{
+    -fx-background-color: #666666;
+    -fx-text-fill: #d3caca;
+}
+
+.button:hover
+{
+    -fx-background-color: #009933;
+}
+
+.menu-bar
+{
+    -fx-background-color: gray;
+}
+
+.combo-box
+{
+    -fx-background-color: #666666;
+}
+
+.context-menu
+{
+    -fx-background-color: gray;
+}
+
+.combo-box .list-view
+{
+    -fx-background-color: gray;
+}
