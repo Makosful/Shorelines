@@ -32,14 +32,14 @@
 
 .button:hover
 {
-    -fx-background-color: #009933;
+    -fx-background-color: #3300ff;
     -fx-opacity: 0.6;
 }
 
 .button:pressed
 {
     -fx-font-weight:bold;
-    -fx-background-color: #009933;
+    -fx-background-color: #3300ff;
     -fx-opacity: 0.2;
 }
 
