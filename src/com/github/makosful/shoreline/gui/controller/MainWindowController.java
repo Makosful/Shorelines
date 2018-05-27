@@ -715,4 +715,10 @@ public class MainWindowController implements Initializable
         listViewSorted.getItems().remove(listViewSorted.getSelectionModel().getSelectedItem());
     }
 
+    @FXML
+    private void handleInsertCustom(ActionEvent event)
+    {
+
+    }
+
 }

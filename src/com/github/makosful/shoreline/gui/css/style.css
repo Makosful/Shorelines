@@ -18,12 +18,10 @@
 {
     -fx-background-color: lightgray;
 }
-
 .list-view .cell
 {
     -fx-background-color: lightgray;
 }
-
 .list-view .list-cell:selected
 {
     -fx-background-color: #3366ff;
@@ -32,38 +30,32 @@
 
 .button
 {
-    -fx-background-color: #666666;
-    -fx-text-fill: #d3caca;
+    -fx-background-color: #0C6076;
+    -fx-text-fill: white;
 }
-
 .button:hover
 {
-    -fx-background-color: #3300ff;
-    -fx-opacity: 0.6;
+    -fx-background-color: #094c5e;
+    -fx-opacity: 0.5;
 }
-
 .button:pressed
 {
-    -fx-font-weight:bold;
-    -fx-background-color: #3300ff;
-    -fx-opacity: 0.2;
+    -fx-background-color: #073946;
+    -fx-opacity: 0.5;
 }
 
 .menu-bar
 {
     -fx-background-color: gray;
 }
-
 .combo-box
 {
     -fx-background-color: #666666;
 }
-
 .context-menu
 {
     -fx-background-color: gray;
 }
-
 .combo-box .list-view
 {
     -fx-background-color: gray;

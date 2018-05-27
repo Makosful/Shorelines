@@ -62,23 +62,23 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
          <children>
-                <ButtonBar buttonMinWidth="150.0" buttonOrder="L+A+U+R">
+                <ButtonBar buttonMinWidth="50.0" buttonOrder="L+A_U_N+H+Y">
                     <buttons>
-                        <Button fx:id="btnChecklistCheck" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" ButtonBar.buttonData="LEFT" />
-                        <ComboBox fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="LEFT" />
-                        <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add Task" ButtonBar.buttonData="APPLY" />
-                        <TextField fx:id="txtFieldConfig" ButtonBar.buttonData="RIGHT" />
-                        <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="RIGHT" />
-                  <Button mnemonicParsing="false" onAction="#taskWindow" text="Handle Tasks" />
+                        <Button fx:id="btnChecklistCheck" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" ButtonBar.buttonData="LEFT"/>
+                        <ComboBox fx:id="comboBoxConfig" prefWidth="150.0" promptText="Configuration" ButtonBar.buttonData="APPLY"/>
+                        <TextField fx:id="txtFieldConfig" ButtonBar.buttonData="OTHER"/>
+                        <Button mnemonicParsing="false" onAction="#handleBtnSaveConfig" text="Save configuration" ButtonBar.buttonData="NO"/>
+                        <Button fx:id="btnConvert" mnemonicParsing="false" onAction="#handleConversion" text="Add Task" ButtonBar.buttonData="HELP"/>
+                        <Button mnemonicParsing="false" onAction="#taskWindow" text="Handle Tasks" ButtonBar.buttonData="YES"/>
                     </buttons>
                 </ButtonBar>
          </children>
       </VBox>
     </bottom>
    <right>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="554.0" prefWidth="490.0" BorderPane.alignment="CENTER">
+            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="555.0" prefWidth="400.0" BorderPane.alignment="CENTER">
                 <children>
-                    <VBox alignment="CENTER" disable="true" layoutX="4.0" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <VBox alignment="CENTER" disable="true" layoutX="4.0" layoutY="4.0" prefWidth="340.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
                             <Label alignment="CENTER" style="&#10;" text="Output Example (JSON)" textAlignment="CENTER" wrapText="false">
                                 <font>
