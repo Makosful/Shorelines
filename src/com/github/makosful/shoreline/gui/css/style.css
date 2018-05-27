@@ -24,6 +24,12 @@
     -fx-background-color: lightgray;
 }
 
+.list-view .list-cell:selected
+{
+    -fx-background-color: #3366ff;
+     -fx-text-fill: white;
+}
+
 .button
 {
     -fx-background-color: #666666;
