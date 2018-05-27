@@ -47,7 +47,7 @@ public class HelpWindowModel
     {
         for (int i = 0; i < 5; i++)
         {
-            images.add(new Image("./res/instruction" + i + ".png"));
+            images.add(new Image("./res/instructions" + i + ".png"));
         }
         return images;
     }
