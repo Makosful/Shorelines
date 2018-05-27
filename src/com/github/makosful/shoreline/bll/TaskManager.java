@@ -17,11 +17,6 @@ public class TaskManager
     private IDAL dalManager;
     private Task task;
 
-    public TaskManager()
-    {
-
-    }
-
     public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException
     {
         String fPath = filePath;
@@ -43,7 +38,6 @@ public class TaskManager
                 {
                     List<Map> list = dalManager.fileGetValues(fMap, fPath);
                     dalManager.createFile(list, fName);
-                    System.out.println(" i do not runna");
                 }
                 catch (DALException ex)
                 {
