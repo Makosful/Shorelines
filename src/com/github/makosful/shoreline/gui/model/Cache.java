@@ -1,5 +1,9 @@
 package com.github.makosful.shoreline.gui.model;
 
+import com.github.makosful.shoreline.be.User;
+import com.github.makosful.stage.entities.Docking;
+import com.github.makosful.stage.utils.StageManager;
+
 /**
  * This Model class will serve as a data cache, storing data that should be
  * shared between Model classes.
@@ -26,8 +30,75 @@ public class Cache
     }
     //</editor-fold>
 
+    private StageManager stageManager;
+    private User user;
+
     // Singleton constructor
     private Cache()
     {
     }
+
+    //<editor-fold defaultstate="collapsed" desc="StageManager">
+    public void setStageManager(StageManager stageManager)
+    {
+        this.stageManager = stageManager;
+    }
+
+    public StageManager getStageManager()
+    {
+        return this.stageManager;
+    }
+
+    public void clearStageManager()
+    {
+        this.stageManager = null;
+    }
+
+    public void changeScene(int sceneId)
+    {
+        this.stageManager.setActiveScene(sceneId);
+        this.stageManager.getPlacementUtil().alignStage(this.stageManager.getStage(), Docking.CENTER);
+    }
+
+    public Object getSceneController()
+    {
+        return this.stageManager.getController();
+    }
+
+    public enum Scenes
+    {
+        Main(0),
+        Login(1),
+        SignUp(2);
+
+        private final int id;
+
+        Scenes(int id)
+        {
+            this.id = id;
+        }
+
+        public int getValue()
+        {
+            return this.id;
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="User">
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public User getUser()
+    {
+        return this.user;
+    }
+
+    public void clearUser()
+    {
+        this.user = null;
+    }
+    //</editor-fold>
 }

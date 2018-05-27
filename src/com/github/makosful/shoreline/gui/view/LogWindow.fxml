@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="511.0" prefWidth="791.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.LogWindowController">
+   <center>
+      <TabPane fx:id="tabPane" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Full Log">
+               <content>
+                  <TableView fx:id="tblFullLog" prefHeight="435.0" prefWidth="666.0">
+                    <columns>
+                        <TableColumn fx:id="date" prefWidth="106.39999389648438" text="Date" />
+                        <TableColumn fx:id="userId" prefWidth="56.79998779296875" text="UserId" />
+                        <TableColumn fx:id="type" prefWidth="149.5999755859375" text="Type" />
+                        <TableColumn fx:id="message" prefWidth="297.60003662109375" text="Message" />
+                        <TableColumn fx:id="name" minWidth="0.0" prefWidth="179.9999877929688" text="FileName" />
+                    </columns>
+                  </TableView>
+               </content>
+            </Tab>
+          <Tab text="Errors">
+               <content>
+                  <TableView fx:id="tblErrorLog" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn fx:id="errorDate" prefWidth="122.4000244140625" text="Date" />
+                        <TableColumn fx:id="errorUserId" prefWidth="84.0" text="UserId" />
+                        <TableColumn fx:id="errorMessage" prefWidth="407.199951171875" text="Message" />
+                        <TableColumn fx:id="errorName" minWidth="7.20001220703125" prefWidth="174.39996337890625" text="FileName" />
+                    </columns>
+                  </TableView>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <ButtonBar BorderPane.alignment="CENTER">
+        <buttons>
+            <VBox prefHeight="35.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="18.0" prefWidth="222.0">
+                     <children>
+                        <CheckBox mnemonicParsing="false" onAction="#handleCheckBox" prefHeight="18.0" prefWidth="119.0" text="UserId" />
+                        <CheckBox mnemonicParsing="false" onAction="#handleCheckBox" text="LogType" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="26.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox mnemonicParsing="false" onAction="#handleCheckBox" prefHeight="18.0" prefWidth="119.0" text="Message" />
+                        <CheckBox mnemonicParsing="false" onAction="#handleCheckBox" text="FileName" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <TextField fx:id="txtFieldSearch" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="211.0" promptText="Search">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+          <Button fx:id="btnClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="26.0" prefWidth="248.0" text="Close" />
+        </buttons>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </ButtonBar>
+   </bottom>
+</BorderPane>

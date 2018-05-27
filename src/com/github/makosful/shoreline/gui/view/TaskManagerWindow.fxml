@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="anchorPane" prefHeight="463.0" prefWidth="640.0" stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.TaskManagerWindowController">
+   <children>
+      <VBox layoutX="46.0" layoutY="35.0" prefHeight="367.0" prefWidth="257.0">
+         <children>
+            <ListView fx:id="taskListView" prefHeight="393.0" prefWidth="257.0" style="-fx-background-color: #A0A0A0;" />
+         </children>
+      </VBox>
+      <VBox layoutX="324.0" layoutY="35.0" prefHeight="367.0" prefWidth="257.0">
+         <children>
+            <ListView fx:id="runningListView" prefHeight="595.0" prefWidth="257.0" style="-fx-background-color: #A0A0A0;" />
+         </children>
+      </VBox>
+      <Label alignment="CENTER" layoutX="109.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Task List" />
+      <Label alignment="CENTER" layoutX="387.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Running Tasks" />
+      <JFXButton id="btn-hover" layoutX="170.0" layoutY="436.0" onAction="#convertSelectedTasks" text="Convert Selected Tasks" />
+      <JFXButton id="btn-hover" layoutX="14.0" layoutY="437.0" onAction="#removeSelectedTasks" text="Remove Selected Tasks" />
+      <JFXButton id="btn-hover" fx:id="stopSelectedTasks" layoutX="500.0" layoutY="437.0" onAction="#stopSelectedTasks" text="Stop Selected Tasks" />
+      <JFXButton id="btn-hover" fx:id="btnPauseResume" layoutX="324.0" layoutY="437.0" onAction="#pauseResumeSelectedTasks" text="Pause/Resume Converting" />
+      <Button id="btn-hover-left" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#selectAll" text="&gt;" />
+      <Button id="btn-hover-right" layoutX="586.0" layoutY="35.0" mnemonicParsing="false" onAction="#selectAllRunning" text="&lt;" />
+   </children>
+</AnchorPane>

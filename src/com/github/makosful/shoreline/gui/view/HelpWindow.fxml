@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="500.0" prefWidth="615.0" stylesheets="@../css/MainStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.HelpWindowController">
+   <children>
+      <BorderPane prefHeight="397.0" prefWidth="351.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <AnchorPane prefHeight="75.0" prefWidth="604.0">
+               <children>
+                  <Label fx:id="lblInstructions" text="The documentation / instructions will be listed here." textAlignment="JUSTIFY" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding></Label>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
+            </AnchorPane>
+         </bottom>
+         <left>
+            <Pane maxWidth="32.0" prefHeight="421.0" prefWidth="32.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button id="btn-hover-left" fx:id="btnPrevPic" layoutX="2.0" layoutY="195.0" mnemonicParsing="false" onAction="#handlePreviousPicture" text="◀" />
+               </children>
+            </Pane>
+         </left>
+         <right>
+            <Pane maxWidth="32.0" prefHeight="415.0" prefWidth="32.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button id="btn-hover-right" fx:id="btnNextPic" layoutX="7.0" layoutY="195.0" mnemonicParsing="false" onAction="#handleNextPicture" text="▶">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+               </children>
+            </Pane>
+         </right>
+         <center>
+            <AnchorPane fx:id="imageViewPane" minHeight="405.0" minWidth="541.0" prefHeight="405.0" prefWidth="541.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imageView" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <VBox layoutX="258.0" layoutY="392.0" AnchorPane.bottomAnchor="-25.0">
+                     <children>
+                        <Label fx:id="lblimgDisplay" textAlignment="CENTER">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding></Label>
+                     </children>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </BorderPane.margin>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

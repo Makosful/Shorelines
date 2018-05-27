@@ -1,0 +1,2755 @@
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 2
+Message: hej
+File: filename
+Message:test
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 08 18:48:34 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 09 12:05:16 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 09 12:05:32 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 09 13:18:44 CEST 2018
+User id: 0
+Message: Message
+File: Import_data.xlsx
+Message:Conversion, no errors occured
+=======
+Log Date: null
+User id: 0
+Message: No errors occured
+File: Import_data.xlsx
+Message:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 0
+Message: No errors occured
+File: Import_data.xlsx
+Message:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: null
+User id: 0
+Message: No errors occured
+File: Import_data.xlsx
+Message:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 03:44:57 CEST 2018
+User id: 0
+Message: No errors occured
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 04:11:57 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 04:13:20 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 04:17:45 CEST 2018
+User id: 0
+Message: An error occured while saving configuration, something went wrong
+File: Import_data.xlsx
+LogType:Configuration
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 05:25:22 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 05:26:16 CEST 2018
+User id: 0
+Message: No errors occured, saved configuration successfully
+File: Import_data.xlsx
+LogType:Configuration
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 05:27:13 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 18:55:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 18:57:07 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 18:58:14 CEST 2018
+User id: 0
+Message: No errors occured, saved configuration successfully
+File: Import_data.xlsx
+LogType:Configuration
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Fri May 11 19:02:56 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, The filetype 'jpg' is not valid
+File: bi_1080p.jpg
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Sat May 12 23:24:00 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Mon May 14 00:40:57 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+>>>>>>> 346f0a3eaa98ebea34149e60bd256af9612e2b07
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 13:42:02 CEST 2018
+=======
+Log Date: Tue May 15 11:10:51 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 17:00:35 CEST 2018
+=======
+Log Date: Tue May 15 11:11:25 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 17:46:15 CEST 2018
+=======
+Log Date: Tue May 15 11:16:06 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 17:55:51 CEST 2018
+=======
+Log Date: Tue May 15 11:30:01 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 18:04:16 CEST 2018
+=======
+Log Date: Tue May 15 11:31:09 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 19:03:24 CEST 2018
+=======
+Log Date: Tue May 15 11:52:43 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 19:04:41 CEST 2018
+=======
+Log Date: Tue May 15 11:56:52 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 19:05:15 CEST 2018
+=======
+Log Date: Tue May 15 11:57:15 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:01:19 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:01:29 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:02:30 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:02:35 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:04:26 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 19:35:23 CEST 2018
+=======
+Log Date: Tue May 15 12:04:31 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:06:08 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 19:37:16 CEST 2018
+=======
+Log Date: Tue May 15 12:06:14 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:10:00 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 19:40:26 CEST 2018
+=======
+Log Date: Tue May 15 12:10:06 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:37:43 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Tue May 15 21:15:30 CEST 2018
+=======
+Log Date: Tue May 15 12:37:48 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:37:55 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:40:43 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 12:13:05 CEST 2018
+=======
+Log Date: Tue May 15 12:40:49 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:42:46 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 12:18:39 CEST 2018
+=======
+Log Date: Tue May 15 12:42:52 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:50:14 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 12:46:28 CEST 2018
+=======
+Log Date: Tue May 15 12:50:21 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 12:57:20 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 13:44:26 CEST 2018
+=======
+Log Date: Tue May 15 12:57:25 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:06:56 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:08:11 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 13:48:33 CEST 2018
+=======
+Log Date: Tue May 15 13:08:18 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:09:20 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:10:16 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 13:49:06 CEST 2018
+=======
+Log Date: Tue May 15 13:10:43 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:37:21 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:37:29 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:00:36 CEST 2018
+=======
+Log Date: Tue May 15 13:40:00 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:02:36 CEST 2018
+=======
+Log Date: Tue May 15 13:40:45 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:03:07 CEST 2018
+=======
+Log Date: Tue May 15 13:41:28 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:09:26 CEST 2018
+=======
+Log Date: Tue May 15 13:41:56 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:42:15 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:46:39 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:23:38 CEST 2018
+=======
+Log Date: Tue May 15 13:46:44 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:47:40 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:30:22 CEST 2018
+=======
+Log Date: Tue May 15 13:47:45 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:49:19 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:49:40 CEST 2018
+=======
+Log Date: Tue May 15 13:49:24 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:50:35 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:50:31 CEST 2018
+=======
+Log Date: Tue May 15 13:51:08 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:52:48 CEST 2018
+=======
+Log Date: Tue May 15 13:51:12 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:52:17 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 14:56:13 CEST 2018
+=======
+Log Date: Tue May 15 13:52:20 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:53:31 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 15:04:27 CEST 2018
+=======
+Log Date: Tue May 15 13:53:36 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:54:06 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Wed May 16 15:05:53 CEST 2018
+=======
+Log Date: Tue May 15 13:54:10 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:55:19 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:24:31 CEST 2018
+=======
+Log Date: Tue May 15 13:55:22 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:56:52 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:28:05 CEST 2018
+=======
+Log Date: Tue May 15 13:56:56 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 13:59:27 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:31:07 CEST 2018
+=======
+Log Date: Tue May 15 13:59:39 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:02:27 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:39:57 CEST 2018
+=======
+Log Date: Tue May 15 14:02:33 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:03:17 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:41:28 CEST 2018
+=======
+Log Date: Tue May 15 14:03:22 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:06:51 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:43:13 CEST 2018
+=======
+Log Date: Tue May 15 14:06:56 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:08:04 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:46:04 CEST 2018
+=======
+Log Date: Tue May 15 14:08:10 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:08:41 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:50:28 CEST 2018
+=======
+Log Date: Tue May 15 14:08:44 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:10:29 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 11:54:05 CEST 2018
+=======
+Log Date: Tue May 15 14:10:32 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:11:08 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:02:03 CEST 2018
+=======
+Log Date: Tue May 15 14:11:12 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:11:57 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:06:15 CEST 2018
+=======
+Log Date: Tue May 15 14:12:00 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:15:25 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:10:59 CEST 2018
+=======
+Log Date: Tue May 15 14:15:29 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 15 14:26:57 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:12:05 CEST 2018
+=======
+Log Date: Tue May 15 14:27:01 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:07:45 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:15:59 CEST 2018
+=======
+Log Date: Wed May 16 10:07:53 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:08:38 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:17:35 CEST 2018
+=======
+Log Date: Wed May 16 10:08:45 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:36:53 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:40:00 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:42:09 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:42:32 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:44:15 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:44:29 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:47:08 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:48:35 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:49:07 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:50:14 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:50:29 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:53:39 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:54:33 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:54:46 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:59:03 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 10:59:13 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 11:04:32 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 11:04:44 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 11:06:11 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 11:22:42 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 11:23:04 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 13:19:06 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 13:19:19 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, The filetype 'jpg' is not valid
+File: bi_2_1080p.jpg
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 13:19:35 CEST 2018
+User id: 0
+Message: An error occured while loading file for conversion, The filetype 'xml' is not valid
+File: xmltest.xml
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:40:13 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:43:01 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:45:22 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:48:34 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:50:42 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:52:08 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:54:23 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 22:55:01 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 23:03:15 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 23:06:05 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 23:07:34 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 23:09:35 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 16 23:14:01 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 09:59:32 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:02:05 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:04:17 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:06:02 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:06:34 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:07:32 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:09:01 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:19:19 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:22:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:24:16 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:40:56 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 10:56:19 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 11:02:05 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 11:04:29 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 11:06:17 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 11:13:13 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 11:58:04 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:00:56 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:02:23 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:03:30 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:08:06 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:10:04 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:11:27 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:12:34 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:14:07 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:33:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:36:39 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:37:29 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:39:04 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:40:24 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:41:42 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:45:08 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:49:20 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:50:54 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:55:36 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:57:50 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 12:58:51 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 13:02:02 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 17 13:04:45 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:27:49 CEST 2018
+=======
+Log Date: Thu May 17 13:08:16 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:44:48 CEST 2018
+=======
+Log Date: Thu May 17 13:17:22 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:46:24 CEST 2018
+=======
+Log Date: Thu May 17 13:27:00 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 12:55:51 CEST 2018
+=======
+Log Date: Thu May 17 13:29:01 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:01:35 CEST 2018
+=======
+Log Date: Thu May 17 13:30:02 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:12:37 CEST 2018
+=======
+Log Date: Thu May 17 13:31:34 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:15:17 CEST 2018
+=======
+Log Date: Thu May 17 13:36:33 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:17:55 CEST 2018
+=======
+Log Date: Thu May 17 13:39:14 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:19:32 CEST 2018
+=======
+Log Date: Thu May 17 13:42:18 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:20:24 CEST 2018
+=======
+Log Date: Thu May 17 13:44:11 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:22:12 CEST 2018
+=======
+Log Date: Thu May 17 13:45:29 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:31:03 CEST 2018
+=======
+Log Date: Thu May 17 13:46:32 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:34:31 CEST 2018
+=======
+Log Date: Thu May 17 13:48:38 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:36:28 CEST 2018
+=======
+Log Date: Thu May 17 13:51:14 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:37:42 CEST 2018
+=======
+Log Date: Thu May 17 14:02:36 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:44:36 CEST 2018
+=======
+Log Date: Thu May 17 14:06:52 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 13:57:59 CEST 2018
+=======
+Log Date: Thu May 17 14:08:52 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:01:48 CEST 2018
+=======
+Log Date: Thu May 17 14:12:24 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:03:23 CEST 2018
+=======
+Log Date: Thu May 17 14:28:15 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:03:58 CEST 2018
+=======
+Log Date: Thu May 17 14:29:06 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:05:51 CEST 2018
+=======
+Log Date: Thu May 17 14:34:46 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:06:43 CEST 2018
+=======
+Log Date: Thu May 17 14:36:58 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:08:59 CEST 2018
+=======
+Log Date: Thu May 17 14:38:05 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Thu May 17 14:10:32 CEST 2018
+=======
+Log Date: Thu May 17 14:38:46 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+------------------------------------------------------
+Log Date: Fri May 18 12:59:31 CEST 2018
+=======
+------------------------------------------------------
+Log Date: Thu May 17 14:40:48 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Fri May 18 13:11:27 CEST 2018
+=======
+Log Date: Thu May 17 14:43:24 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Fri May 18 13:12:31 CEST 2018
+=======
+Log Date: Thu May 17 14:45:02 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Fri May 18 13:13:24 CEST 2018
+=======
+Log Date: Thu May 17 14:46:22 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Fri May 18 13:14:49 CEST 2018
+=======
+Log Date: Thu May 17 14:48:26 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Fri May 18 23:37:22 CEST 2018
+=======
+Log Date: Thu May 17 14:50:42 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:33:48 CEST 2018
+=======
+Log Date: Thu May 17 14:51:59 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:36:44 CEST 2018
+=======
+Log Date: Thu May 17 14:53:13 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:40:35 CEST 2018
+=======
+Log Date: Mon May 21 23:17:29 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:44:02 CEST 2018
+=======
+Log Date: Tue May 22 11:26:45 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:46:13 CEST 2018
+=======
+Log Date: Tue May 22 11:27:32 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:47:40 CEST 2018
+=======
+Log Date: Tue May 22 11:29:24 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 20:49:08 CEST 2018
+=======
+Log Date: Tue May 22 11:37:00 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+<<<<<<< HEAD
+Log Date: Mon May 21 22:35:36 CEST 2018
+=======
+Log Date: Tue May 22 11:43:41 CEST 2018
+>>>>>>> BobRoss
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+<<<<<<< HEAD
+=======
+>>>>>>> parent of c82bf4b... Broken css shit.. holy fuck
+=======
+>>>>>>> BobRoss
+------------------------------------------------------
+Log Date: Tue May 22 12:13:24 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:43:03 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:46:25 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:47:40 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 20:03:17 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 20:12:21 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 20:14:48 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 21:22:37 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 21:24:20 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 21:28:40 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:30:54 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:36:08 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:36:50 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:40:35 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:40:44 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:42:19 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:42:26 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:43:33 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:43:59 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:45:27 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:45:35 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:46:40 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:46:48 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:47:12 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:47:28 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:50:24 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:50:50 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:55:52 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:56:09 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:57:15 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:57:43 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 12:59:49 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:00:19 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:02:54 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:03:09 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:05:03 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:05:10 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:13:31 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:13:48 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:14:19 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:14:26 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:18:24 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:18:43 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:21:32 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:21:48 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:25:09 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:25:15 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:32:06 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:32:21 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: excel.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:34:35 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.json
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 13:35:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 14:37:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 14:46:55 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 15:40:35 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 18:45:48 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue May 22 18:49:39 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+

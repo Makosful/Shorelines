@@ -1,0 +1,127 @@
+/*
+    DARK BLUE: #0C6076
+    MEDIUM BLUE: #548F9F
+    LIGHT BLUE: #0C8AB8
+    
+    DARK GRAY: #1D1D1D
+    MEDIUM GRAY: #616161
+    LIGHT GRAY: #A0A0A0
+*/
+
+.root {
+    -fx-background-color: #616161; 
+}
+
+.menu-bar {
+    -fx-background-color: #1D1D1D;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:focused {
+    -fx-background-color: #0C8AB8;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
+.context-menu {
+    -fx-background-color: #1D1D1D;
+    -fx-background-radius: 0 15 15 15, 0 15 15 15, 0 15 15 15;
+    -fx-padding: 6px;
+}
+
+.label {
+    -fx-font-size: 15px; 
+    -fx-text-fill: white;
+}
+
+#btn-hover {
+    -fx-border-radius: 15 15 0 0;
+    -fx-background-radius: 15 15 0 0; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 1 1 0 1;
+    -fx-background-color: #616161;
+    -fx-text-fill: #0C8AB8;
+}
+#btn-hover:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: black;
+}
+#btn-hover:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: black;
+}
+
+#btn-hover-reverse {
+    -fx-border-radius: 0 0 15 15;
+    -fx-background-radius: 0 0 15 15; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 0 1 1 1;
+    -fx-background-color: #616161;
+    -fx-text-fill: #0C8AB8;
+}
+#btn-hover-reverse:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: black;
+}
+#btn-hover-reverse:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: black;
+}
+
+#btn-hover-left {
+    -fx-border-radius: 15 0 0 15;
+    -fx-background-radius: 15 0 0 15; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 1 0 1 1;
+    -fx-background-color: #616161;
+    -fx-text-fill: #0C8AB8;
+}
+#btn-hover-left:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: black;
+}
+#btn-hover-left:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: black;
+}
+
+#btn-hover-right {
+    -fx-border-radius: 0 15 15 0;
+    -fx-background-radius: 0 15 15 0; 
+    -fx-border-color: #1D1D1D #1D1D1D #1D1D1D #1D1D1D;
+    -fx-border-width: 1 1 1 0;
+    -fx-background-color: #616161;
+    -fx-text-fill: #0C8AB8;
+}
+#btn-hover-right:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: black;
+}
+#btn-hover-right:pressed {
+    -fx-background-color: #0C6076;
+    -fx-text-fill: black;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: transparent;
+}
+
+.list-cell:odd {
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: black;
+}
+
+.list-cell:even {
+    -fx-background-color: #A0A0A0;
+    -fx-text-fill: black;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #548F9F;
+    -fx-text-fill: white;
+}
