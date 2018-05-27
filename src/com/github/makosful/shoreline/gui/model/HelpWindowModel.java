@@ -5,26 +5,12 @@
  */
 package com.github.makosful.shoreline.gui.model;
 
-import com.github.makosful.shoreline.Main;
-import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
-import com.github.makosful.shoreline.gui.controller.HelpWindowController;
-import com.github.makosful.shoreline.gui.model.Cache.Scenes;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 /**
  *
@@ -33,22 +19,13 @@ import javafx.stage.Stage;
 public class HelpWindowModel
 {
 
-    private final Cache cache;
-    private final IBLL bll;
-    private ArrayList<Image> images;
-
-    public HelpWindowModel()
-    {
-        cache = Cache.getInstance();
-        bll = new BLLManager();
-
-    }
+    private final List<Image> images = new ArrayList<>();
 
     public void loadImages()
     {
         for (int i = 1; i < 6; i++)
         {
-            File file = new File("./res/tutorial" + i + ".png");
+            File file = new File("./res/instructions" + i + ".png");
             Image img = new Image(file.toURI().toString());
             images.add(img);
         }

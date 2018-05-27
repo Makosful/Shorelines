@@ -22,39 +22,6 @@
 <?import org.controlsfx.control.CheckListView?>
 
 <BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
-    <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Open…" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="View">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleOpenLog" text="Log" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                        <MenuItem fx:id="menuItemInstructions" mnemonicParsing="false" onAction="#handleShowInstructionsWindow" text="Instructions | Tutorial" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Account">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleChangePassword" text="Change Password" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
     <bottom>
         <VBox spacing="10.0">
             <BorderPane.margin>
@@ -227,4 +194,37 @@
             </BorderPane.margin>
         </AnchorPane>
     </left>
+   <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Open…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="View">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenLog" text="Log" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                        <MenuItem fx:id="menuItemInstructions" mnemonicParsing="false" onAction="#handleShowInstructionsWindow" text="Instructions | Tutorial" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Account">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleChangePassword" text="Change Password" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+   </top>
 </BorderPane>
