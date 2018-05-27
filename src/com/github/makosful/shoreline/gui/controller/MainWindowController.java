@@ -497,8 +497,8 @@ public class MainWindowController implements Initializable
             String col = listOfStrings.get(i);
             cellOrder.put(hashmapStrings[i], col);
 
-             // No more than 15 columns, allowed. 
-             // Incase user selects more than 15.
+            // No more than 15 columns, allowed.
+            // Incase user selects more than 15.
             if (i == 14)
             {
                 break;
@@ -668,16 +668,20 @@ public class MainWindowController implements Initializable
         try
         {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Main.class.getResource("gui/view/HelpWindow.fxml"));
+            Parent root = FXMLLoader.load(Main.class
+                    .getResource("gui/view/HelpWindow.fxml"));
             stage.setScene(new Scene(root));
             stage.setTitle("Shoreline | Instructions");
             stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.show();
         }
         catch (IOException ex)
         {
-            showAlert("Failed to open window", "Error opening the window", "Error");
+            System.out.println("failed to open window");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Error opening the window");
+            alert.setContentText(ex.getMessage());
+            alert.show();
         }
     }
 
