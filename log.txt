@@ -3102,3 +3102,11 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Mon May 28 00:51:49 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
