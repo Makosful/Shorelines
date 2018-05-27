@@ -5,7 +5,6 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
-import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,26 +151,8 @@ public class TaskManagerWindowController implements Initializable
             thread.setDaemon(true);
             thread.start();
         }
-        else
-        {
-            System.out.println("it is not dead");
-        }
-
-//        exService.shutdown();
-//        if (exService.isShutdown())
-//        {
-//            Alert alert = new Alert(AlertType.INFORMATION);
-//            alert.setTitle("Convertion Info");
-//            alert.setContentText("You successfully converted the files to JSON");
-//            alert.setHeaderText("Info");
-//            alert.show();
-//
-//            controller.setLog("No errors occured, conversion successful", "Conversion");
-//            controller.saveLog();
-//
-//        }
     }
-    int i = 0;
+
 
     @FXML
     private void removeSelectedTasks(ActionEvent event)
@@ -240,6 +221,12 @@ public class TaskManagerWindowController implements Initializable
         }
     }
 
+    public void makeSuccessfulLog()
+    {
+        controller.setLog("No errors occured, conversion successful", "Conversion");
+        controller.saveLog();
+    }
+
     /**
      * Getting the user added tasks from the mainwindow.
      * And making our listview hold on an observablelist.
@@ -305,6 +292,7 @@ public class TaskManagerWindowController implements Initializable
                 public void handle(Event event)
                 {
                     runningTasks.remove(task);
+                    makeSuccessfulLog();
                 }
             });
         }
