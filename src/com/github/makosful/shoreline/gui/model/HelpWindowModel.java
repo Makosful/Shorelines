@@ -11,6 +11,7 @@ import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
 import com.github.makosful.shoreline.gui.controller.HelpWindowController;
 import com.github.makosful.shoreline.gui.model.Cache.Scenes;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,12 +44,18 @@ public class HelpWindowModel
 
     }
 
-    public ArrayList<Image> getImages()
+    public void loadImages()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 6; i++)
         {
-            images.add(new Image("./res/instructions" + i + ".png"));
+            File file = new File("./res/tutorial" + i + ".png");
+            Image img = new Image(file.toURI().toString());
+            images.add(img);
         }
+    }
+
+    public List<Image> getImages()
+    {
         return images;
     }
 }
