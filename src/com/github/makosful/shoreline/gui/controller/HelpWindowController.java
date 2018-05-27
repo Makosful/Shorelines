@@ -5,6 +5,7 @@
  */
 package com.github.makosful.shoreline.gui.controller;
 
+import com.github.makosful.shoreline.gui.model.HelpWindowModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,8 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import com.github.makosful.shoreline.gui.model.HelpWindowModel;
-import javafx.scene.image.Image;
 
 /**
  * FXML Controller class
@@ -48,6 +47,9 @@ public class HelpWindowController implements Initializable
 
     /**
      * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -55,10 +57,10 @@ public class HelpWindowController implements Initializable
         model = new HelpWindowModel();
 
         setupStrings();
-
         SetImages();
-        updateTutString();
+
         displayImage();
+        updateTutString();
 
     }
 
@@ -105,29 +107,26 @@ public class HelpWindowController implements Initializable
 
     private void updateTutString()
     {
-        if (imgIndex == 0)
+        switch (imgIndex)
         {
-            lblInstructions.setText(tutString1);
-        }
-        else if (imgIndex == 1)
-        {
-            lblInstructions.setText(tutString2);
-        }
-        else if (imgIndex == 2)
-        {
-            lblInstructions.setText(tutString3);
-        }
-        else if (imgIndex == 3)
-        {
-            lblInstructions.setText(tutString4);
-        }
-        else if (imgIndex == 4)
-        {
-            lblInstructions.setText(tutString5);
-        }
-        else
-        {
-            lblInstructions.setText("The documentation / instructions will be listed here.");
+            case 0:
+                lblInstructions.setText(tutString1);
+                break;
+            case 1:
+                lblInstructions.setText(tutString2);
+                break;
+            case 2:
+                lblInstructions.setText(tutString3);
+                break;
+            case 3:
+                lblInstructions.setText(tutString4);
+                break;
+            case 4:
+                lblInstructions.setText(tutString5);
+                break;
+            default:
+                lblInstructions.setText("The documentation / instructions will be listed here.");
+                break;
         }
     }
 
