@@ -153,7 +153,6 @@ public class MainWindowController implements Initializable
         log = new ConversionLog();
         executorServiceInitialization();
 
-
         labels = new Label[]
         {
             lblSiteName, lblAssetSerialNo,
@@ -170,19 +169,21 @@ public class MainWindowController implements Initializable
         addConfigs();
         addConfigListener();
     }
+
     public void executorServiceInitialization()
     {
-       exService = Executors.newFixedThreadPool(1, new ThreadFactory()
-        {
-            @Override
-            public Thread newThread(Runnable r)
-            {
-              Thread thread = Executors.defaultThreadFactory().newThread(r);
-              thread.setDaemon(true);
-              return thread;
-            }
-        });
+        exService = Executors.newFixedThreadPool(1, new ThreadFactory()
+                                         {
+                                             @Override
+                                             public Thread newThread(Runnable r)
+                                             {
+                                                 Thread thread = Executors.defaultThreadFactory().newThread(r);
+                                                 thread.setDaemon(true);
+                                                 return thread;
+                                             }
+                                         });
     }
+
     @FXML
     private void handleChangePassword(ActionEvent event)
     {
@@ -201,7 +202,7 @@ public class MainWindowController implements Initializable
         }
         catch (IOException ex)
         {
-            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 
@@ -325,6 +326,7 @@ public class MainWindowController implements Initializable
         alert.setTitle(title);
         alert.setContentText(message);
         alert.setHeaderText(headerText);
+        alert.initModality(Modality.WINDOW_MODAL);
         alert.show();
     }
 
@@ -400,7 +402,7 @@ public class MainWindowController implements Initializable
 
                 for (int i = 0; i < listViewSorted.getItems().size(); i++)
                 {
-                    if(!(i > labels.length-1))
+                    if (!(i > labels.length - 1))
                     {
                         labels[i].setText(listViewSorted.getItems().get(i));
                     }
@@ -488,7 +490,7 @@ public class MainWindowController implements Initializable
         };
 
         List<String> listOfStrings = listViewSorted.getItems();
-        
+
         for (int i = 0; i < listOfStrings.size(); i++)
         {
             String col = listOfStrings.get(i);
@@ -510,44 +512,50 @@ public class MainWindowController implements Initializable
     @FXML
     private void loadFile(ActionEvent event)
     {
-        model.setFileNull();
-        FileChooser fc = new FileChooser();
-        File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-        fileName = file.getName().split("\\.")[0];
-        filePath = file.getAbsolutePath();
-        
-        exService.execute(() ->
+        try
         {
-            //Set file name to log, which will be saved later
-            log.setFileName(file.getName());
+            model.setFileNull();
+            FileChooser fc = new FileChooser();
+            File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+            fileName = file.getName().split("\\.")[0];
+            filePath = file.getAbsolutePath();
 
-            model.loadFile(file.getAbsolutePath());
-            if (!model.isFileNull())
+            exService.execute(() ->
             {
-                Platform.runLater(() ->
+                //Set file name to log, which will be saved later
+                log.setFileName(file.getName());
+
+                model.loadFile(file.getAbsolutePath());
+                if (!model.isFileNull())
                 {
-                    chklistSelectData.setItems(model.getCategories());
-                    AddListeners();
-                    listViewSorted.getItems().clear();
-                    setLog("No errors occured, filed loaded successfully", "Conversion");
+                    Platform.runLater(() ->
+                    {
+                        chklistSelectData.setItems(model.getCategories());
+                        AddListeners();
+                        listViewSorted.getItems().clear();
+                        setLog("No errors occured, filed loaded successfully", "Conversion");
+                        model.saveLog(log);
+                    });
+                }
+                else
+                {
+                    Platform.runLater(() ->
+                    {
+                        showAlert("Reading file error", model.getErrorMessageProperty().getValue(), "Error");
+                    });
+
+                    setLog("An error occured while loading file for conversion, "
+                           + model.getErrorMessageProperty().getValue(), "Error");
                     model.saveLog(log);
-                });
-            }
-            else
-            {
-                Platform.runLater(() ->
-                {
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("Reading File Error");
-                    alert.setContentText(model.getErrorMessageProperty().getValue());
-                    alert.show();
-                });
-
-                setLog("An error occured while loading file for conversion, "
-                       + model.getErrorMessageProperty().getValue(), "Error");
-                model.saveLog(log);
-            }
-        });
+                }
+            });
+        }
+        catch (NullPointerException ex)
+        {
+            System.out.println("Not supposed to make alert error, it just catches"
+                               + "nullpointer incase user doesnt select anything when opening"
+                               + "the filechooser");
+        }
 
     }
 
@@ -612,10 +620,10 @@ public class MainWindowController implements Initializable
         }
         catch (IndexOutOfBoundsException e)
         {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Config Error");
-            alert.setContentText("Failed to select amount of columns /n, "
-                                 + " are you sure you've selected the correct config? ");
+            String contentText = "Failed to select amount of columns /n, "
+                                 + " are you sure you've selected the correct config?";
+
+            showAlert("Config Error", contentText, "Error");
         }
     }
 
@@ -666,11 +674,7 @@ public class MainWindowController implements Initializable
         }
         catch (IOException ex)
         {
-            System.out.println("failed to open window");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error opening the window");
-            alert.setContentText(ex.getMessage());
-            alert.show();
+            showAlert("Failed to open window", "Error opening the window", "Error");
         }
     }
 
@@ -693,10 +697,7 @@ public class MainWindowController implements Initializable
         }
         catch (IOException ex)
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Failed to open the window");
-            alert.setContentText(ex.getMessage());
-            alert.show();
+            showAlert("Failed to open window", ex.getMessage(), "Error");
         }
 
     }
