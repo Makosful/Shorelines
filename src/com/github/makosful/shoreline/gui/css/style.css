@@ -40,12 +40,12 @@
 .button:hover
 {
     -fx-background-color: #094c5e;
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.75;
 }
 .button:pressed
 {
     -fx-background-color: #073946;
-    -fx-opacity: 0.5;
+    -fx-opacity: 0.75;
 }
 
 .menu-bar
