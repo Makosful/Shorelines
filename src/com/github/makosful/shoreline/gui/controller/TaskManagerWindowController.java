@@ -24,8 +24,11 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.stage.Modality;
 
 /**
  * FXML Controller class
@@ -204,12 +207,12 @@ public class TaskManagerWindowController implements Initializable
                 {
                     threadSleep();
                     runTaskInRow();
-
                 }
             }
 
         });
     }
+
     /**
      * Making the thread sleep for 1 sec.
      */
@@ -224,24 +227,17 @@ public class TaskManagerWindowController implements Initializable
             Logger.getLogger(TaskManagerWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     /**
      * Running the tasks in correct row.
      */
     public void runTaskInRow()
     {
-        try
+        if (!runningTasks.isEmpty())
         {
-            if (!runningTasks.isEmpty())
-            {
 
-                Task task = runningTasks.get(0);
-                task.run();
-            }
-
-        }
-        catch (IndexOutOfBoundsException ex)
-        {
-            ex.printStackTrace();
+            Task task = runningTasks.get(0);
+            task.run();
         }
     }
 
@@ -420,6 +416,16 @@ public class TaskManagerWindowController implements Initializable
     public List<Task> getSelectedTasks()
     {
         return taskListView.getSelectionModel().getSelectedItems();
+    }
+
+    public void makeErrorAlert(String title, String headerText, String contextText)
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contextText);
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.show();
     }
 
 }
