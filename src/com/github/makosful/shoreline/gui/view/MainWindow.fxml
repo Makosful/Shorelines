@@ -21,7 +21,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
+<BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.MainWindowController">
     <bottom>
         <VBox spacing="10.0">
             <BorderPane.margin>
@@ -146,7 +146,7 @@
                                     </textFill>
                                 </Label>
                                 <CheckListView fx:id="chklistSelectData" layoutY="36.0" prefHeight="485.0" prefWidth="235.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0" />
-                              <Button fx:id="btnChecklistCheck" layoutY="523.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" />
+                              <Button fx:id="btnChecklistCheck" layoutY="524.0" mnemonicParsing="false" onAction="#handleChecklistItemsStatus" text="Check all" />
                             </children>
                         </AnchorPane>
                         <AnchorPane>
@@ -199,27 +199,25 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Open…" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Select file" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
                         <MenuItem mnemonicParsing="false" text="Quit" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="View">
+                <Menu mnemonicParsing="false" text="Log">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#handleOpenLog" text="Log" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleOpenLog" text="Open log" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                        <MenuItem mnemonicParsing="false" text="About" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="menuItemInstructions" mnemonicParsing="false" onAction="#handleShowInstructionsWindow" text="Instructions | Tutorial" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Account">
+                <Menu mnemonicParsing="false" text="User">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleChangePassword" text="Change Password" />
                     </items>
