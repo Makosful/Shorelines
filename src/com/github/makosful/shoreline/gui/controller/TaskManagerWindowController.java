@@ -67,6 +67,7 @@ public class TaskManagerWindowController implements Initializable
         booleanInitialization();
         threadInitialization();
         listViewsListeners();
+        btnPauseResume.setDisable(true);
     }
 
     /**
