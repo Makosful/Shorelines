@@ -11,7 +11,7 @@
 
 .label
 {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: white;
 }
 
 .list-view
@@ -22,10 +22,14 @@
 {
     -fx-background-color: lightgray;
 }
-.list-view .list-cell:selected
+.list-view .list-cell:hover
 {
-    -fx-background-color: #3366ff;
-     -fx-text-fill: white;
+    -fx-background-color: rgba(0,150,201,0.5);
+}
+.list-view .list-cell:selected, list-cell:focused
+{
+    -fx-background-color: #0096C9;
+    -fx-text-fill: white;
 }
 
 .button
