@@ -552,9 +552,9 @@ public class MainWindowController implements Initializable
         }
         catch (NullPointerException ex)
         {
-            System.out.println("Not supposed to make alert error, it just catches"
-                               + "nullpointer incase user doesnt select anything when opening"
-                               + "the filechooser");
+//           Not supposed to make alert error, it just catches"
+//           nullpointer incase user doesnt select anything when opening
+//           the filechooser
         }
 
     }
