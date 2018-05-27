@@ -139,7 +139,7 @@ public class TaskManagerWindowController implements Initializable
     }
 
     @FXML
-    private void convertSelectedTasks(ActionEvent event) throws InterruptedException
+    private void convertSelectedTasks(ActionEvent event)
     {
         // Rækkefølgen er vigtig.
         runningTasks.addAll(getSelectedTasks());
@@ -152,7 +152,6 @@ public class TaskManagerWindowController implements Initializable
             thread.start();
         }
     }
-
 
     @FXML
     private void removeSelectedTasks(ActionEvent event)
@@ -185,8 +184,8 @@ public class TaskManagerWindowController implements Initializable
             {
                 while (!runningTasks.isEmpty() && !pause.getValue())
                 {
-                    threadSleep();
                     runTaskInRow();
+                    threadSleep();
                 }
             }
 
@@ -213,11 +212,19 @@ public class TaskManagerWindowController implements Initializable
      */
     public void runTaskInRow()
     {
-        if (!runningTasks.isEmpty())
+        try
         {
 
-            Task task = runningTasks.get(0);
-            task.run();
+            if (!runningTasks.isEmpty())
+            {
+
+                Task task = runningTasks.get(0);
+                task.run();
+            }
+        }
+        catch (IndexOutOfBoundsException ex)
+        {
+            
         }
     }
 
