@@ -1,13 +1,30 @@
+/*
+    DARK BLUE: #0C6076
+    MEDIUM BLUE: #548F9F
+    LIGHT BLUE: #0C8AB8
+    
+    DARK GRAY: #1D1D1D
+    MEDIUM GRAY: #616161
+    LIGHT GRAY: #A0A0A0
+*/
+
 /* Signup Screen */
 .signup .text-field {
     -fx-border-width: 2px;
     -fx-border-color: transparent;
 }
 
+.menu-bar
+{
+    -fx-background-color: #1D1D1D;
+}
+
 .root
 {
-    -fx-background-color: gray;
+    -fx-background-color: #616161;
 }
+
+
 
 .label
 {
@@ -48,10 +65,6 @@
     -fx-opacity: 0.75;
 }
 
-.menu-bar
-{
-    -fx-background-color: gray;
-}
 .combo-box
 {
     -fx-background-color: #666666;
