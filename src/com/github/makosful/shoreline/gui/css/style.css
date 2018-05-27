@@ -24,7 +24,7 @@
 }
 .list-view .list-cell:hover
 {
-    -fx-background-color: rgba(0,150,201,0.5);
+    -fx-background-color: rgba(0,150,201,0.5); /* #0096C9 50% */
 }
 .list-view .list-cell:selected, list-cell:focused
 {
