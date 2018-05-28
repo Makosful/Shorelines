@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.bll;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.User;
-import com.github.makosful.shoreline.be.UserNew;
 import java.util.List;
 import java.util.Map;
 import javafx.collections.ObservableList;
@@ -43,7 +42,7 @@ public interface IBLL
 
     public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws BLLException;
 
-    public boolean createUser(UserNew userNew) throws BLLException;
+    public boolean createUser(User user) throws BLLException;
 
     public User login(String uName, String pass) throws BLLException;
 

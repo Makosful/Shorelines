@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.bll;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.User;
-import com.github.makosful.shoreline.be.UserNew;
 import com.github.makosful.shoreline.dal.DALManager;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import com.github.makosful.shoreline.dal.Interfaces.IDAL;
@@ -180,16 +179,16 @@ public final class BLLManager implements IBLL
 
     //<editor-fold defaultstate="collapsed" desc="User Handling">
     @Override
-    public boolean createUser(UserNew u) throws BLLException
+    public boolean createUser(User user) throws BLLException
     {
         try
         {
-            String hash = Hashing.hashPass(u.getPassword());
+            String hash = Hashing.hashPass(user.getPassword());
 
-            return dal.createUser(new UserNew(u.getFirstName(),
-                                              u.getLastName(),
-                                              u.getUserName(),
-                                              u.getEmail(),
+            return dal.createUser(new User(user.getFirstName(),
+                                              user.getLastName(),
+                                              user.getUserName(),
+                                              user.getEmail(),
                                               hash));
         }
         catch (DALException

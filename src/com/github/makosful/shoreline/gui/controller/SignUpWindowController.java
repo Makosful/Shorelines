@@ -1,6 +1,6 @@
 package com.github.makosful.shoreline.gui.controller;
 
-import com.github.makosful.shoreline.be.UserNew;
+import com.github.makosful.shoreline.be.User;
 import com.github.makosful.shoreline.gui.model.SignupModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -90,7 +90,7 @@ public class SignUpWindowController implements Initializable
     @FXML
     private void handleCreate(ActionEvent event)
     {
-        final UserNew user = new UserNew(txtNameFirst.getText(),
+        final User user = new User(txtNameFirst.getText(),
                                          txtNameLast.getText(),
                                          txtNameUser.getText(),
                                          txtEmail.getText(),

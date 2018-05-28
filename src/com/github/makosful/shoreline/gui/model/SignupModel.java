@@ -1,6 +1,6 @@
 package com.github.makosful.shoreline.gui.model;
 
-import com.github.makosful.shoreline.be.UserNew;
+import com.github.makosful.shoreline.be.User;
 import com.github.makosful.shoreline.bll.BLLException;
 import com.github.makosful.shoreline.bll.BLLManager;
 import com.github.makosful.shoreline.bll.IBLL;
@@ -29,11 +29,11 @@ public class SignupModel
         goBack();
     }
 
-    public void createUser(UserNew userNew)
+    public void createUser(User user)
     {
         try
         {
-            bll.createUser(userNew);
+            bll.createUser(user);
             goBack();
         }
         catch (BLLException ex)

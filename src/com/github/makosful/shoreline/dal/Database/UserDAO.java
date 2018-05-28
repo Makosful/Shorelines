@@ -1,7 +1,6 @@
 package com.github.makosful.shoreline.dal.Database;
 
 import com.github.makosful.shoreline.be.User;
-import com.github.makosful.shoreline.be.UserNew;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +20,7 @@ public class UserDAO
         db = new DataBaseConnector();
     }
 
-    public boolean createUser(UserNew u) throws SQLException
+    public boolean createUser(User user) throws SQLException
     {
         try (Connection con = db.getConnection())
         {
@@ -33,11 +32,11 @@ public class UserDAO
             PreparedStatement stmt = con.prepareStatement(sql);
 
             int i = 1;
-            stmt.setString(i++, u.getFirstName());
-            stmt.setString(i++, u.getLastName());
-            stmt.setString(i++, u.getUserName());
-            stmt.setString(i++, u.getEmail());
-            stmt.setString(i++, u.getPassword());
+            stmt.setString(i++, user.getFirstName());
+            stmt.setString(i++, user.getLastName());
+            stmt.setString(i++, user.getUserName());
+            stmt.setString(i++, user.getEmail());
+            stmt.setString(i++, user.getPassword());
 
             stmt.executeUpdate();
 

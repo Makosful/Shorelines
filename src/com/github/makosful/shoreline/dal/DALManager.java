@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.User;
-import com.github.makosful.shoreline.be.UserNew;
 import com.github.makosful.shoreline.dal.Database.ConfigDAO;
 import com.github.makosful.shoreline.dal.Database.UserDAO;
 import com.github.makosful.shoreline.dal.Exception.DALException;
@@ -47,7 +46,7 @@ public class DALManager implements IDAL
     // DAO
     private final ConfigDAO cDAO;
     private final LogDBDAO lDAO;
-    private final UserDAO user;
+    private final UserDAO userDAO;
 
     public DALManager()
     {
@@ -56,7 +55,7 @@ public class DALManager implements IDAL
         storeLogIn = new StoreLogIn();
         lDAO = new LogDBDAO();
         jWriter = new JsonWriter();
-        user = new UserDAO();
+        userDAO = new UserDAO();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Core File In">
@@ -223,11 +222,11 @@ public class DALManager implements IDAL
 
     //<editor-fold defaultstate="collapsed" desc="User Handling">
     @Override
-    public boolean createUser(UserNew u) throws DALException
+    public boolean createUser(User user) throws DALException
     {
         try
         {
-            return user.createUser(u);
+            return userDAO.createUser(user);
         }
         catch (SQLException ex)
         {
@@ -240,7 +239,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return user.getUserLogin(uName, pass);
+            return userDAO.getUserLogin(uName, pass);
         }
         catch (SQLException ex)
         {
@@ -253,7 +252,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return user.getUserByMail(mail);
+            return userDAO.getUserByMail(mail);
         }
         catch (SQLException ex)
         {
@@ -266,7 +265,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return this.user.changePassWord(user, pass);
+            return this.userDAO.changePassWord(user, pass);
         }
         catch (SQLException ex)
         {
@@ -302,7 +301,7 @@ public class DALManager implements IDAL
     {
         try
         {
-            return this.user.passwordMatch(user, pass);
+            return this.userDAO.passwordMatch(user, pass);
         }
         catch (SQLException ex)
         {

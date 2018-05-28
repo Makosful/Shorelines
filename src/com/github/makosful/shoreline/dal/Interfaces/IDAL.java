@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.dal.Interfaces;
 import com.github.makosful.shoreline.be.Config;
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.be.User;
-import com.github.makosful.shoreline.be.UserNew;
 import com.github.makosful.shoreline.dal.Exception.DALException;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +43,7 @@ public interface IDAL
 
     public ObservableList<ConversionLog> searchLogs(String searchText, List<String> checked) throws DALException;
 
-    public boolean createUser(UserNew userNew) throws DALException;
+    public boolean createUser(User user) throws DALException;
 
     public User getUser(String uName, String hashPass) throws DALException;
 
