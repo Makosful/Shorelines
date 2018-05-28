@@ -109,7 +109,6 @@ public class TaskManagerWindowController implements Initializable
                 }
             }
         });
-
     }
 
     /**
@@ -224,7 +223,7 @@ public class TaskManagerWindowController implements Initializable
         }
         catch (IndexOutOfBoundsException ex)
         {
-            
+
         }
     }
 
@@ -421,5 +420,4 @@ public class TaskManagerWindowController implements Initializable
         alert.initModality(Modality.WINDOW_MODAL);
         alert.show();
     }
-
 }
