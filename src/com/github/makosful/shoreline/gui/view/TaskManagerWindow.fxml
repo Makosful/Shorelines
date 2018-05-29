@@ -4,27 +4,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" minHeight="449.0" minWidth="764.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.TaskManagerWindowController">
+<AnchorPane id="AnchorPane" minWidth="460.0" prefHeight="460.0" prefWidth="632.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.makosful.shoreline.gui.controller.TaskManagerWindowController">
    <children>
-      <VBox layoutX="74.0" layoutY="35.0" prefHeight="367.0" prefWidth="287.0">
+      <VBox layoutX="14.0" layoutY="25.0" prefHeight="380.0" prefWidth="275.0">
          <children>
-            <ListView fx:id="taskListView" prefHeight="595.0" prefWidth="257.0" />
+            <ListView fx:id="taskListView" prefHeight="350.0" prefWidth="282.0" />
+            <Button mnemonicParsing="false" onAction="#selectAll" text="Select All" />
          </children>
       </VBox>
-      <VBox layoutX="421.0" layoutY="35.0" prefHeight="367.0" prefWidth="268.0">
+      <VBox layoutX="342.0" layoutY="25.0" prefHeight="380.0" prefWidth="275.0">
          <children>
-            <ListView fx:id="runningListView" prefHeight="595.0" prefWidth="257.0" />
+            <ListView fx:id="runningListView" />
+            <Button mnemonicParsing="false" onAction="#selectAllRunning" text="Select All" />
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="140.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Task List" textFill="WHITE" />
-      <Label alignment="CENTER" layoutX="496.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Running Tasks" textFill="WHITE" />
-      <Button layoutX="4.0" layoutY="35.0" mnemonicParsing="false" onAction="#selectAll" prefHeight="25.0" prefWidth="66.0" text="Select All" />
-      <Button layoutX="693.0" layoutY="35.0" mnemonicParsing="false" onAction="#selectAllRunning" prefHeight="25.0" prefWidth="66.0" text="Select All" />
-      <Button layoutX="222.0" layoutY="419.0" mnemonicParsing="false" onAction="#removeSelectedTasks" text="Remove Selected Tasks" textFill="#d3caca" />
-      <Button layoutX="67.0" layoutY="419.0" mnemonicParsing="false" onAction="#convertSelectedTasks" text="Convert Selected Tasks" textFill="#d3caca" />
-      <Button fx:id="btnPauseResume" layoutX="423.0" layoutY="419.0" mnemonicParsing="false" onAction="#pauseResumeSelectedTasks" prefHeight="25.0" prefWidth="86.0" text="Pause" textFill="#d3caca" />
-      <Button fx:id="stopSelectedTasks" layoutX="555.0" layoutY="418.0" mnemonicParsing="false" onAction="#stopSelectedTasks" prefHeight="25.0" prefWidth="131.0" text="Stop Selected Tasks" />
+      <Label alignment="CENTER" layoutX="86.0" layoutY="4.0" prefHeight="21.0" prefWidth="131.0" text="Task List" textFill="WHITE" />
+      <Label alignment="CENTER" layoutX="414.0" layoutY="4.0" prefHeight="21.0" prefWidth="131.0" text="Running Tasks" textFill="WHITE" />
+      <HBox layoutX="14.0" layoutY="418.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#convertSelectedTasks" text="Convert selected" textFill="#d3caca" />
+            <Button mnemonicParsing="false" onAction="#removeSelectedTasks" text="Remove Selected" textFill="#d3caca" />
+         </children>
+      </HBox>
+      <HBox layoutX="342.0" layoutY="418.0" spacing="10.0">
+         <children>
+            <Button fx:id="btnPauseResume" mnemonicParsing="false" onAction="#pauseResumeSelectedTasks" text="Pause convertion" textFill="#d3caca" />
+            <Button fx:id="stopSelectedTasks" mnemonicParsing="false" onAction="#stopSelectedTasks" prefHeight="25.0" prefWidth="131.0" text="Stop convertion" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

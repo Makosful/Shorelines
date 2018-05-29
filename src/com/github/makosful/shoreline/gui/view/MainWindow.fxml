@@ -112,7 +112,7 @@
                                 <Label fx:id="lblEarliestStart" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                                 <Label fx:id="lblLatestStart" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                                 <Label fx:id="lblLatestFinish" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                                <Label fx:id="lblEstimatedTime" prefWidth="35.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                <Label fx:id="lblEstimatedTime" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                                 <Label text="Name (Description)" GridPane.rowIndex="8" />
                                 <Label fx:id="lblNameDescription" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                                 <Label text="Order Type" GridPane.rowIndex="2" />
