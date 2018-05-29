@@ -65,8 +65,14 @@
 
 .combo-box
 {
-    -fx-background-color: #666666;
+    -fx-background-color: #0C6076;
 }
+
+.combo-box-base .text
+{
+    -fx-fill:white;
+}
+
 .context-menu
 {
     -fx-background-color: gray;
