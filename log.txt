@@ -3126,3 +3126,107 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 30 12:52:46 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:52:52 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:53:02 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:53:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:53:53 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:54:30 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:54:37 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:54:46 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:58:23 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:58:29 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:58:34 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:58:34 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 12:58:35 CEST 2018
+User id: 0
+Message: No errors occured, conversion successful
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+

@@ -36,6 +36,8 @@ public class TaskManager
             {
                 try
                 {
+                    dalManager.setReader(fPath);
+                    dalManager.fileGetHeader(fPath);
                     List<Map> list = dalManager.fileGetValues(fMap, fPath);
                     dalManager.createFile(list, fName);
                 }

@@ -244,6 +244,10 @@ public class TaskManagerWindowController implements Initializable
         for (Task task : tasks)
         {
             taskDoneRemove(task);
+            task.setOnFailed((event) ->
+            {
+               task.getException().printStackTrace();
+            });
         }
         taskOtherController = tasks;
         taskList = FXCollections.observableArrayList(tasks);
