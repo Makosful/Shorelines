@@ -3230,3 +3230,59 @@ File: MOCK_DATA.csv
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 30 13:04:31 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.json
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 13:05:34 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.json
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 13:11:47 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 13:11:56 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.json
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 13:12:15 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Belman-Info-Viewer-Report.pdf
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 13:12:27 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Agreement and dod.txt
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 13:12:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Agreement and dod.txt
+LogType:Conversion
+------------------------------------------------------
+

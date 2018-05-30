@@ -167,8 +167,8 @@ public class MainWindowController implements Initializable
         };
 
         AddListeners();
-//        addConfigs();
-//        addConfigListener();
+        addConfigs();
+        addConfigListener();
     }
 
     public void executorServiceInitialization()
@@ -306,10 +306,17 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
+        if(!listViewSorted.getItems().isEmpty())
+        {
         Task task = model.makeTask(getMap(), filePath, fileName);
         if (task != null)
         {
             listTask.add(task);
+        }
+        }
+        else
+        {
+            showAlert("Error", "You haven't selected any columns", "Empty Columns");
         }
 
     }

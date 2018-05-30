@@ -3,7 +3,6 @@ package com.github.makosful.shoreline.dal;
 import com.github.makosful.shoreline.dal.CSV.CSVReader;
 import com.github.makosful.shoreline.dal.Excel.ExcelReader;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
-import com.github.makosful.shoreline.dal.Json.JsonReader;
 
 /**
  *
@@ -22,8 +21,6 @@ public class ReaderFactory{
                 return new ExcelReader();
             case "xls":
                 return new ExcelReader();
-            case "json":
-                return new JsonReader();
             case "csv":
                 return new CSVReader();
             default: 
