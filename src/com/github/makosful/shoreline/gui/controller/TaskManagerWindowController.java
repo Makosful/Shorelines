@@ -51,8 +51,6 @@ public class TaskManagerWindowController implements Initializable
     private volatile ObservableList<Task> runningTasks;
     private volatile BooleanProperty pause;
     private Thread thread;
-    private Boolean allRunningTasksSelected;
-    private Boolean allTasksSelected;
     @FXML
     private Button stopSelectedTasks;
     @FXML
@@ -67,7 +65,7 @@ public class TaskManagerWindowController implements Initializable
         listInitialization();
         booleanInitialization();
         threadInitialization();
-        listViewsListeners();
+        runningTaskListViewListener();
         btnDisableStart();
     }
 
@@ -82,31 +80,15 @@ public class TaskManagerWindowController implements Initializable
      * boolean
      * to false regarding "selectall"
      */
-    public void listViewsListeners()
+    public void runningTaskListViewListener()
     {
-        taskListView.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Task>()
-        {
-            @Override
-            public void onChanged(Change<? extends Task> c)
-            {
-                if (taskList.isEmpty())
-                {
-                    allTasksSelected = false;
-                }
-            }
-        });
-
         runningListView.getItems().addListener(new ListChangeListener<Task>()
         {
             @Override
             public void onChanged(Change<? extends Task> c)
             {
-                lockStopBtn();
+                disableStopBtn();
                 pauseButtonAndPause();
-                if (runningTasks.isEmpty())
-                {
-                    allRunningTasksSelected = false;
-                }
             }
         });
     }
@@ -128,12 +110,10 @@ public class TaskManagerWindowController implements Initializable
      */
     public void booleanInitialization()
     {
-        allRunningTasksSelected = false;
-        allTasksSelected = false;
         pause = new SimpleBooleanProperty(false);
         pause.addListener((observable) ->
         {
-            lockStopBtn();
+            disableStopBtn();
         });
     }
 
@@ -223,7 +203,7 @@ public class TaskManagerWindowController implements Initializable
         }
         catch (IndexOutOfBoundsException ex)
         {
-
+            // Just incase.
         }
     }
 
@@ -246,7 +226,7 @@ public class TaskManagerWindowController implements Initializable
             taskDoneRemove(task);
             task.setOnFailed((event) ->
             {
-               task.getException().printStackTrace();
+                task.getException().printStackTrace();
             });
         }
         taskOtherController = tasks;
@@ -329,17 +309,7 @@ public class TaskManagerWindowController implements Initializable
     {
         if (!taskList.isEmpty())
         {
-            if (!allTasksSelected)
-            {
-                taskListView.getSelectionModel().selectAll();
-
-                allTasksSelected = true;
-            }
-            else
-            {
-                taskListView.getSelectionModel().clearSelection();
-                allTasksSelected = false;
-            }
+            taskListView.getSelectionModel().selectAll();
         }
     }
 
@@ -348,16 +318,7 @@ public class TaskManagerWindowController implements Initializable
     {
         if (!runningTasks.isEmpty())
         {
-            if (!allRunningTasksSelected)
-            {
-                runningListView.getSelectionModel().selectAll();
-                allRunningTasksSelected = true;
-            }
-            else
-            {
-                runningListView.getSelectionModel().clearSelection();
-                allRunningTasksSelected = false;
-            }
+            runningListView.getSelectionModel().selectAll();
         }
     }
 
@@ -366,7 +327,7 @@ public class TaskManagerWindowController implements Initializable
      * pause
      * is true. Else they get disabled.
      */
-    public void lockStopBtn()
+    public void disableStopBtn()
     {
 
         if (!pause.getValue() || runningTasks.isEmpty())

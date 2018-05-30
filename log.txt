@@ -3286,3 +3286,19 @@ File: Agreement and dod.txt
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Wed May 30 14:06:36 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Wed May 30 14:06:42 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+
