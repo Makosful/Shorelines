@@ -49,7 +49,7 @@ public class TaskManagerWindowController implements Initializable
     private ListView<Task> runningListView;
     // Observable running tasks.
     private volatile ObservableList<Task> runningTasks;
-    private BooleanProperty pause;
+    private volatile BooleanProperty pause;
     private Thread thread;
     private Boolean allRunningTasksSelected;
     private Boolean allTasksSelected;
