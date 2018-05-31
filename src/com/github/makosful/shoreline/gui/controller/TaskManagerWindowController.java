@@ -117,6 +117,12 @@ public class TaskManagerWindowController implements Initializable
         });
     }
 
+    /**
+     * Starts the thread for conversion, unless already started.
+     * Takes all selected tasks removes them from left listview and throws them
+     * to running task listview.
+     * @param event 
+     */
     @FXML
     private void convertSelectedTasks(ActionEvent event)
     {
@@ -131,7 +137,10 @@ public class TaskManagerWindowController implements Initializable
             thread.start();
         }
     }
-
+    /**
+     * Clears selected tasks from listview.
+     * @param event 
+     */
     @FXML
     private void removeSelectedTasks(ActionEvent event)
     {

@@ -3310,3 +3310,27 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Thu May 31 12:18:42 CEST 2018
+User id: 5
+Message: No errors occured, filed loaded successfully
+File: Serier.txt
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 31 12:18:51 CEST 2018
+User id: 5
+Message: No errors occured, filed loaded successfully
+File: hone.png
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Thu May 31 12:42:45 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: MOCK_DATA.csv
+LogType:Conversion
+------------------------------------------------------
+

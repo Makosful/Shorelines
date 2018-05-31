@@ -24,13 +24,20 @@ public class TaskManager
         Map fMap = new LinkedHashMap<>(map);
         task = new Task()
         {
-
+            /**
+             * Overriding to return the fileName - For listviews.
+             * @return 
+             */
             @Override
             public String toString()
             {
                 return fileName;
             }
-
+            /**
+             * This gets called when you run task. Setsreader according to 
+             * file format  - Reads file and converts it to json.
+             * @return 
+             */
             @Override
             protected Object call()
             {

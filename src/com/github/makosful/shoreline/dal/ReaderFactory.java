@@ -10,7 +10,13 @@ import com.github.makosful.shoreline.dal.Interfaces.IReader;
  */
 public class ReaderFactory{
 
-
+    /**
+     * Returns reader according to file format; supported file formats:
+     * xlsx, xls, csv.
+     * @param path
+     * @return
+     * @throws IllegalArgumentException 
+     */
     public IReader getReader(String path) throws IllegalArgumentException
     {
         String extension = path.substring(path.lastIndexOf('.')+1);

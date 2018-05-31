@@ -490,7 +490,7 @@ public class MainWindowController implements Initializable
     {
         // Clearing hashMap.
         cellOrder.clear();
-        String[] hashmapStrings = new String[]
+        String[] map = new String[]
         {
             "siteName", "assetSerialNumber", "orderType", "workOrderId", "systemStatus",
             "userStatus", "createdOn", "createdBy", "nameDescription",
@@ -502,7 +502,7 @@ public class MainWindowController implements Initializable
         for (int i = 0; i < listOfStrings.size(); i++)
         {
             String col = listOfStrings.get(i);
-            cellOrder.put(hashmapStrings[i], col);
+            cellOrder.put(map[i], col);
 
             // No more than 15 columns, allowed.
             // Incase user selects more than 15.
@@ -524,7 +524,7 @@ public class MainWindowController implements Initializable
     {
         try
         {
-            model.setFileNull();
+            model.setFilePathNull();
             FileChooser fc = new FileChooser();
             File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
             fileName = file.getName().split("\\.")[0];
@@ -535,8 +535,8 @@ public class MainWindowController implements Initializable
                 //Set file name to log, which will be saved later
                 log.setFileName(file.getName());
 
-                model.loadFile(file.getAbsolutePath());
-                if (!model.isFileNull())
+                model.getFilePath(file.getAbsolutePath());
+                if (!model.isFilePathNull())
                 {
                     Platform.runLater(() ->
                     {
