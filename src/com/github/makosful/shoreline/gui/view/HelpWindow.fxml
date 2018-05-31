@@ -24,6 +24,11 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
+                  <Label fx:id="lblimgDisplay" layoutX="425.0" layoutY="-15.0" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
                </children>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -33,14 +38,14 @@
          <left>
             <Pane BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnPrevPic" layoutY="280.0" mnemonicParsing="false" onAction="#handlePreviousPicture" text="◀" />
+                  <Button fx:id="btnPrevPic" layoutY="280.0" mnemonicParsing="false" onAction="#handlePreviousPicture" stylesheets="@../css/style.css" text="◀" />
                </children>
             </Pane>
          </left>
          <right>
             <Pane BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnNextPic" layoutY="280.0" mnemonicParsing="false" onAction="#handleNextPicture" text="▶">
+                  <Button fx:id="btnNextPic" layoutY="280.0" mnemonicParsing="false" onAction="#handleNextPicture" stylesheets="@../css/style.css" text="▶">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -56,14 +61,7 @@
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <VBox layoutX="258.0" layoutY="392.0" AnchorPane.bottomAnchor="-25.0">
-                     <children>
-                        <Label fx:id="lblimgDisplay" textAlignment="CENTER">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding></Label>
-                     </children>
-                  </VBox>
+                  <VBox layoutX="258.0" layoutY="392.0" AnchorPane.bottomAnchor="-25.0" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
