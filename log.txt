@@ -3318,3 +3318,11 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Fri Jun 01 01:30:32 CEST 2018
+User email: davidmsf@gmail.com
+Message: An error occured while loading file for conversion, The filetype 'jpg' is not valid
+File: shorelineUML1.jpg
+LogType:Error
+------------------------------------------------------
+

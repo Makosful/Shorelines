@@ -540,23 +540,22 @@ public class MainWindowController implements Initializable
                 {
                     Platform.runLater(() ->
                     {
-                        chklistSelectData.setItems(model.getCategories());
-                        AddListeners();
-                        listViewSorted.getItems().clear();
-                        setLog("No errors occured, filed loaded successfully", "Conversion");
-                        model.saveLog(log);
+                        ObservableList<String> headers = model.getCategories();
+                        if(headers != null){
+                            chklistSelectData.setItems(headers);
+                            AddListeners();
+                            listViewSorted.getItems().clear();
+                            setLog("No errors occured, filed loaded successfully", "Conversion");
+                            model.saveLog(log);
+                        }
+                        else
+                        {
+                            showAlert("Reading file error", model.getErrorMessageProperty().getValue(), "Error");
+                            setLog("An error occured while loading file for conversion, "
+                                   + model.getErrorMessageProperty().getValue(), "Error");
+                            model.saveLog(log);
+                        }
                     });
-                }
-                else
-                {
-                    Platform.runLater(() ->
-                    {
-                        showAlert("Reading file error", model.getErrorMessageProperty().getValue(), "Error");
-                    });
-
-                    setLog("An error occured while loading file for conversion, "
-                           + model.getErrorMessageProperty().getValue(), "Error");
-                    model.saveLog(log);
                 }
             });
         }

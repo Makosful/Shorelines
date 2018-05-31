@@ -102,7 +102,7 @@ public class MainWindowModel
         catch (BLLException ex)
         {
             errorMessage.setValue(ex.getLocalizedMessage());
-            return FXCollections.observableArrayList();
+            return null;
         }
     }
 
