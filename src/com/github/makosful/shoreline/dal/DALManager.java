@@ -11,7 +11,7 @@ import com.github.makosful.shoreline.dal.Interfaces.IDAL;
 import com.github.makosful.shoreline.dal.Interfaces.IReader;
 import com.github.makosful.shoreline.dal.Json.JsonWriter;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogContext;
-import com.github.makosful.shoreline.dal.LoggingFolder.LogDBDAO;
+import com.github.makosful.shoreline.dal.Database.LogDBDAO;
 import com.github.makosful.shoreline.dal.LoggingFolder.LogFileDAO;
 import com.github.makosful.shoreline.dal.RememberMe.StoreLogIn;
 import java.io.FileNotFoundException;

@@ -23,7 +23,7 @@ public class LogFileDAO implements ILog
             writer.newLine();
             writer.write("Log Date: " + new Date());
             writer.newLine();
-            writer.write("User id: " + log.getUserId());
+            writer.write("User email: " + log.getEmail());
             writer.newLine();
             writer.write("Message: " + log.getMessage());
             writer.newLine();

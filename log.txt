@@ -3310,3 +3310,11 @@ File: Import_data.xlsx
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Thu May 31 22:56:18 CEST 2018
+User email: davidmsf@gmail.com
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+

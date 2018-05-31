@@ -55,6 +55,6 @@ public class Main extends Application
         sm.registerScene(2, "Signup",
                          getClass().getResource("gui/view/SignUpWindow.fxml"));
 
-        sm.setActiveScene(0);
+        sm.setActiveScene(1);
     }
 }

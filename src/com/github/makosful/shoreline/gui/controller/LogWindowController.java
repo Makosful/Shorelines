@@ -27,7 +27,7 @@ public class LogWindowController implements Initializable
     
     //Search
     private List<String> checked;
-    private String searchText;
+    private String searchText = "";
     
     @FXML
     private Button btnClose;
@@ -38,7 +38,7 @@ public class LogWindowController implements Initializable
     @FXML
     private TableColumn<ConversionLog, Date> date;
     @FXML
-    private TableColumn<ConversionLog, Integer> userId;
+    private TableColumn<ConversionLog, String> email;
     @FXML
     private TableColumn<ConversionLog, String> type;
     @FXML
@@ -48,15 +48,16 @@ public class LogWindowController implements Initializable
     @FXML
     private TableColumn<ConversionLog, Date> errorDate;
     @FXML
-    private TableColumn<ConversionLog, Integer> errorUserId;
-    @FXML
     private TableColumn<ConversionLog, String> errorMessage;
     @FXML
     private TableColumn<ConversionLog, String> errorName;
     @FXML
+    private TableColumn<ConversionLog, String> errorEmail;
+    @FXML
     private TextField txtFieldSearch;
     @FXML
     private TabPane tabPane;
+
 
 
     /**
@@ -100,14 +101,14 @@ public class LogWindowController implements Initializable
         
         //Full log cell factory
         date.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        userId.setCellValueFactory(new PropertyValueFactory<>("UserId"));
+        email.setCellValueFactory(new PropertyValueFactory<>("Email"));
         type.setCellValueFactory(new PropertyValueFactory<>("logType"));
         message.setCellValueFactory(new PropertyValueFactory<>("message"));
         name.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         
         //Error log cell factory
         errorDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        errorUserId.setCellValueFactory(new PropertyValueFactory<>("UserId"));
+        errorEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
         errorMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
         errorName.setCellValueFactory(new PropertyValueFactory<>("fileName"));
     }

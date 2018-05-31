@@ -206,7 +206,7 @@ public class MainWindowModel
         try
         {
             if(cache.getUser() != null){
-                log.setUserId(cache.getUser().getUserId());
+                log.setEmail(cache.getUser().getEmail());
             }
             bll.saveLog(log);
         }

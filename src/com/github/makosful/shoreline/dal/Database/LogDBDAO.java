@@ -1,8 +1,9 @@
-package com.github.makosful.shoreline.dal.LoggingFolder;
+package com.github.makosful.shoreline.dal.Database;
 
 import com.github.makosful.shoreline.be.ConversionLog;
 import com.github.makosful.shoreline.dal.Database.DataBaseConnector;
 import com.github.makosful.shoreline.dal.Exception.DALException;
+import com.github.makosful.shoreline.dal.LoggingFolder.ILog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +41,7 @@ public class LogDBDAO implements ILog
             int i = 1;
             String sql = "INSERT INTO Logs VALUES(?, ?, ?, ?, GETDATE())";
             PreparedStatement pstmt = con.prepareStatement(sql);
-            pstmt.setInt(i++, log.getUserId());
+            pstmt.setString(i++, log.getEmail());
             pstmt.setString(i++, log.getMessage());
             pstmt.setString(i++, log.getLogType());
             pstmt.setString(i++, log.getFileName());
@@ -55,7 +56,7 @@ public class LogDBDAO implements ILog
 
     /**
      * Getting all logs from DB.
-     * @return ObservableList<ConversionLog> logs
+     * @return ObservableList with ConversionLogs
      * @throws SQLException
      */
     public ObservableList<ConversionLog> getLogs() throws SQLException
@@ -71,7 +72,7 @@ public class LogDBDAO implements ILog
             {
                 ConversionLog conversionLogger = new ConversionLog();
 
-                conversionLogger.setUserId(rs.getInt("UserId"));
+                conversionLogger.setEmail(rs.getString("Email"));
                 conversionLogger.setMessage(rs.getString("Message"));
                 conversionLogger.setFileName(rs.getString("FileName"));
                 conversionLogger.setLogType(rs.getString("LogType"));
@@ -117,7 +118,7 @@ public class LogDBDAO implements ILog
             {
                 ConversionLog conversionLogger = new ConversionLog();
 
-                conversionLogger.setUserId(rs.getInt("UserId"));
+                conversionLogger.setEmail(rs.getString("Email"));
                 conversionLogger.setMessage(rs.getString("Message"));
                 conversionLogger.setFileName(rs.getString("FileName"));
                 conversionLogger.setLogType(rs.getString("LogType"));
@@ -157,7 +158,7 @@ public class LogDBDAO implements ILog
         {
             //if the checkboxes are not checked, create a regular search with all the tablecolumns,
             // first step is to add all the column names to the arraylist
-            checked.add("UserId");
+            checked.add("Email");
             checked.add("message");
             checked.add("FileName");
             checked.add("LogType");

@@ -13,16 +13,15 @@ import java.util.Date;
  */
 public class ConversionLog
 {
-
-    private int userId;
+    private String email;
     private String message;
     private String fileName;
     private String logType;
     private Date date;
 
-    public ConversionLog(int userId, String message, String logType, String fileName, Date date)
+    public ConversionLog(String email, String message, String logType, String fileName, Date date)
     {
-        this.userId = userId;
+        this.email = email;
         this.message = message;
         this.logType = logType;
         this.fileName = fileName;
@@ -34,14 +33,14 @@ public class ConversionLog
         
     }
 
-    public int getUserId()
+    public String getEmail()
     {
-        return userId;
+        return email;
     }
 
-    public void setUserId(int userId)
+    public void setEmail(String email)
     {
-        this.userId = userId;
+        this.email = email;
     }
 
     public String getMessage()
