@@ -71,17 +71,17 @@ public class MainWindowModel
     }
 
     //<editor-fold defaultstate="collapsed" desc="Basic File Handling">
-    public void loadFile(String path)
+    public void getFilePath(String path)
     {
         this.filepath = path;
     }
 
-    public void setFileNull()
+    public void setFilePathNull()
     {
         this.filepath = null;
     }
 
-    public boolean isFileNull()
+    public boolean isFilePathNull()
     {
         return filepath == null;
     }

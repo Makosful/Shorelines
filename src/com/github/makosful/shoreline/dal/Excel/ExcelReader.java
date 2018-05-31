@@ -161,9 +161,9 @@ public class ExcelReader implements IReader
                     cell = row.getCell((short) c);
                     if (cell != null)
                     {
-                        String cellValue = RenameDuplicateHeaderNames(row, cell.getStringCellValue(), c);
+                        String columnName = RenameDuplicateHeaderNames(row, cell.getStringCellValue(), c);
                         headers.put(
-                                cellValue,
+                                columnName,
                                 cell.getAddress().getColumn()
                         );
                     }
