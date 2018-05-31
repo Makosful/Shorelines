@@ -3302,3 +3302,11 @@ File: MOCK_DATA.csv
 LogType:Conversion
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Thu May 31 11:19:40 CEST 2018
+User id: 0
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+

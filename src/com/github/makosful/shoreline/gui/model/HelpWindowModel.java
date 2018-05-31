@@ -23,7 +23,7 @@ public class HelpWindowModel
 
     public void loadImages()
     {
-        for (int i = 1; i < 6; i++)
+        for (int i = 11; i < 16; i++)
         {
             File file = new File("./res/tutorial" + i + ".png");
             Image img = new Image(file.toURI().toString());
