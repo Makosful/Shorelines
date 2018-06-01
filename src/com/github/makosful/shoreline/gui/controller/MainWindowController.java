@@ -135,6 +135,7 @@ public class MainWindowController implements Initializable
 
     private ExecutorService exService;
     private String filePath;
+    private File file;
 
     final KeyCombination shortcutUp = new KeyCodeCombination(KeyCode.UP, KeyCombination.CONTROL_DOWN);
     final KeyCombination shortcutDown = new KeyCodeCombination(KeyCode.DOWN, KeyCombination.CONTROL_DOWN);
@@ -306,13 +307,13 @@ public class MainWindowController implements Initializable
     @FXML
     private void handleConversion(ActionEvent event) throws BLLException, InterruptedException
     {
-        if(!listViewSorted.getItems().isEmpty())
+        if (!listViewSorted.getItems().isEmpty())
         {
-        Task task = model.makeTask(getMap(), filePath, fileName);
-        if (task != null)
-        {
-            listTask.add(task);
-        }
+            Task task = model.makeTask(getMap(), filePath, fileName);
+            if (task != null)
+            {
+                listTask.add(task);
+            }
         }
         else
         {
@@ -526,10 +527,8 @@ public class MainWindowController implements Initializable
         {
             model.setFilePathNull();
             FileChooser fc = new FileChooser();
-            File file = fc.showOpenDialog(btnConvert.getScene().getWindow());
-            fileName = file.getName().split("\\.")[0];
-            filePath = file.getAbsolutePath();
-
+            file = fc.showOpenDialog(btnConvert.getScene().getWindow());
+            setFilePathAndName();
             exService.execute(() ->
             {
                 //Set file name to log, which will be saved later
@@ -541,19 +540,18 @@ public class MainWindowController implements Initializable
                     Platform.runLater(() ->
                     {
                         ObservableList<String> headers = model.getCategories();
-                        if(headers != null){
+                        if (headers != null)
+                        {
                             chklistSelectData.setItems(headers);
                             AddListeners();
                             listViewSorted.getItems().clear();
-                            setLog("No errors occured, filed loaded successfully", "Conversion");
-                            model.saveLog(log);
+                            setAndSaveLog("No errors occured, filed loaded successfully", "Conversion");
                         }
                         else
                         {
                             showAlert("Reading file error", model.getErrorMessageProperty().getValue(), "Error");
-                            setLog("An error occured while loading file for conversion, "
-                                   + model.getErrorMessageProperty().getValue(), "Error");
-                            model.saveLog(log);
+                            setAndSaveLog("An error occured while loading file for conversion,"
+                                          + model.getErrorMessageProperty().getValue(), "Error");
                         }
                     });
                 }
@@ -566,6 +564,18 @@ public class MainWindowController implements Initializable
 //           the filechooser
         }
 
+    }
+    
+    public void setAndSaveLog(String logMessage, String logType)
+    {
+        setLog(logMessage, logType);
+        model.saveLog(log);
+    }
+
+    public void setFilePathAndName()
+    {
+        fileName = file.getName().split("\\.")[0];
+        filePath = file.getAbsolutePath();
     }
 
     /**
