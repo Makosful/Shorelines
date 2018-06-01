@@ -129,7 +129,8 @@ public class LogWindowController implements Initializable
         });
     }
 
-    
+    //handle the checkbox filtering when ckicking on one of the checkboxes. 
+    //the arraylist checked is filled with the string values of the checked checkboxes  
     @FXML
     private void handleCheckBox(ActionEvent event)
     {
