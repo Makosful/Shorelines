@@ -168,8 +168,8 @@ public class MainWindowController implements Initializable
         };
 
         AddListeners();
-//        addConfigs();
-//        addConfigListener();
+        addConfigs();
+        addConfigListener();
     }
 
     public void executorServiceInitialization()
