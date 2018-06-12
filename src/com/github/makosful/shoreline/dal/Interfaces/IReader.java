@@ -21,13 +21,13 @@ public interface IReader
 {
 
     /**
-     * This method must be claeed before any other method works.
+     * This method must be cleared before any other method works.
      * This method loads the file into memory and prepares it for use
      *
      * @param path The path to the file as a String
      *
      * @return Return true of the file could be loaded. An exception is thrown
-     *         if anyting goes wrong
+     *         if anything goes wrong
      *
      * @throws ReaderException If the reader fails for any reason, this
      *                         exception will be thrown.
@@ -43,13 +43,13 @@ public interface IReader
      * @see #loadFile(java.lang.String) A file must be loaded using this method
      * before any categories can be used.
      *
-     * @throws ReaderException If the categories fail to be retrived for any
+     * @throws ReaderException If the categories fail to be retrieved for any
      *                         reason, this exception will be thrown
      */
     public List<String> getHeaders(String path) throws ReaderException;
 
     /**
-     * Retrive the values from the loaded file
+     * Retrieve the values from the loaded file
      *
      * @param keys A map with the static output JSON key as the key value, and
      *             the category to pair with that key as the value
@@ -58,9 +58,9 @@ public interface IReader
      * @return Returns a list of Maps mapped for the JSON output
      *
      * @see #loadFile(java.lang.String) A file must be loaded using this method
-     * before any values can be retrived
+     * before any values can be retrieved
      * @see #getHeaders() The categories to use for the Value in the given map
-     * should be retrived using this method.
+     * should be retrieved using this method.
      *
      * @throws ReaderException If anything goes wrong, this method will be
      *                         thrown

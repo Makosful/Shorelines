@@ -3326,3 +3326,59 @@ File: shorelineUML1.jpg
 LogType:Error
 ------------------------------------------------------
 
+------------------------------------------------------
+Log Date: Sat Jun 09 21:57:21 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: An error occured while loading file for conversion,The filetype 'flv' is not valid
+File: 2017-12-27 04-32-45.flv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Sat Jun 09 21:58:02 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: An error occured while loading file for conversion,The filetype 'flv' is not valid
+File: 2017-12-27 04-32-45.flv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Sat Jun 09 21:58:35 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: An error occured while loading file for conversion,The filetype 'flv' is not valid
+File: 2017-06-20 03-49-40.flv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Sat Jun 09 21:58:57 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: An error occured while loading file for conversion,The filetype 'flv' is not valid
+File: 2017-06-20 03-49-40.flv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Sat Jun 09 21:59:46 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: An error occured while loading file for conversion,The filetype 'flv' is not valid
+File: 2017-12-27 04-32-45.flv
+LogType:Error
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue Jun 12 00:15:57 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+
+------------------------------------------------------
+Log Date: Tue Jun 12 00:16:32 CEST 2018
+User email: xephangaming@hotmail.dk
+Message: No errors occured, filed loaded successfully
+File: Import_data.xlsx
+LogType:Conversion
+------------------------------------------------------
+

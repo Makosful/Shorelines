@@ -32,13 +32,13 @@ public final class BLLManager implements IBLL
 
     private final IDAL dal;
     private final Log log;
-    private final TaskManager tasks;
+    private final TaskManager taskMgr;
     private final PasswordGenerator passGen;
 
     public BLLManager()
     {
         dal = new DALManager();
-        tasks = new TaskManager();
+        taskMgr = new TaskManager();
         setDalManager();
         log = new Log();
         passGen = new PasswordGenerator(12);
@@ -75,7 +75,7 @@ public final class BLLManager implements IBLL
     {
         try
         {
-            return tasks.makeTask(map, filePath, fileName);
+            return taskMgr.makeTask(map, filePath, fileName);
         }
         catch (BLLException ex)
         {
@@ -147,7 +147,7 @@ public final class BLLManager implements IBLL
 
     public void setDalManager()
     {
-        tasks.setDalManager(dal);
+        taskMgr.setDalManager(dal);
     }
 
     //<editor-fold defaultstate="collapsed" desc="Logs">
@@ -186,10 +186,10 @@ public final class BLLManager implements IBLL
             String hash = Hashing.hashPass(user.getPassword());
 
             return dal.createUser(new User(user.getFirstName(),
-                                              user.getLastName(),
-                                              user.getUserName(),
-                                              user.getEmail(),
-                                              hash));
+                                           user.getLastName(),
+                                           user.getUserName(),
+                                           user.getEmail(),
+                                           hash));
         }
         catch (DALException
                | NoSuchAlgorithmException

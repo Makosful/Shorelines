@@ -26,7 +26,7 @@ public interface IBLL
 
     public void saveConfig(String configName, ObservableList<String> items) throws BLLException;
 
-    public Task makeTask(Map<String, String> map, String filePath,  String fileName) throws BLLException;
+    public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException;
 
     public ObservableList<Config> getAllConfigs() throws BLLException;
 

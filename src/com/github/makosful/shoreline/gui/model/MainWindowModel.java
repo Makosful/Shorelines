@@ -53,6 +53,26 @@ public class MainWindowModel
         available = FXCollections.observableArrayList();
     }
 
+    /**
+     * Gets the headers from the chosen file
+     *
+     * @param path
+     *
+     * @return
+     */
+    public ObservableList<String> getCategories()
+    {
+        try
+        {
+            return FXCollections.observableArrayList(bll.getHeaders(filepath));
+        }
+        catch (BLLException ex)
+        {
+            errorMessage.setValue(ex.getLocalizedMessage());
+            return null;
+        }
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Properties">
     public SimpleStringProperty getErrorMessageProperty()
     {
@@ -70,6 +90,11 @@ public class MainWindowModel
         return this.selected;
     }
 
+    public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException
+    {
+        return bll.makeTask(map, filePath, fileName);
+    }
+
     //<editor-fold defaultstate="collapsed" desc="Basic File Handling">
     public void getFilePath(String path)
     {
@@ -84,26 +109,6 @@ public class MainWindowModel
     public boolean isFilePathNull()
     {
         return filepath == null;
-    }
-
-    /**
-     * Gets the
-     *
-     * @param path
-     *
-     * @return
-     */
-    public ObservableList<String> getCategories()
-    {
-        try
-        {
-            return FXCollections.observableArrayList(bll.getHeaders(filepath));
-        }
-        catch (BLLException ex)
-        {
-            errorMessage.setValue(ex.getLocalizedMessage());
-            return null;
-        }
     }
 
     public List<Map> getValues(Map<String, String> map)
@@ -205,7 +210,8 @@ public class MainWindowModel
     {
         try
         {
-            if(cache.getUser() != null){
+            if (cache.getUser() != null)
+            {
                 log.setEmail(cache.getUser().getEmail());
             }
             bll.saveLog(log);
@@ -221,10 +227,5 @@ public class MainWindowModel
     {
         cache.clearUser();
         cache.changeScene(Scenes.Login.getValue()); // ID 1
-    }
-
-    public Task makeTask(Map<String, String> map, String filePath, String fileName) throws BLLException
-    {
-        return bll.makeTask(map, filePath, fileName);
     }
 }

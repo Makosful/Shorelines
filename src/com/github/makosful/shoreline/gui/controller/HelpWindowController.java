@@ -133,6 +133,7 @@ public class HelpWindowController implements Initializable
     private void setupStrings()
     {
         tutString1 = "Start by clicking the 'FILE' tab in the menu bar, from there select the option 'SELECT FILE' \nTo select the importable data you wish to convert to JSON.";
+
         tutString2 = "Locate the file you wish to convert by using the built in file chooser. \nIf you are unable to find your specific file, make sure it is the one highligted by the file format \n(swapped at the bottom right corner).Simply mark your file and hit 'OPEN'";
 
         tutString3 = "Once the file has succesfully been loaded into the program. The headers will appear as items in the list, \nassociated with a checkbox. Check off the items in the list that you wish to include in your conversion. \nWhen you check them, they will appear in the 'SORTING' list, and they will also be set in the \n'OUTPUT EXAMPLE' list as well. Be sure to sort this accordingly, so your output has a correct binding, \nbetween the key and the value. E.g. 'PRIORITY' should NOT have 'SITE NAME' under it.";

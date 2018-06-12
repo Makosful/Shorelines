@@ -5,8 +5,6 @@
  */
 package com.github.makosful.shoreline.gui.model;
 
-import com.github.makosful.shoreline.bll.BLLManager;
-import com.github.makosful.shoreline.bll.IBLL;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

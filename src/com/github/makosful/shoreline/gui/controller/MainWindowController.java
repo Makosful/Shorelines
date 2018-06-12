@@ -13,8 +13,6 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -57,8 +55,9 @@ public class MainWindowController implements Initializable
     private String fileName;
     private Label[] labels;
     //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+
     //<editor-fold defaultstate="collapsed" desc="FXML Stuff">
-//<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
+    //<editor-fold defaultstate="collapsed" desc="Split Pane Descriptions">
     @FXML
     private Color x211;
     @FXML
@@ -331,10 +330,10 @@ public class MainWindowController implements Initializable
      */
     private void showAlert(String title, String message, String headerText)
     {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setTitle(title);
+        Alert alert = new Alert(AlertType.NONE);
+        alert.setTitle(headerText);
         alert.setContentText(message);
-        alert.setHeaderText(headerText);
+        alert.setHeaderText(title);
         alert.initModality(Modality.WINDOW_MODAL);
         alert.show();
     }
@@ -526,6 +525,7 @@ public class MainWindowController implements Initializable
         try
         {
             model.setFilePathNull();
+
             FileChooser fc = new FileChooser();
             file = fc.showOpenDialog(btnConvert.getScene().getWindow());
             setFilePathAndName();
@@ -535,11 +535,13 @@ public class MainWindowController implements Initializable
                 log.setFileName(file.getName());
 
                 model.getFilePath(file.getAbsolutePath());
+
+                ObservableList<String> headers = model.getCategories();
+
                 if (!model.isFilePathNull())
                 {
                     Platform.runLater(() ->
                     {
-                        ObservableList<String> headers = model.getCategories();
                         if (headers != null)
                         {
                             chklistSelectData.setItems(headers);
@@ -559,13 +561,14 @@ public class MainWindowController implements Initializable
         }
         catch (NullPointerException ex)
         {
-//           Not supposed to make alert error, it just catches"
-//           nullpointer incase user doesnt select anything when opening
-//           the filechooser
+            /*
+           Not supposed to make alert error, it just catches"
+           nullpointer incase user doesnt select anything when opening
+           the filechooser
+             */
         }
-
     }
-    
+
     public void setAndSaveLog(String logMessage, String logType)
     {
         setLog(logMessage, logType);

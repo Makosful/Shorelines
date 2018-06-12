@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -24,11 +23,11 @@ public class LogWindowController implements Initializable
 {
 
     private LogWindowModel model;
-    
+
     //Search
     private List<String> checked;
     private String searchText = "";
-    
+
     @FXML
     private Button btnClose;
     @FXML
@@ -58,8 +57,6 @@ public class LogWindowController implements Initializable
     @FXML
     private TabPane tabPane;
 
-
-
     /**
      * Initializes the controller class.
      *
@@ -71,9 +68,9 @@ public class LogWindowController implements Initializable
     {
         model = new LogWindowModel();
         checked = new ArrayList();
-        
+
         createTableViewFactory();
-        
+
         addSearchListener();
     }
 
@@ -98,14 +95,14 @@ public class LogWindowController implements Initializable
         //Get all logs and add them to the tableView
         tblFullLog.setItems(model.getFullLog());
         tblErrorLog.setItems(model.getErrorLog());
-        
+
         //Full log cell factory
         date.setCellValueFactory(new PropertyValueFactory<>("Date"));
         email.setCellValueFactory(new PropertyValueFactory<>("Email"));
         type.setCellValueFactory(new PropertyValueFactory<>("logType"));
         message.setCellValueFactory(new PropertyValueFactory<>("message"));
         name.setCellValueFactory(new PropertyValueFactory<>("fileName"));
-        
+
         //Error log cell factory
         errorDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
         errorEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
@@ -114,15 +111,17 @@ public class LogWindowController implements Initializable
     }
 
     /**
-     * Add a changelistener to the textfields textproperty, so when the text changes 
+     * Add a changelistener to the textfields textproperty, so when the text
+     * changes
      * in the textfield a new seach is made
      */
     private void addSearchListener()
     {
-        txtFieldSearch.textProperty().addListener((observable, oldSearchValue, newSearchValue) -> {
+        txtFieldSearch.textProperty().addListener((observable, oldSearchValue, newSearchValue) ->
+        {
             searchText = newSearchValue;
             model.searchLogs(searchText, checked);
-            if(tabPane.getSelectionModel().getSelectedItem().getText().equals("Errors"))
+            if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Errors"))
             {
                 tblErrorLog.setItems(model.getErrorLog());
             }
@@ -135,7 +134,7 @@ public class LogWindowController implements Initializable
     private void handleCheckBox(ActionEvent event)
     {
         CheckBox cBox = (CheckBox) event.getSource();
-        if(cBox.isSelected())
+        if (cBox.isSelected())
         {
             checked.add(cBox.getText());
         }
@@ -144,12 +143,12 @@ public class LogWindowController implements Initializable
             checked.remove(cBox.getText());
         }
         model.searchLogs(searchText, checked);
-        
-        if(tabPane.getSelectionModel().getSelectedItem().getText().equals("Errors"))
+
+        if (tabPane.getSelectionModel().getSelectedItem().getText().equals("Errors"))
         {
             tblErrorLog.setItems(model.getErrorLog());
         }
-       
+
     }
 
 }
